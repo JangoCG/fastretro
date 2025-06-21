@@ -15,7 +15,6 @@ why we built Fast Retro: Wrap up your next retro fast, getting actionable result
   options
 - **🤝 Smart Grouping & Voting**: Group similar feedback together, then vote on what matters most with 3 votes per person
 - **🔄 Real-time Collaboration**: See feedback appear instantly as team members contribute
-- **📱 Mobile Responsive**: Works seamlessly on desktop, tablet, and mobile devices
 - **⚡ Fast Setup**: Create and start a retrospective in seconds - no signup required
 - **🔓 Open Source**: Free forever, modify as you like, no vendor lock-in
 
