@@ -2,10 +2,6 @@
 
 **Retrospectives made fast** - An open source retrospective tool for agile teams.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/JangoCG/simple-retro-vue?style=flat-square)](https://github.com/JangoCG/fastretro/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/JangoCG/simple-retro-vue?style=flat-square)](https://github.com/JangoCG/fastretro/issues)
-
 ![Fast Retro Screenshot](public/brainstorming.png)
 
 ## 🌟 Why Fast Retro?
@@ -19,9 +15,7 @@ why we built Fast Retro: Wrap up your next retro fast, getting actionable result
   options
 - **🤝 Smart Grouping & Voting**: Group similar feedback together, then vote on what matters most with 3 votes per person
 - **🔄 Real-time Collaboration**: See feedback appear instantly as team members contribute
-- **🎭 Anonymous Participation**: Team members can share honest feedback without fear
 - **📱 Mobile Responsive**: Works seamlessly on desktop, tablet, and mobile devices
-- **🎨 Neo-Brutalist Design**: Bold, playful interface that makes retrospectives engaging
 - **⚡ Fast Setup**: Create and start a retrospective in seconds - no signup required
 - **🔓 Open Source**: Free forever, modify as you like, no vendor lock-in
 
@@ -149,7 +143,7 @@ Fast Retro follows a structured 6-phase workflow:
 
 ## 🤝 Contributing
 
-We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
+I love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
 
 ### Quick Contribution Steps
 
@@ -166,27 +160,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Third-party dependencies are licensed under their respective licenses.
 See [THIRD-PARTY-LICENSES.md](THIRD-PARTY-LICENSES.md) for details.
-
-## 🆘 Support
-
-- 📖 [Documentation](https://github.com/JangoCG/fastretro/wiki)
-- 🐛 [Report a Bug](https://github.com/JangoCG/fastretro/issues/new?template=bug_report.md)
-- 💡 [Request a Feature](https://github.com/JangoCG/fastretro/issues/new?template=feature_request.md)
-- 💬 [Discussions](https://github.com/JangoCG/fastretro/discussions)
-
-## 🙏 Acknowledgments
-
-- Built with ❤️ for agile teams everywhere
-- Inspired by the need for simpler, faster retrospectives
-- Thanks to all contributors who help make this project better
-
-## 📊 Project Stats
-
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/JangoCG/simple-retro-vue)
-![GitHub last commit](https://img.shields.io/github/last-commit/JangoCG/simple-retro-vue)
-![GitHub code size](https://img.shields.io/github/languages/code-size/JangoCG/simple-retro-vue)
-
----
-
-**Made with ❤️ by the Fast Retro team
-** | [Website](https://fastretro.app) | [GitHub](https://github.com/JangoCG/fastretro)
