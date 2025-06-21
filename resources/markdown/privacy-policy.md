@@ -103,6 +103,18 @@ Web: <https://fastretro.app>
   Zweckerreichung zu löschen oder zurückzugeben.
 * Datenschutzerklärung: <https://www.cloudflare.com/privacypolicy/>
 
+### Simple Analytics B.V. (Niederlande)
+
+* Privacy-freundliche Website-Analytik ohne Cookies oder persönliche Daten.
+* **Keine personenbezogenen Daten:** Simple Analytics sammelt ausschließlich anonyme Metriken (Seitenaufrufe, Zeitzone 
+  als Proxy für Land, anonymisierte User-Agents, UTM-Parameter).
+* **Keine IP-Adressen:** IP-Adressen werden bei jeder Anfrage sofort verworfen, nicht gespeichert oder gehasht.
+* **Keine Cookies:** Es werden keinerlei Tracking-Cookies oder ähnliche Technologien verwendet.
+* **EU-Hosting:** Daten werden ausschließlich in den Niederlanden (EU) gespeichert bei DSGVO-konformen Anbietern.
+* **Kein Consent erforderlich:** Da keine personenbezogenen Daten verarbeitet werden, ist keine Einwilligung nötig.
+* Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Website-Optimierung).
+* Datenschutzerklärung: <https://simpleanalytics.com/privacy>
+
 Es erfolgt **keine Weitergabe** Ihrer Daten an sonstige Dritte, außer wir sind gesetzlich dazu verpflichtet.
 
 ---
@@ -264,6 +276,18 @@ Web: <https://fastretro.app>
 * Cloudflare commits to process personal data only for the provision of services and to delete or return it after
   purpose fulfillment.
 * Privacy policy: <https://www.cloudflare.com/privacypolicy/>
+
+### Simple Analytics B.V. (Netherlands)
+
+* Privacy-friendly website analytics without cookies or personal data.
+* **No personal data:** Simple Analytics exclusively collects anonymous metrics (page views, timezone as proxy for 
+  country, anonymized user agents, UTM parameters).
+* **No IP addresses:** IP addresses are immediately discarded with every request, not stored or hashed.
+* **No cookies:** No tracking cookies or similar technologies are used whatsoever.
+* **EU hosting:** Data is stored exclusively in the Netherlands (EU) with GDPR-compliant providers.
+* **No consent required:** Since no personal data is processed, no consent is necessary.
+* Legal basis: Art. 6 para. 1 lit. f GDPR (legitimate interest in website optimization).
+* Privacy policy: <https://simpleanalytics.com/privacy>
 
 There is **no disclosure** of your data to other third parties, unless we are legally obligated to do so.
 

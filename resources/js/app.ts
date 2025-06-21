@@ -7,6 +7,7 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 import { configureEcho } from '@laravel/echo-vue';
+import SimpleAnalytics from 'simple-analytics-vue';
 
 configureEcho({
     broadcaster: 'reverb',
@@ -21,6 +22,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(SimpleAnalytics, { skip: import.meta.env.DEV })
             .mount(el);
     },
     progress: {
