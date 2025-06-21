@@ -3,9 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast Retro - Open Source Retrospective Tool</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Fast Retro - Free Open Source Retrospective Tool for Agile Teams</title>
+    <meta name="title" content="Fast Retro - Free Open Source Retrospective Tool for Agile Teams">
     <meta name="description"
-          content="An open source retrospective tool for agile teams. Run effective retrospectives fast with real-time collaboration.">
+          content="Run effective agile retrospectives with Fast Retro. Free, open-source tool with real-time collaboration, smart grouping, voting, and action items. No signup required.">
+    <meta name="keywords"
+          content="retrospective tool, agile retrospective, retro tool, open source, free retrospective software, scrum retrospective, team retrospective, action items">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Cengiz Gürtusgil">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://fastretro.app">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fastretro.app">
+    <meta property="og:title" content="Fast Retro - Free Open Source Retrospective Tool for Agile Teams">
+    <meta property="og:description"
+          content="Run effective agile retrospectives with Fast Retro. Free, open-source tool with real-time collaboration, smart grouping, voting, and action items. No signup required.">
+    <meta property="og:image" content="https://fastretro.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Fast Retro - Retrospective Tool Screenshot">
+    <meta property="og:site_name" content="Fast Retro">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fastretro.app">
+    <meta property="twitter:title" content="Fast Retro - Free Open Source Retrospective Tool for Agile Teams">
+    <meta property="twitter:description"
+          content="Run effective agile retrospectives with Fast Retro. Free, open-source tool with real-time collaboration, smart grouping, voting, and action items. No signup required.">
+    <meta property="twitter:image" content="https://fastretro.app/og-image.jpg">
+    <meta property="twitter:image:alt" content="Fast Retro - Retrospective Tool Screenshot">
+    <meta property="twitter:creator" content="@cengizgurtus">
+    <meta property="twitter:site" content="@fastretroapp">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#FACC15">
+    <meta name="msapplication-TileColor" content="#FACC15">
+
+    <!-- Additional SEO -->
+    <meta name="rating" content="general">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Fast Retro",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web Browser",
+            "description": "Free open-source retrospective tool for agile teams with real-time collaboration, smart grouping, voting, and action items.",
+            "url": "https://fastretro.app",
+            "screenshot": "https://fastretro.app/brainstorming.png",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "Cengiz Gürtusgil",
+                "url": "https://twitter.com/cengizgurtus"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Fast Retro",
+                "url": "https://fastretro.app"
+            },
+            "softwareVersion": "1.0",
+            "dateCreated": "2025-01-21",
+            "featureList": [
+                "Real-time collaboration",
+                "Smart grouping and voting",
+                "Action items tracking",
+                "No registration required",
+                "Open source",
+                "Privacy-first",
+                "Mobile responsive"
+            ],
+            "keywords": "retrospective, agile, scrum, team collaboration, open source",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "ratingCount": "1"
+            }
+        }
+    </script>
+
     @vite(['resources/css/blade.css', 'resources/js/blade.js'])
 </head>
 <body class="bg-white antialiased">
@@ -142,10 +239,6 @@
                 <a href="{{ route('retro.create') }}"
                    class="bg-yellow-400 text-black px-8 py-4 text-lg font-bold border-4 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200">
                     Start a Retro Now →
-                </a>
-                <a href="#demo"
-                   class="text-gray-900 px-8 py-4 text-lg font-semibold border-4 border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white transition-all duration-200">
-                    See it in action
                 </a>
             </div>
         </div>
@@ -441,17 +534,39 @@
                 </ul>
             </div>
 
-            <!-- Social & CTA -->
+            <!-- Resources & Links -->
             <div class="space-y-4">
-                <h3 class="font-bold text-black">Get Started</h3>
-                <a href="{{ route('retro.create') }}"
-                   class="inline-block rounded-md bg-black px-4 py-2 text-sm font-semibold text-yellow-400 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
-                    Create Your First Retro
-                </a>
+                <h3 class="font-bold text-black">Resources</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{{ route('retro.create') }}"
+                           class="text-sm text-black/80 hover:text-black transition-colors inline-flex items-center gap-1">
+                            <span>→</span> Start Free Retrospective
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/JangoCG/fastretro" target="_blank" rel="noopener noreferrer"
+                           class="text-sm text-black/80 hover:text-black transition-colors inline-flex items-center gap-1">
+                            <span>→</span> Open Source Code
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/JangoCG/fastretro/issues" target="_blank" rel="noopener noreferrer"
+                           class="text-sm text-black/80 hover:text-black transition-colors inline-flex items-center gap-1">
+                            <span>→</span> Report Issues
+                        </a>
+                    </li>
+                </ul>
+                <div class="pt-4">
+                    <a href="{{ route('retro.create') }}"
+                       class="inline-block rounded-md bg-black px-4 py-2 text-sm font-semibold text-yellow-400 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                        Create Your First Retro
+                    </a>
+                </div>
                 <div class="flex items-center gap-4 pt-2">
                     <a href="https://github.com/JangoCG/fastretro" target="_blank" rel="noopener noreferrer"
-                       class="inline-block p-2 bg-white rounded-md border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
-                        <span class="sr-only">GitHub</span>
+                       class="inline-block p-2 bg-white rounded-md border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                       aria-label="View Fast Retro on GitHub">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
                                   d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -462,14 +577,32 @@
             </div>
         </div>
 
-        <!-- Bottom Bar -->
+        <!-- SEO Content Section -->
         <div class="mt-12 pt-8 border-t-2 border-black/20">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center mb-8">
+                <h4 class="text-lg font-bold text-black mb-4">About Fast Retro - Agile Retrospective Software</h4>
+                <p class="text-sm text-black/70 max-w-4xl mx-auto leading-relaxed">
+                    Fast Retro is a modern, <strong>free retrospective tool</strong> designed for agile teams who want
+                    to conduct effective sprint retrospectives without the overhead. Unlike traditional retro tools that
+                    overcomplicate the process, Fast Retro focuses on what matters: gathering feedback, identifying
+                    patterns, and creating actionable improvements. Perfect for <strong>scrum teams</strong>, remote
+                    teams, and any group looking to improve through structured reflection. Our <strong>open-source
+                        retrospective software</strong> supports real-time collaboration, smart feedback grouping,
+                    democratic voting, and comprehensive action item tracking - all without requiring user registration
+                    or storing personal data.
+                </p>
+            </div>
+
+            <!-- Bottom Legal Links -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-black/10">
                 <div class="flex items-center gap-6">
                     <a href="{{ route('privacy-policy') }}"
                        class="text-sm text-black/60 hover:text-black transition-colors">Privacy Policy / Datenschutz</a>
                     <a href="{{ route('imprint') }}" class="text-sm text-black/60 hover:text-black transition-colors">Imprint
                         / Impressum</a>
+                </div>
+                <div class="text-sm text-black/50">
+                    © 2025 Fast Retro - Free Retrospective Tool
                 </div>
             </div>
         </div>
