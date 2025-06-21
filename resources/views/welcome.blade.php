@@ -52,7 +52,7 @@
                    class="text-sm font-semibold leading-6 text-gray-900 hover:text-yellow-600 transition-colors">Features</a>
                 <a href="#demo"
                    class="text-sm font-semibold leading-6 text-gray-900 hover:text-yellow-600 transition-colors">Demo</a>
-                <a href="https://github.com/JangoCG/simple-retro-vue" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/JangoCG/fastretro" target="_blank" rel="noopener noreferrer"
                    class="text-sm font-semibold leading-6 text-gray-900 hover:text-yellow-600 transition-colors">GitHub</a>
             </div>
         </div>
@@ -71,7 +71,7 @@
                        class="block rounded-lg px-4 py-3 text-base font-semibold text-gray-900 hover:bg-gray-50 transition-colors">Features</a>
                     <a href="#demo" @click="open = false"
                        class="block rounded-lg px-4 py-3 text-base font-semibold text-gray-900 hover:bg-gray-50 transition-colors">Demo</a>
-                    <a href="https://github.com/JangoCG/simple-retro-vue" target="_blank" rel="noopener noreferrer"
+                    <a href="https://github.com/JangoCG/fastretro" target="_blank" rel="noopener noreferrer"
                        @click="open = false"
                        class="block rounded-lg px-4 py-3 text-base font-semibold text-gray-900 hover:bg-gray-50 transition-colors">GitHub</a>
                 </div>
@@ -92,14 +92,14 @@
         <!-- Header Content -->
         <div class="text-center space-y-8 mb-16">
             <!-- Badge -->
-            <div
-                class="inline-flex items-center gap-2 bg-yellow-400 text-black px-4 py-2 rounded-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-bold text-sm">
+            <a href="https://github.com/JangoCG/fastretro" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-yellow-400 text-black px-4 py-2 rounded-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 font-bold text-sm">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path
                         d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                 </svg>
                 Open Source
-            </div>
+            </a>
 
             <!-- Main Headline -->
             <h1 class="text-6xl md:text-8xl font-black text-gray-900 leading-none">
@@ -115,6 +115,26 @@
                 group similar topics together, vote on what matters most, then discuss and create action items.
                 Done. No BS, no endless phases, just actionable results.
             </p>
+
+            <!-- Key Benefits -->
+            <div class="flex flex-wrap justify-center gap-6 mt-8 text-sm">
+                <div
+                    class="flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full border-2 border-green-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="font-semibold">No account required</span>
+                </div>
+                <div
+                    class="flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full border-2 border-blue-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                    <span class="font-semibold">Data deleted nightly</span>
+                </div>
+            </div>
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
@@ -290,8 +310,15 @@
         <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Ready to get started?</h2>
             <p class="mt-6 text-lg leading-8 text-gray-600">
-                Create your first retrospective in seconds. No signup required, no data stored externally.
+                Create your first retrospective in seconds. <strong>No signup required</strong> - just create a retro
+                and share the link.
             </p>
+            <div class="mt-4 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
+                <p class="text-sm text-yellow-800">
+                    <strong>🔒 Privacy First:</strong> All retrospective data is automatically deleted every night,
+                    so your team's feedback stays private and doesn't accumulate on my servers.
+                </p>
+            </div>
         </div>
         <div class="mx-auto mt-10 max-w-2xl">
             <div class="flex items-center justify-center gap-x-6">
@@ -320,8 +347,9 @@
                     <span class="text-xl font-bold text-black">Fast Retro</span>
                 </div>
                 <p class="text-sm text-black/80">
-                    An open source retrospective tool for agile teams. Run effective retrospectives fast with real-time
-                    collaboration.
+                    An open source retrospective tool for agile teams. No signup required, data deleted nightly for
+                    privacy.
+                    Run effective retrospectives fast with real-time collaboration.
                 </p>
             </div>
 
@@ -358,7 +386,7 @@
                     Create Your First Retro
                 </a>
                 <div class="flex items-center gap-4 pt-2">
-                    <a href="https://github.com/JangoCG/simple-retro-vue" target="_blank" rel="noopener noreferrer"
+                    <a href="https://github.com/JangoCG/fastretro" target="_blank" rel="noopener noreferrer"
                        class="inline-block p-2 bg-white rounded-md border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
                         <span class="sr-only">GitHub</span>
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

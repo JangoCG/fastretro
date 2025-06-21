@@ -3,18 +3,20 @@
 **Retrospectives made fast** - An open source retrospective tool for agile teams.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/JangoCG/simple-retro-vue?style=flat-square)](https://github.com/JangoCG/simple-retro-vue/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/JangoCG/simple-retro-vue?style=flat-square)](https://github.com/JangoCG/simple-retro-vue/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/JangoCG/simple-retro-vue?style=flat-square)](https://github.com/JangoCG/fastretro/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/JangoCG/simple-retro-vue?style=flat-square)](https://github.com/JangoCG/fastretro/issues)
 
 ![Fast Retro Screenshot](public/brainstorming.png)
 
 ## 🌟 Why Fast Retro?
 
-Dreading your next retro again? Cringe icebreakers, pointless fluff and going overtime (again)? Yeah, same here. That's why we built Fast Retro: Wrap up your next retro fast, getting actionable results and get back to work.
+Dreading your next retro again? Cringe icebreakers, pointless fluff and going overtime (again)? Yeah, same here. That's
+why we built Fast Retro: Wrap up your next retro fast, getting actionable results and get back to work.
 
 ## ✨ Features
 
-- **🎯 Two Simple Columns**: Just "What went well?" and "What could be better?" - no confusing categories or endless options
+- **🎯 Two Simple Columns**: Just "What went well?" and "What could be better?" - no confusing categories or endless
+  options
 - **🤝 Smart Grouping & Voting**: Group similar feedback together, then vote on what matters most with 3 votes per person
 - **🔄 Real-time Collaboration**: See feedback appear instantly as team members contribute
 - **🎭 Anonymous Participation**: Team members can share honest feedback without fear
@@ -36,7 +38,7 @@ Dreading your next retro again? Cringe icebreakers, pointless fluff and going ov
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/JangoCG/simple-retro-vue.git
+   git clone https://github.com/JangoCG/fastretro.git
    cd simple-retro-vue
    ```
 
@@ -72,12 +74,14 @@ That's it! Open your browser to `http://localhost:8000` and start your first ret
 ## 🛠️ Technology Stack
 
 ### Backend
+
 - **Laravel 12** - Modern PHP framework with Inertia.js for SPA-like routing
 - **Laravel Reverb** - WebSocket server for real-time collaboration
 - **SQLite** - Lightweight database for development
 - **Pest PHP** - Testing framework
 
 ### Frontend
+
 - **Vue 3** - Progressive JavaScript framework with Composition API
 - **TypeScript** - Type-safe JavaScript development
 - **Tailwind CSS v4** - Utility-first CSS framework
@@ -85,6 +89,7 @@ That's it! Open your browser to `http://localhost:8000` and start your first ret
 - **Vite** - Fast build tool and development server
 
 ### Architecture Highlights
+
 - **Real-time updates** via WebSocket broadcasting
 - **Session-based authentication** for anonymous participation
 - **Drag & drop** feedback organization
@@ -159,12 +164,15 @@ We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+Third-party dependencies are licensed under their respective licenses.
+See [THIRD-PARTY-LICENSES.md](THIRD-PARTY-LICENSES.md) for details.
+
 ## 🆘 Support
 
-- 📖 [Documentation](https://github.com/JangoCG/simple-retro-vue/wiki)
-- 🐛 [Report a Bug](https://github.com/JangoCG/simple-retro-vue/issues/new?template=bug_report.md)
-- 💡 [Request a Feature](https://github.com/JangoCG/simple-retro-vue/issues/new?template=feature_request.md)
-- 💬 [Discussions](https://github.com/JangoCG/simple-retro-vue/discussions)
+- 📖 [Documentation](https://github.com/JangoCG/fastretro/wiki)
+- 🐛 [Report a Bug](https://github.com/JangoCG/fastretro/issues/new?template=bug_report.md)
+- 💡 [Request a Feature](https://github.com/JangoCG/fastretro/issues/new?template=feature_request.md)
+- 💬 [Discussions](https://github.com/JangoCG/fastretro/discussions)
 
 ## 🙏 Acknowledgments
 
@@ -180,4 +188,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ by the Fast Retro team** | [Website](https://fastretro.app) | [GitHub](https://github.com/JangoCG/simple-retro-vue)
+**Made with ❤️ by the Fast Retro team
+** | [Website](https://fastretro.app) | [GitHub](https://github.com/JangoCG/fastretro)

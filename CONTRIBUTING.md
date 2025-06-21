@@ -104,7 +104,7 @@ composer test      # PHP tests
 ## 🐛 Bug Reports
 
 We use GitHub Issues to track bugs. Report a bug
-by [opening a new issue](https://github.com/JangoCG/simple-retro-vue/issues/new?template=bug_report.md).
+by [opening a new issue](https://github.com/JangoCG/fastretro/issues/new?template=bug_report.md).
 
 **Great Bug Reports** include:
 
@@ -118,7 +118,7 @@ by [opening a new issue](https://github.com/JangoCG/simple-retro-vue/issues/new?
 ## 💡 Feature Requests
 
 We welcome feature requests!
-Please [open an issue](https://github.com/JangoCG/simple-retro-vue/issues/new?template=feature_request.md) with:
+Please [open an issue](https://github.com/JangoCG/fastretro/issues/new?template=feature_request.md) with:
 
 - **Use case**: Why do you need this feature?
 - **Proposed solution**: How should it work?
@@ -232,7 +232,7 @@ php artisan migrate:fresh --seed
 
 Don't hesitate to ask questions! You can:
 
-- Open a [GitHub Discussion](https://github.com/JangoCG/simple-retro-vue/discussions)
+- Open a [GitHub Discussion](https://github.com/JangoCG/fastretro/discussions)
 - Comment on an existing issue
 - Reach out to maintainers
 

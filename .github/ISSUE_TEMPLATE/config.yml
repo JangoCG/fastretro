@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Fast Retro Community Discussions
-    url: https://github.com/JangoCG/simple-retro-vue/discussions
+    url: https://github.com/JangoCG/fastretro/discussions
     about: Please ask and answer questions here
   - name: Fast Retro Documentation
-    url: https://github.com/JangoCG/simple-retro-vue/wiki
+    url: https://github.com/JangoCG/fastretro/wiki
     about: Check our documentation for setup and usage guides
