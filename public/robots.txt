@@ -1,2 +1,19 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://fastretro.app/sitemap.xml
+
+# Block admin/private areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_debugbar/
+Disallow: /telescope/
+
+# Allow important crawling paths
+Allow: /retro/create
+Allow: /privacy-policy
+Allow: /imprint
+
+# Crawl delay (optional - be nice to servers)
+Crawl-delay: 1

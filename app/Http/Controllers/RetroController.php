@@ -7,6 +7,7 @@ use App\Events\ParticipantSelected;
 use App\Events\PhaseCompleted;
 use App\Models\Participant;
 use App\Models\Retro;
+use App\Models\RetroCount;
 use App\Services\ParticipantSessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,6 +44,9 @@ class RetroController extends Controller
         $this->sessionService->clearSession();
 
         $retro = Retro::create(['name' => $validated['name']]);
+
+        // Increment the global retro counter
+        RetroCount::incrementCounter();
 
         // Create session for the creator
         $sessionId = $this->sessionService->setSession($validated['creator_name']);

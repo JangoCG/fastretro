@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return view('welcome');
+    $retroCount = \App\Models\RetroCount::getTotalRetros();
+    return view('welcome', compact('retroCount'));
 })->name('home');
 
 Route::patch('sessions', [SessionControllerAlias::class, 'update']);

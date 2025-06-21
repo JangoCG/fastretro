@@ -214,8 +214,16 @@
                 Done. No BS, no endless phases, just actionable results.
             </p>
 
-            <!-- Key Benefits -->
+            <!-- Stats & Benefits -->
             <div class="flex flex-wrap justify-center gap-3 sm:gap-6 mt-6 sm:mt-8 text-xs sm:text-sm">
+                <div
+                    class="flex items-center gap-2 bg-yellow-100 text-yellow-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border-2 border-yellow-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    <span class="font-semibold">{{ number_format($retroCount ?? 0) }}+ retros created</span>
+                </div>
                 <div
                     class="flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border-2 border-green-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -246,9 +254,12 @@
         <!-- Demo Image -->
         <div class="flex justify-center">
             <div class="max-w-5xl w-full">
-                <img src="{{ asset('brainstorming.png') }}"
-                     alt="Fast Retro Screenshot"
-                     class="w-full h-auto rounded-3xl border-6 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300">
+                <picture>
+                    <source srcset="{{ asset('brainstorming.png.webp') }}" type="image/webp">
+                    <img src="{{ asset('brainstorming.png') }}"
+                         alt="Fast Retro Screenshot"
+                         class="w-full h-auto rounded-3xl border-6 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300">
+                </picture>
             </div>
         </div>
 
@@ -447,9 +458,12 @@
             <!-- Image -->
             <div class="order-1 lg:order-2">
                 <div class="relative">
-                    <img src="{{ asset('take-action.png') }}"
-                         alt="Fast Retro Action Items Feature"
-                         class="w-full max-w-md mx-auto rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300">
+                    <picture>
+                        <source srcset="{{ asset('take-action.png.webp') }}" type="image/webp">
+                        <img src="{{ asset('take-action.png') }}"
+                             alt="Fast Retro Action Items Feature"
+                             class="w-full max-w-md mx-auto rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300">
+                    </picture>
                     <div
                         class="absolute -top-3 -right-3 bg-yellow-400 text-black px-4 py-2 rounded-full border-2 border-black font-bold text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                         NEW
