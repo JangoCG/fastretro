@@ -155,8 +155,8 @@ const copyToClipboard = async () => {
                     </div>
                     <!-- Legal Links -->
                     <div class="flex items-center gap-6">
-                        <a href="/privacy-policy" class="text-sm text-black/60 transition-colors hover:text-black">Datenschutz / Privacy Policy</a>
-                        <a href="/imprint" class="text-sm text-black/60 transition-colors hover:text-black">Impressun / Imprint</a>
+                        <a href="/privacy-policy" class="text-sm text-black/60 transition-colors hover:text-black">Privacy Policy / Datenschutz</a>
+                        <a href="/imprint" class="text-sm text-black/60 transition-colors hover:text-black">Imprint / Impressum</a>
                     </div>
                 </div>
             </div>
