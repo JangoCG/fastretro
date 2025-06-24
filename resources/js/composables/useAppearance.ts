@@ -54,35 +54,33 @@ export function initializeTheme() {
         return;
     }
 
-    // Initialize theme from saved preference or default to system...
-    const savedAppearance = getStoredAppearance();
-    updateTheme(savedAppearance || 'system');
-
-    // Set up system theme change listener...
-    mediaQuery()?.addEventListener('change', handleSystemThemeChange);
+    // Force light mode only
+    updateTheme('light');
+    
+    // Remove dark class to ensure light mode
+    document.documentElement.classList.remove('dark');
 }
 
 const appearance = ref<Appearance>('system');
 
 export function useAppearance() {
     onMounted(() => {
-        const savedAppearance = localStorage.getItem('appearance') as Appearance | null;
-
-        if (savedAppearance) {
-            appearance.value = savedAppearance;
-        }
+        // Always use light mode
+        appearance.value = 'light';
     });
 
     function updateAppearance(value: Appearance) {
-        appearance.value = value;
+        // Always force light mode, ignore the value parameter
+        appearance.value = 'light';
 
-        // Store in localStorage for client-side persistence...
-        localStorage.setItem('appearance', value);
+        // Store light mode in localStorage
+        localStorage.setItem('appearance', 'light');
 
-        // Store in cookie for SSR...
-        setCookie('appearance', value);
+        // Store light mode in cookie
+        setCookie('appearance', 'light');
 
-        updateTheme(value);
+        // Always update to light theme
+        updateTheme('light');
     }
 
     return {
