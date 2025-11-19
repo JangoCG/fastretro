@@ -1,0 +1,56 @@
+# Build artifacts
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel artifacts
+vendor/
+.env
+.env.*
+!.env.example
+storage/
+bootstrap/cache/
+public/hot
+public/storage
+public/build
+
+# Development files
+*.log
+*.pid
+*.seed
+*.pid.lock
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Testing
+.phpunit.result.cache
+coverage/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Development tools
+composer.lock
+package-lock.json
+phpunit.xml
+.editorconfig
+.php-cs-fixer.php
+phpstan.neon

@@ -1,0 +1,42 @@
+{{- if .Values.gateway.createGateway }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: {{ include "fastretro.fullname" . }}-gateway
+  labels:
+    {{- include "fastretro.labels" . | nindent 4 }}
+  {{- with .Values.gateway.gatewayAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  gatewayClassName: {{ .Values.gateway.gatewayClassName }}
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      {{- if .Values.gateway.hostnames }}
+      hostname: {{ first .Values.gateway.hostnames | quote }}
+      {{- end }}
+      allowedRoutes:
+        namespaces:
+          from: Same
+    {{- if .Values.gateway.tls.enabled }}
+    - name: https
+      protocol: HTTPS
+      port: 443
+      {{- if .Values.gateway.hostnames }}
+      hostname: {{ first .Values.gateway.hostnames | quote }}
+      {{- end }}
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: {{ .Values.gateway.tls.certificateRef }}
+            {{- if .Values.gateway.tls.certificateNamespace }}
+            namespace: {{ .Values.gateway.tls.certificateNamespace }}
+            {{- end }}
+      allowedRoutes:
+        namespaces:
+          from: Same
+    {{- end }}
+{{- end }}

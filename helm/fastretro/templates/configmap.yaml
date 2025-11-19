@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "fastretro.fullname" . }}
+  labels:
+    {{- include "fastretro.labels" . | nindent 4 }}
+data:
+  APP_NAME: {{ .Values.app.name | quote }}
+  APP_ENV: {{ .Values.app.env | quote }}
+  APP_DEBUG: {{ .Values.app.debug | quote }}
+  APP_URL: {{ .Values.app.url | quote }}
+
+  DB_CONNECTION: {{ .Values.database.connection | quote }}
+  {{- if eq .Values.database.connection "sqlite" }}
+  DB_DATABASE: "/var/www/html/storage/database/database.sqlite"
+  {{- end }}
+
+  QUEUE_CONNECTION: {{ .Values.queue.connection | quote }}
+  CACHE_DRIVER: {{ .Values.cache.driver | quote }}
+  SESSION_DRIVER: {{ .Values.session.driver | quote }}
+  SESSION_LIFETIME: {{ .Values.session.lifetime | quote }}
+
+  REVERB_APP_ID: {{ .Values.reverb.appId | quote }}
+  REVERB_APP_KEY: {{ .Values.reverb.appKey | quote }}
+  REVERB_HOST: {{ .Values.reverb.host | quote }}
+  REVERB_PORT: {{ .Values.reverb.port | quote }}
+  REVERB_SCHEME: {{ .Values.reverb.scheme | quote }}
+
+  VITE_APP_NAME: {{ .Values.app.name | quote }}
+  VITE_REVERB_APP_KEY: {{ .Values.reverb.appKey | quote }}
+  VITE_REVERB_HOST: {{ required "app.url is required" .Values.app.url | quote }}
+  VITE_REVERB_PORT: "443"
+  VITE_REVERB_SCHEME: "https"

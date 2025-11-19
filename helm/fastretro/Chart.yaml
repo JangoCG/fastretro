@@ -1,0 +1,18 @@
+apiVersion: v2
+name: fastretro
+description: A Helm chart for FastRetro - Real-time collaborative retrospective and task management application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - laravel
+  - vue
+  - retrospective
+  - collaboration
+  - agile
+home: https://github.com/jack-in-the-box/fastretro
+sources:
+  - https://github.com/jack-in-the-box/fastretro
+maintainers:
+  - name: FastRetro Team
+    url: https://github.com/jack-in-the-box/fastretro

@@ -1,0 +1,229 @@
+# Default values for fastretro
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/jack-in-the-box/fastretro
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext:
+  fsGroup: 9999
+  runAsUser: 9999
+  runAsGroup: 9999
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 9999
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+reverbService:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+# Gateway API configuration (modern approach, recommended)
+gateway:
+  enabled: false
+  # Create a new Gateway resource (set to false if using existing Gateway)
+  createGateway: false
+  # GatewayClass to use when creating a Gateway
+  gatewayClassName: "istio"
+  # Name of the Gateway resource to attach HTTPRoutes to
+  gatewayName: "default-gateway"
+  # Namespace where the Gateway is located (optional, leave empty for same namespace)
+  namespace: ""
+  # Specific listener/section name to attach to (optional)
+  sectionName: ""
+  # Hostnames for routing
+  hostnames:
+    - fastretro.example.com
+  # Annotations for Gateway resource (only used if createGateway is true)
+  gatewayAnnotations: {}
+  # Annotations for HTTPRoute resources
+  annotations: {}
+  # TLS configuration (only used if createGateway is true)
+  tls:
+    enabled: false
+    # Reference to TLS certificate secret
+    certificateRef: fastretro-tls
+    # Namespace of the certificate (optional)
+    certificateNamespace: ""
+  # Request filters for main application routes
+  filters: []
+  # Request filters for Reverb WebSocket routes (e.g., request timeout)
+  reverbFilters:
+    - type: RequestHeaderModifier
+      requestHeaderModifier:
+        set:
+          - name: Upgrade
+            value: websocket
+          - name: Connection
+            value: Upgrade
+
+# Legacy Ingress configuration (deprecated, use gateway instead)
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: fastretro.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: fastretro-tls
+      hosts:
+        - fastretro.example.com
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+livenessProbe:
+  httpGet:
+    path: /up
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /up
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes:
+  - name: storage
+    emptyDir: {}
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+  - name: storage
+    mountPath: /var/www/html/storage/app
+    subPath: app
+  - name: storage
+    mountPath: /var/www/html/storage/framework
+    subPath: framework
+  - name: storage
+    mountPath: /var/www/html/storage/logs
+    subPath: logs
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Laravel application configuration
+app:
+  name: FastRetro
+  env: production
+  debug: false
+  url: https://fastretro.example.com
+  key: ""  # Generate with: php artisan key:generate --show
+
+database:
+  connection: sqlite
+  # For SQLite, the database file will be stored in storage/database.sqlite
+  # mounted via persistent volume
+
+queue:
+  connection: database
+
+cache:
+  driver: file
+
+session:
+  driver: file
+  lifetime: 120
+
+# Laravel Reverb (WebSocket) configuration
+reverb:
+  appId: ""
+  appKey: ""
+  appSecret: ""
+  host: "0.0.0.0"
+  port: "8080"
+  scheme: "http"
+
+# Jobs to run on installation/upgrade
+jobs:
+  migrate:
+    enabled: true
+    backoffLimit: 3
+    restartPolicy: Never
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+  cacheConfig:
+    enabled: true
+    backoffLimit: 1
+    restartPolicy: Never
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+persistence:
+  enabled: true
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  annotations: {}

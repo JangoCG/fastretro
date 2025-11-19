@@ -64,6 +64,30 @@ why we built Fast Retro: Wrap up your next retro fast, getting actionable result
 
 That's it! Open your browser to `http://localhost:8000` and start your first retrospective.
 
+## ☸️ Kubernetes Deployment
+
+FastRetro can be deployed to Kubernetes clusters using Helm. See the [Kubernetes Deployment Guide](helm/DEPLOYMENT.md) for detailed instructions.
+
+### Quick Helm Install
+
+```bash
+# Add the Helm repository
+helm repo add fastretro https://jack-in-the-box.github.io/fastretro/
+helm repo update
+
+# Install FastRetro
+helm install my-fastretro fastretro/fastretro \
+  --set app.url=https://fastretro.example.com \
+  --set app.key="base64:YOUR_APP_KEY" \
+  --set reverb.appId="YOUR_REVERB_APP_ID" \
+  --set reverb.appKey="YOUR_REVERB_APP_KEY" \
+  --set reverb.appSecret="YOUR_REVERB_APP_SECRET" \
+  --set ingress.enabled=true \
+  --set ingress.hosts[0].host=fastretro.example.com
+```
+
+For detailed configuration options and troubleshooting, see the [complete deployment guide](helm/DEPLOYMENT.md).
+
 ## 🛠️ Technology Stack
 
 ### Backend
