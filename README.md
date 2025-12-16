@@ -1,6 +1,6 @@
 # Fast Retro
 
-This is the source code of [Fast Retro](https://fastretro.app/), a tool which helps remote teams to carry out their [retrospectives](https://www.atlassian.com/agile/scrum/retrospectives) fast.
+This is the source code of [Fast Retro](https://fastretro.app/), a tool which helps remote teams to carry out their [retrospectives](https://www.scrum.org/resources/what-is-a-sprint-retrospective) fast.
 
 
 ## Running your own Fast Retro instance
