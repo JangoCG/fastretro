@@ -17,6 +17,14 @@ bin/dev
 
 You'll be able to access the app in development at http://localhost:3000.
 
+### Linting
+
+To run RuboCop and auto-fix all files:
+
+```sh
+bin/rubocop -A
+```
+
 ### Running tests
 
 For fast feedback loops, unit tests can be run with:
