@@ -34,7 +34,7 @@ class ActionDispatch::IntegrationTest
   private
     # Temporarily set ENV variables for a test block
     def with_env(env_vars)
-      original_values = env_vars.keys.to_h { |key| [key, ENV[key]] }
+      original_values = env_vars.keys.to_h { |key| [ key, ENV[key] ] }
       env_vars.each { |key, value| ENV[key] = value }
       yield
     ensure

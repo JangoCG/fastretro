@@ -139,7 +139,7 @@ retro1 = Retro.create!(
 )
 
 # Add all participants
-[sarah, marcus, emily, david, alex, priya].each_with_index do |user, index|
+[ sarah, marcus, emily, david, alex, priya ].each_with_index do |user, index|
   role = index < 2 ? :admin : :participant
   retro1.add_participant(user, role: role)
 end
@@ -223,7 +223,7 @@ retro2 = Retro.create!(
   phase: :complete
 )
 
-[sarah, marcus, emily, david, alex, priya].each_with_index do |user, index|
+[ sarah, marcus, emily, david, alex, priya ].each_with_index do |user, index|
   role = index < 1 ? :admin : :participant
   participant = retro2.add_participant(user, role: role)
   participant.finish!
@@ -251,11 +251,11 @@ past_could_be_better = [
 ]
 
 past_went_well.each_with_index do |content, i|
-  create_feedback(retro: retro2, user: [sarah, marcus, emily, david, alex, priya][i % 6], category: :went_well, content: content)
+  create_feedback(retro: retro2, user: [ sarah, marcus, emily, david, alex, priya ][i % 6], category: :went_well, content: content)
 end
 
 past_could_be_better.each_with_index do |content, i|
-  create_feedback(retro: retro2, user: [david, sarah, emily, marcus, alex, priya][i % 6], category: :could_be_better, content: content)
+  create_feedback(retro: retro2, user: [ david, sarah, emily, marcus, alex, priya ][i % 6], category: :could_be_better, content: content)
 end
 
 # Add comprehensive action items
@@ -268,7 +268,7 @@ completed_actions = [
 ]
 
 completed_actions.each_with_index do |content, i|
-  create_action(retro: retro2, user: [sarah, marcus, emily, david, alex][i % 5], content: content, status: :published)
+  create_action(retro: retro2, user: [ sarah, marcus, emily, david, alex ][i % 5], content: content, status: :published)
 end
 
 # =============================================================================
