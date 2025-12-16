@@ -1,6 +1,0 @@
-- Always use Vue 3 Composition API
-- Use Tailwind v4
-- Use Typescript
-- Use Vue ShadCN
- The Shadcn components can be found in resources/js/components/ui if the 
-one you want to use is not there add the shadcn  component by using npx shadcn-vue@latest <component-name>

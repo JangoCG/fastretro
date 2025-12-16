@@ -1,0 +1,101 @@
+<% content_for :full_width, true %>
+<% content_for :title, "#{@post.title} — Fast Retro Blog" %>
+<% content_for :meta_title, @post.title %>
+<% content_for :meta_description, @post.description %>
+<% content_for :meta_author, @post.author %>
+<% content_for :published_time, @post.date.iso8601 %>
+<% content_for :og_type, "article" %>
+<% if @post.image %>
+<% content_for :og_image, image_url(@post.image) %>
+<% end %>
+
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "<%= j @post.title %>",
+  "description": "<%= j @post.description %>",
+  "image": "<%= @post.image ? image_url(@post.image) : image_url("retro-image-no-padding.png") %>",
+  "author": {
+    "@type": "Person",
+    "name": "<%= @post.author %>"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fast Retro",
+    "url": "https://fastretro.app",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "<%= image_url("icon.png") %>"
+    }
+  },
+  "datePublished": "<%= @post.date.iso8601 %>",
+  "dateModified": "<%= @post.date.iso8601 %>",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= request.original_url %>"
+  }
+}
+</script>
+<% end %>
+
+<article class="max-w-4xl mx-auto px-4 sm:px-6 relative">
+  
+  <%# Navigation %>
+  <div class="mb-12 border-b-2 border-black pb-4 flex justify-between items-center">
+    <%= link_to blog_path, class: "group inline-flex items-center gap-2 font-mono text-sm font-bold uppercase hover:bg-black hover:text-white px-3 py-2 transition-colors border border-transparent hover:border-black" do %>
+      <span><-</span> RETURN_TO_ARCHIVE
+    <% end %>
+    
+    <span class="font-mono text-xs text-zinc-400 uppercase hidden sm:inline-block">/ VIEWING_FILE: <%= @post.slug.upcase rescue "ID_UNKNOWN" %></span>
+  </div>
+
+  <%# Header Block %>
+  <header class="mb-12">
+    <div class="border-l-4 border-[#ffe600] pl-6 py-2 mb-8">
+      <div class="flex flex-wrap gap-4 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">
+        <span class="bg-zinc-100 px-2 py-1">AUTH: <%= @post.author.upcase rescue "SYSTEM" %></span>
+        <span class="bg-zinc-100 px-2 py-1">DATE: <%= @post.formatted_date.upcase rescue "UNKNOWN" %></span>
+        <span class="bg-zinc-100 px-2 py-1">TIME: <%= @post.read_time.upcase rescue "N/A" %></span>
+      </div>
+      
+      <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+        "<%= @post.title rescue "UNTITLED" %>"
+      </h1>
+    </div>
+
+    <% if @post.image %>
+      <div class="w-full border-2 border-black p-2 bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <div class="aspect-[21/9] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+           <%= image_tag @post.image, alt: @post.title, class: "w-full h-full object-cover" %>
+           
+           <%# Watermark %>
+           <div class="absolute bottom-4 right-4 bg-black text-white px-2 py-1 font-mono text-[10px] uppercase font-bold opacity-50">
+             IMG_REF: <%= SecureRandom.hex(4).upcase %>
+           </div>
+        </div>
+      </div>
+    <% end %>
+  </header>
+
+  <%# Content %>
+  <div class="prose prose-lg max-w-none
+              prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter
+              prose-p:font-sans prose-p:text-zinc-700
+              prose-a:text-black prose-a:font-bold prose-a:decoration-[#ffe600] prose-a:decoration-2 prose-a:underline-offset-2
+              prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:not-italic prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:bg-zinc-100 prose-blockquote:py-2 prose-blockquote:px-4
+              prose-img:border-2 prose-img:border-black prose-img:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+              prose-li:text-zinc-700 prose-li:marker:text-zinc-400
+              prose-strong:text-black prose-strong:font-bold
+              prose-ol:list-decimal prose-ul:list-disc
+              mb-24">
+    <%= @post.content %>
+  </div>
+
+  <%# Footer Block %>
+  <div class="border-t-4 border-dashed border-zinc-300 pt-8 mb-16">
+    <span class="font-mono text-xs font-bold uppercase text-zinc-400">END_OF_FILE</span>
+  </div>
+
+</article>

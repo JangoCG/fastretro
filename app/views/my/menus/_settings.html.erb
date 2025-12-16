@@ -1,0 +1,42 @@
+<details class="group border-t border-gray-100 pt-3" data-action="toggle->nav-section-expander#toggle" data-nav-section-expander-target="section" data-nav-section-expander-key-value="settings" data-filter-target="section" open>
+  <summary class="flex items-center gap-2 py-2 text-sm font-semibold text-gray-500 uppercase tracking-wide cursor-pointer select-none hover:text-gray-700">
+    <%= icon_tag "caret-down", class: "w-4 h-4 transition-transform group-open:rotate-0 -rotate-90" %>
+    Settings
+  </summary>
+  <ul class="mt-2 space-y-1">
+    <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item">
+      <%= icon_tag "settings", class: "w-6 h-6 text-gray-600 shrink-0" %>
+      <%= link_to account_settings_path, class: "flex-1 truncate text-base text-gray-900" do %>
+        <span class="truncate">Account Settings</span>
+      <% end %>
+    </li>
+    <% if Current.user %>
+      <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item">
+        <%= icon_tag "person", class: "w-6 h-6 text-gray-600 shrink-0" %>
+        <%= link_to user_path(Current.user), class: "flex-1 truncate text-base text-gray-900" do %>
+          <span class="truncate">My Profile</span>
+        <% end %>
+      </li>
+    <% end %>
+    <% if FastRetro.saas? %>
+      <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item">
+        <%= icon_tag "crown", class: "w-6 h-6 text-gray-600 shrink-0" %>
+        <%= link_to my_subscription_path(script_name: nil), class: "flex-1 truncate text-base text-gray-900" do %>
+          <span class="truncate">Subscription & Usage</span>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item">
+      <%= icon_tag "chat", class: "w-6 h-6 text-gray-600 shrink-0" %>
+      <%= link_to new_site_feedback_path(script_name: nil), class: "flex-1 truncate text-base text-gray-900" do %>
+        <span class="truncate">Send Feedback</span>
+      <% end %>
+    </li>
+    <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item">
+      <%= icon_tag "logout", class: "w-6 h-6 text-gray-600 shrink-0" %>
+      <%= button_to session_url(script_name: nil), method: :delete, class: "flex-1 text-left text-base text-gray-900", data: { turbo: false } do %>
+        <span>Log out</span>
+      <% end %>
+    </li>
+  </ul>
+</details>

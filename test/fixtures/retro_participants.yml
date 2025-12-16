@@ -1,0 +1,13 @@
+one_admin:
+  retro_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  role: admin
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+two_admin:
+  retro_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  role: admin
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

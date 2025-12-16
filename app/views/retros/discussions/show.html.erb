@@ -1,0 +1,13 @@
+<% content_for :title, @retro.name %>
+
+<% content_for :phase_tag do %>
+  <%= render PhaseTagComponent.new(phase: :discussion) %>
+<% end %>
+
+<% content_for :board_columns do %>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <%= render Retros::ColumnComponent.new(retro: @retro, category: "went_well") %>
+    <%= render Retros::ColumnComponent.new(retro: @retro, category: "could_be_better") %>
+    <%= render Actions::ColumnComponent.new(retro: @retro) %>
+  </div>
+<% end %>

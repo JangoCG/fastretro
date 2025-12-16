@@ -1,0 +1,22 @@
+<%# Compact Retro Footer - 40px max height %>
+<footer class="w-full h-10 bg-zinc-900 border-t-[2px] border-zinc-800 flex items-center justify-between px-4 sm:px-6 mt-auto">
+  <%# Left: Brand %>
+  <span class="font-mono text-[0.6rem] text-zinc-100 uppercase tracking-widest">
+    FASTRETRO <span class="text-zinc-200">//</span> 2025
+  </span>
+
+  <%# Center: Legal Links %>
+  <div class="flex items-center gap-4 font-mono text-xs uppercase tracking-wider">
+    <%= link_to "BLOG", blog_path(script_name: nil), class: "text-zinc-100 hover:text-white transition-colors" %>
+    <span class="text-zinc-300">|</span>
+    <%= link_to "IMPRINT", imprint_path(script_name: nil), class: "text-zinc-100 hover:text-white transition-colors" %>
+    <span class="text-zinc-300">|</span>
+    <%= link_to "PRIVACY", privacy_policy_path(script_name: nil), class: "text-zinc-100 hover:text-white transition-colors" %>
+  </div>
+
+  <%# Right: Barcode decoration %>
+  <div class="hidden sm:flex items-center gap-2">
+    <div class="h-3 w-12 bg-[repeating-linear-gradient(90deg,#fff,#fff_1px,transparent_1px,transparent_3px)] opacity-50"></div>
+
+  </div>
+</footer>

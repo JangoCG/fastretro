@@ -1,0 +1,13 @@
+<% if @magic_link.for_sign_in? %>
+  <h1 class="title">Fast Retro verification code</h1>
+  <p class="subtitle">Please enter this 6-character verification code on the FastRetro sign-in page:</p>
+<% else %>
+  <h1 class="title">Welcome to Fast Retro!</h1>
+  <p class="subtitle">Please enter this 6-character verification code on the FastRetro sign-up page to create your new account:</p>
+<% end %>
+
+<strong style="font-size: 1.5rem;"><%= @magic_link.code %></strong>
+
+<p>This code will work for <%= distance_of_time_in_words(MagicLink::EXPIRATION_TIME) %>.</p>
+
+<p class="footer">Need help? <%= mail_to "cengiz@cengizg.com", "Send us an email" %>.</p>

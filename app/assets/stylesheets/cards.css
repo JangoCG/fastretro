@@ -1,0 +1,161 @@
+/* Card styles from fizzy */
+
+/* CSS Variables needed for cards */
+:root {
+  --card-color: var(--color-ink-medium, #6b7280);
+  --text-xx-large: 1.5rem;
+  --block-space: 1rem;
+  --block-space-half: 0.5rem;
+  --inline-space: 1rem;
+  --inline-space-double: 2rem;
+}
+
+/* Card title */
+.card__title {
+  --autosize-block-padding: 0 0.5ch;
+  --input-border-radius: 0;
+  --input-color: var(--card-content-color, var(--color-ink));
+  --lines: 3;
+
+  color: var(--card-content-color, var(--color-ink));
+  font-size: var(--text-xx-large);
+  font-weight: 900;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.card__title .card-field__title {
+  overflow: hidden;
+  padding-block: var(--autosize-block-padding);
+}
+
+.card__title .card-field__title:is(textarea)::placeholder {
+  color: inherit;
+  opacity: 0.66;
+}
+
+.card__title .card__title-link {
+  color: inherit;
+}
+
+/* Card description */
+.card__description {
+  /* Hide the empty element that Lexical saves when nothing is added to the description */
+}
+
+.card__description action-text-content p:only-child:has(br:only-child) {
+  display: none;
+}
+
+.card__description lexxy-toolbar {
+  border-block-start: 1px solid var(--color-ink-light);
+}
+
+/* Autoresize support (for browsers without field-sizing) */
+@supports not (field-sizing: content) {
+  .autoresize__wrapper {
+    display: grid !important;
+    position: relative;
+  }
+
+  .autoresize__wrapper > *,
+  .autoresize__wrapper::after {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .autoresize__wrapper::after {
+    content: attr(data-autoresize-clone-value) " ";
+    font: inherit;
+    line-height: inherit;
+    padding-block: var(--autosize-block-padding, 0);
+    visibility: hidden;
+    white-space: pre-wrap;
+  }
+
+  .autoresize__textarea {
+    inset: 0;
+    overflow: hidden;
+    position: absolute;
+    resize: none;
+  }
+}
+
+/* Input styles */
+.input {
+  accent-color: var(--input-accent-color, var(--color-ink));
+  background-color: var(--input-background, transparent);
+  border-radius: var(--input-border-radius, 0.5em);
+  border: var(--input-border-size, 1px) solid var(--input-border-color, var(--color-ink-medium));
+  color: var(--input-color, var(--color-ink));
+  font-size: max(16px, 1em);
+  inline-size: 100%;
+  line-height: inherit;
+  max-inline-size: 100%;
+  padding: var(--input-padding, 0.5em 0.8em);
+  resize: none;
+}
+
+.input:autofill,
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-ink);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-selected) inset;
+}
+
+.input:where(:focus) {
+  --focus-ring-offset: -1px;
+}
+
+.input[readonly] {
+  --focus-ring-size: 0;
+}
+
+.input--textarea {
+  --input-padding: 0;
+
+  line-height: inherit;
+  min-block-size: calc(3lh + (2 * var(--input-padding)));
+  min-inline-size: 100%;
+  padding-block: var(--input-padding);
+  padding-inline: calc(var(--input-padding) + calc((1lh - 1ex) / 2));
+}
+
+@supports (field-sizing: content) {
+  .input--textarea {
+    field-sizing: content;
+    max-block-size: calc(3lh + (2 * var(--input-padding)));
+    min-block-size: calc(1lh + (2 * var(--input-padding)));
+  }
+}
+
+/* Target mobile Safari only */
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  @media (hover: none) {
+    .input {
+      font-size: max(16px, 1em) !important;
+    }
+  }
+}
+
+/* Utility classes */
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.align-center { align-items: center; }
+.full-width { inline-size: 100%; }
+.txt-align-start { text-align: start; }
+.borderless { border: 0; }
+
+.hide-focus-ring {
+  --focus-ring-size: 0;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* Edge */
+  scrollbar-width: none; /* FF */
+}
+
+/* Chrome/Safari/Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

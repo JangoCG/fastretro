@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Custom Tailwind Components
+   Using @apply to create reusable CSS classes from Tailwind utilities
+   ========================================================================== */
+
+
+
+/* Auth input field for login/signup pages */
+.auth-input {
+  @apply font-light sm:text-[28px] px-4 py-1 text-lg border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/*
+   * BASE BUTTON (.btn)
+   * Handles layout, shape, typography, focus states, and animation.
+   */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-2 text-sm font-medium transition-all duration-200 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* 
+   * DANGER BUTTON (.btn-danger)
+   * Red background, white text. Good for Sign Out, Delete.
+   */
+.btn-danger {
+  @apply text-white bg-red-500 hover:bg-red-600 focus:ring-red-500;
+}
+
+/* 
+   * PRIMARY BUTTON (.btn-primary)
+   * Standard brand color (e.g., Indigo/Blue). Good for Submit, Save.
+   */
+.btn-primary {
+  @apply text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500;
+}
+
+/* 
+   * SECONDARY BUTTON (.btn-secondary)
+   * White/Gray background. Good for Cancel, Back.
+   */
+.btn-secondary {
+  @apply text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 focus:ring-slate-500;
+}
+
+/* 
+   * GHOST BUTTON (.btn-ghost)
+   * No background. Good for subtle actions.
+   */
+.btn-ghost {
+  @apply text-slate-500 bg-transparent shadow-none hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-500;
+}

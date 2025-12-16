@@ -1,0 +1,66 @@
+<% content_for :title, "Join #{@retro.name}" %>
+
+<div class="max-w-md mx-auto px-4 py-8 font-sans">
+
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+
+    <%# Header %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10">
+        <p class="font-mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
+          YOU'VE BEEN INVITED TO
+        </p>
+        <h1 class="text-2xl font-black uppercase tracking-tight text-zinc-900 leading-tight">
+          <%= @retro.name %>
+        </h1>
+        <p class="font-mono text-xs text-zinc-500 mt-2 uppercase">
+          TEAM: <%= @join_code.account.name %>
+        </p>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="p-6 relative bg-white">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <%= form_with url: retro_invite_path(code: @join_code.code, retro_id: @retro.id), method: :post, class: "flex flex-col gap-6 relative z-10" do |form| %>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+            ENTER YOUR EMAIL TO JOIN
+          </label>
+          <%= form.email_field :email_address,
+             required: true,
+             class: "w-full px-4 py-3 bg-[#F8F5EC] border-[2px] border-zinc-900 text-zinc-900 font-bold placeholder-zinc-400 focus:outline-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-none",
+             autofocus: true,
+             autocomplete: "username",
+             placeholder: "your@email.com",
+             value: Current.identity&.email_address %>
+        </div>
+
+        <div class="p-2 border-l-[3px] border-zinc-300">
+          <p class="text-[0.65rem] font-bold text-zinc-400 uppercase tracking-wide leading-relaxed">
+            WE'LL SEND YOU A MAGIC LINK TO VERIFY YOUR EMAIL AND JOIN THE RETRO.
+          </p>
+        </div>
+
+        <button type="submit" class="group relative flex items-center justify-center gap-3 w-full py-4 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+          <span>JOIN RETRO</span>
+          <i class="icon icon--arrow-right text-lg pt-0.5 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+
+      <% end %>
+
+    </div>
+
+    <%# Technical Footer %>
+    <div class="p-4 border-t-[3px] border-zinc-900 bg-[#F8F5EC] flex justify-center">
+      <span class="text-[0.65rem] font-bold text-zinc-400 uppercase tracking-widest">
+        NEW OR EXISTING USER? JUST ENTER YOUR EMAIL
+      </span>
+    </div>
+  </div>
+</div>

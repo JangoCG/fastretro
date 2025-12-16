@@ -1,0 +1,57 @@
+<% content_for :title, "Join #{@join_code.account.name}" %>
+
+<div class="max-w-7xl mx-auto px-4 py-12">
+  
+  <%# Navigation Header %>
+  <div class="flex items-center justify-between mb-16 border-b-2 border-black pb-4">
+    <%= render BackButtonComponent.new(label: "Back", href: root_path) %>
+    <span class="font-mono text-xs text-zinc-400 uppercase hidden sm:inline-block">/ Join team</span>
+  </div>
+
+  <div class="max-w-md mx-auto">
+    <%# Header %>
+    <div class="border-l-4 border-black pl-6 py-4 mb-8">
+      <p class="font-mono text-xs text-zinc-500 mb-2 uppercase tracking-widest">
+        You've been invited to
+      </p>
+      <h1 class="text-4xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+        <%= @join_code.account.name %>
+      </h1>
+    </div>
+
+    <%# Card %>
+    <div class="bg-zinc-100 border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div class="flex items-center gap-2 mb-8 border-b border-black pb-2">
+        <span class="w-2 h-2 bg-[#ffe600] border border-black rounded-full"></span>
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Enter your email to join</span>
+      </div>
+
+      <%= form_with url: join_path(@join_code.code), method: :post, class: "flex flex-col gap-6" do |form| %>
+
+        <div>
+          <%= form.label :email_address, "Email address", class: "font-mono text-xs font-bold uppercase block mb-1" %>
+          <div class="relative">
+            <%= form.email_field :email_address,
+                required: true,
+                class: "w-full bg-white border-2 border-zinc-300 focus:border-black#ffe600] px-4 py-3 font-mono text-sm focus:outline-none transition-colors rounded-none placeholder:text-zinc-400",
+                autofocus: true,
+                autocomplete: "username",
+                placeholder: "you@example.com",
+                value: Current.identity&.email_address %>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-dashed border-zinc-300">
+           <button type="submit" class="group w-full bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider flex items-center justify-between border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1">
+              <span>Join team</span>
+              <span class="font-mono group-hover:translate-x-2 transition-transform">-></span>
+           </button>
+        </div>
+      <% end %>
+
+      <div class="mt-8 text-center font-mono text-[10px] text-zinc-400 uppercase">
+         We'll send you a magic link to verify your email.
+      </div>
+    </div>
+  </div>
+</div>

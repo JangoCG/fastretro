@@ -1,0 +1,91 @@
+<% @page_title = "Change usage limit" %>
+
+<% content_for :header do %>
+  <div class="flex">
+    <%= render BackButtonComponent.new(label: "Invite link", href: account_join_code_path, hotkeys: ["left", "esc"]) %>
+  </div>
+<% end %>
+
+<% @page_title = "CONFIG: USAGE_LIMITS" %>
+<% content_for :title, @page_title %>
+
+<% content_for :header do %>
+  <div class="flex">
+    <%= render BackButtonComponent.new(label: "INVITE_LINK", href: account_join_code_path, hotkeys: ["left", "esc"]) %>
+  </div>
+<% end %>
+
+<div class="max-w-xl mx-auto px-4 py-8 font-sans">
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative" style="view-transition-name: <%= dom_id(@join_code) %>">
+    
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+       <%# Background Grid %>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+      
+      <div class="relative z-10 flex items-center justify-between">
+        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+           CONFIG_LIMITS
+        </h1>
+        
+        <span class="inline-flex items-center px-2 py-1 border-[2px] border-zinc-900 bg-zinc-100 text-zinc-900 text-[0.6rem] font-bold uppercase tracking-widest">
+           REF_<%= @join_code.id %>
+        </span>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="p-8 relative flex flex-col gap-6 items-center">
+       <%# Background Grid %>
+       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+       
+       <div class="relative z-10 text-center">
+         <h2 class="text-lg font-black text-zinc-900 uppercase tracking-tight">SET_MAXIMUM_USAGE</h2>
+         <p class="text-xs font-mono text-zinc-500 uppercase mt-1">DEFINE_NUMERIC_THRESHOLD_FOR_LINK_VALIDITY</p>
+       </div>
+
+       <%= form_with model: @join_code, url: account_join_code_path, method: :patch, data: { controller: "form" }, html: { class: "flex flex-col gap-6 items-center relative z-10 w-full" } do |form| %>
+        
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+             <span class="text-zinc-300 font-mono text-xs">MAX:</span>
+          </div>
+          <%= form.number_field :usage_limit,
+                required: true, autofocus: true,
+                in: 0..Account::JoinCode::USAGE_LIMIT_MAX,
+                class: "bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-black text-center w-full min-w-[120px] py-4 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:translate-y-0.5 focus:shadow-none transition-all",
+                style: "max-inline-size: 10ch",
+                data: { action: "keydown.esc@document->form#cancel focus->form#select" } %>
+        </div>
+
+        <% if @join_code.errors.any? %>
+          <div class="p-4 bg-red-50 border-[2px] border-red-500 w-full max-w-sm">
+            <% @join_code.errors.full_messages.each do |message| %>
+              <p class="text-xs font-bold text-red-700 uppercase"><%= message %></p>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="text-center">
+            <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-wider">CURRENT_METRICS</span>
+            <p class="text-sm font-mono font-bold text-zinc-900">
+              USAGE_COUNT: <%= @join_code.usage_count %> / <%= @join_code.usage_limit_in_database %>
+            </p>
+        </div>
+
+        <div class="flex gap-4 pt-4">
+            <%= form.button type: :submit, class: "group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all", data: { form_target: "submit" } do %>
+              <span>COMMIT_CHANGES</span>
+            <% end %>
+            
+             <%= link_to "ABORT", account_join_code_path, class: "group relative inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors", data: { form_target: "cancel" }, hidden: true %>
+        </div>
+
+      <% end %>
+    </div>
+    
+     <%# Technical Footer %>
+    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+  </div>
+</div>

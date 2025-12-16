@@ -1,0 +1,2 @@
+class RetroFooterComponent < ApplicationComponent
+end

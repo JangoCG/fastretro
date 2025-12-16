@@ -1,0 +1,31 @@
+one:
+  name: Test User One
+  account: one
+  identity: one
+  role: owner
+  active: true
+  verified_at: <%= Time.current %>
+
+two:
+  name: Test User Two
+  account: one
+  identity: two
+  role: member
+  active: true
+  verified_at: <%= Time.current %>
+
+admin:
+  name: Admin User
+  account: one
+  identity: admin
+  role: admin
+  active: true
+  verified_at: <%= Time.current %>
+
+other_account_owner:
+  name: Other Owner
+  account: two
+  identity: other
+  role: owner
+  active: true
+  verified_at: <%= Time.current %>

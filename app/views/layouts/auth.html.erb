@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <title><%= content_for(:title) || "FastRetro" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="FastRetro">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
+
+    <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
+    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+         style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <header class="py-6">
+      <%# Industrial Header (non-interactive, no menu) %>
+      <nav class="relative flex justify-center z-50">
+        <%= link_to landing_page_path(script_name: nil), class: "group" do %>
+          <div class="relative inline-flex items-center gap-3 px-8 py-5 bg-[#F8F5EC] border-[2px] border-stone-300 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] group-hover:shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all duration-75 overflow-hidden min-w-[280px]">
+
+            <%# Decorative Hazard Strip %>
+            <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
+
+            <%# Meta Label %>
+            <div class="absolute top-2 left-2 flex flex-col items-start gap-0.5 pointer-events-none">
+              <span class="text-[0.45rem] font-bold text-stone-400 uppercase leading-none tracking-widest">NAV_SYS</span>
+              <span class="text-[0.4rem] font-mono text-stone-300 uppercase leading-none">V 2.0</span>
+            </div>
+
+            <%# Main Label %>
+            <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
+              <div class="flex items-center gap-2">
+                <span class="font-black text-xl sm:text-2xl uppercase tracking-tighter text-black leading-none select-none relative px-1">
+                  <span class="absolute inset-0 bg-[#FFFF00] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+                  "FAST RETRO"
+                </span>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+      </nav>
+    </header>
+
+    <% if flash[:alert].present? %>
+      <div class="max-w-md mx-auto px-4 mb-4">
+        <div class="bg-red-50 border-2 border-red-500 p-4 shadow-[4px_4px_0px_0px_rgba(220,38,38,1)]">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+            <span class="font-mono text-xs font-bold uppercase text-red-600">ERROR_LOG</span>
+          </div>
+          <p class="font-bold text-red-700 text-sm uppercase"><%= flash[:alert] %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <% if flash[:notice].present? %>
+      <div class="max-w-md mx-auto px-4 mb-4">
+        <div class="bg-green-50 border-2 border-green-500 p-4 shadow-[4px_4px_0px_0px_rgba(22,163,74,1)]">
+          <div class="flex items-center gap-2 mb-1">
+             <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+             <span class="font-mono text-xs font-bold uppercase text-green-600">SYSTEM_NOTICE</span>
+          </div>
+          <p class="font-bold text-green-700 text-sm uppercase"><%= flash[:notice] %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="flex-1 flex items-center justify-center px-4">
+      <div class="w-full max-w-md">
+        <%= yield %>
+      </div>
+    </main>
+    <%= render SiteFooterComponent.new %>
+  </body>
+</html>

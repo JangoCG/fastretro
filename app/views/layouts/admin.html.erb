@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="h-full">
+<head>
+  <%= page_title_tag %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="FastRetro">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
+
+<%# === BACKGROUND TEXTURE (The Dot Grid) === %>
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+
+<main id="main" class="flex-1 relative z-10">
+  <% if flash[:alert].present? %>
+    <div class="px-8 xl:px-16 pt-6">
+      <div class="border-2 border-red-600 bg-red-50 p-4 font-mono text-sm text-red-800">
+        <%= flash[:alert] %>
+      </div>
+    </div>
+  <% end %>
+  <% if flash[:notice].present? %>
+    <div class="px-8 xl:px-16 pt-6">
+      <div class="border-2 border-green-600 bg-green-50 p-4 font-mono text-sm text-green-800">
+        <%= flash[:notice] %>
+      </div>
+    </div>
+  <% end %>
+  <%= yield %>
+</main>
+
+<%= render RetroFooterComponent.new %>
+</body>
+</html>

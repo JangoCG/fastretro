@@ -1,0 +1,39 @@
+<header class="fixed top-0 inset-x-0 z-50 bg-zinc-100/80 backdrop-blur-sm border-b border-dashed border-zinc-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <%# Branding %>
+    <div class="flex items-center gap-2">
+      <%= link_to landing_page_path(script_name: nil), class: "group flex items-center gap-2" do %>
+        <div class="w-8 h-8 bg-black text-white flex items-center justify-center font-black text-xs tracking-tighter group-hover:rotate-180 transition-transform duration-500">
+          FR
+        </div>
+        <span class="font-black text-xl tracking-tighter uppercase italic">FASTRETRO</span>
+      <% end %>
+    </div>
+
+    <%# Nav %>
+    <nav class="hidden md:flex items-center gap-8">
+      <% [
+        ["HOW IT WORKS", landing_page_path(anchor: "features", script_name: nil)],
+        ["OPEN SOURCE", landing_page_path(anchor: "opensource", script_name: nil)],
+        ["FAQ", landing_page_path(anchor: "faq", script_name: nil)],
+        ["PRICING", landing_page_path(anchor: "pricing", script_name: nil)]
+      ].each_with_index do |(label, href), i| %>
+        <a href="<%= href %>" class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-black transition-colors">
+          [<%= sprintf('%02d', i + 1) %>] <%= label %>
+        </a>
+      <% end %>
+    </nav>
+
+    <%# Actions %>
+    <div class="flex items-center gap-2 sm:gap-4">
+      <%= link_to new_session_path(script_name: nil), class: "font-mono text-[10px] sm:text-xs font-bold uppercase underline decoration-1 underline-offset-4 hover:bg-zinc-200 px-1.5 sm:px-2 py-1" do %>
+        <span class="hidden sm:inline">Sign in</span>
+        <span class="sm:hidden">Login</span>
+      <% end %>
+      <%= link_to new_signup_path(script_name: nil), class: "bg-[#ffe600] text-black font-black text-[10px] sm:text-xs uppercase px-2 sm:px-4 py-1.5 sm:py-2 border-2 border-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" do %>
+        <span class="hidden sm:inline">Start for free</span>
+        <span class="sm:hidden">Start</span>
+      <% end %>
+    </div>
+  </div>
+</header>

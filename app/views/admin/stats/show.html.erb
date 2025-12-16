@@ -1,0 +1,168 @@
+<% content_for :title, "Admin Stats" %>
+
+<div class="px-8 xl:px-16 py-8">
+  <%# Back Button %>
+  <div class="pb-6">
+    <%= render BackButtonComponent.new(label: "Home", href: root_path) %>
+  </div>
+
+  <%# Page Title %>
+  <div class="mb-10">
+    <h1 class="font-black text-3xl sm:text-4xl lg:text-5xl text-zinc-900 uppercase tracking-tighter leading-none">
+      Admin Stats
+    </h1>
+    <div class="h-[3px] bg-zinc-900 mt-4"></div>
+  </div>
+
+  <%# Stats Cards Grid %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+    <%# Accounts Card %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)] p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <%= icon_tag "group", class: "text-3xl text-blue-600" %>
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Accounts</h2>
+      </div>
+      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@accounts_total) %></div>
+      <div class="flex gap-6 font-mono text-sm">
+        <div>
+          <span class="text-zinc-400">7d:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@accounts_last_7_days) %></span>
+        </div>
+        <div>
+          <span class="text-zinc-400">24h:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@accounts_last_24_hours) %></span>
+        </div>
+      </div>
+    </div>
+
+    <%# Identities Card %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)] p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <%= icon_tag "person", class: "text-3xl text-emerald-600" %>
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Identities</h2>
+      </div>
+      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@identities_total) %></div>
+      <div class="flex gap-6 font-mono text-sm">
+        <div>
+          <span class="text-zinc-400">7d:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@identities_last_7_days) %></span>
+        </div>
+        <div>
+          <span class="text-zinc-400">24h:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@identities_last_24_hours) %></span>
+        </div>
+      </div>
+    </div>
+
+    <%# Retros Card %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)] p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <%= icon_tag "history", class: "text-3xl text-violet-600" %>
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Retros</h2>
+      </div>
+      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@retros_total) %></div>
+      <div class="flex gap-6 font-mono text-sm">
+        <div>
+          <span class="text-zinc-400">7d:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@retros_last_7_days) %></span>
+        </div>
+        <div>
+          <span class="text-zinc-400">24h:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@retros_last_24_hours) %></span>
+        </div>
+      </div>
+    </div>
+
+    <%# Feedbacks Card %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)] p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <%= icon_tag "chat", class: "text-3xl text-amber-600" %>
+        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Feedbacks</h2>
+      </div>
+      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@feedbacks_total) %></div>
+      <div class="flex gap-6 font-mono text-sm">
+        <div>
+          <span class="text-zinc-400">7d:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@feedbacks_last_7_days) %></span>
+        </div>
+        <div>
+          <span class="text-zinc-400">24h:</span>
+          <span class="font-bold text-zinc-700"><%= number_with_delimiter(@feedbacks_last_24_hours) %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# Lists Grid %>
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+    <%# Recent Signups %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)]">
+      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-blue-600">
+        <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
+          <%= icon_tag "schedule", class: "text-2xl opacity-90" %>
+          10 Most Recent Signups
+        </h2>
+      </div>
+      <ul class="divide-y-2 divide-zinc-200">
+        <% @recent_accounts.each do |account| %>
+          <% owner = account.users.owner.first %>
+          <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
+            <div class="flex justify-between items-start gap-4">
+              <div class="min-w-0 flex-1">
+                <div class="text-base font-bold text-zinc-900 truncate"><%= account.name %></div>
+                <div class="font-mono text-xs text-zinc-500 mt-1">
+                  #<%= account.external_account_id %> &middot;
+                  <%= owner&.identity&.email_address || "No owner" %>
+                </div>
+              </div>
+              <div class="font-mono text-xs text-zinc-500 whitespace-nowrap bg-zinc-200 px-3 py-1.5 border border-zinc-300">
+                <%= time_ago_in_words(account.created_at) %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <%# Top Accounts %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)]">
+      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-amber-500">
+        <h2 class="font-bold text-zinc-900 flex items-center gap-3 uppercase tracking-widest text-sm">
+          <%= icon_tag "leaderboard", class: "text-2xl opacity-90" %>
+          Top 20 by Feedback Count
+        </h2>
+      </div>
+      <ul class="divide-y-2 divide-zinc-200">
+        <% @top_accounts.each_with_index do |account, index| %>
+          <% owner = account.users.owner.first %>
+          <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
+            <div class="flex justify-between items-start gap-4">
+              <div class="flex items-center gap-4 min-w-0 flex-1">
+                <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono text-sm font-bold border-2 border-zinc-900
+                  <%= case index
+                      when 0 then 'bg-[#FFD700] text-zinc-900'
+                      when 1 then 'bg-[#C0C0C0] text-zinc-900'
+                      when 2 then 'bg-[#CD7F32] text-white'
+                      else 'bg-zinc-100 text-zinc-600'
+                      end %>">
+                  <%= index + 1 %>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="text-base font-bold text-zinc-900 truncate"><%= account.name %></div>
+                  <div class="font-mono text-xs text-zinc-500 mt-1">
+                    #<%= account.external_account_id %> &middot;
+                    <%= owner&.identity&.email_address || "No owner" %>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-shrink-0 text-right">
+                <div class="text-2xl font-black text-amber-600"><%= number_with_delimiter(account.feedbacks_count) %></div>
+                <div class="font-mono text-xs text-zinc-500 uppercase">feedbacks</div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

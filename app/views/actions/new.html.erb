@@ -1,0 +1,68 @@
+<% content_for :title, "Add action" %>
+<div class="px-4 py-4">
+  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro)) %>
+</div>
+
+<div class="max-w-3xl mx-auto px-4 py-8 font-sans">
+  <%= form_with url: retro_action_publish_path(@retro, @action), method: :post, id: "action_form" do |form| %>
+    <%# Industrial Container: Clean, heavy border, no rounded corners %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+
+      <%# Header Section %>
+      <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+        <%# Background Grid %>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+        <div class="relative z-10 flex items-center justify-between">
+          <%# Action Badge (Purple) %>
+          <span class="inline-flex items-center px-3 py-1 border-[2px] border-zinc-900 text-xs font-bold uppercase tracking-widest bg-violet-100 text-violet-800">
+            <span class="mr-2 w-2 h-2 rounded-full border border-black bg-violet-500"></span>
+            ACTION
+          </span>
+
+          <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest">NEW</span>
+        </div>
+      </div>
+
+      <%# Content Area %>
+      <div class="p-6 min-h-[200px] relative bg-[#F8F5EC]">
+        <%# Background Grid %>
+        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+        <div class="relative z-10" data-controller="lexxy-autofocus">
+          <%= form.rich_textarea :content, class: "card__description rich-text-content",
+                placeholder: "What action should we take?" %>
+        </div>
+      </div>
+
+      <%# Footer Metadata %>
+      <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-zinc-900">AUTHOR:</span>
+          <span><%= Current.user&.name || "UNKNOWN" %></span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span>STATUS:</span>
+          <span class="text-zinc-900 font-bold">DRAFTING</span>
+        </div>
+      </div>
+    </div>
+
+    <%# Action Buttons (Squared, Heavy) %>
+    <div class="flex justify-center gap-4 mt-8">
+      <button type="submit" name="creation_type" value="add"
+        data-controller="hotkey" data-action="keydown.ctrl+enter@document->hotkey#click keydown.meta+enter@document->hotkey#click"
+        class="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+        Create Action
+        <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
+      </button>
+
+      <button type="submit" name="creation_type" value="add_another"
+        data-controller="hotkey" data-action="keydown.ctrl+shift+enter@document->hotkey#click keydown.meta+shift+enter@document->hotkey#click"
+        class="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+        Create & Add Another
+        <%= render KbdComponent.new(key: "Ctrl+Shift+Enter", size: :sm) %>
+      </button>
+    </div>
+  <% end %>
+</div>

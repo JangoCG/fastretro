@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "my_menu", target: "_top" do %>
+  <%= render "my/menus/jump" do %>
+    <%= render "my/menus/people", users: @users %>
+    <%= render "my/menus/settings" %>
+    <%= render "my/menus/admin" %>
+    <%= render "my/menus/accounts", accounts: @accounts %>
+  <% end %>
+
+  <footer class="mt-4 pt-3 border-t border-gray-100 text-center text-xs text-gray-400">
+    <strong class="whitespace-nowrap text-gray-500">FastRetro</strong> is designed, built, and backed by <strong class="text-gray-500">you</strong>
+  </footer>
+<% end %>

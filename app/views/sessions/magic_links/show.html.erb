@@ -1,0 +1,71 @@
+<% content_for :title, "Enter Code" %>
+
+<div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:alert] || flash[:shake] %>">
+  
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+    
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-zinc-900 relative">
+      <div class="relative z-10 flex items-center justify-between">
+        <h1 class="text-xl font-black text-white uppercase tracking-tighter">
+           VERIFY
+        </h1>
+        <div class="w-3 h-3 bg-yellow-500 animate-pulse"></div>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="p-8 relative bg-white flex flex-col items-center gap-6">
+       <%# Background Grid %>
+       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+       
+       <div class="relative z-10 text-center w-full">
+         <% if flash[:notice] %>
+           <p class="text-sm font-bold text-emerald-600 mb-2"><%= flash[:notice] %></p>
+         <% end %>
+         <p class="text-sm font-bold text-zinc-900 mt-1 mx-auto break-words">ENTER THE CODE FROM YOUR EMAIL</p>
+       </div>
+
+       <%= form_with url: session_magic_link_path, method: :post, class: "relative z-10 w-full flex justify-center", html: { data: { controller: "magic-link" } } do |form| %>
+        <div class="relative w-full max-w-[300px]">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i class="icon icon--lock text-zinc-400"></i>
+            </div>
+            <%= form.text_field :code,
+                required: true,
+                class: "w-full pl-10 pr-4 py-4 font-mono text-3xl font-black tracking-[0.5em] text-center uppercase border-[3px] border-zinc-900 rounded-none bg-white text-zinc-900 focus:outline-none focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-200",
+                autofocus: true,
+                autocorrect: "off",
+                autocapitalize: "off",
+                spellcheck: "false",
+                autocomplete: "one-time-code",
+                maxlength: "6",
+                placeholder: "000000",
+                value: params[:code],
+                data: { "1p-ignore": true, magic_link_target: "input", action: "keydown.enter->magic-link#submitOnEnter paste->magic-link#submitOnPaste" } %>
+        </div>
+       <% end %>
+
+       <p class="relative z-10 text-[0.6rem] font-bold text-zinc-400 uppercase tracking-wide">
+         EXPIRES IN <%= distance_of_time_in_words(MagicLink::EXPIRATION_TIME) %>
+       </p>
+
+       <div class="relative z-10 pt-2">
+         <%= button_to "Resend Code", resend_session_magic_link_path, method: :post, class: "text-xs font-bold text-zinc-500 hover:text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-zinc-900 transition-colors uppercase tracking-wide" %>
+       </div>
+
+    </div>
+    
+    <%# Technical Footer %>
+    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+  </div>
+
+  <% if Rails.env.development? && flash[:magic_link_code].present? %>
+    <div class="flex items-center justify-center gap-4 bg-zinc-900 border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(251,191,36,1)] p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden">
+      <span class="absolute top-0 bottom-0 left-0 bg-yellow-400 px-2 flex items-center justify-center text-[0.55rem] uppercase font-black text-center rotate-180 [writing-mode:vertical-rl] text-zinc-900">DEV</span>
+      <span class="text-xs font-mono font-bold text-white uppercase ml-6">PSST, HERE'S YOUR CODE:</span>
+      <code class="text-2xl font-black font-mono text-yellow-400 tracking-widest"><%= flash[:magic_link_code] %></code>
+    </div>
+  <% end %>
+</div>

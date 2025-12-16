@@ -1,0 +1,21 @@
+<% content_for :title, @retro.name %>
+
+<% content_for :phase_tag do %>
+  <%= render PhaseTagComponent.new(phase: :grouping) %>
+<% end %>
+
+<% if @retro.admin?(Current.user) %>
+  <% content_for :sidebar_tip do %>
+    <div class="bg-sky-50 border-2 border-sky-200 p-3 sm:p-4 rounded-sm">
+      <div class="flex items-start gap-2">
+        <%= icon_tag "lightbulb", class: "text-sky-600 text-xl flex-shrink-0 mt-0.5" %>
+        <div>
+          <p class="font-bold text-sky-900 text-sm uppercase tracking-wide mb-1">Pro Tip</p>
+          <p class="text-sky-800 text-sm leading-relaxed">
+            Click on a participant's name to highlight their feedbacks. They can then share a few words about them.
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

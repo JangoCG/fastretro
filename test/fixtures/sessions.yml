@@ -1,0 +1,19 @@
+one:
+  identity: one
+  user_agent: Mozilla/5.0 (Test Browser)
+  ip_address: 127.0.0.1
+
+two:
+  identity: two
+  user_agent: Mozilla/5.0 (Test Browser)
+  ip_address: 127.0.0.1
+
+admin:
+  identity: admin
+  user_agent: Mozilla/5.0 (Test Browser)
+  ip_address: 127.0.0.1
+
+other:
+  identity: other
+  user_agent: Mozilla/5.0 (Test Browser)
+  ip_address: 127.0.0.1

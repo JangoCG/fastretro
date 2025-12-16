@@ -1,0 +1,16 @@
+<% if Current.identity&.staff? %>
+  <details class="group border-t border-gray-100 pt-3" data-action="toggle->nav-section-expander#toggle" data-nav-section-expander-target="section" data-nav-section-expander-key-value="admin" data-filter-target="section" open>
+    <summary class="flex items-center gap-2 py-2 text-sm font-semibold text-red-500 uppercase tracking-wide cursor-pointer select-none hover:text-red-700">
+      <%= icon_tag "caret-down", class: "w-4 h-4 transition-transform group-open:rotate-0 -rotate-90" %>
+      Admin
+    </summary>
+    <ul class="mt-2 space-y-1">
+      <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item">
+        <%= icon_tag "settings", class: "w-6 h-6 text-gray-600 shrink-0" %>
+        <%= link_to admin_stats_path(script_name: nil), class: "flex-1 truncate text-base text-gray-900" do %>
+          <span class="truncate">Stats</span>
+        <% end %>
+      </li>
+    </ul>
+  </details>
+<% end %>

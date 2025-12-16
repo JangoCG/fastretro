@@ -1,0 +1,53 @@
+<% content_for :title, "Complete your sign-up" %>
+
+<div class="max-w-md mx-auto <%= 'shake' if flash[:alert] %>">
+  
+  <%# Header %>
+  <div class="border-l-4 border-black pl-6 py-4 mb-8">
+    <p class="font-mono text-xs text-zinc-500 mb-2 uppercase tracking-widest">
+      Almost there!
+    </p>
+    <h1 class="text-4xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+      Complete<br>
+      your profile
+    </h1>
+  </div>
+
+  <div class="bg-zinc-100 border-2 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+    <div class="flex items-center gap-2 mb-6 border-b border-black pb-2">
+      <span class="w-2 h-2 bg-[#ffe600] border border-black rounded-full"></span>
+      <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Tell us about yourself</span>
+    </div>
+
+    <%= form_with model: @signup, url: signup_completion_path, scope: "signup", class: "flex flex-col gap-6", data: { controller: "form" } do |form| %>
+      
+      <div class="space-y-4">
+        <div>
+          <%= form.label :full_name, "Your name", class: "font-mono text-xs font-bold uppercase block mb-1" %>
+          <%= form.text_field :full_name,
+              class: "w-full bg-white border-2 border-zinc-300 focus:border-black#ffe600] px-4 py-3 font-mono text-sm focus:outline-none transition-colors rounded-none placeholder:text-zinc-400",
+              autocomplete: "name",
+              placeholder: "Jane Smith",
+              autofocus: true,
+              required: true %>
+        </div>
+      </div>
+
+      <% if @signup.errors.any? %>
+        <div class="bg-red-50 border border-red-500 p-4">
+          <p class="font-bold text-red-600 text-sm uppercase mb-2">Something went wrong:</p>
+          <ul class="list-disc list-inside font-mono text-xs text-red-600">
+            <% @signup.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <button type="submit" class="group w-full bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider flex items-center justify-between border-2 border-transparent transition-all" data-form-target="submit">
+        <span>Continue</span>
+        <span class="font-mono group-hover:translate-x-2 transition-transform">-></span>
+      </button>
+    <% end %>
+  </div>
+</div>

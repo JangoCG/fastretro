@@ -1,0 +1,17 @@
+<% content_for :title, "Transfer Session" %>
+
+<div class="bg-white text-gray-900 max-w-full p-4 w-full sm:p-8 sm:w-[42ch] sm:mx-auto text-center">
+  <h1 class="text-2xl font-black mb-2">Transferring Session...</h1>
+  <p class="mb-4">Please wait while we transfer your session to this device.</p>
+
+  <div class="flex justify-center">
+    <div class="w-8 h-8 border-[3px] border-gray-200 border-t-blue-600 rounded-full animate-spin"></div>
+  </div>
+
+  <%= form_with url: session_transfer_path(params[:id]), method: :put, data: { turbo: false, controller: "auto-submit" } do %>
+  <% end %>
+</div>
+
+<% content_for :footer do %>
+  <%= render "sessions/footer" %>
+<% end %>

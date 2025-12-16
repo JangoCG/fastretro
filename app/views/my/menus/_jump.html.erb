@@ -1,0 +1,74 @@
+<%# === HEADER SECTION === %>
+<div class="relative flex items-center justify-between px-5 pt-6 pb-4 border-b-[2px] border-zinc-900 bg-[#F8F5EC] select-none">
+
+  <%# Title Block %>
+    <div class="flex flex-col">
+      <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono mb-0.5">ACCOUNT</span>
+      <strong class="text-xl font-black text-zinc-900 uppercase tracking-tight leading-none">
+        <%= Current.account.name %>
+      </strong>
+    </div>
+
+  <%# Mobile Close Button (Industrial Square Style) %>
+  <button class="absolute right-4 top-5 w-8 h-8 flex sm:hidden! items-center justify-center border-[2px] border-zinc-900 text-zinc-900 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-150 rounded-none"
+          data-action="dialog#close">
+    <%= icon_tag "close", class: "w-5 h-5 font-bold" %>
+    <span class="sr-only">Close menu</span>
+  </button>
+</div>
+
+<%# === MAIN CONTENT AREA === %>
+<div class="p-5 bg-[#F8F5EC]">
+
+  <%# 1. Search Field (Command Prompt Style) %>
+  <div class="mb-6 group">
+    <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-1">SEARCH</label>
+    <div class="relative">
+      <%# Decorative Prompt Symbol %>
+      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 font-mono font-bold select-none">></div>
+
+      <%# Note: Ensure your jump_field_tag accepts these classes. 
+          If it renders an input, it should look like a raw terminal input. %>
+      <div class="[&>input]:w-full [&>input]:pl-8 [&>input]:pr-4 [&>input]:py-2.5 [&>input]:bg-white [&>input]:border-[2px] [&>input]:border-zinc-300 [&>input]:focus:border-zinc-900 [&>input]:text-zinc-900 [&>input]:placeholder-zinc-300 [&>input]:outline-none [&>input]:font-mono [&>input]:text-sm [&>input]:rounded-[1px] [&>input]:shadow-inner [&>input]:transition-colors">
+        <%= jump_field_tag %>
+      </div>
+    </div>
+  </div>
+
+  <%# 2. Quick Links Grid (Function Key Style) %>
+  <div class="mb-2">
+    <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-2">QUICK LINKS</label>
+
+    <%# Grid container %>
+    <div class="grid grid-cols-3 gap-3 mb-6" role="list" data-filter-target="section">
+      <%# 
+         NOTE: Ensure 'filter_hotkey_link' renders a block with these classes for the full effect:
+         class="flex flex-col items-center justify-center p-3 border-[2px] border-zinc-900 bg-white shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:bg-zinc-50"
+      %>
+      <%= filter_hotkey_link "Retros", root_path, 1, "home" %>
+      <%= filter_hotkey_link "Account", account_settings_path, 2, "settings" %>
+      <% if Current.user %>
+        <%= filter_hotkey_link "Profile", user_path(Current.user), 3, "person" %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# 3. Dynamic Scrollable Area %>
+  <div class="overflow-y-auto max-h-[50vh] flex flex-col gap-2 pr-1 scrollbar-thin scrollbar-thumb-zinc-900 scrollbar-track-zinc-200">
+
+    <%# Section Divider Label %>
+    <div class="flex items-center gap-2 mb-2 opacity-50">
+      <div class="w-1 h-1 bg-zinc-900 rounded-full"></div>
+      <span class="text-[0.55rem] font-bold text-zinc-500 uppercase tracking-widest">NAVIGATION</span>
+      <div class="h-[1px] bg-zinc-300 flex-1"></div>
+    </div>
+
+    <%= yield %>
+
+    <%# Empty State %>
+    <div class="hidden py-8 text-center border-2 border-dashed border-zinc-300 bg-zinc-50/50" data-filter-target="blankSlate">
+      <p class="text-zinc-400 font-mono text-xs uppercase">NO RESULTS</p>
+    </div>
+  </div>
+
+</div>

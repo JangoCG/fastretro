@@ -1,0 +1,9 @@
+<% content_for :title, @retro.name %>
+
+<% content_for :phase_tag do %>
+  <%= render PhaseTagComponent.new(phase: :voting) %>
+<% end %>
+
+<% content_for :header_actions do %>
+  <%= render VotesRemainingComponent.new(participant: @current_participant) %>
+<% end %>

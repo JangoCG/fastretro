@@ -1,0 +1,178 @@
+/* Blog code styling */
+
+/* Inline code */
+.prose code:not(pre code) {
+  background-color: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 2px;
+  padding: 0.15em 0.4em;
+  font-size: 0.875em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-weight: 500;
+  color: #18181b;
+}
+
+/* Code blocks */
+.prose pre.highlight {
+  background-color: #1c1c1c;
+  border: 2px solid #18181b;
+  border-radius: 0;
+  padding: 0;
+  margin: 1.5em 0;
+  overflow: hidden;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.prose pre.highlight code {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: #e4e4e7;
+  background: transparent;
+  border: none;
+}
+
+/* Rouge syntax highlighting - GitHub-inspired dark theme */
+
+/* Comments */
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cs,
+.highlight .cp {
+  color: #6e7681;
+  font-style: italic;
+}
+
+/* Strings */
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sr,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .dl {
+  color: #a5d6ff;
+}
+
+/* Numbers */
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
+  color: #79c0ff;
+}
+
+/* Keywords */
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kv {
+  color: #ff7b72;
+}
+
+/* Built-in / Types */
+.highlight .kt,
+.highlight .nb,
+.highlight .bp,
+.highlight .nc {
+  color: #ffa657;
+}
+
+/* Functions / Methods */
+.highlight .nf,
+.highlight .fm,
+.highlight .nx {
+  color: #d2a8ff;
+}
+
+/* Variables */
+.highlight .n,
+.highlight .na,
+.highlight .nv,
+.highlight .vi,
+.highlight .vc,
+.highlight .vg,
+.highlight .vm {
+  color: #e6edf3;
+}
+
+/* Operators */
+.highlight .o,
+.highlight .ow {
+  color: #ff7b72;
+}
+
+/* Punctuation */
+.highlight .p {
+  color: #e6edf3;
+}
+
+/* Class names */
+.highlight .nc,
+.highlight .nn {
+  color: #ffa657;
+}
+
+/* Constants */
+.highlight .no {
+  color: #79c0ff;
+}
+
+/* Symbols (Ruby) */
+.highlight .ss {
+  color: #7ee787;
+}
+
+/* Regular expressions */
+.highlight .sr {
+  color: #7ee787;
+}
+
+/* Tags (HTML/XML) */
+.highlight .nt {
+  color: #7ee787;
+}
+
+/* Attributes */
+.highlight .na {
+  color: #79c0ff;
+}
+
+/* Errors */
+.highlight .err {
+  color: #f85149;
+}
+
+/* Generic styles */
+.highlight .gd {
+  color: #f85149;
+  background-color: rgba(248, 81, 73, 0.15);
+}
+
+.highlight .gi {
+  color: #7ee787;
+  background-color: rgba(46, 160, 67, 0.15);
+}
+
+.highlight .gh {
+  color: #79c0ff;
+  font-weight: bold;
+}
+
+.highlight .gu {
+  color: #79c0ff;
+}

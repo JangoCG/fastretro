@@ -1,0 +1,21 @@
+<% if accounts.many? %>
+    <details class="group border-t border-gray-100 pt-3" data-action="toggle->nav-section-expander#toggle" data-nav-section-expander-target="section" data-nav-section-expander-key-value="accounts" data-filter-target="section" open>
+      <summary class="flex items-center gap-2 py-2 text-sm font-semibold text-gray-500 uppercase tracking-wide cursor-pointer select-none hover:text-gray-700">
+        <%= icon_tag "caret-down", class: "w-4 h-4 transition-transform group-open:rotate-0 -rotate-90" %>
+        Accounts
+      </summary>
+      <ul class="mt-2 space-y-1">
+        <% accounts.each do |account| %>
+          <li class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 aria-selected:bg-blue-100 cursor-pointer" data-filter-target="item" data-navigable-list-target="item" aria-checked="<%= account == Current.account %>">
+            <%= icon_tag "marker", class: "w-6 h-6 text-gray-600 shrink-0" %>
+            <%= link_to landing_url(script_name: account.slug), class: "flex-1 flex items-center truncate text-base text-gray-900", data: { turbo: false } do %>
+              <span class="truncate"><%= account.name %></span>
+              <% if account == Current.account %>
+                <%= icon_tag "check", class: "w-5 h-5 ml-auto text-gray-800" %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </details>
+<% end %>

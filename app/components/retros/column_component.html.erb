@@ -1,0 +1,128 @@
+<%# Outer Container %>
+<div class="h-full flex flex-col relative group">
+  <div class="absolute -left-1 -top-1 -right-1 -bottom-1 border-[1px] border-zinc-400 rounded-sm"></div>
+
+  <div class="relative flex flex-col h-full bg-[#f4f1ea] border-[4px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] overflow-hidden">
+
+    <%# Header %>
+    <div class="px-5 py-5 border-b-[3px] border-zinc-900 bg-white relative overflow-hidden">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <%
+        highlight_color = if title.downcase.include?("well")
+                           "#22c55e"
+                         elsif title.downcase.include?("better") || title.downcase.include?("improve")
+                           "#fb923c"
+                         else
+                           "#FFFF00"
+                         end
+      %>
+
+      <div class="relative z-10 flex justify-between items-start gap-4">
+        <div class="flex-1 min-w-0 overflow-hidden">
+          <h2 class="font-black text-2xl uppercase tracking-tighter text-zinc-900 leading-[0.85] filter drop-shadow-sm">
+            <span class="relative px-1 inline-block">
+               <span class="absolute inset-0 -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80" style="background-color: <%= highlight_color %>;"></span>
+               "<%= title %>"
+            </span>
+          </h2>
+        </div>
+
+        <div class="relative z-20 flex-shrink-0">
+           <%= render Retros::AddFeedbackButtonComponent.new(retro: @retro, category: @category) %>
+        </div>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="flex-1 p-4 overflow-y-auto bg-[#F8F5EC] relative">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+      <div
+        id="feedback-list-<%= @category %>"
+        class="space-y-4 relative z-10"
+        <% if grouping_enabled? %>
+          data-controller="feedback-grouping"
+          data-feedback-grouping-group-url-value="<%= retro_feedback_groups_path(@retro) %>"
+          data-feedback-grouping-target="list"
+        <% elsif voting_enabled? %>
+          data-controller="vote-sorting"
+        <% end %>
+      >
+        <% if feedbacks.any? %>
+          <% if voting_enabled? %>
+            <%# During voting: render all items sorted by votes %>
+            <% all_items_sorted_by_votes.each do |item| %>
+              <% if item[:type] == :group %>
+                <%= render Feedbacks::FeedbackGroupComponent.new(
+                  group: item[:group],
+                  feedbacks: item[:feedbacks],
+                  grouping_enabled: grouping_enabled?,
+                  voting_enabled: voting_enabled?,
+                  participant: current_participant,
+                  retro: @retro
+                ) %>
+              <% else %>
+                <%= render Feedbacks::FeedbackComponent.new(
+                  feedback: item[:feedback],
+                  draggable: grouping_enabled?,
+                  grouping_enabled: grouping_enabled?,
+                  voting_enabled: voting_enabled?,
+                  participant: current_participant,
+                  retro: @retro
+                ) %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%# Other phases: render groups first, then ungrouped %>
+            <% grouped_feedbacks_by_group.each do |group, group_feedbacks| %>
+              <%= render Feedbacks::FeedbackGroupComponent.new(
+                group: group,
+                feedbacks: group_feedbacks,
+                grouping_enabled: grouping_enabled?,
+                voting_enabled: voting_enabled?,
+                participant: current_participant,
+                retro: @retro
+              ) %>
+            <% end %>
+
+            <% ungrouped_feedbacks.each do |feedback| %>
+              <%= render Feedbacks::FeedbackComponent.new(
+                feedback: feedback,
+                draggable: grouping_enabled?,
+                grouping_enabled: grouping_enabled?,
+                voting_enabled: voting_enabled?,
+                participant: current_participant,
+                retro: @retro
+              ) %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="flex flex-col items-center justify-center py-16 text-center select-none no-drag">
+             <div class="w-20 h-20 border-[3px] border-zinc-900 flex items-center justify-center mb-6 relative">
+               <span class="font-black text-4xl text-zinc-900">"</span>
+               <div class="absolute -top-2 -right-2 w-4 h-4 bg-<%= title.downcase.include?("well") ? "[#22c55e]" : "[#fb923c]" %>"></div>
+             </div>
+
+             <p class="font-black text-zinc-900 text-xs uppercase tracking-widest mb-1">
+               "NOTHING HERE YET"
+             </p>
+             <p class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-wide">SHARE YOUR FIRST THOUGHT
+             </p>
+
+             <div class="mt-6 flex items-center gap-2">
+               <div class="h-[2px] w-8 bg-zinc-300"></div>
+               <span class="font-mono text-[0.5rem] text-zinc-400 uppercase">CLICK + ADD</span>
+               <div class="h-[2px] w-8 bg-zinc-300"></div>
+             </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Footer %>
+    <div class="h-5 border-t-[3px] border-zinc-900 bg-zinc-900 flex items-center px-3">
+       <div class="ml-auto h-3 w-16 bg-[repeating-linear-gradient(90deg,#fff,#fff_1px,transparent_1px,transparent_3px)] opacity-50"></div>
+    </div>
+  </div>
+</div>

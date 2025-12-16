@@ -1,0 +1,32 @@
+<div id="<%= dom_id %>" class="flex items-center gap-1">
+  <%# Remove vote button (single button) %>
+  <% if can_remove_vote? %>
+    <%= button_to remove_vote_path(first_user_vote),
+        method: :delete,
+        class: "flex items-center justify-center w-8 h-8 bg-zinc-200 border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-300 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none",
+        title: "Remove vote" do %>
+      <%= icon_tag "minus", class: "text-lg" %>
+    <% end %>
+  <% end %>
+
+  <%# Vote count badge with user's votes indicator %>
+  <div id="<%= vote_count_dom_id %>" class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm relative">
+    <span data-vote-total><%= total_votes %></span>
+    <% if user_vote_count > 0 %>
+      <span class="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 bg-violet-600 text-white text-[0.6rem] font-black rounded-full border border-zinc-900">
+        <%= user_vote_count %>
+      </span>
+    <% end %>
+  </div>
+
+  <%# Add vote button %>
+  <% if can_add_vote? %>
+    <%= button_to vote_path,
+        method: :post,
+        params: { voteable_type: voteable_type, voteable_id: voteable_id },
+        class: "flex items-center justify-center w-8 h-8 bg-violet-600 border-2 border-zinc-900 text-white hover:bg-violet-700 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none",
+        title: "Add vote" do %>
+      <%= icon_tag "add", class: "text-lg" %>
+    <% end %>
+  <% end %>
+</div>

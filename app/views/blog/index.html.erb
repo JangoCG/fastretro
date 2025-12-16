@@ -1,0 +1,69 @@
+<% content_for :full_width, true %>
+<% content_for :title, "Fast Retro Blog — Building in Public" %>
+<% content_for :meta_description, "Follow along as we build Fast Retro in public. Technical guides, retrospective tips, and behind-the-scenes updates on building an open source agile tool." %>
+<% content_for :og_type, "website" %>
+
+<% content_for :structured_data do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Fast Retro Blog",
+  "description": "Building Fast Retro in public. Technical guides, retrospective tips, and behind-the-scenes updates.",
+  "url": "<%= blog_url %>",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fast Retro",
+    "url": "https://fastretro.app"
+  }
+}
+</script>
+<% end %>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 mb-16 relative">
+  <div class="border-l-4 border-black pl-6 md:pl-12 py-4">
+    <h1 class="text-[3rem] md:text-[5rem] leading-[0.85] font-black uppercase tracking-tighter text-black mb-6">
+      THE FAST RETRO BLOG
+    </h1>
+    <p class="max-w-xl text-base md:text-lg font-mono text-zinc-600">
+      I am building Fast Retro in public. Follow along for updates and insights on the journey.
+    </p>
+  </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+  <% if @posts.empty? %>
+    <div class="border-2 border-dashed border-zinc-300 p-12 text-center">
+      <p class="font-mono text-zinc-500">No posts yet. Check back soon.</p>
+    </div>
+  <% else %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% @posts.each do |post| %>
+        <%= link_to blog_post_path(post.slug), class: "group block" do %>
+          <article class="bg-white border-2 border-black h-full flex flex-col hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
+            <% if post.image %>
+              <div class="aspect-[16/10] overflow-hidden border-b-2 border-black relative">
+                <%= image_tag post.image, alt: post.title, class: "w-full h-full object-cover" %>
+              </div>
+            <% end %>
+
+            <div class="p-6 flex-1 flex flex-col">
+              <p class="font-mono text-[10px] text-zinc-500 uppercase mb-2"><%= post.date.strftime("%b %d, %Y") rescue "" %></p>
+              <h2 class="text-xl font-black uppercase tracking-tight text-black mb-3 leading-tight group-hover:underline decoration-4 underline-offset-4 decoration-[#ffe600]">
+                <%= post.title %>
+              </h2>
+              <p class="font-mono text-xs text-zinc-600 mb-6 flex-1 line-clamp-3">
+                <%= post.description %>
+              </p>
+
+              <div class="flex items-center justify-between mt-auto pt-4 border-t border-dashed border-zinc-300">
+                <span class="font-mono text-[10px] uppercase font-bold bg-black text-white px-2 py-1">READ MORE</span>
+                <span class="font-mono text-[10px] text-zinc-400"><%= post.read_time %></span>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

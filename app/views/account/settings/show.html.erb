@@ -1,0 +1,36 @@
+<div class="max-w-xl mx-auto px-4 py-8 font-sans">
+  
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+    
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+       <%# Background Grid %>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+      
+      <div class="relative z-10 flex items-center justify-between">
+        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+         ACCOUNT SETTINGS
+        </h1>
+      </div>
+    </div>
+
+    <%# Profile Body %>
+    <div class="p-8 relative flex flex-col gap-6 max-h-[80vh] lg:max-h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-900 scrollbar-track-zinc-200">
+       <%# Background Grid %>
+       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+       
+       <div class="relative z-10 flex flex-col gap-6">
+          <%= render "name" %>
+          
+          <div class="w-full h-[2px] bg-zinc-200"></div>
+          
+          <%= render "users" %>
+       </div>
+    </div>
+    
+    <%# Technical Footer %>
+    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+
+  </div>
+</div>

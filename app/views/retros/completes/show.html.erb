@@ -1,0 +1,100 @@
+<% content_for :title, "#{@retro.name} - Complete" %>
+
+<% content_for :phase_tag do %>
+  <%= render PhaseTagComponent.new(phase: :complete) %>
+<% end %>
+
+<% content_for :board_columns do %>
+  <div class="space-y-8">
+    <%# Summary Stats %>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <%# Participants Card %>
+      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+        <div class="text-center">
+          <div class="text-6xl font-black text-zinc-900"><%= @retro.participants.count %></div>
+          <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500">Participants</div>
+        </div>
+      </div>
+
+      <%# Feedbacks Card %>
+      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+        <div class="text-center">
+          <div class="text-6xl font-black text-zinc-900"><%= @retro.feedbacks.published.count %></div>
+          <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500">Total Feedbacks</div>
+          <div class="mt-3 flex justify-center gap-4 text-xs">
+            <span class="text-emerald-600 font-bold"><%= @retro.feedbacks.published.went_well.count %> went well</span>
+            <span class="text-amber-600 font-bold"><%= @retro.feedbacks.published.could_be_better.count %> to improve</span>
+          </div>
+        </div>
+      </div>
+
+      <%# Actions Card %>
+      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+        <div class="text-center">
+          <div class="text-6xl font-black text-violet-600"><%= @retro.actions.published.count %></div>
+          <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500">Action Items</div>
+        </div>
+      </div>
+    </div>
+
+    <%# Action Items List %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)]">
+      <%# Header %>
+      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-violet-500 border border-zinc-900"></div>
+          <h2 class="font-black text-xl uppercase tracking-tight text-zinc-900">"Action Items"</h2>
+        </div>
+      </div>
+
+      <%# Content %>
+      <div class="p-6">
+        <% if @retro.actions.published.any? %>
+          <div class="space-y-4">
+            <% @retro.actions.published.each_with_index do |action, index| %>
+              <div class="flex gap-4 items-start p-4 bg-white border-[2px] border-zinc-900 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)]">
+                <div class="flex-shrink-0 w-8 h-8 bg-violet-100 border-[2px] border-zinc-900 flex items-center justify-center">
+                  <span class="font-black text-sm text-violet-700"><%= index + 1 %></span>
+                </div>
+                <div class="flex-1">
+                  <div class="rich-text-content text-zinc-900 font-medium">
+                    <%= action.content %>
+                  </div>
+                  <div class="mt-2 text-xs text-zinc-500">
+                    Added by <span class="font-bold"><%= action.user.name %></span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-12">
+            <div class="text-zinc-400 font-mono text-sm uppercase">No action items were created</div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Completion Message %>
+    <div class="text-center py-8">
+      <div class="inline-block bg-zinc-900 text-white px-8 py-4 border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,0.5)]">
+        <span class="font-black text-lg uppercase tracking-widest">Retro Complete</span>
+      </div>
+      <p class="mt-4 text-sm text-zinc-500 font-mono uppercase">
+        Thank you for participating!
+      </p>
+
+      <%# Export Buttons %>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+        <%= link_to retro_export_path(@retro, format: :xlsx),
+              class: "inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-emerald-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+          <span>Export Excel (.xlsx)</span>
+        <% end %>
+        <%= link_to retro_export_path(@retro, format: :csv),
+              class: "inline-flex items-center gap-2 px-6 py-3 bg-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+          <span>Export CSV</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

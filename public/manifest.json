@@ -1,0 +1,20 @@
+{
+  "name": "Fast Retro",
+  "short_name": "Fast Retro",
+  "description": "Open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss in real-time.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f4f5",
+  "theme_color": "#18181b",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "lang": "en",
+  "orientation": "portrait-primary"
+}

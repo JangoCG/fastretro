@@ -1,0 +1,18 @@
+<%= link_to new_retro_action_path(@retro),
+      class: "group inline-flex items-center gap-2 px-4 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-[#F8F5EC] border-2 border-transparent hover:border-zinc-900 transition-all shadow-sm rounded-sm",
+      data: {
+        controller: "hotkey",
+        action: "keydown.#{hotkey.downcase}@document->hotkey#click"
+      } do %>
+
+  <%# Icon: slightly larger and bolder %>
+  <%= icon_tag "add", class: "text-base font-bold" %>
+
+  <%# Text: Uppercase and bold %>
+  <span class="text-xs font-black uppercase tracking-wide">Add</span>
+
+  <%# Hotkey: Styled like a technical spec [A] %>
+  <span class="hidden sm:inline-flex ml-1 items-center justify-center text-[0.6rem] font-mono text-zinc-400 border border-zinc-600 px-1 rounded-[1px]">
+    <%= hotkey %>
+  </span>
+<% end %>

@@ -1,0 +1,36 @@
+<section class="text-center">
+  <h2 class="text-2xl font-black uppercase tracking-tight mb-2">
+    <span class="relative inline-block px-2">
+      <span class="absolute inset-0 bg-orange-300 -rotate-1 skew-x-2 scale-105"></span>
+      <span class="relative">Cancelled</span>
+    </span>
+  </h2>
+  <p class="text-zinc-600 font-mono text-sm mb-6">No worries, you can try again anytime</p>
+
+  <%# Status Card %>
+  <div class="bg-zinc-100 border-2 border-zinc-900 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold uppercase tracking-wide text-sm text-zinc-500">Status</h3>
+      <span class="px-3 py-1 bg-zinc-300 text-zinc-700 text-xs font-bold uppercase">Cancelled</span>
+    </div>
+    <p class="text-lg font-semibold">Checkout was not completed</p>
+    <p class="text-sm text-zinc-500 mt-1">No charges were made to your account</p>
+  </div>
+
+  <%# Options %>
+  <div class="text-left mb-6">
+    <h3 class="font-bold uppercase tracking-wide text-sm text-zinc-500 mb-3">What now?</h3>
+    <ul class="space-y-2 font-mono text-sm">
+      <li class="flex items-center gap-2">
+        <span class="text-zinc-400 font-bold">-></span>
+        <span>Return to your retros</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-zinc-400 font-bold">-></span>
+        <span>Try upgrading again later</span>
+      </li>
+    </ul>
+  </div>
+
+  <%= link_to "Return to Retros", root_path(script_name: nil), class: "w-full inline-block px-6 py-4 bg-zinc-900 text-white font-bold uppercase tracking-wide hover:bg-zinc-800 transition-colors border-2 border-zinc-900" %>
+</section>
