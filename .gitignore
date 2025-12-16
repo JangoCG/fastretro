@@ -42,3 +42,4 @@
 .kamal
 config/credentials.yml.enc
 config/deploy.yml
+config/deploy.dev.yml
