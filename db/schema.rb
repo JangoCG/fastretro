@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_15_180419) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_16_204824) do
   create_table "account_external_id_sequences", force: :cascade do |t|
     t.bigint "value", default: 0, null: false
     t.index ["value"], name: "index_account_external_id_sequences_on_value", unique: true
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_15_180419) do
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "external_account_id", null: false
+    t.integer "feedbacks_count", default: 0, null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["external_account_id"], name: "index_accounts_on_external_account_id", unique: true
