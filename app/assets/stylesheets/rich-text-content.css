@@ -1,0 +1,348 @@
+/* Rich Text Content styles from fizzy */
+
+.rich-text-content {
+  --block-margin: 0.5lh;
+}
+
+.rich-text-content a {
+  color: var(--color-link);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.rich-text-content :where(h1, h2, h3, h4, h5, h6) {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.02ch;
+  line-height: 1.1;
+  margin-block: 0 var(--block-margin);
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.rich-text-content :where(h1) { font-size: 2em; }
+.rich-text-content :where(h2) { font-size: 1.5em; }
+.rich-text-content :where(h3) { font-size: 1.17em; }
+.rich-text-content :where(h4) { font-size: 1em; }
+.rich-text-content :where(h5) { font-size: 0.83em; }
+.rich-text-content :where(h6) { font-size: 0.67em; }
+
+.rich-text-content :where(p, ul, ol, dl, blockquote, figure, .attachment) {
+  margin-block: 0 var(--block-margin);
+}
+
+.rich-text-content :where(p, ul, ol, dl, blockquote, figure, .attachment):not(lexxy-editor *) {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+.rich-text-content :where(ol, ul) {
+  list-style: disc;
+  padding-inline-start: 3ch;
+}
+
+.rich-text-content :where(li:has(li)) {
+  list-style: none;
+}
+
+.rich-text-content :where(li:has(li)) :where(ol, ul) {
+  margin: 0;
+  padding-inline-start: 2ch;
+}
+
+.rich-text-content :where(b, strong, .lexxy-content__bold) {
+  font-weight: 700;
+}
+
+.rich-text-content :where(i, em, .lexxy-content__italic) {
+  font-style: italic;
+}
+
+.rich-text-content :where(s, .lexxy-content__strikethrough) {
+  text-decoration: line-through;
+}
+
+.rich-text-content :where(mark, .lexxy-content__highlight) {
+  background-color: transparent;
+  color: inherit;
+}
+
+.rich-text-content :where(p, blockquote) {
+  letter-spacing: -0.005ch;
+}
+
+.rich-text-content :where(blockquote) {
+  border-inline-start: 0.25em solid var(--color-ink-lighter);
+  font-style: italic;
+  margin: var(--block-margin) 0;
+  padding-inline-start: 2ch;
+}
+
+.rich-text-content :where(img, video, embed, object) {
+  inline-size: auto;
+  margin-inline: auto;
+  max-block-size: 32rem;
+  object-fit: contain;
+}
+
+/* Links should hug media contained within */
+.rich-text-content a:has(img),
+.rich-text-content a:has(video) {
+  inline-size: fit-content;
+}
+
+/* Avoid extra space due to empty paragraphs */
+.rich-text-content p:empty {
+  display: none;
+}
+
+.rich-text-content :where(hr) {
+  color: currentColor;
+  block-size: 0;
+  border: none;
+  border-block-end: 2px solid currentColor;
+  inline-size: 20%;
+  margin: calc(var(--block-margin) * 2) 0;
+}
+
+.rich-text-content .horizontal-divider {
+  margin: var(--block-margin) 0;
+  padding-block: var(--block-margin);
+}
+
+/* Code */
+.rich-text-content :where(code, pre) {
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-ink-lighter);
+  border-radius: 0.3em;
+  color: var(--color-ink);
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  font-weight: 500;
+  margin-block: var(--block-margin);
+  padding: 0.1em 0.3em;
+}
+
+.rich-text-content :where(pre),
+.rich-text-content :where(code[data-language]) {
+  border-radius: 0.5em;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5lh 2ch;
+  tab-size: 2;
+  text-wrap: nowrap;
+  white-space: pre;
+  word-break: break-word;
+}
+
+/* Code syntax highlighting tokens */
+.rich-text-content :where(pre) .code-token__attr,
+.rich-text-content :where(pre) .token.atrule,
+.rich-text-content :where(pre) .token.attr,
+.rich-text-content :where(pre) .token.keyword {
+  color: var(--color-code-token__att, #7c3aed);
+}
+
+.rich-text-content :where(pre) .code-token__property,
+.rich-text-content :where(pre) .token.boolean,
+.rich-text-content :where(pre) .token.constant,
+.rich-text-content :where(pre) .token.deleted,
+.rich-text-content :where(pre) .token.number,
+.rich-text-content :where(pre) .token.property,
+.rich-text-content :where(pre) .token.symbol,
+.rich-text-content :where(pre) .token.tag {
+  color: var(--color-code-token__property, #dc2626);
+}
+
+.rich-text-content :where(pre) .code-token__selector,
+.rich-text-content :where(pre) .token.builtin,
+.rich-text-content :where(pre) .token.char,
+.rich-text-content :where(pre) .token.inserted,
+.rich-text-content :where(pre) .token.selector,
+.rich-text-content :where(pre) .token.string {
+  color: var(--color-code-token__selector, #16a34a);
+}
+
+.rich-text-content :where(pre) .code-token__comment,
+.rich-text-content :where(pre) .token.cdata,
+.rich-text-content :where(pre) .token.comment,
+.rich-text-content :where(pre) .token.doctype,
+.rich-text-content :where(pre) .token.prolog {
+  color: var(--color-code-token__comment, #6b7280);
+  font-style: italic;
+}
+
+.rich-text-content :where(pre) .code-token__operator,
+.rich-text-content :where(pre) .token.entity,
+.rich-text-content :where(pre) .token.operator,
+.rich-text-content :where(pre) .token.url {
+  color: var(--color-code-token__operator, #0891b2);
+}
+
+.rich-text-content :where(pre) .code-token__function,
+.rich-text-content :where(pre) .token.class,
+.rich-text-content :where(pre) .token.class-name,
+.rich-text-content :where(pre) .token.function {
+  color: var(--color-code-token__function, #2563eb);
+}
+
+.rich-text-content :where(pre) .code-token__variable,
+.rich-text-content :where(pre) .token.important,
+.rich-text-content :where(pre) .token.namespace,
+.rich-text-content :where(pre) .token.regex,
+.rich-text-content :where(pre) .token.variable {
+  color: var(--color-code-token__variable, #ea580c);
+}
+
+.rich-text-content :where(pre) .code-token__punctuation,
+.rich-text-content :where(pre) .token.punctuation {
+  color: var(--color-code-token__punctuation, #374151);
+}
+
+/* Attachments */
+.attachment {
+  block-size: auto;
+  display: block;
+  inline-size: fit-content;
+  position: relative;
+  max-inline-size: 100%;
+}
+
+.attachment :where(progress) {
+  inline-size: 100%;
+  margin: auto;
+}
+
+.attachment__caption {
+  color: color-mix(in oklch, var(--color-ink) 66%, transparent);
+  font-size: var(--text-small, 0.875rem);
+}
+
+.attachment__caption textarea {
+  --input-border-radius: 0.3em;
+  --input-border-size: 0;
+  --input-padding: 0;
+
+  background-color: var(--input-background, transparent);
+  border: none;
+  color: inherit;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  resize: none;
+  text-align: center;
+}
+
+.attachment__caption textarea:focus {
+  --focus-ring-size: 0;
+}
+
+@supports (field-sizing: content) {
+  .attachment__caption textarea {
+    field-sizing: content;
+    inline-size: auto;
+    min-inline-size: 20ch;
+  }
+}
+
+.attachment--preview {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.attachment--preview img,
+.attachment--preview video {
+  block-size: auto;
+  display: block;
+  margin-inline: auto;
+  max-inline-size: 100%;
+  user-select: none;
+}
+
+.attachment--preview > a {
+  display: block;
+}
+
+.attachment--preview .attachment__caption {
+  column-gap: 0.5ch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-block-start: 0.5ch;
+}
+
+.attachment--file {
+  --attachment-icon-color: var(--color-ink-medium);
+
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1ch;
+  inline-size: 100%;
+  margin-inline: 0;
+}
+
+.attachment--file .attachment__caption {
+  display: grid;
+  flex: 1;
+  text-align: start;
+}
+
+.attachment--file .attachment__name {
+  color: var(--color-ink);
+  font-weight: bold;
+}
+
+.attachment--file:has(video) .attachment__caption {
+  flex: none;
+  inline-size: 100%;
+}
+
+/* Custom attachments such as mentions, etc. */
+action-text-attachment[content-type^='application/vnd.actiontext'] {
+  --attachment-bg-color: transparent;
+  --attachment-image-size: 1em;
+  --attachment-text-color: currentColor;
+
+  align-items: center;
+  background: var(--attachment-bg-color);
+  border-radius: 99rem;
+  box-shadow:
+    -0.25ch 0 0 var(--attachment-bg-color),
+     0.5ch 0 0 var(--attachment-bg-color);
+  color: var(--attachment-text-color);
+  display: inline-flex;
+  gap: 0.25ch;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  vertical-align: bottom;
+  white-space: normal;
+}
+
+lexxy-editor action-text-attachment[content-type^='application/vnd.actiontext'] {
+  cursor: pointer;
+}
+
+action-text-attachment[content-type^='application/vnd.actiontext'] img {
+  block-size: var(--attachment-image-size);
+  border-radius: 50%;
+  inline-size: var(--attachment-image-size);
+}
+
+action-text-attachment[content-type^='application/vnd.actiontext'].node--selected {
+  --attachment-bg-color: oklch(var(--lch-blue-dark, 0.5 0.15 260));
+  --attachment-text-color: var(--color-ink-inverted);
+}
+
+action-text-attachment[content-type^='application/vnd.actiontext.mention'] img {
+  object-fit: cover;
+}
+
+[data-lexical-cursor] {
+  animation: blink 1s step-end infinite;
+  block-size: 1lh;
+  border-inline-start: 1px solid currentColor;
+  line-height: inherit;
+  margin-block: 1em;
+}

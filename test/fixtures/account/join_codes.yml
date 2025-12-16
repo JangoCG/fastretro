@@ -1,0 +1,11 @@
+one:
+  code: TEST-5678-9XYZ
+  usage_count: 0
+  usage_limit: 10
+  account: one
+
+two:
+  code: ACME-5678-9XYZ
+  usage_count: 10
+  usage_limit: 10
+  account: two

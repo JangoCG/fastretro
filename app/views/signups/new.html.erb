@@ -1,0 +1,58 @@
+<% content_for :title, "Sign up" %>
+<div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:shake] %>">
+  
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+    
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+       <%# Background Grid %>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10">
+        <h1 class="text-xl font-black text-zinc-900 uppercase tracking-tighter">
+           Sign up
+        </h1>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="p-8 relative">
+       <%# Background Grid %>
+       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+       
+       <%= form_with model: @signup, url: signup_path, scope: "signup", class: "flex flex-col gap-6 relative z-10", data: { turbo: false, controller: "form" } do |form| %>
+        
+        <div class="flex flex-col gap-2">
+           <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">Email address</label>
+           <%= form.email_field :email_address,
+              required: true,
+              class: "w-full px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 font-bold placeholder-zinc-400 focus:outline-none focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-none",
+              autofocus: true,
+              autocomplete: "username",
+              placeholder: "you@example.com" %>
+        </div>
+
+        <div class="bg-zinc-100 p-3 border-[2px] border-zinc-200 border-dashed">
+             <p class="text-[0.65rem] font-bold text-zinc-500 uppercase tracking-wide leading-relaxed">
+               Enter your email to create an account.
+             </p>
+        </div>
+
+        <button type="submit" class="group relative flex items-center justify-center gap-3 w-full py-4 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+          <span>Sign up</span>
+          <i class="icon icon--arrow-right text-lg pt-0.5 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+
+      <% end %>
+
+    </div>
+    
+    <%# Footer %>
+    <div class="p-4 border-t-[3px] border-zinc-900 bg-white flex justify-center">
+       <span class="text-[0.65rem] font-bold text-zinc-400 uppercase tracking-widest">
+         Already have an account? <%= link_to "Sign in", new_session_path, class: "text-zinc-900 underline hover:no-underline" %>
+       </span>
+    </div>
+  </div>
+</div>

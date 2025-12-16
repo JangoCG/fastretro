@@ -1,0 +1,38 @@
+<%= form_with(model: retro, id: "retro-form", data: { controller: "hotkey", action: "keydown.ctrl+enter@document->hotkey#submit keydown.meta+enter@document->hotkey#submit" }, class: "space-y-6") do |form| %>
+  <% if retro.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 border border-red-500 p-4">
+      <div class="flex items-center gap-2 mb-2 text-red-600">
+        <span class="font-mono text-xs font-bold uppercase">ERROR_LOG:</span>
+        <span class="font-bold text-sm uppercase"><%= pluralize(retro.errors.count, "error") %> DETECTED</span>
+      </div>
+      <ul class="list-disc list-inside font-mono text-xs text-red-600">
+        <% retro.errors.each do |error| %>
+          <li><%= error.full_message.upcase %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "RETRO NAME", class: "font-mono text-xs font-bold uppercase block mb-1" %>
+    <div class="relative">
+      <%= form.text_field :name,
+          class: "w-full bg-white border-2 border-zinc-300 focus:border-black#ffe600] px-4 py-3 font-mono text-sm focus:outline-none transition-colors rounded-none placeholder:text-zinc-400",
+          placeholder: "ENTER NAME...",
+          autofocus: true %>
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+         <span class="font-mono text-[10px] text-zinc-400 hidden sm:block">REQUIRED_FIELD</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-4 border-t border-dashed border-zinc-300">
+     <button type="submit" class="group w-full bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider flex items-center justify-between border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1">
+        <span class="flex items-center gap-2">
+          <%= retro.persisted? ? "UPDATE_RETRO" : "CREATE_RETRO" %>
+          <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
+        </span>
+        <span class="font-mono group-hover:translate-x-2 transition-transform">-></span>
+     </button>
+  </div>
+<% end %>

@@ -1,0 +1,81 @@
+<div class="max-w-2xl mx-auto p-4">
+  
+  <div class="border-l-4 border-black pl-6 py-4 mb-8">
+    <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+      Subscription<br>& Usage
+    </h1>
+  </div>
+
+  <%# Subscription Status %>
+  <div class="bg-white border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)](63,63,70,1)] p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-bold uppercase tracking-wide text-sm text-zinc-500">Current Plan</h2>
+      <% if @identity.active? %>
+        <span class="px-3 py-1 bg-green-500 text-white text-xs font-bold uppercase">Active</span>
+      <% else %>
+        <span class="px-3 py-1 bg-zinc-200 text-zinc-600 text-xs font-bold uppercase">Free</span>
+      <% end %>
+    </div>
+
+    <% if @identity.active? %>
+      <p class="text-lg font-semibold"><%= FastRetro.pricing[:plan_name] %></p>
+      <p class="text-sm text-zinc-500 mt-1">Unlimited feedbacks</p>
+    <% else %>
+      <p class="text-lg font-semibold">Free Plan</p>
+      <p class="text-sm text-zinc-500 mt-1">
+        <%= number_with_delimiter(@limit) %> feedbacks included
+      </p>
+    <% end %>
+  </div>
+
+  <%# Usage Stats %>
+  <div class="bg-white border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)](63,63,70,1)] p-6 mb-6">
+    <h2 class="font-bold uppercase tracking-wide text-sm text-zinc-500 mb-4">Usage</h2>
+
+    <div class="flex items-end justify-between mb-2">
+      <span class="text-3xl font-black"><%= number_with_delimiter(@total_feedbacks) %></span>
+      <span class="text-zinc-500">
+        <% if @identity.active? %>
+          unlimited
+        <% else %>
+          / <%= number_with_delimiter(@limit) %>
+        <% end %>
+      </span>
+    </div>
+
+    <% unless @identity.active? %>
+      <%# Progress Bar %>
+      <div class="w-full h-3 bg-zinc-200 rounded-full overflow-hidden mb-2">
+        <div class="h-full transition-all duration-300 <%= @percentage >= 90 ? 'bg-red-500' : @percentage >= 70 ? 'bg-amber-500' : 'bg-green-500' %>"
+             style="width: <%= @percentage %>%"></div>
+      </div>
+
+      <p class="text-sm text-zinc-500">
+        <% if @identity.feedback_limit_reached? %>
+          <span class="text-red-600 font-semibold">Limit reached!</span> Upgrade to continue creating feedbacks.
+        <% elsif @identity.near_feedback_limit? %>
+          <span class="text-amber-600 font-semibold"><%= number_with_delimiter(@remaining) %> feedbacks remaining</span>
+        <% else %>
+          <%= number_with_delimiter(@remaining) %> feedbacks remaining
+        <% end %>
+      </p>
+    <% else %>
+      <p class="text-sm text-zinc-500">Unlimited feedbacks with your subscription</p>
+    <% end %>
+  </div>
+
+  <%# Actions %>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <% if @identity.active? %>
+      <%= form_with url: stripe_portal_path, method: :post, data: { turbo: false }, class: "flex-1" do %>
+        <button type="submit" class="w-full px-6 py-3 bg-zinc-900 text-white font-bold uppercase tracking-wide hover:bg-zinc-800 transition-colors border-2 border-zinc-900">
+          Manage Subscription
+        </button>
+      <% end %>
+    <% else %>
+      <%= link_to stripe_checkout_path(script_name: nil), class: "flex-1 px-6 py-3 bg-zinc-900 text-white font-bold uppercase tracking-wide text-center hover:bg-zinc-800 transition-colors border-2 border-zinc-900", data: { turbo: false } do %>
+        Upgrade to Pro
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div
+  id="<%= dom_id(@feedback) %>"
+  class="block relative group mt-3 select-none transition-all duration-200 hover:-translate-y-1 no-underline <%= @draggable ? 'cursor-grab active:cursor-grabbing' : '' %> <%= 'ring-2 ring-sky-400' if highlighted? %> <%= 'opacity-30' if dimmed? %>"
+  data-user-id="<%= @feedback.user_id %>"
+  <% if @draggable %>
+    data-feedback-id="<%= @feedback.id %>"
+    data-feedback-grouping-target="feedback"
+  <% end %>
+  <% if @voting_enabled %>
+    data-vote-sorting-target="item"
+  <% end %>
+>
+  <%# Card Body: Clean Industrial (White, heavy border, sharp shadow) %>
+  <div class="bg-white relative border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden flex flex-col h-full min-h-[100px] group-hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">
+
+    <% unless show_voting? %>
+      <%= link_to retro_feedback_path(@feedback.retro, @feedback), class: "absolute inset-0 z-10" do %><% end %>
+    <% end %>
+
+    <%# Internal Content Area %>
+    <div class="flex-1 p-4 flex flex-col gap-2">
+
+      <%# Technical Header Label %>
+      <div class="flex justify-between items-center border-b-[2px] border-zinc-100 pb-2 mb-1">
+        <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono">ID_00<%= @feedback.id %></span>
+        <div class="flex items-center gap-2">
+          <% if @grouping_enabled && in_group? %>
+            <%= button_to remove_feedback_retro_feedback_groups_path(@feedback.retro, feedback_id: @feedback.id),
+                method: :delete,
+                class: "text-[0.55rem] font-bold text-zinc-500 hover:text-zinc-900 uppercase tracking-wider transition-colors px-1.5 py-0.5 border border-zinc-300 hover:border-zinc-500 rounded bg-zinc-50 hover:bg-zinc-100 relative z-20" do %>
+              Ungroup
+            <% end %>
+          <% else %>
+            <%# Optional Category Dot %>
+            <div class="flex gap-1">
+              <div class="w-1.5 h-1.5 rounded-full border border-zinc-900 bg-zinc-200"></div>
+              <div class="w-1.5 h-1.5 rounded-full border border-zinc-900 bg-zinc-200"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%# The Content (Quoted & Bold) %>
+      <div class="text-zinc-900 font-bold text-sm leading-snug break-words">
+        <div class="rich-text-content">
+          <%= @feedback.content %>
+        </div>
+      </div>
+    </div>
+
+    <%# Footer Section (Clean) %>
+    <div class="px-4 py-3 flex items-center justify-between mt-auto">
+      <%# User Info %>
+      <div class="flex items-center gap-2">
+        <%# Simple Avatar %>
+        <div class="w-5 h-5 bg-zinc-900 text-white flex items-center justify-center text-[0.55rem] font-black uppercase tracking-wider">
+           <%= @feedback.user.initials %>
+        </div>
+        <span class="text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider line-clamp-1 max-w-[80px]">
+          <%= @feedback.user.name %>
+        </span>
+      </div>
+
+      <%# Voting UI %>
+      <% if show_voting? %>
+        <div class="relative z-20">
+          <%= render VoteButtonComponent.new(voteable: @feedback, participant: @participant, retro: @retro) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

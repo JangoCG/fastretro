@@ -1,0 +1,17 @@
+<% content_for :title, "Confirm email change" %>
+
+<div class="max-w-md mx-auto px-4 py-8">
+  <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 lg:p-8 text-center">
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">Confirm email change</h1>
+
+    <p class="text-gray-500 mb-6">Just a sec while we confirm your new email address.</p>
+
+    <%= form_with url: user_email_address_confirmation_path(user_id: @user.id, email_address_token: params[:email_address_token]), method: :post, data: { controller: "form auto-submit" } do |form| %>
+      <%= form.hidden_field :email_address_token, value: params[:email_address_token] %>
+
+      <button type="submit" class="inline-flex items-center gap-2 px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors" data-form-target="submit">
+        <span>Confirm</span>
+      </button>
+    <% end %>
+  </div>
+</div>

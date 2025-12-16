@@ -1,0 +1,85 @@
+<%# Invite Card: Industrial Shipping Crate Aesthetic %>
+<div class="h-full flex flex-col relative group">
+  <%# Structural outline with "flange" effect %>
+  <div class="absolute -left-1 -top-1 -right-1 -bottom-1 border-[1px] border-zinc-400 rounded-sm"></div>
+
+  <div class="relative flex flex-col bg-[#f4f1ea] border-[4px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] overflow-hidden">
+
+    <%# Hazard Strip Header %>
+    <div class="h-3 w-full border-b-[3px] border-zinc-900 bg-[repeating-linear-gradient(45deg,#18181b,#18181b_10px,#22c55e_10px,#22c55e_20px)]"></div>
+
+    <%# Technical Header %>
+    <div class="px-5 py-4 border-b-[3px] border-zinc-900 bg-white relative overflow-hidden">
+      <%# Background Grid for Header %>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10 flex justify-between items-center gap-4">
+        <div class="flex-1 min-w-0 overflow-hidden">
+          <h2 class="font-black text-lg uppercase tracking-tighter text-zinc-900 leading-[0.85] filter drop-shadow-sm">
+            <span class="relative px-1 inline-block">
+               <span class="absolute inset-0 bg-emerald-300 -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+               "SHARE LINK"
+            </span>
+          </h2>
+        </div>
+
+        <div class="flex-shrink-0 border-[2px] border-zinc-900 bg-white p-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <%= icon_tag "person-add", class: "text-lg text-zinc-900" %>
+        </div>
+      </div>
+    </div>
+
+    <%# Content Area %>
+    <div class="p-4 bg-[#F8F5EC] relative">
+      <%# Background Grid %>
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+      <div class="relative z-10">
+        <p class="text-xs text-zinc-600 mb-3 uppercase tracking-wide font-bold">
+          Share this link to invite team members:
+        </p>
+
+        <%# Link Input with Copy Button %>
+        <div class="flex gap-2">
+          <div class="flex-1 relative">
+            <input
+              type="text"
+              value="<%= full_invite_url %>"
+              readonly
+              id="invite-link-input"
+              class="w-full px-3 py-2 text-sm font-mono bg-white border-[2px] border-zinc-900 rounded-[2px] text-zinc-700 truncate pr-10"
+            >
+          </div>
+          <button
+            type="button"
+            onclick="copyInviteLink()"
+            class="px-4 py-2 bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider border-[2px] border-zinc-900 rounded-[2px] hover:bg-zinc-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <%# Technical Footer %>
+    <div class="h-5 border-t-[3px] border-zinc-900 bg-zinc-900 flex items-center justify-between px-3">
+      <div></div>
+       <%# Barcode Effect %>
+       <div class="h-2 w-10 bg-[repeating-linear-gradient(90deg,#fff,#fff_1px,transparent_1px,transparent_3px)] opacity-50"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function copyInviteLink() {
+    const input = document.getElementById('invite-link-input');
+    navigator.clipboard.writeText(input.value).then(() => {
+      const button = event.target;
+      const originalText = button.textContent;
+      button.textContent = 'Copied!';
+      setTimeout(() => {
+        button.textContent = originalText;
+      }, 2000);
+    });
+  }
+</script>

@@ -1,0 +1,362 @@
+<% content_for :full_width, true %>
+<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
+<% content_for :title, "Fast Retro — Run Better Retrospectives" %>
+<% content_for :meta_title, "Fast Retro — Open Source Retrospective Tool for Agile Teams" %>
+<% content_for :meta_description, "Fast Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss in real-time. No per-user fees. Free tier with 300 items." %>
+<% content_for :meta_keywords, "retrospective tool, agile retrospective, sprint retrospective, team retrospective, scrum retrospective, remote retrospective, online retrospective, open source retrospective, free retrospective tool" %>
+
+<%# === BACKGROUND TEXTURE (The Dot Grid) === %>
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+
+<%# === HEADER === %>
+<%= render LandingPageHeaderComponent.new %>
+
+<main class="pt-24 pb-0 overflow-x-hidden">
+
+  <%# === HERO SECTION === %>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-32 relative">
+    <%# Retro Counter - Top Right %>
+    <div class="hidden lg:block absolute top-0 right-4 sm:right-6 z-20">
+      <div class="relative group cursor-help rotate-[6deg] hover:rotate-0 transition-transform">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-600 border border-black shadow-sm z-20"></div>
+        <div class="inline-flex flex-col items-center justify-center border-2 border-black bg-white p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] w-28 h-28">
+          <span class="font-mono text-[0.5rem] font-bold uppercase tracking-widest mb-1 text-zinc-400">TOTAL</span>
+          <span class="font-black text-2xl tabular-nums tracking-tighter leading-none"><%= number_with_delimiter(@retro_count) %></span>
+          <span class="font-bold text-[0.5rem] uppercase leading-tight mt-1 border-t-2 border-black pt-1 w-full text-center">RETROS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center gap-12">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="py-4">
+          <p class="font-mono text-[10px] text-zinc-500 mb-2 uppercase tracking-widest">
+            FAST. STRAIGHTFORWARD. OPEN SOURCE.
+          </p>
+          <h1 class="text-[2rem] sm:text-[3rem] md:text-[5rem] leading-[0.85] font-black uppercase tracking-tighter text-black mb-4 sm:mb-6">
+            RETROSPECTIVES<br>
+            DONE<br>
+            RIGHT
+          </h1>
+          <p class="max-w-xl mx-auto text-xs sm:text-sm font-bold font-mono text-zinc-600 bg-zinc-200/50 p-2 inline-block">
+            BRAINSTORM. GROUP. VOTE. DISCUSS.<br>
+            <span class="bg-black text-white px-1">THE MODERN SPIN</span> ON TEAM RETROSPECTIVES.
+          </p>
+        </div>
+
+      <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
+          <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-6 py-3 border-2 border-transparent" do %>
+            <span>START FOR FREE</span>
+            <span class="font-mono">-></span>
+          <% end %>
+        </div>
+
+        <%# Retro Counter - Mobile/Tablet (below CTA) %>
+        <div class="lg:hidden mt-6">
+          <div class="inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <span class="font-black text-xl tabular-nums tracking-tighter"><%= number_with_delimiter(@retro_count) %></span>
+            <span class="font-bold text-[0.6rem] uppercase leading-tight text-zinc-500">RETROS<br>COMPLETED</span>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="w-full max-w-5xl mx-auto relative">
+         <div class="relative">
+             <div class="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-black z-10 hidden sm:block"></div>
+             <div class="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-black z-10 hidden sm:block"></div>
+             <%# Mobile image %>
+             <%= image_tag "retro-mobile.png", class: "w-full h-auto shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 sm:hidden" %>
+             <%# Desktop image %>
+             <%= image_tag "retro-image-no-padding.png", class: "w-full h-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 hidden sm:block" %>
+         </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === FEATURES ("THE COLLECTION") === %>
+  <section id="features" class="mb-40 relative">
+    <%# The Wire %>
+    <div class="absolute top-0 left-0 right-0 border-t-2 border-dashed border-zinc-400 mt-[-2rem]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="mb-8 sm:mb-16">
+        <h2 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block">
+          HOW IT WORKS: 4 PHASES
+        </h2>
+        <p class="mt-3 font-mono text-sm sm:text-base text-zinc-600 max-w-2xl leading-relaxed">
+          Create a retro, share the link with your team, and guide everyone through four structured phases.
+          The moderator controls the pace—when you're ready, advance to the next phase with one click.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 sm:gap-x-8 sm:gap-y-14 lg:gap-8 justify-items-center">
+        <%# Feature 1: Brainstorming %>
+        <%= render PhaseTagComponent.new(
+              phase: :brainstorming,
+              phase_title: "PHASE 01\nREFLECT",
+              phase_instruction: "EVERYONE WRITES DOWN THEIR THOUGHTS PRIVATELY. NO ONE SEES UNTIL THE REVEAL.",
+              phase_footer: "ANONYMOUS INPUT",
+              rotation: -5
+            ) %>
+
+        <%# Feature 2: Grouping %>
+        <%= render PhaseTagComponent.new(
+              phase: :grouping,
+              phase_title: "PHASE 02\nCLUSTER",
+              phase_instruction: "DRAG SIMILAR IDEAS TOGETHER INTO GROUPS. FIND THE PATTERNS.",
+              phase_footer: "ORGANIZE THEMES",
+              rotation: 4
+            ) %>
+
+        <%# Feature 3: Voting %>
+        <%= render PhaseTagComponent.new(
+              phase: :voting,
+              phase_title: "PHASE 03\nPRIORITIZE",
+              phase_instruction: "EACH PERSON GETS 3 VOTES. SPEND THEM ON WHAT MATTERS MOST.",
+              phase_footer: "DEMOCRATIC FOCUS",
+              rotation: -3
+            ) %>
+
+        <%# Feature 4: Discussion %>
+        <%= render PhaseTagComponent.new(
+              phase: :discussion,
+              phase_title: "PHASE 04\nACT",
+              phase_instruction: "TALK THROUGH TOP-VOTED ITEMS. CREATE ACTION ITEMS. ASSIGN OWNERS.",
+              phase_footer: "DRIVE CHANGE",
+              rotation: 6
+            ) %>
+      </div>
+
+      <%# Phase descriptions %>
+      <div class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 font-mono text-sm">
+        <div class="border-l-4 border-amber-400 pl-4 sm:pl-6">
+          <h4 class="font-bold text-base mb-2">01. Reflect</h4>
+          <p class="text-zinc-600 leading-relaxed">
+            Team members write feedback into two columns: "What went well" and "What could be better."
+            Cards are private until the moderator reveals them so no one is influenced.
+          </p>
+        </div>
+        <div class="border-l-4 border-sky-400 pl-4 sm:pl-6">
+          <h4 class="font-bold text-base mb-2">02. Cluster</h4>
+          <p class="text-zinc-600 leading-relaxed">
+            The moderator drags related cards together to form groups. Similar ideas get consolidated,
+            making it easier to see themes and avoid discussing the same point multiple times.
+          </p>
+        </div>
+        <div class="border-l-4 border-violet-400 pl-4 sm:pl-6">
+          <h4 class="font-bold text-base mb-2">03. Prioritize</h4>
+          <p class="text-zinc-600 leading-relaxed">
+            Everyone gets 3 votes to spend on the items that matter most to them. Cards and groups
+            automatically sort by vote count so the team focuses on high-priority topics first.
+          </p>
+        </div>
+        <div class="border-l-4 border-emerald-400 pl-4 sm:pl-6">
+          <h4 class="font-bold text-base mb-2">04. Act</h4>
+          <p class="text-zinc-600 leading-relaxed">
+            Work through the top-voted items together. Create action items with owners and due dates.
+            Actions persist after the retro ends so you can track follow-through in future sessions.
+          </p>
+        </div>
+      </div>
+
+      <%# Export Feature %>
+      <div class="mt-16 sm:mt-20 text-center">
+        <div class="inline-flex items-center gap-3 border-2 border-black bg-white px-6 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div class="text-3xl">📊</div>
+          <div class="text-left">
+            <div class="font-bold text-sm uppercase tracking-wide">Export to Excel</div>
+            <div class="text-xs text-zinc-500 font-mono">Download feedbacks & action items as .xlsx</div>
+          </div>
+        </div>
+        <p class="mt-4 font-mono text-sm text-zinc-600 max-w-md mx-auto">
+          When the retro is complete, export everything to Excel.
+          Review action items before your next retro and track what got done.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <%# === FREE TIER CTA === %>
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-24 text-center">
+    <h2 class="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight">
+      <span class="bg-[#ffe600] px-2 text-black">DISCUSS <%= number_with_delimiter(@free_limit) %> FEEDBACKS</span><br>
+      FOR FREE.
+    </h2>
+    <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
+      No credit card required. No time limit.<br>
+      Want to keep going past <%= number_with_delimiter(@free_limit) %> It's only €9.99/month<br class="hidden sm:block">
+      for unlimited everything. Cancel anytime.
+    </p>
+
+
+  </section>
+
+  <%# === PRICING ("TICKET") === %>
+  <section id="pricing" class="mb-32 max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="relative bg-[#F8F5EC] border-2 border-black p-8 sm:p-12 overflow-hidden group hover:scale-[1.01] transition-transform duration-500">
+        <%# Ticket Cutouts %>
+        <div class="absolute top-1/2 -left-3 w-6 h-6 bg-zinc-100 rounded-full border-r-2 border-black"></div>
+        <div class="absolute top-1/2 -right-3 w-6 h-6 bg-zinc-100 rounded-full border-l-2 border-black"></div>
+
+        <%# Barcode Decoration %>
+        <div class="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 opacity-50 hidden sm:block">
+           <div class="h-12 flex gap-1">
+             <% 20.times do %>
+               <div class="w-[2px] bg-black h-full"></div>
+               <div class="w-[1px] bg-transparent h-full"></div>
+               <div class="w-[4px] bg-black h-full"></div>
+             <% end %>
+           </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-8 relative z-10">
+          <div>
+            <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 block mb-2">ALL ACCESS PASS</span>
+            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-4">
+              "TICKET"<br>
+              <span class="text-zinc-400">UNLIMITED</span>
+            </h2>
+            <ul class="font-mono text-sm space-y-2 mt-6">
+              <li class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-black"></span> UNLIMITED ACCOUNTS
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-black"></span> UNLIMITED USERS
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-black"></span> UNLIMITED FEEDBACK
+              </li>
+            </ul>
+          </div>
+
+          <div class="text-left sm:text-right flex flex-col justify-between">
+             <div class="font-mono text-xs uppercase tracking-widest text-zinc-500">FLAT RATE</div>
+
+             <div class="my-2 sm:my-0">
+               <div class="text-5xl sm:text-6xl font-black mb-1">€9.99</div>
+               <div class="font-mono text-xs uppercase">/ MONTH</div>
+             </div>
+
+             <div class="font-mono text-[10px] text-zinc-500 mt-4 uppercase">
+               NO PER-USER FEES.<br>
+               CANCEL ANYTIME.
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === DATA & TRUST === %>
+  <section id="trust" class="max-w-4xl mx-auto px-4 sm:px-6 mb-32 text-center">
+    <div class="inline-block bg-black text-white px-2 py-1 font-mono text-xs font-bold uppercase tracking-widest mb-4">
+      DATA SOVEREIGNTY
+    </div>
+    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
+      YOUR DATA.<br>
+      <span class="text-zinc-400">YOUR RULES.</span>
+    </h2>
+    <p class="font-mono text-sm md:text-base text-zinc-600 leading-relaxed mb-8 max-w-2xl mx-auto">
+      <span class="font-bold text-black">HOSTED IN GERMANY.</span>
+      Your retrospective data stays in the EU, protected by GDPR.
+      We treat your data with the respect it deserves.
+    </p>
+
+    <%# Hosted in Germany Card %>
+    <div class="flex justify-center">
+      <div class="inline-flex items-center gap-3 border-2 border-black bg-white p-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] rotate-[-3deg] hover:rotate-0 transition-transform cursor-help">
+        <div class="flex flex-col gap-[1px]">
+          <div class="w-8 h-2 bg-black"></div>
+          <div class="w-8 h-2 bg-[#DD0000]"></div>
+          <div class="w-8 h-2 bg-[#FFCE00]"></div>
+        </div>
+        <div class="font-bold text-xs uppercase leading-none text-left">
+          Hosted in<br>Germany
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === OPEN SOURCE === %>
+  <section id="opensource" class="max-w-3xl mx-auto px-4 sm:px-6 mb-32 text-center text-sm md:text-base">
+    <div class="border-2 border-black p-8 md:p-12 bg-white relative">
+       <!-- Decorative Corners -->
+       <div class="absolute top-0 left-0 w-4 h-4 bg-black"></div>
+       <div class="absolute top-0 right-0 w-4 h-4 bg-black"></div>
+       <div class="absolute bottom-0 left-0 w-4 h-4 bg-black"></div>
+       <div class="absolute bottom-0 right-0 w-4 h-4 bg-black"></div>
+
+       <h3 class="font-bold text-2xl md:text-3xl mb-6 uppercase tracking-tight">Don't want to pay or trust us?</h3>
+
+       <p class="text-zinc-600 mb-8 max-w-2xl mx-auto font-mono leading-relaxed">
+        You don't have to. Fast Retro is <span class="font-bold text-black">100% open source</span>. Spin up your own instance. Fork it,
+         tweak it, make it yours. Got a feature idea? PRs are always welcome.
+         The software is provided under a <a href="https://github.com/jangocg/fastretro-v2/blob/main/LICENSE.md" target="_blank" class="underline hover:text-black">permissive license with minimal limitations on use</a>.
+       </p>
+
+       <a href="https://github.com/jangocg/fastretro-v2" target="_blank" class="inline-flex items-center justify-center gap-3 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-8 py-4 border-2 border-transparent transition-all hover:scale-105">
+         <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+         <span>VIEW SOURCE CODE</span>
+       </a>
+    </div>
+  </section>
+
+  <%# === FAQ === %>
+  <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 mb-32">
+    <h2 class="text-3xl font-black uppercase tracking-tighter mb-12 text-center">Common questions.</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 font-mono text-sm">
+      <div class="space-y-8">
+        <div>
+          <h4 class="font-bold mb-2">How does it work?</h4>
+          <p class="text-zinc-600">Create a retro, invite your team via link, and guide everyone through four phases: brainstorming (collect ideas anonymously), grouping (organize similar items), voting (prioritize what matters), and discussion (talk through top items and create action items).</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-2">Is it real-time?</h4>
+          <p class="text-zinc-600">Yes. All participants see updates instantly. When someone adds a card, votes, or moves to the next phase, everyone sees it immediately. No refreshing needed.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-2">Self-hosted?</h4>
+          <p class="text-zinc-600">Absolutely. Fast Retro is fully open source. Clone the repo, run it on your own server, and customize it however you want. No license fees, no restrictions on internal use.</p>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+          <h4 class="font-bold mb-2">What counts toward the free tier?</h4>
+          <p class="text-zinc-600">Every feedback card created counts toward your <%= number_with_delimiter(@free_limit) %> free items. After that, upgrade to unlimited for €9.99/month. Deleted cards still count—we don't play games with limits.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-2">Do participants need accounts?</h4>
+          <p class="text-zinc-600">Yes, everyone creates an account to participate. It's quick—just enter your email and click the magic link. No passwords to remember, no friction.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-2">Can I run multiple retros?</h4>
+          <p class="text-zinc-600">Yes, create as many retros as you need. Run them simultaneously with different teams. Each retro is independent with its own participants and phases.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === FINAL CTA === %>
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-32 text-center">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter leading-tight mb-8">
+      Ready to run<br>
+      <span class="text-zinc-400">better retros?</span>
+    </h2>
+    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+      <span>GET STARTED FREE</span>
+      <span class="font-mono">-></span>
+    <% end %>
+  </section>
+
+  <%# === FOOTER === %>
+  <%= render LandingPageFooterComponent.new %>
+
+</main>

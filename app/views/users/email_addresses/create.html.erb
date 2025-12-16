@@ -1,0 +1,17 @@
+<% content_for :title, "Confirm your new email address" %>
+
+<div class="px-4 py-4">
+  <%= render BackButtonComponent.new(label: "profile", href: edit_user_path(@user)) %>
+</div>
+
+<div class="max-w-md mx-auto px-4 pb-8">
+  <h1 class="text-3xl font-bold text-gray-900 text-center mb-8">Check your email</h1>
+
+  <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 lg:p-8 text-center">
+    <p class="text-gray-700 mb-4">We just sent an email to <strong class="text-gray-900"><%= params[:email_address] %></strong></p>
+
+    <p class="text-sm text-gray-500 mb-6">Click the link in the email to confirm this is the email address you want to use with FastRetro going forward.</p>
+
+    <%= link_to "Done", edit_user_path(@user), class: "inline-flex items-center gap-2 px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors" %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8 text-center">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900">That code is all used up</h1>
+      <p class="mt-4 text-gray-600">
+        Ask someone from <%= @join_code.account.name %> to send you a new link or increase the limit.
+      </p>
+    </div>
+
+    <div>
+      <%= link_to "OK", root_path, class: "inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700" %>
+    </div>
+  </div>
+</div>

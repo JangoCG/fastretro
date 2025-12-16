@@ -1,0 +1,17 @@
+one:
+  retro: one
+  user: one
+  category: went_well
+  status: published
+
+two:
+  retro: one
+  user: two
+  category: could_be_better
+  status: published
+
+draft:
+  retro: one
+  user: one
+  category: went_well
+  status: drafted

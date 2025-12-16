@@ -1,0 +1,15 @@
+<% if @magic_link.for_sign_in? -%>
+Fast Retro verification code
+
+Please enter this 6-character verification code on the Fast Retro sign-in page:
+<% else -%>
+Welcome to Fast Retro!
+
+Please enter this 6-character verification code on the FastRetro sign-up page to create your new account:
+<% end -%>
+
+<%= @magic_link.code %>
+
+This code will work for <%= distance_of_time_in_words(MagicLink::EXPIRATION_TIME) %>.
+
+Need help? Send us an email at cengiz@cengizg.com.

@@ -1,0 +1,60 @@
+<li class="flex items-center gap-4 px-3 py-3 hover:bg-zinc-50 transition-colors border-b border-zinc-200 group relative" data-filter-target="item" data-navigable-list-target="item">
+  
+  <%# Hover Marker %>
+  <div class="absolute left-0 top-0 bottom-0 w-1 bg-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+  <%= link_to user_path(user), class: "flex items-center gap-4 min-w-0 text-zinc-900 hover:text-zinc-600 transition-colors shrink-0 group/link" do %>
+    <%# Squared Avatar %>
+    <div class="w-10 h-10 border-[2px] border-zinc-900 bg-zinc-200 flex items-center justify-center shrink-0 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover/link:translate-y-0.5 group-hover/link:shadow-none transition-all">
+      <%= icon_tag "person", class: "w-5 h-5 text-zinc-900" %>
+    </div>
+    <div class="min-w-0 flex flex-col">
+      <strong class="block truncate text-sm font-bold uppercase tracking-wide"><%= user.name %></strong>
+      <% if user.identity&.email_address.present? %>
+        <span class="block truncate text-xs font-mono text-zinc-500 uppercase"><%= user.identity.email_address %></span>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# Industrial Connector %>
+  <div class="flex-1 border-t-[2px] border-dashed border-zinc-300 mx-3"></div>
+
+  <div class="flex items-center gap-3 shrink-0">
+    <%# Crown button to toggle admin role %>
+    <%= form_with model: user, url: user_role_path(user), method: :patch, data: { controller: "form" } do |form| %>
+      <% can_toggle = Current.user.can_administer?(user) %>
+      
+      <label class="w-10 h-10 flex items-center justify-center border-[2px] transition-all
+        <%= user.admin? ? "bg-zinc-900 border-zinc-900 text-white" : "bg-white border-zinc-300 text-zinc-400" %>
+        <%= can_toggle ? "cursor-pointer hover:border-zinc-900 hover:text-zinc-900" : "opacity-50 cursor-not-allowed" %>"
+        for="<%= dom_id(user, :role) %>"
+        title="<%= role_display_name(user) %><%= ' (cannot change owner)' if user.owner? %>">
+        
+        <%= icon_tag "crown", class: "text-lg" %>
+        <span class="sr-only">Role: <%= role_display_name(user) %></span>
+        
+        <%= form.check_box :role,
+          { data: { action: "form#submit" },
+            disabled: !can_toggle,
+            checked: user.admin?,
+            hidden: true,
+            id: dom_id(user, :role) },
+          "admin", "member" %>
+      </label>
+    <% end %>
+
+    <%# Remove user button %>
+    <% can_remove = Current.user.can_administer?(user) %>
+    <%= render IconButtonComponent.new(
+      icon: "minus",
+      variant: can_remove ? :danger : :secondary,
+      size: :lg,
+      href: user_path(user),
+      label: "Remove #{user.name}",
+      disabled: !can_remove,
+      # Industrial Square Button
+      class: "w-10 h-10 rounded-none border-[2px] flex items-center justify-center transition-all " + (can_remove ? "border-transparent text-red-600 hover:bg-red-50 hover:border-red-600" : "opacity-40 cursor-not-allowed border-transparent text-zinc-400"),
+      data: { turbo_method: :delete, turbo_confirm: can_remove ? "Are you sure you want to remove #{user.name} from this account?" : nil }
+    ) %>
+  </div>
+</li>

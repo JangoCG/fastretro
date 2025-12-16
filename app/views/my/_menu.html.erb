@@ -1,0 +1,81 @@
+<nav class="relative flex justify-center z-50"
+     data-controller="dialog"
+     data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside mouseenter->dialog#loadLazyFrames">
+
+  <%# === MOBILE BURGER BUTTON === %>
+  <%= tag.button class:"sm:hidden group relative inline-flex flex-col items-center justify-center gap-1 w-10 h-10 mt-3 bg-[#F8F5EC] border-[2px] border-zinc-900 shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] active:bg-zinc-100 transition-all duration-75 cursor-pointer outline-none",
+                 data: { action: "click->dialog#open" } do %>
+    <span class="block w-5 h-0.5 bg-zinc-900"></span>
+    <span class="block w-5 h-0.5 bg-zinc-900"></span>
+    <span class="block w-5 h-0.5 bg-zinc-900"></span>
+  <% end %>
+
+  <%# === DESKTOP TRIGGER BUTTON (Tactile Switch Style - Industrial Redesign) === %>
+  <%= tag.button class:"hidden sm:inline-flex group relative items-center gap-3 px-8 py-5 mt-4 bg-[#F8F5EC] border-[2px] border-stone-300 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] hover:shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all duration-75 cursor-pointer outline-none focus:ring-4 focus:ring-zinc-900/10 overflow-hidden min-w-[280px]",
+                 data: {
+                   action: "click->dialog#open keydown.j@document->hotkey#click keydown.meta+j@document->hotkey#click keydown.ctrl+j@document->hotkey#click",
+                   controller: "hotkey"
+                 } do %>
+
+    <%# Decorative Hazard Strip %>
+    <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
+
+
+    <%# Main Label %>
+    <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
+       <div class="flex items-center gap-2">
+         <span class="font-black text-xl sm:text-2xl uppercase tracking-tighter text-black leading-none select-none relative px-1">
+           <span class="absolute inset-0 bg-[#FFFF00] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+           "FAST RETRO"
+         </span>
+         <%# Caret (Re-styled) %>
+         <%= icon_tag "caret-down", class: "w-4 h-4 text-zinc-900 stroke-[3px]" %>
+       </div>
+       <span class="text-[0.5rem] sm:text-[0.6rem] font-bold text-stone-500 uppercase tracking-widest leading-none mt-1 pl-1">
+         MENU
+       </span>
+    </div>
+
+    <%# Hotkey Indicator (Re-styled) %>
+    <div class="absolute bottom-2 right-2 hidden sm:flex items-center justify-center border border-zinc-900 bg-zinc-900 text-[#F8F5EC] px-1.5 py-0.5">
+      <kbd class="font-mono text-[9px] font-bold uppercase tracking-widest">J</kbd>
+    </div>
+
+  <% end %>
+
+  <%# === THE DIALOG === %>
+  <%= tag.dialog class: "fixed left-1/2 -translate-x-1/2 top-1 z-50 w-[96vw] sm:w-[520px] max-w-[520px] max-h-[calc(100vh-8px)] overflow-y-auto p-0 bg-[#F8F5EC] text-zinc-900 rounded-[2px] shadow-[8px_8px_0px_0px_rgba(24,24,27,1)] border-[3px] border-zinc-900 outline-none backdrop:bg-zinc-900/20 backdrop:backdrop-blur-sm",
+                 data: {
+                   action: "turbo:before-cache@document->dialog#close turbo:frame-render->navigable-list#reset keydown->navigable-list#navigate filter:changed->navigable-list#reset filter:changed->nav-section-expander#showWhileFiltering toggle->filter#filter",
+                   controller: "filter navigable-list nav-section-expander",
+                   dialog_target: "dialog",
+                   navigable_list_focus_on_selection_value: false,
+                   navigable_list_actionable_items_value: true,
+                   turbo_permanent: true
+                 } do %>
+
+    <%# Dialog Header Bar %>
+    <div class="flex justify-between items-center px-4 py-2 bg-zinc-900 text-[#F8F5EC] border-b border-zinc-900 select-none">
+      <span class="font-bold text-xs uppercase tracking-widest">MENU</span>
+      <div class="flex gap-1.5">
+        <div class="w-2 h-2 rounded-full bg-red-500 border border-red-700"></div>
+        <div class="w-2 h-2 rounded-full bg-yellow-400 border border-yellow-600"></div>
+        <div class="w-2 h-2 rounded-full bg-green-500 border border-green-700"></div>
+      </div>
+    </div>
+
+    <%# Dialog Content Area %>
+    <div class="p-1">
+      <%= turbo_frame_tag "my_menu", src: my_menu_path, loading: :lazy, target: "_top" do %>
+        <div class="p-8 flex flex-col items-center justify-center opacity-50">
+          <span class="font-mono text-xs uppercase animate-pulse">LOADING...</span>
+        </div>
+        <%= render("my/menus/jump") { } %>
+      <% end %>
+    </div>
+
+    <%# Footer Deco Strip %>
+    <div class="h-2 w-full bg-[repeating-linear-gradient(-45deg,#000,#000_2px,transparent_2px,transparent_4px)] opacity-10"></div>
+
+  <% end %>
+</nav>

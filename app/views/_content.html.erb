@@ -1,0 +1,15 @@
+<% if feedback.published? %>
+  <div data-turbo-permanent>
+  <%= turbo_frame_tag feedback, :edit do %>
+    <div class="rich-text-content">
+      <%= feedback.content %>
+    </div>
+  <% end %>
+  </div>
+<% else %>
+  <%= form_with model: [feedback.retro, feedback], id: "feedback_form", data: { controller: "auto-save" } do |form| %>
+    <%= form.rich_textarea :content, class: "card__description rich-text-content",
+          placeholder: "Share your thoughts...",
+          data: { action: "lexxy:change->auto-save#change focusout->auto-save#submit" } %>
+  <% end %>
+<% end %>

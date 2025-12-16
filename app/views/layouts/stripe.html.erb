@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="h-full">
+  <head>
+    <title>FastRetro - Checkout</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
+    <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
+    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+         style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <%# === HEADER === %>
+    <header class="relative flex justify-center z-50">
+      <div class="relative inline-flex items-center gap-3 px-8 py-5 mt-4 bg-[#F8F5EC] border-[2px] border-stone-300 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden min-w-[280px]">
+        <%# Decorative Hazard Strip %>
+        <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
+
+        <%# Main Label %>
+        <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
+          <div class="flex items-center gap-2">
+            <span class="font-black text-xl sm:text-2xl uppercase tracking-tighter text-black leading-none select-none relative px-1">
+              <span class="absolute inset-0 bg-[#FFFF00] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+              "FAST RETRO"
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <%# Navigation Header %>
+    <div class="px-4 py-8">
+      <%= render BackButtonComponent.new(label: "RETROS", href: root_path(script_name: nil)) %>
+    </div>
+
+    <main class="flex-1 flex items-center justify-center p-4 relative z-10">
+      <div class="bg-white border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] p-8 max-w-md w-full">
+        <% if flash[:alert] %>
+          <div class="mb-4 p-3 border-2 border-red-600 bg-red-50 text-red-800 font-mono text-sm"><%= flash[:alert] %></div>
+        <% end %>
+        <% if flash[:notice] %>
+          <div class="mb-4 p-3 border-2 border-green-600 bg-green-50 text-green-800 font-mono text-sm"><%= flash[:notice] %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+
+    <%# === FOOTER === %>
+    <%= render RetroFooterComponent.new %>
+  </body>
+</html>

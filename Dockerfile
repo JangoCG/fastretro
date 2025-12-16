@@ -1,101 +1,76 @@
 # syntax=docker/dockerfile:1
+# check=error=true
 
-# Build arguments
-ARG PHP_VERSION=8.3
-ARG NODE_VERSION=20.18.0
-ARG VITE_APP_NAME="Laravel"
-# this is PUBLIC key and is used by the frontend. You can ignore the docker warning.
-ARG VITE_REVERB_APP_KEY
-ARG VITE_REVERB_HOST="localhost"
-ARG VITE_REVERB_PORT="8080"
-ARG VITE_REVERB_SCHEME="http"
+# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# docker build -t fastretro .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name fastretro fastretro
 
-# ============================================
-# Base stage - common configuration
-# ============================================
-FROM serversideup/php:${PHP_VERSION}-fpm-nginx AS base
+# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
-WORKDIR /var/www/html
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+ARG RUBY_VERSION=3.4.5
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
-# Configure web server and PHP
-ENV SSL_MODE="off" \
-    AUTORUN_ENABLED="true" \
-    PHP_OPCACHE_ENABLE="1" \
-    HEALTHCHECK_PATH="/up"
+# Rails app lives here
+WORKDIR /rails
 
-# ============================================
-# Dependencies stage - install all dependencies
-# ============================================
-FROM base AS dependencies
+# Install base packages
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
+    ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-USER root
+# Set production environment variables and enable jemalloc for reduced memory usage and latency.
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development" \
+    LD_PRELOAD="/usr/local/lib/libjemalloc.so"
 
-# Install Node.js
-ARG NODE_VERSION
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    corepack enable && \
-    rm -rf /tmp/node-build-master
+# Throw-away build stage to reduce size of final image
+FROM base AS build
 
-# Copy dependency files only
-COPY --chown=www-data:www-data composer.json composer.lock package.json package-lock.json ./
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Install PHP dependencies
-RUN composer install \
-    --no-interaction \
-    --prefer-dist \
-    --optimize-autoloader \
-    --no-scripts \
-    --no-dev && \
-    rm -rf ~/.composer/cache
+# Install application gems
+COPY Gemfile Gemfile.lock vendor ./
 
-# Install Node dependencies
-RUN npm ci --no-audit --no-fund && \
-    rm -rf ~/.npm
-
-# ============================================
-# Build stage - compile assets
-# ============================================
-FROM dependencies AS build
-
-# Build arguments for Vite
-ARG VITE_APP_NAME
-ARG VITE_REVERB_APP_KEY
-ARG VITE_REVERB_HOST
-ARG VITE_REVERB_PORT
-ARG VITE_REVERB_SCHEME
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    # -j 1 disable parallel compilation to avoid a QEMU bug: https://github.com/rails/bootsnap/issues/495
+    bundle exec bootsnap precompile -j 1 --gemfile
 
 # Copy application code
-COPY --chown=www-data:www-data . .
+COPY . .
 
-# Build frontend assets with Vite environment variables
-RUN VITE_APP_NAME=$VITE_APP_NAME \
-    VITE_REVERB_APP_KEY=$VITE_REVERB_APP_KEY \
-    VITE_REVERB_HOST=$VITE_REVERB_HOST \
-    VITE_REVERB_PORT=$VITE_REVERB_PORT \
-    VITE_REVERB_SCHEME=$VITE_REVERB_SCHEME \
-    npm run build
+# Precompile bootsnap code for faster boot times.
+# -j 1 disable parallel compilation to avoid a QEMU bug: https://github.com/rails/bootsnap/issues/495
+RUN bundle exec bootsnap precompile -j 1 app/ lib/
 
-# Clean up Node modules after build
-RUN rm -rf node_modules
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# ============================================
-# Production stage - final image
-# ============================================
-FROM base AS production
 
-USER root
 
-# Create necessary directories (sqlite) with proper permissions
-RUN mkdir -p /var/www/html/dbs && \
-    chown -R www-data:www-data /var/www/html/dbs && \
-    chmod 775 /var/www/html/dbs
 
-USER www-data
+# Final stage for app image
+FROM base
 
-# Copy built application from build stage
-COPY --chown=www-data:www-data --from=build /var/www/html /var/www/html
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash
+USER 1000:1000
 
-# Expose ports
-EXPOSE 8080 8000
+# Copy built artifacts: gems, application
+COPY --chown=rails:rails --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --chown=rails:rails --from=build /rails /rails
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start server via Thruster by default, this can be overwritten at runtime
+EXPOSE 80
+CMD ["./bin/thrust", "./bin/rails", "server"]

@@ -1,0 +1,42 @@
+<section class="text-center">
+  <h2 class="text-2xl font-black uppercase tracking-tight mb-2">
+    <span class="relative inline-block px-2">
+      <span class="absolute inset-0 bg-green-300 -rotate-1 skew-x-2 scale-105"></span>
+      <span class="relative">Success!</span>
+    </span>
+  </h2>
+  <p class="text-zinc-600 font-mono text-sm mb-6">Welcome aboard, you're all set</p>
+
+  <%# Status Card %>
+  <div class="bg-green-50 border-2 border-zinc-900 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold uppercase tracking-wide text-sm text-zinc-500">Status</h3>
+      <span class="px-3 py-1 bg-green-500 text-white text-xs font-bold uppercase">Active</span>
+    </div>
+    <p class="text-lg font-semibold"><%= FastRetro.pricing[:plan_name] %></p>
+    <p class="text-sm text-zinc-500 mt-1">You now have unlimited access</p>
+  </div>
+
+  <%# What's unlocked %>
+  <div class="text-left mb-6">
+    <h3 class="font-bold uppercase tracking-wide text-sm text-zinc-500 mb-3">What's unlocked</h3>
+    <ul class="space-y-2 font-mono text-sm">
+      <li class="flex items-center gap-2">
+        <span class="text-green-600 font-bold">+</span>
+        <span>Unlimited feedbacks</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="text-green-600 font-bold">+</span>
+        <span>Unlimited retrospectives</span>
+      </li>
+    </ul>
+  </div>
+
+  <%= link_to "Start Using FastRetro", root_path(script_name: nil), class: "w-full inline-block px-6 py-4 bg-zinc-900 text-white font-bold uppercase tracking-wide hover:bg-zinc-800 transition-colors border-2 border-zinc-900 mb-3" %>
+
+  <%= form_with url: stripe_portal_path, method: :post, data: { turbo: false } do %>
+    <button type="submit" id="checkout-and-portal-button" class="w-full text-zinc-600 font-mono text-sm hover:text-zinc-900 underline">
+      Manage Billing
+    </button>
+  <% end %>
+</section>

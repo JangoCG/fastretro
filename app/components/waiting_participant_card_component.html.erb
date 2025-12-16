@@ -1,0 +1,33 @@
+<div class="relative group">
+  <%# Structural outline %>
+  <div class="absolute -left-0.5 -top-0.5 -right-0.5 -bottom-0.5 border border-zinc-300"></div>
+
+  <div class="relative bg-white border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all">
+    <%# Corner Marks %>
+    <div class="absolute top-1 left-1 w-2 h-2 border-l-2 border-t-2 border-zinc-400"></div>
+    <div class="absolute top-1 right-1 w-2 h-2 border-r-2 border-t-2 border-zinc-400"></div>
+    <div class="absolute bottom-1 left-1 w-2 h-2 border-l-2 border-b-2 border-zinc-400"></div>
+    <div class="absolute bottom-1 right-1 w-2 h-2 border-r-2 border-b-2 border-zinc-400"></div>
+
+    <div class="flex flex-col items-center text-center">
+      <%# Avatar %>
+      <div class="relative mb-3">
+        <div class="w-14 h-14 rounded-[2px] border-[2px] border-zinc-900 <%= avatar_color %> flex items-center justify-center text-white text-lg font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+          <%= @participant.initials %>
+        </div>
+        <%# Online Indicator %>
+        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-[2px] border-white rounded-[2px]"></div>
+      </div>
+
+      <%# Name %>
+      <p class="font-black text-sm uppercase tracking-tight text-zinc-900 leading-tight mb-1 truncate max-w-full">
+        "<%= @participant.name %>"
+      </p>
+
+      <%# Role Badge %>
+      <span class="inline-block bg-zinc-900 text-white text-[0.5rem] font-bold px-2 py-0.5 uppercase tracking-widest">
+        <%= role_label %>
+      </span>
+    </div>
+  </div>
+</div>

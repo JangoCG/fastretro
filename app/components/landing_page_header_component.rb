@@ -1,0 +1,2 @@
+class LandingPageHeaderComponent < ApplicationComponent
+end

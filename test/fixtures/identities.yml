@@ -1,0 +1,19 @@
+one:
+  email_address: one@example.com
+  staff: false
+
+two:
+  email_address: two@example.com
+  staff: false
+
+admin:
+  email_address: admin@example.com
+  staff: false
+
+other:
+  email_address: other@example.com
+  staff: false
+
+staff:
+  email_address: staff@example.com
+  staff: true

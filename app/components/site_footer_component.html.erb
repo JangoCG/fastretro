@@ -1,0 +1,39 @@
+<footer class="w-full pb-12 border-t-4 border-black pt-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-start gap-8">
+    <div>
+      <h3 class="font-black text-xl italic tracking-tighter uppercase mb-4">FASTRETRO</h3>
+      <p class="font-mono text-xs text-zinc-500 max-w-xs uppercase">
+        MANUFACTURED IN THE DARK.
+      </p>
+    </div>
+
+    <div class="flex gap-12 font-mono text-xs uppercase">
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">INDEX</li>
+        <li><%= link_to "HOME", landing_page_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "FEATURES", landing_page_path(anchor: "features", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "PRICING", landing_page_path(anchor: "pricing", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+      </ul>
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">FOLLOW</li>
+        <li><%= link_to "BLOG", blog_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><a href="https://x.com/JangoCG" target="_blank" class="hover:bg-black hover:text-white px-1">X</a></li>
+      </ul>
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">LEGAL</li>
+        <li><%= link_to "IMPRINT", imprint_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "PRIVACY POLICY", privacy_policy_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+      </ul>
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">CONTACT</li>
+        <li><a href="mailto:cengiz@cengizg.com" class="hover:bg-black hover:text-white px-1">EMAIL</a></li>
+      </ul>
+    </div>
+
+    <div class="text-right">
+    </div>
+  </div>
+
+  <%# Warning Stripe %>
+  <div class="w-full h-4 mt-8 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#ffe600_10px,#ffe600_20px)]"></div>
+</footer>

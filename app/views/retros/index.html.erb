@@ -1,0 +1,77 @@
+<% content_for :title, "Retros" %>
+<div class="max-w-7xl mx-auto p-4" data-controller="filter">
+  <%= render "feedbacks/near_limit_notice" %>
+
+  <% if notice.present? %>
+    <div class="border-2 border-black bg-[#ffe600] p-4 mb-8 font-mono text-xs font-bold uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] inline-block" id="notice">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <%# Industrial Header %>
+  <div class="border-l-4 border-black pl-6 py-4 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+    <div>
+      <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+        YOUR<br>RETROS
+      </h1>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-4">
+      <%= link_to new_retro_path, class: "group inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
+        <span>NEW RETRO</span>
+        <span class="font-mono group-hover:translate-x-1 transition-transform">-></span>
+        <%= render KbdComponent.new(key: "C", size: :sm) %>
+      <% end %>
+
+      <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex items-center gap-2 px-4 py-3 bg-violet-600 text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-violet-700 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+        <%= icon_tag "chat", class: "w-4 h-4" %>
+        Feedback
+      <% end %>
+    </div>
+  </div>
+
+  <%# Industrial Search Bar %>
+  <div class="mb-12 border-b-2 border-black pb-8">
+    <div class="relative max-w-md">
+      <input
+        type="text"
+        placeholder="SEARCH..."
+        class="block w-full pl-4 pr-12 py-3 bg-zinc-100 border-2 border-zinc-300 focus:border-black#ffe600] font-mono text-sm uppercase rounded-none focus:outline-none transition-colors"
+        data-filter-target="input"
+        data-controller="hotkey"
+        data-action="input->filter#filter keydown.f@window->hotkey#focus"
+      >
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        <%= render KbdComponent.new(key: "F", size: :sm) %>
+      </div>
+    </div>
+  </div>
+
+  <%# Retros List Grid %>
+  <div id="retros" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+    <% if @retros.any? %>
+      <% @retros.each do |retro| %>
+        <div data-filter-target="item">
+          <%= render Retros::RetroCardComponent.new(retro: retro) %>
+        </div>
+      <% end %>
+
+      <%# No Results State %>
+      <div data-filter-target="blankSlate" class="hidden col-span-full py-16 text-center border-2 border-dashed border-zinc-300">
+        <p class="font-mono text-zinc-400 uppercase">NO MATCHES FOUND</p>
+      </div>
+    <% else %>
+      <%# Empty State %>
+      <div class="col-span-full py-24 text-center border-2 border-dashed border-zinc-300 bg-zinc-50">
+        <div class="max-w-md mx-auto">
+          <p class="text-2xl font-black uppercase tracking-tight mb-4">NO RETROS YET</p>
+          <p class="font-mono text-sm text-zinc-500 mb-8">START YOUR FIRST RETROSPECTIVE.</p>
+          
+          <%= link_to new_retro_path, class: "inline-block bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-3 text-sm tracking-wider" do %>
+            CREATE FIRST RETRO
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

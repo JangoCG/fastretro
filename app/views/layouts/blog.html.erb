@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%# === PRIMARY META TAGS === %>
+    <meta charset="UTF-8">
+    <title><%= content_for(:title) || "Fast Retro Blog — Building in Public" %></title>
+    <meta name="title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro Blog — Building in Public" %>">
+    <meta name="description" content="<%= content_for(:meta_description) || "Follow along as we build Fast Retro in public. Tips on retrospectives, agile practices, and behind-the-scenes updates." %>">
+    <meta name="keywords" content="<%= content_for(:meta_keywords) || "retrospective, agile, scrum, sprint retrospective, team retrospective, fast retro blog, building in public" %>">
+    <meta name="author" content="<%= content_for(:meta_author) || "Fast Retro" %>">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%# === MOBILE & APP META === %>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fast Retro">
+    <meta name="application-name" content="Fast Retro">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#18181b">
+
+    <%# === CANONICAL URL === %>
+    <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
+
+    <%# === OPEN GRAPH / FACEBOOK === %>
+    <meta property="og:type" content="<%= content_for(:og_type) || "article" %>">
+    <meta property="og:url" content="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
+    <meta property="og:title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro Blog" %>">
+    <meta property="og:description" content="<%= content_for(:meta_description) || "Follow along as we build Fast Retro in public." %>">
+    <meta property="og:image" content="<%= content_for(:og_image) || image_url("retro-image-no-padding.png") %>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Fast Retro">
+    <meta property="og:locale" content="en_US">
+    <% if content_for?(:published_time) %>
+    <meta property="article:published_time" content="<%= content_for(:published_time) %>">
+    <% end %>
+    <% if content_for?(:meta_author) %>
+    <meta property="article:author" content="<%= content_for(:meta_author) %>">
+    <% end %>
+
+    <%# === TWITTER CARD === %>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
+    <meta name="twitter:title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro Blog" %>">
+    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Follow along as we build Fast Retro in public." %>">
+    <meta name="twitter:image" content="<%= content_for(:og_image) || image_url("retro-image-no-padding.png") %>">
+
+    <%# === STRUCTURED DATA (JSON-LD) === %>
+    <%= content_for(:structured_data) %>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+
+    <%# === ICONS === %>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon.png">
+
+    <%# === STYLESHEETS & SCRIPTS === %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "blog", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="<%= content_for(:body_class) || "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden" %> flex flex-col min-h-screen">
+    <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
+    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+         style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+    </div>
+
+    <%= render LandingPageHeaderComponent.new %>
+
+    <main class="flex-1 pt-24 pb-20 overflow-x-hidden">
+      <%= yield %>
+    </main>
+
+    <%= render SiteFooterComponent.new %>
+  </body>
+</html>

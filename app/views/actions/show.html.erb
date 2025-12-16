@@ -1,0 +1,86 @@
+<% content_for :title, "View action" %>
+<div class="px-4 py-4">
+  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro)) %>
+</div>
+
+<div class="max-w-3xl mx-auto px-4 py-8 font-sans">
+  <%# Industrial Container: Clean, heavy border, no rounded corners %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+       <%# Background Grid %>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10 flex items-center justify-between">
+        <%# Action Badge (Purple) %>
+        <span class="inline-flex items-center px-3 py-1 border-[2px] border-zinc-900 text-xs font-bold uppercase tracking-widest bg-violet-100 text-violet-800">
+          <span class="mr-2 w-2 h-2 rounded-full border border-black bg-violet-500"></span>
+          ACTION
+        </span>
+
+        <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest">ID: <%= @action.id %></span>
+      </div>
+    </div>
+
+    <%# Content Area - Read Only %>
+    <div class="p-6 min-h-[200px] relative bg-[#F8F5EC]">
+      <%# Background Grid %>
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+      <div class="relative z-10 rich-text-content prose prose-zinc max-w-none">
+        <%= @action.content %>
+      </div>
+    </div>
+
+    <%# Footer Metadata %>
+    <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-zinc-900">AUTHOR:</span>
+        <span><%= @action.user&.name || "UNKNOWN" %></span>
+      </div>
+      <div class="flex items-center gap-1">
+         <span>CREATED:</span>
+         <span class="text-zinc-900 font-bold"><%= time_ago_in_words(@action.created_at) %> ago</span>
+      </div>
+    </div>
+  </div>
+
+  <%# Action Buttons - Only show for author %>
+  <% if @action.user == Current.user %>
+    <div class="flex justify-center gap-4 mt-8">
+      <%= link_to edit_retro_action_path(@retro, @action),
+          class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all",
+          data: { controller: "hotkey", action: "keydown.e@document->hotkey#click" } do %>
+        <%= icon_tag "pencil", class: "text-sm" %>
+        Edit
+      <% end %>
+
+      <%= button_to retro_action_path(@retro, @action),
+          method: :delete,
+          class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-red-600 border-[2px] border-red-600 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(220,38,38,0.5)] active:translate-y-0 active:shadow-none transition-all hover:bg-red-50",
+          data: {
+            controller: "hotkey",
+            action: "keydown.d@document->hotkey#click",
+            turbo_confirm: "Are you sure you want to delete this action?"
+          } do %>
+        <%= icon_tag "delete", class: "text-sm" %>
+        Delete
+      <% end %>
+    </div>
+
+    <%# Keyboard hints %>
+    <p class="mt-6 text-sm text-zinc-500 text-center">
+      <%= render KbdComponent.new(key: "E", size: :sm) %> to edit
+      <span class="mx-2">•</span>
+      <%= render KbdComponent.new(key: "D", size: :sm) %> to delete
+      <span class="mx-2">•</span>
+      <%= render KbdComponent.new(key: "Esc", size: :sm) %> to go back
+    </p>
+  <% else %>
+    <%# Keyboard hints for non-authors %>
+    <p class="mt-6 text-sm text-zinc-500 text-center">
+      <%= render KbdComponent.new(key: "Esc", size: :sm) %> to go back
+    </p>
+  <% end %>
+</div>

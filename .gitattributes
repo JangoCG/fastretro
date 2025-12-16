@@ -1,10 +1,9 @@
-* text=auto eol=lf
+# See https://git-scm.com/docs/gitattributes for more about git attribute files.
 
-*.blade.php diff=html
-*.css diff=css
-*.html diff=html
-*.md diff=markdown
-*.php diff=php
+# Mark the database schema as having been generated.
+db/schema.rb linguist-generated
 
-CHANGELOG.md export-ignore
-README.md export-ignore
+# Mark any vendored files as having been vendored.
+vendor/* linguist-vendored
+config/credentials/*.yml.enc diff=rails_credentials
+config/credentials.yml.enc diff=rails_credentials

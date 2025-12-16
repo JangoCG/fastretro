@@ -1,0 +1,179 @@
+<% @page_title = "#{@retro.name} - #{@retro.phase.titleize}" %>
+
+<!DOCTYPE html>
+<html class="h-full">
+<head>
+  <%= page_title_tag %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Fast Retro">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <%# Turbo 8: Enable morph refreshes with scroll preservation %>
+  <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<%#
+    BODY STYLING:
+    - bg-zinc-100: A cool grey base that contrasts with the warm #F8F5EC cards.
+    - selection:bg-[#ffe600]: Highlights text in "Highlighter Yellow".
+    - overflow-x-hidden: Prevents horizontal scroll from the hanging tag animations.
+  %>
+<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
+
+<%# Turbo 8: Subscribe to retro stream for real-time updates %>
+<%= turbo_stream_from @retro %>
+
+<%# === BACKGROUND TEXTURE (The Dot Grid) === %>
+<%# This creates a technical 'cutting mat' feel behind your content %>
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+
+<%# === HEADER === %>
+<%# Kept transparent so your new "Floating System Menu" sits on top of the grid %>
+<% if authenticated? %>
+  <header class="z-40 relative flex justify-start sm:justify-center px-4 sm:px-6 md:px-8 xl:px-16">
+    <%= render "my/menu" %>
+    <%= link_to new_site_feedback_path(script_name: nil), class: "hidden sm:inline-flex absolute right-4 sm:right-6 md:right-8 xl:right-16 top-4 items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-violet-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-violet-700 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+      <%= icon_tag "chat", class: "w-3.5 h-3.5 sm:w-4 sm:h-4" %>
+      <span class="hidden sm:inline">Feedback</span>
+    <% end %>
+  </header>
+<% end %>
+
+<%# === MAIN CONTENT === %>
+<main id="main">
+  <div class="px-4 sm:px-6 md:px-8 xl:px-16 pt-2 sm:pt-0 pb-8 sm:pb-16">
+    <div class="pb-4 sm:pb-4">
+      <%= render BackButtonComponent.new(label: "Retros", href: retros_path) %>
+    </div>
+
+    <%= render "feedbacks/near_limit_notice" %>
+
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <% end %>
+
+    <%# Header - all screen sizes %>
+    <div id="header-container" class="mt-0 sm:mt-4 md:mt-0 mb-6 sm:mb-8 font-sans">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+        <div class="text-center sm:text-left">
+          <h1 class="font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-900 uppercase tracking-tighter leading-none">
+            "<%= @retro.name %>"
+          </h1>
+          <%
+            phase_colors = {
+              "brainstorming" => "bg-amber-200 text-amber-900",
+              "grouping" => "bg-sky-200 text-sky-900",
+              "voting" => "bg-violet-200 text-violet-900",
+              "discussion" => "bg-emerald-200 text-emerald-900",
+              "complete" => "bg-zinc-300 text-zinc-900",
+              "waiting_room" => "bg-zinc-200 text-zinc-700"
+            }
+            color_classes = phase_colors[@retro.phase] || "bg-zinc-200 text-zinc-700"
+          %>
+          <p class="hidden sm:inline-block font-bold text-xs sm:text-sm md:text-base uppercase tracking-widest mt-1.5 sm:mt-2 px-1.5 sm:px-2 py-0.5 -rotate-1 <%= color_classes %>">
+            "<%= @retro.phase.tr('_', ' ') %>"
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 justify-center sm:justify-end w-full sm:w-auto">
+          <%# Phase-specific actions (e.g., votes remaining) %>
+          <%= yield :header_actions %>
+
+          <%# I am finished button - available to all participants, hidden when retro is complete %>
+          <% if @current_participant.present? && !@retro.complete? %>
+            <%= button_to retro_finished_path(@retro),
+                  method: :patch,
+                  class: class_names(
+                    "h-10 sm:h-12 px-4 sm:px-8 font-bold uppercase tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0",
+                    @current_participant.finished? ? "bg-[#FFFF00] border-zinc-900 text-zinc-900 hover:bg-[#f4f1ea]" : "bg-[#f4f1ea] border-zinc-900 text-zinc-900 hover:bg-[#FFFF00]"
+                  ) do %>
+              <%= @current_participant.finished? ? "Finished!" : "I am finished" %>
+            <% end %>
+          <% end %>
+
+          <%# Complete Phase button with confirmation modal - admin only, not shown on last phase %>
+          <% if @retro.admin?(Current.user) && !@retro.last_phase? %>
+            <%= render ConfirmPhaseModalComponent.new(retro: @retro) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="h-[2px] sm:h-[3px] bg-zinc-900 mt-3 sm:mt-4"></div>
+    </div>
+
+    <%# CONTENT GRID %>
+    <div class="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-8 relative z-10"
+      <% if @retro.grouping? && @retro.admin?(Current.user) %>
+        data-controller="participant-highlight"
+        data-participant-highlight-url-value="<%= retro_highlight_path(@retro) %>"
+      <% end %>
+    >
+
+      <%# The Board %>
+      <div class="col-span-12 lg:col-span-9 order-2 lg:order-1">
+        <% if content_for?(:board_columns) %>
+          <%= yield :board_columns %>
+        <% else %>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <%= render Retros::ColumnComponent.new(retro: @retro, category: "went_well") %>
+            <%= render Retros::ColumnComponent.new(retro: @retro, category: "could_be_better") %>
+          </div>
+        <% end %>
+      </div>
+
+      <%# Participants - on mobile, show compact version at top %>
+      <div class="col-span-12 lg:col-span-3 order-1 lg:order-2">
+        <div class="lg:sticky lg:top-8 flex flex-col gap-4 sm:gap-6">
+          <%# Phase tag: Show simple text on mobile, fancy badge on desktop %>
+          <div class="flex justify-center lg:-translate-x-4 mb-1 sm:mb-3">
+            <%# Simple mobile phase indicator %>
+            <div class="lg:hidden">
+              <%
+                mobile_phase_colors = {
+                  "brainstorming" => "bg-amber-100 text-amber-800 border-amber-400",
+                  "grouping" => "bg-sky-100 text-sky-800 border-sky-400",
+                  "voting" => "bg-violet-100 text-violet-800 border-violet-400",
+                  "discussion" => "bg-emerald-100 text-emerald-800 border-emerald-400",
+                  "complete" => "bg-zinc-100 text-zinc-800 border-zinc-400"
+                }
+                mobile_colors = mobile_phase_colors[@retro.phase] || "bg-zinc-100 text-zinc-800 border-zinc-400"
+              %>
+              <div class="px-4 py-2 border-2 <%= mobile_colors %> font-black text-sm uppercase tracking-wider">
+                "<%= @retro.phase.tr('_', ' ') %>"
+              </div>
+            </div>
+            <%# Fancy badge on desktop %>
+            <div class="hidden lg:block">
+              <%= yield :phase_tag %>
+            </div>
+          </div>
+          <%# On mobile/tablet, show invite and participants side by side %>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
+            <%= render RetroInviteCardComponent.new(retro: @retro) %>
+            <%= yield :sidebar_tip %>
+            <%= render ParticipantListComponent.new(retro: @retro, highlight_enabled: @retro.grouping? && @retro.admin?(Current.user)) %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<%# === FOOTER === %>
+<%= render RetroFooterComponent.new %>
+</body>
+</html>

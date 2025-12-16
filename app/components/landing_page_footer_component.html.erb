@@ -1,0 +1,61 @@
+<footer class="w-full pb-12 border-t-4 border-black pt-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-start gap-8">
+    <div>
+      <h3 class="font-black text-xl italic tracking-tighter uppercase mb-4">FASTRETRO</h3>
+      <p class="font-mono text-xs text-zinc-500 max-w-xs uppercase">
+        MANUFACTURED IN THE DARK.
+      </p>
+    </div>
+
+    <div class="flex gap-12 font-mono text-xs uppercase">
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">INDEX</li>
+        <li><%= link_to "HOME", landing_page_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "FEATURES", landing_page_path(anchor: "features", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "PRICING", landing_page_path(anchor: "pricing", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+      </ul>
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">FOLLOW</li>
+        <li><%= link_to "BLOG", blog_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><a href="https://x.com/JangoCG" target="_blank" class="hover:bg-black hover:text-white px-1">X</a></li>
+      </ul>
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">LEGAL</li>
+        <li><%= link_to "IMPRINT", imprint_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "PRIVACY POLICY", privacy_policy_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+      </ul>
+      <ul class="space-y-2">
+        <li class="font-bold mb-2 text-black">CONTACT</li>
+        <li><a href="mailto:cengiz@cengizg.com" class="hover:bg-black hover:text-white px-1">EMAIL</a></li>
+      </ul>
+    </div>
+
+    <div class="text-right">
+    </div>
+  </div>
+
+  <%# Warning Stripe %>
+  <div class="w-full h-4 mt-8 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#ffe600_10px,#ffe600_20px)]"></div>
+
+<%# SEO Content %>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 mt-12 pb-8">
+    <div class="font-mono text-xs text-zinc-500 leading-relaxed space-y-4">
+      <p>
+        Fast Retro is a streamlined, <strong class="text-zinc-600">free online retrospective tool</strong> (for up to <%= number_with_delimiter(free_limit) %> feedbacks) designed to help agile teams improve continuously. We replace complex enterprise software with a straightforward interface, allowing you to run effective <strong class="text-zinc-600">Sprint Retrospectives</strong> in seconds. Whether you are a Scrum Master or a team lead, our tool facilitates the essential "Inspect and Adapt" cycle without the friction of enterprise apps or feature bloat.
+      </p>
+
+      <p>
+        Built specifically for <strong class="text-zinc-600">Scrum methodology</strong>, our platform guides your team through a structured 4-phase process: anonymous reflection, <strong class="text-zinc-600">grouping feedback</strong> by themes, dot-voting to prioritize issues, and assigning concrete action items. This ensures your <strong class="text-zinc-600">agile ceremonies</strong> move beyond complaining and result in actionable change, with data that persists across sessions for tracking velocity and health.
+      </p>
+
+      <p>
+        We are an <strong class="text-zinc-600">open source retrospective software</strong> (O'Saasy License) prioritizing data sovereignty. You can use our managed cloud version—hosted in Germany for full or self host the application on your own infrastructure. With a <strong class="text-zinc-600">flat-rate pricing</strong> model (after your free tier), Fast Retro is the budget-friendly alternative for privacy-conscious organizations.
+      </p>
+
+      <p>
+       Start with <%= number_with_delimiter(free_limit) %> feedback items for free and discover why more and more teams prefer our lightweight, keyboard-accessible approach to <strong class="text-zinc-600">team reflection</strong>.
+      </p>
+
+    </div>
+  </div>
+</footer>

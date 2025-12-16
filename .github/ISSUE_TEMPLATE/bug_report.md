@@ -26,10 +26,9 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
  - OS: [e.g. Ubuntu 22.04, macOS 14.0]
  - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
- - PHP Version: [e.g. 8.2]
- - Node Version: [e.g. 20.x]
- - Self-hosted or Demo: [please specify]
+ - Self-hosted or Cloud: [please specify]
+ - Ruby Version: [e.g. 3.2]
+ - Rails Version: [e.g. 7.1]
 
 **Additional context**
 Add any other context about the problem here.
@@ -37,5 +36,5 @@ Add any other context about the problem here.
 **Logs**
 If applicable, please include relevant error logs from:
 - Browser console
-- Laravel logs (`storage/logs/laravel.log`)
-- WebSocket/Reverb logs
+- Rails logs (`log/development.log` or `log/production.log`)
+- Action Cable logs

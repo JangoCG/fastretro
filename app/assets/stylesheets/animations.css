@@ -1,0 +1,63 @@
+/* Custom animations for Tailwind */
+
+@keyframes shake {
+  0% {
+    transform: translateX(-2rem);
+  }
+  25% {
+    transform: translateX(2rem);
+  }
+  50% {
+    transform: translateX(-1rem);
+  }
+  75% {
+    transform: translateX(1rem);
+  }
+}
+
+@keyframes slide-up-fade-in {
+  from {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Wiggle animation for attention-grabbing elements (Fizzy-inspired) */
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(3deg); }
+  40% { transform: rotate(-3deg); }
+  60% { transform: rotate(3deg); }
+  80% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+.animate-wiggle-hover:hover {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+/* Highlighter effect for emphasized text (Fizzy-inspired) */
+.fill-highlighter {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.fill-highlighter::before {
+  background-color: #ffe600;
+  border-radius: 0.2em;
+  content: "";
+  inset-block: 0;
+  inset-inline: -0.1em;
+  position: absolute;
+  transform: skewX(-10deg) rotate(1deg);
+  z-index: -1;
+}

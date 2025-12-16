@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="fastretro-g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="0.5" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="6" y="8" width="52" height="48" rx="14" fill="url(#fastretro-g)" opacity="0.14"/>
+  <rect x="12" y="12" width="40" height="40" rx="10" fill="white" opacity="0.9"/>
+
+  <rect x="18" y="18" width="8" height="28" rx="4" fill="#6366F1"/>
+  <rect x="28" y="18" width="8" height="28" rx="4" fill="#22C55E"/>
+  <rect x="38" y="18" width="8" height="28" rx="4" fill="#F59E0B"/>
+
+  <circle cx="22" cy="26" r="2.2" fill="white"/>
+  <circle cx="32" cy="32" r="2.2" fill="white"/>
+  <circle cx="42" cy="38" r="2.2" fill="white"/>
+
+  <path d="M50 22h6l-4.5 5.5h4.5l-8 9 2.5-7H46l4-7z" fill="#0F172A" opacity="0.9"/>
+</svg>

@@ -1,0 +1,7 @@
+one:
+  name: Test Account
+  external_account_id: 1000001
+
+two:
+  name: Another Account
+  external_account_id: 1000002

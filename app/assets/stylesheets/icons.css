@@ -1,0 +1,130 @@
+.icon {
+    -webkit-touch-callout: none;
+    background-color: currentColor;
+    block-size: var(--icon-size, 1em);
+    display: inline-block;
+    flex-shrink: 0;
+    inline-size: var(--icon-size, 1em);
+    mask-image: var(--svg);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: var(--icon-size, 1em);
+    pointer-events: none;
+    user-select: none;
+}
+
+img.icon {
+    background: none;
+}
+
+.icon--add {
+    --svg: url("add.svg");
+}
+
+.icon--arrow-left {
+    --svg: url("arrow-left.svg");
+}
+
+.icon--arrow-right {
+    --svg: url("arrow-right.svg");
+}
+
+.icon--caret-down {
+    --svg: url("caret-down.svg");
+}
+
+.icon--chat {
+    --svg: url("chat.svg");
+}
+
+.icon--check {
+    --svg: url("check.svg");
+}
+
+.icon--clipboard {
+    --svg: url("clipboard.svg");
+}
+
+.icon--close {
+    --svg: url("close.svg");
+}
+
+.icon--computer {
+    --svg: url("computer.svg");
+}
+
+.icon--copy {
+    --svg: url("copy.svg");
+}
+
+.icon--copy-paste {
+    --svg: url("copy-paste.svg");
+}
+
+.icon--crown {
+    --svg: url("crown.svg");
+}
+
+.icon--group {
+    --svg: url("group.svg");
+}
+
+.icon--history {
+    --svg: url("history.svg");
+}
+
+.icon--home {
+    --svg: url("home.svg");
+}
+
+.icon--leaderboard {
+    --svg: url("leaderboard.svg");
+}
+
+.icon--lightbulb {
+    --svg: url("lightbulb.svg");
+}
+
+.icon--logout {
+    --svg: url("logout.svg");
+}
+
+.icon--marker {
+    --svg: url("marker.svg");
+}
+
+.icon--minus {
+    --svg: url("minus.svg");
+}
+
+.icon--moon {
+    --svg: url("moon.svg");
+}
+
+.icon--pencil {
+    --svg: url("pencil.svg");
+}
+
+.icon--person {
+    --svg: url("person.svg");
+}
+
+.icon--person-add {
+    --svg: url("person-add.svg");
+}
+
+.icon--refresh {
+    --svg: url("refresh.svg");
+}
+
+.icon--schedule {
+    --svg: url("schedule.svg");
+}
+
+.icon--settings {
+    --svg: url("settings.svg");
+}
+
+.icon--sun {
+    --svg: url("sun.svg");
+}

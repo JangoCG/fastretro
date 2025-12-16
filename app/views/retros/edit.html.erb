@@ -1,0 +1,57 @@
+<% content_for :title, "Edit #{@retro.name}" %>
+<div class="px-4 py-4">
+  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro)) %>
+</div>
+
+<div class="max-w-2xl mx-auto px-4 py-8 font-sans">
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+    
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+       <%# Background Grid %>
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+      
+      <div class="relative z-10 flex items-center justify-between">
+        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+           EDIT RETRO
+        </h1>
+
+        <span class="inline-flex items-center px-2 py-1 border-[2px] border-zinc-900 bg-blue-100 text-blue-900 text-[0.6rem] font-bold uppercase tracking-widest">
+           NO. <%= @retro.id %>
+        </span>
+      </div>
+    </div>
+
+    <%# Content area %>
+    <div class="p-6 relative">
+       <%# Background Grid %>
+       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+       
+       <div class="relative z-10">
+        <%= render "form", retro: @retro %>
+       </div>
+    </div>
+
+    <%# Footer Metadata %>
+    <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-zinc-900">CREATED:</span>
+        <span><%= time_ago_in_words(@retro.created_at) %> AGO</span>
+      </div>
+      <div class="flex items-center gap-1">
+         <span class="text-zinc-900 font-bold"><%= @retro.feedbacks.published.count %></span>
+         <span>ITEMS</span>
+      </div>
+    </div>
+  </div>
+
+  <%# Action button (Heavy) %>
+  <div class="flex justify-center gap-3 mt-8">
+     <button type="submit" form="retro-form"
+        class="group relative inline-flex items-center justify-center gap-2 px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+        SAVE CHANGES
+        <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
+      </button>
+  </div>
+</div>

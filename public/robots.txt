@@ -1,19 +1,25 @@
+# https://www.robotstxt.org/robotstxt.html
+
 User-agent: *
 Allow: /
 
 # Sitemap
 Sitemap: https://fastretro.app/sitemap.xml
 
-# Block admin/private areas (if any)
+# Disallow admin and internal routes
 Disallow: /admin/
-Disallow: /api/
-Disallow: /_debugbar/
-Disallow: /telescope/
+Disallow: /account/
+Disallow: /my/
+Disallow: /stripe/
+Disallow: /checkout
+Disallow: /portal
+Disallow: /up
 
-# Allow important crawling paths
-Allow: /retro/create
-Allow: /privacy-policy
+# Allow public pages
+Allow: /landing_page
+Allow: /blog
+Allow: /blog/*
 Allow: /imprint
-
-# Crawl delay (optional - be nice to servers)
-Crawl-delay: 1
+Allow: /privacy_policy
+Allow: /signup
+Allow: /session
