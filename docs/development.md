@@ -57,6 +57,3 @@ bin/rails dev:email
 ```
 
 Under the hood, this will create or remove `tmp/email-dev.txt`.
-
-
-See [Multi-Tenant Architecture documentation](multi-tenant-magic-link-auth.md) for more details.

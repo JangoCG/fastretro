@@ -39,3 +39,5 @@
 
 .idea
 .DS_Store
+.kamal
+config/deploy.yml
