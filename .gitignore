@@ -41,5 +41,5 @@
 .DS_Store
 .kamal
 config/credentials.yml.enc
-# config/deploy.yml
-# config/deploy.dev.yml
+config/deploy.yml
+config/deploy.dev.yml
