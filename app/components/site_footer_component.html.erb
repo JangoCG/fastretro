@@ -10,9 +10,9 @@
     <div class="flex gap-12 font-mono text-xs uppercase">
       <ul class="space-y-2">
         <li class="font-bold mb-2 text-black">INDEX</li>
-        <li><%= link_to "HOME", landing_page_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><%= link_to "FEATURES", landing_page_path(anchor: "features", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><%= link_to "PRICING", landing_page_path(anchor: "pricing", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "HOME", root_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "FEATURES", root_path(anchor: "features", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li><%= link_to "PRICING", root_path(anchor: "pricing", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
       </ul>
       <ul class="space-y-2">
         <li class="font-bold mb-2 text-black">FOLLOW</li>

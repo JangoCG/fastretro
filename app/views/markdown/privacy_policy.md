@@ -39,6 +39,8 @@ Data is primarily stored in the EU. I have concluded Data Processing Agreements 
 
 **Analytics with Simple Analytics.** Privacy-friendly analytics from the Netherlands. No personal data collected, no IP addresses stored, no tracking cookies used.
 
+**Payment Processing with Stripe.** For payment processing, I use Stripe (Stripe Payments Europe, Ltd., Ireland). Stripe processes your payment data (e.g., credit card information, billing address) to handle subscriptions. Stripe is certified under the EU-US Data Privacy Framework. [Stripe Privacy Policy](https://stripe.com/privacy).
+
 ## 3. How long do I keep your data?
 
 * **Account Data:** As long as the account exists.
@@ -53,7 +55,7 @@ Under GDPR, you have the right to access, rectification, erasure, restriction of
 
 ## 5. Updates
 
-Last updated: December 16, 2025.
+Last updated: December 17, 2025.
 
 ---
 
@@ -98,6 +100,8 @@ Deine Daten werden primär in der EU gespeichert. Ich habe mit allen Dienstleist
 
 **Analyse durch Simple Analytics.** Um die Nutzung der Website zu verstehen, verwende ich Simple Analytics (Niederlande). Es werden keine persönlichen Daten gesammelt, keine IP-Adressen gespeichert und keine Tracking-Cookies gesetzt.
 
+**Zahlungsabwicklung durch Stripe.** Für die Zahlungsabwicklung nutze ich Stripe (Stripe Payments Europe, Ltd., Irland). Stripe verarbeitet deine Zahlungsdaten (z.B. Kreditkarteninformationen, Rechnungsadresse) zur Abwicklung von Abonnements. Stripe ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von Stripe](https://stripe.com/de/privacy).
+
 ## 3. Wie lange speichere ich deine Daten?
 
 * **Kontodaten & Inhalte:** Solange dein Konto oder das Team existiert.
@@ -115,4 +119,4 @@ Der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Postfach 31
 
 ## 5. Aktualität
 
-Diese Datenschutzerklärung wurde zuletzt am 16. Dezember 2025 aktualisiert.
+Diese Datenschutzerklärung wurde zuletzt am 17. Dezember 2025 aktualisiert.

@@ -29,7 +29,7 @@ class Stripe::CheckoutControllerTest < ActionDispatch::IntegrationTest
     end
 
     # Redirects to landing page for unauthenticated users
-    assert_redirected_to landing_page_url(script_name: nil)
+    assert_redirected_to root_url(script_name: nil)
   end
 
   test "create redirects to Stripe checkout session" do

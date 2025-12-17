@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     <%# Branding %>
     <div class="flex items-center gap-2">
-      <%= link_to landing_page_path(script_name: nil), class: "group flex items-center gap-2" do %>
+      <%= link_to root_path(script_name: nil), class: "group flex items-center gap-2" do %>
         <div class="w-8 h-8 bg-black text-white flex items-center justify-center font-black text-xs tracking-tighter group-hover:rotate-180 transition-transform duration-500">
           FR
         </div>
@@ -13,10 +13,10 @@
     <%# Nav %>
     <nav class="hidden md:flex items-center gap-8">
       <% [
-        ["HOW IT WORKS", landing_page_path(anchor: "features", script_name: nil)],
-        ["OPEN SOURCE", landing_page_path(anchor: "opensource", script_name: nil)],
-        ["FAQ", landing_page_path(anchor: "faq", script_name: nil)],
-        ["PRICING", landing_page_path(anchor: "pricing", script_name: nil)]
+        ["HOW IT WORKS", root_path(anchor: "features", script_name: nil)],
+        ["OPEN SOURCE", root_path(anchor: "opensource", script_name: nil)],
+        ["FAQ", root_path(anchor: "faq", script_name: nil)],
+        ["PRICING", root_path(anchor: "pricing", script_name: nil)]
       ].each_with_index do |(label, href), i| %>
         <a href="<%= href %>" class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-black transition-colors">
           [<%= sprintf('%02d', i + 1) %>] <%= label %>
