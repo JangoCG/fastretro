@@ -1,4 +1,5 @@
 <% content_for :full_width, true %>
+<% content_for :skip_javascript, true %>
 <% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
 <% content_for :title, "Fast Retro — Run Better Retrospectives" %>
 <% content_for :meta_title, "Fast Retro — Open Source Retrospective Tool for Agile Teams" %>
@@ -66,7 +67,7 @@
             <p class="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-400">
               TRUSTED BY ENGINEERS AT
             </p>
-            <%= image_tag "aws.svg", class: "h-6 sm:h-8 w-auto", alt: "AWS" %>
+            <%= image_tag "aws.svg", class: "h-6 sm:h-8 w-auto", alt: "AWS logo", width: "50", height: "30" %>
           </div>
         </div>
 
@@ -79,9 +80,9 @@
              <div class="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-black z-10 hidden sm:block"></div>
              <div class="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-black z-10 hidden sm:block"></div>
              <%# Mobile image %>
-             <%= image_tag "retro-mobile.png", class: "w-full h-auto shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 sm:hidden" %>
+             <%= image_tag "retro-mobile.webp", class: "w-full h-auto shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 sm:hidden", alt: "Fast Retro retrospective interface on mobile", width: "752", height: "1626", loading: "eager", fetchpriority: "high" %>
              <%# Desktop image %>
-             <%= image_tag "retro-image-no-padding.png", class: "w-full h-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 hidden sm:block" %>
+             <%= image_tag "retro-image-no-padding.webp", class: "w-full h-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 hidden sm:block", alt: "Fast Retro retrospective interface showing brainstorming phase", width: "3452", height: "2248", loading: "eager", fetchpriority: "high" %>
          </div>
       </div>
     </div>

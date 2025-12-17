@@ -1,10 +1,10 @@
 module LoginHelper
   def login_url
-    main_app.landing_page_path(script_name: nil)
+    main_app.root_path(script_name: nil)
   end
 
   def logout_url
-    main_app.landing_page_path(script_name: nil)
+    main_app.root_path(script_name: nil)
   end
 
   def redirect_to_login_url

@@ -88,7 +88,9 @@
 
     <%# === STYLESHEETS & SCRIPTS === %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <% unless content_for?(:skip_javascript) %>
+      <%= javascript_importmap_tags %>
+    <% end %>
   </head>
   <body class="<%= content_for(:body_class) || "bg-gray-50 min-h-screen" %>">
     <%= yield :header %>

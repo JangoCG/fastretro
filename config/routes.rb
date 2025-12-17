@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "retros#index"
+  root "landing_page#show"
 
   resources :users, only: %i[ show edit update destroy ] do
     scope module: :users do
@@ -76,9 +76,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  # Public landing page (marketing)
-  get "landing_page", to: "landing_page#show", as: :landing_page
 
   # Tenanted entry point (after account switch)
   resource :landing, only: :show
