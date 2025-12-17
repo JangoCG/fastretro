@@ -1,7 +1,7 @@
 NOTICES AND INFORMATION
 
 This software incorporates material from third parties.
-The following components are used within fastretro are presented along their license.
+The following components are used within Fast Retro and are presented along their license.
 
 **component**: https://github.com/basecamp/fizzy
 
