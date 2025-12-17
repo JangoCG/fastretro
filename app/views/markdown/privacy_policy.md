@@ -55,7 +55,7 @@ Under GDPR, you have the right to access, rectification, erasure, restriction of
 
 ## 5. Updates
 
-Last updated: December 16, 2025.
+Last updated: December 17, 2025.
 
 ---
 
@@ -119,4 +119,4 @@ Der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Postfach 31
 
 ## 5. Aktualität
 
-Diese Datenschutzerklärung wurde zuletzt am 16. Dezember 2025 aktualisiert.
+Diese Datenschutzerklärung wurde zuletzt am 17. Dezember 2025 aktualisiert.
