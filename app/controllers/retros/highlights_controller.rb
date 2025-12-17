@@ -8,14 +8,14 @@ class Retros::HighlightsController < ApplicationController
     new_value = @retro.highlighted_user_id == user_id ? nil : user_id
 
     @retro.update!(highlighted_user_id: new_value)
-    broadcast_refresh
+    broadcast_highlight(new_value)
 
     head :ok
   end
 
   def destroy
     @retro.update!(highlighted_user_id: nil)
-    broadcast_refresh
+    broadcast_highlight(nil)
 
     head :ok
   end
@@ -34,7 +34,11 @@ class Retros::HighlightsController < ApplicationController
     head :forbidden unless @retro.admin?(Current.user)
   end
 
-  def broadcast_refresh
-    Turbo::StreamsChannel.broadcast_refresh_to(@retro)
+  def broadcast_highlight(user_id)
+    Turbo::StreamsChannel.broadcast_action_to(
+      @retro,
+      action: :highlight,
+      attributes: { "user-id": user_id.to_s }
+    )
   end
 end

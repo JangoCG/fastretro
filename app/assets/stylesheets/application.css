@@ -21,3 +21,24 @@
 .feedback-chosen {
   /* Chosen state - handled by JS for multi-class support */
 }
+
+/* Participant highlighting - uses CSS attribute selectors to avoid full page refresh */
+[data-highlighted-user-id] [data-user-id] {
+  opacity: 0.3;
+  transition: opacity 200ms ease;
+}
+
+[data-highlighted-user-id] [data-user-id][data-highlighted="true"] {
+  opacity: 1;
+  outline: 2px solid #38bdf8; /* sky-400 */
+  outline-offset: 0;
+}
+
+/* Highlighted feedbacks within groups get inset ring */
+[data-highlighted-user-id] .space-y-3 > [data-user-id][data-highlighted="true"] {
+  outline: 2px solid #38bdf8;
+  outline-offset: -2px;
+  border-radius: 2px;
+  padding: 4px;
+  margin: -4px;
+}

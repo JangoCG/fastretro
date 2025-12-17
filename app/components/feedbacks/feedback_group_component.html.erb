@@ -41,7 +41,9 @@
         <%# Show preview of all feedbacks in group %>
         <div class="space-y-3">
           <% @feedbacks.each_with_index do |feedback, index| %>
-            <div class="<%= index > 0 ? 'border-t border-zinc-200 pt-3' : '' %> <%= 'ring-2 ring-sky-400 ring-inset rounded-sm p-1 -m-1' if feedback_highlighted?(feedback) %> <%= 'opacity-30' if feedback_dimmed?(feedback) %> transition-all duration-200">
+            <div class="<%= index > 0 ? 'border-t border-zinc-200 pt-3' : '' %>"
+                 data-user-id="<%= feedback.user_id %>"
+                 <% if feedback_highlighted?(feedback) %>data-highlighted="true"<% end %>>
               <div class="flex justify-between items-start gap-2">
                 <div class="flex-1 min-w-0 text-zinc-900 font-bold text-sm leading-snug break-words">
                   <div class="rich-text-content">

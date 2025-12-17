@@ -32,9 +32,9 @@
       <ul class="divide-y divide-zinc-300 border-t border-zinc-300 relative z-10">
         <% participants.each_with_index do |participant, index| %>
           <li class="group flex items-center gap-3 px-4 py-3 hover:bg-zinc-200/50 transition-all relative aria-selected:bg-yellow-100 <%= highlight_enabled? ? 'cursor-pointer' : 'cursor-default' %>"
+              data-user-id="<%= participant.user_id %>"
               <% if highlighted?(participant) %>aria-selected="true"<% end %>
               <% if highlight_enabled? %>
-                data-user-id="<%= participant.user_id %>"
                 data-action="click->participant-highlight#toggle"
               <% end %>
           >

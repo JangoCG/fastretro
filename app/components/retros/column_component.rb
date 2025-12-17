@@ -22,7 +22,14 @@ class Retros::ColumnComponent < ApplicationComponent
   private
 
   def feedbacks
-    @feedbacks ||= @retro.feedbacks.published.in_category(@category)
+    @feedbacks ||= begin
+      base = @retro.feedbacks.published.in_category(@category)
+      if @retro.brainstorming?
+        base.where(user: Current.user)
+      else
+        base
+      end
+    end
   end
 
   def ungrouped_feedbacks

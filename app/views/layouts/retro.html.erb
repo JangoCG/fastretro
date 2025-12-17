@@ -115,11 +115,13 @@
     </div>
 
     <%# CONTENT GRID %>
-    <div class="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-8 relative z-10"
-      <% if @retro.grouping? && @retro.admin?(Current.user) %>
-        data-controller="participant-highlight"
-        data-participant-highlight-url-value="<%= retro_highlight_path(@retro) %>"
-      <% end %>
+    <div id="retro-content-grid"
+         class="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-8 relative z-10"
+         <% if @retro.highlighted_user_id.present? %>data-highlighted-user-id="<%= @retro.highlighted_user_id %>"<% end %>
+         <% if @retro.grouping? && @retro.admin?(Current.user) %>
+           data-controller="participant-highlight"
+           data-participant-highlight-url-value="<%= retro_highlight_path(@retro) %>"
+         <% end %>
     >
 
       <%# The Board %>

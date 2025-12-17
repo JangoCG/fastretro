@@ -1,7 +1,8 @@
 <div
   id="<%= dom_id(@feedback) %>"
-  class="block relative group mt-3 select-none transition-all duration-200 hover:-translate-y-1 no-underline <%= @draggable ? 'cursor-grab active:cursor-grabbing' : '' %> <%= 'ring-2 ring-sky-400' if highlighted? %> <%= 'opacity-30' if dimmed? %>"
+  class="block relative group mt-3 select-none hover:-translate-y-1 no-underline <%= @draggable ? 'cursor-grab active:cursor-grabbing' : '' %>"
   data-user-id="<%= @feedback.user_id %>"
+  <% if highlighted? %>data-highlighted="true"<% end %>
   <% if @draggable %>
     data-feedback-id="<%= @feedback.id %>"
     data-feedback-grouping-target="feedback"
