@@ -69,11 +69,13 @@ module Authentication
     end
 
     def redirect_authenticated_user
-      redirect_to main_app.root_url if authenticated?
+      if authenticated?
+        redirect_to Current.account.present? ? main_app.root_url : main_app.session_menu_url(script_name: nil)
+      end
     end
 
     def redirect_tenanted_request
-      redirect_to main_app.root_url if Current.account.present?
+      redirect_to main_app.retros_url if Current.account.present?
     end
 
     def start_new_session_for(identity)

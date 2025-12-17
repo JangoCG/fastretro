@@ -14,7 +14,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     untenanted do
       get new_session_path
-      assert_redirected_to root_url
+      assert_redirected_to session_menu_url(script_name: nil)
     end
   end
 
@@ -63,7 +63,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     untenanted do
       delete session_path
 
-      assert_redirected_to landing_page_path
+      assert_redirected_to root_path
       assert_not cookies[:session_token].present?
     end
   end
