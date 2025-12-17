@@ -48,8 +48,8 @@
         </div>
 
       <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-          <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-6 py-3 border-2 border-transparent" do %>
-            <span>START FOR FREE</span>
+          <%= link_to new_signup_path(script_name: nil), aria: { label: "Create your free Fast Retro account - no credit card required" }, class: "inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-6 py-3 border-2 border-transparent" do %>
+            <span>CREATE FREE ACCOUNT</span>
             <span class="font-mono">-></span>
           <% end %>
         </div>
@@ -360,8 +360,8 @@
       Ready to run<br>
       <span class="text-zinc-400">better retros?</span>
     </h2>
-    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
-      <span>GET STARTED FREE</span>
+    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Fast Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+      <span>SIGN UP FREE</span>
       <span class="font-mono">-></span>
     <% end %>
   </section>
