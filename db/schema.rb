@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_16_204824) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_18_143434) do
+  create_table "account_billing_waivers", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_billing_waivers_on_account_id", unique: true
+  end
+
   create_table "account_external_id_sequences", force: :cascade do |t|
     t.bigint "value", default: 0, null: false
     t.index ["value"], name: "index_account_external_id_sequences_on_value", unique: true
@@ -25,6 +32,22 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_16_204824) do
     t.integer "usage_limit", default: 10, null: false
     t.index ["account_id"], name: "index_account_join_codes_on_account_id"
     t.index ["code"], name: "index_account_join_codes_on_code", unique: true
+  end
+
+  create_table "account_subscriptions", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.datetime "cancel_at"
+    t.datetime "created_at", null: false
+    t.datetime "current_period_end"
+    t.integer "next_amount_due_in_cents"
+    t.string "plan_key"
+    t.string "status"
+    t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_subscriptions_on_account_id"
+    t.index ["stripe_customer_id"], name: "index_account_subscriptions_on_stripe_customer_id", unique: true
+    t.index ["stripe_subscription_id"], name: "index_account_subscriptions_on_stripe_subscription_id", unique: true
   end
 
   create_table "accounts", force: :cascade do |t|
@@ -109,14 +132,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_16_204824) do
     t.datetime "created_at", null: false
     t.string "email_address", null: false
     t.integer "lifetime_feedbacks_count", default: 0, null: false
-    t.string "plan"
     t.boolean "staff", default: false, null: false
-    t.string "stripe_customer_id"
-    t.datetime "subscription_ends_at"
-    t.string "subscription_status"
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_identities_on_email_address", unique: true
-    t.index ["stripe_customer_id"], name: "index_identities_on_stripe_customer_id", unique: true
   end
 
   create_table "magic_links", force: :cascade do |t|
@@ -188,7 +206,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_16_204824) do
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
   end
 
+  add_foreign_key "account_billing_waivers", "accounts"
   add_foreign_key "account_join_codes", "accounts"
+  add_foreign_key "account_subscriptions", "accounts"
   add_foreign_key "actions", "retros"
   add_foreign_key "actions", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

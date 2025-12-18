@@ -44,10 +44,9 @@ class FeedbackTest < ActiveSupport::TestCase
     end
   end
 
-  test "publish raises LimitReached when owner has reached limit in saas mode" do
+  test "publish raises LimitReached when account has reached limit in saas mode" do
     enable_saas_mode
-    @retro.account.update!(feedbacks_count: Identity::FREE_FEEDBACK_LIMIT)
-    @owner_identity.update!(subscription_ends_at: nil)
+    @retro.account.update!(feedbacks_count: Plan.free.feedback_limit)
 
     feedback = Feedback.create!(retro: @retro, user: @user, category: :went_well, status: :drafted)
 
@@ -56,10 +55,15 @@ class FeedbackTest < ActiveSupport::TestCase
     end
   end
 
-  test "publish allows publishing when owner has active subscription even over limit" do
+  test "publish allows publishing when account has active subscription even over limit" do
     enable_saas_mode
-    @retro.account.update!(feedbacks_count: Identity::FREE_FEEDBACK_LIMIT + 100)
-    @owner_identity.update!(subscription_ends_at: 1.month.from_now)
+    @retro.account.update!(feedbacks_count: Plan.free.feedback_limit + 100)
+    # Create active subscription for account
+    @retro.account.create_subscription!(
+      plan_key: :monthly_v1,
+      stripe_customer_id: "cus_test",
+      status: "active"
+    )
 
     feedback = Feedback.create!(retro: @retro, user: @user, category: :went_well, status: :drafted)
 
@@ -72,8 +76,7 @@ class FeedbackTest < ActiveSupport::TestCase
 
   test "publish does not check limit when not in saas mode" do
     disable_saas_mode
-    @retro.account.update!(feedbacks_count: Identity::FREE_FEEDBACK_LIMIT + 100)
-    @owner_identity.update!(subscription_ends_at: nil)
+    @retro.account.update!(feedbacks_count: Plan.free.feedback_limit + 100)
 
     feedback = Feedback.create!(retro: @retro, user: @user, category: :went_well, status: :drafted)
 

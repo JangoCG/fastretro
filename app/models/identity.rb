@@ -1,8 +1,6 @@
 class Identity < ApplicationRecord
   include Joinable, Transferable
 
-  FREE_FEEDBACK_LIMIT = ENV.fetch("FREE_FEEDBACK_LIMIT", 3).to_i
-
   has_many :magic_links, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :users, dependent: :nullify
@@ -12,7 +10,6 @@ class Identity < ApplicationRecord
 
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }
   normalizes :email_address, with: ->(value) { value.strip.downcase.presence }
-  after_create_commit :create_stripe_customer, if: -> { FastRetro.saas? }
 
   def send_magic_link(**attributes)
     attributes[:purpose] = attributes.delete(:for) if attributes.key?(:for)
@@ -22,35 +19,8 @@ class Identity < ApplicationRecord
     end
   end
 
-  def active?
-    return false unless subscription_ends_at.present?
-
-    subscription_ends_at > Time.zone.now
-  end
-
-  def feedback_limit_reached?
-    !active? && total_feedbacks_count >= FREE_FEEDBACK_LIMIT
-  end
-
-  def near_feedback_limit?
-    !active? && total_feedbacks_count >= (FREE_FEEDBACK_LIMIT * 0.8)
-  end
-
-  def feedbacks_remaining
-    return Float::INFINITY if active?
-    [ FREE_FEEDBACK_LIMIT - total_feedbacks_count, 0 ].max
-  end
-
-  def total_feedbacks_count
-    Account.where(id: users.owner.select(:account_id)).sum(:feedbacks_count)
-  end
-
   private
     def deactivate_users
       users.find_each(&:deactivate)
-    end
-
-    def create_stripe_customer
-      CreateStripeCustomerJob.perform_later(self)
     end
 end

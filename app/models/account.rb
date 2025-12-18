@@ -1,5 +1,7 @@
 class Account < ApplicationRecord
   include Account::MultiTenantable
+  include Account::Billing
+  include Account::Limited
 
   has_one :join_code, class_name: "Account::JoinCode", dependent: :destroy
   has_many :users, dependent: :destroy

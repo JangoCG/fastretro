@@ -486,7 +486,7 @@ DEPENDENCIES
   solid_queue
   sqlite3 (>= 2.1)
   stimulus-rails
-  stripe
+  stripe (~> 18.0)
   tailwindcss-rails
   thruster
   turbo-rails

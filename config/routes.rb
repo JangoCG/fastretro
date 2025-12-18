@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   namespace :account do
     resource :join_code, only: %i[ show edit update destroy ]
     resource :settings, only: %i[ show update ]
+    resources :subscriptions, only: :create
+    resource :billing_portal, only: :show
   end
 
   # Join codes for multi-account
@@ -83,7 +85,6 @@ Rails.application.routes.draw do
   # My namespace for nav menu and user-specific resources
   namespace :my do
     resource :menu
-    resource :subscription, only: :show
   end
 
   # Site feedback (app feedback from users)
@@ -108,12 +109,6 @@ Rails.application.routes.draw do
     resource :stats, only: :show
   end
 
-  # Stripe
-  # stripe listen --forward-to localhost:3000/stripe/webhooks
+  # Stripe webhooks
   post "stripe/webhooks", to: "stripe/webhooks#create"
-  get "checkout", to: "stripe/checkout#new", as: :stripe_checkout
-  post "checkout", to: "stripe/checkout#create"
-  get "checkout/success", to: "stripe/checkout#success", as: :stripe_checkout_success
-  get "checkout/cancel", to: "stripe/checkout#cancel", as: :stripe_checkout_cancel
-  post "portal", to: "stripe/portal#create", as: :stripe_portal
 end

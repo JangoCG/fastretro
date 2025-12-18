@@ -25,12 +25,12 @@ class Feedbacks::PublishesController < ApplicationController
     end
 
     def handle_limit_reached
-      if Current.user&.owner?
-        redirect_to stripe_checkout_path(script_name: nil),
-          alert: "You've used all #{Identity::FREE_FEEDBACK_LIMIT} free feedbacks. Please upgrade to continue."
+      if Current.user&.owner? || Current.user&.admin?
+        redirect_to account_settings_path(anchor: "subscription"),
+          alert: "You've used all #{Plan.free.feedback_limit} free feedbacks. Please upgrade to continue."
       else
         redirect_to @retro,
-          alert: "The account owner has reached their feedback limit."
+          alert: "The account has reached its feedback limit. Please contact an account admin."
       end
     end
 end
