@@ -1,0 +1,19 @@
+<% if FastRetro.saas? && Current.user.owner? %>
+  <div class="subscription-section" id="subscription">
+    <h2 class="text-lg font-black text-zinc-900 uppercase tracking-tight mb-4">Subscription</h2>
+
+    <% if Current.account.plan.free? %>
+      <p class="text-zinc-700 mb-2">You're on the <span class="font-bold"><%= Current.account.plan.name %></span> plan.</p>
+      <p class="text-zinc-600 text-sm mb-4">
+        Used <%= Current.account.feedbacks_count %> of <%= Current.account.plan.feedback_limit %> feedbacks.
+      </p>
+      <%= button_to "Upgrade to Paid", account_subscriptions_path,
+          class: "inline-flex items-center gap-2 bg-[#ffe600] text-black hover:bg-[#ffd700] px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+          form: { data: { turbo: false } } %>
+    <% else %>
+      <p class="text-zinc-700 mb-4">Thank you for upgrading to <%= Current.account.plan.name %>!</p>
+      <%= link_to "Manage Billing", account_billing_portal_path,
+          class: "inline-flex items-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]" %>
+    <% end %>
+  </div>
+<% end %>

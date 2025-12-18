@@ -1,5 +1,5 @@
 class LandingPageFooterComponent < ApplicationComponent
   def free_limit
-    Identity::FREE_FEEDBACK_LIMIT
+    Plan.free.feedback_limit
   end
 end

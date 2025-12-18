@@ -58,7 +58,7 @@ gem "rouge"
 gem "aws-sdk-rails", "~> 5"
 gem "aws-actionmailer-ses", "~> 1"
 
-gem "stripe"
+gem "stripe", "~> 18.0"
 gem "simple_analytics_rails"
 
 # CSV export (required explicitly since Ruby 3.4)

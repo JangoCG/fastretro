@@ -11,8 +11,7 @@ module Feedback::Statuses
     return update!(status: :published) unless FastRetro.saas?
 
     transaction do
-      owner = retro.account.owner_identity
-      raise LimitReached if owner&.feedback_limit_reached?
+      raise LimitReached if retro.account.exceeding_feedback_limit?
 
       update!(status: :published)
       retro.account.increment!(:feedbacks_count)

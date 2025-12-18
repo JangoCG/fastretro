@@ -9,7 +9,7 @@ class LandingPageController < ApplicationController
   LEGACY_RETRO_COUNT = 1124
 
   def show
-    @free_limit = Identity::FREE_FEEDBACK_LIMIT
+    @free_limit = Plan.free.feedback_limit
     @retro_count = Rails.cache.fetch("retro_count", expires_in: 4.hours) do
       Retro.count + LEGACY_RETRO_COUNT
     end

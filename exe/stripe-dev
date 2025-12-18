@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# Starts the Stripe CLI webhook listener for local development.
+# Simply run: ./exe/stripe-dev
+#
+# Prerequisites:
+# - Stripe CLI installed (brew install stripe/stripe-cli/stripe)
+# - STRIPE_SECRET_KEY and STRIPE_MONTHLY_V1_PRICE_ID set in .env file
+
+set -e
+
+# Check if Stripe CLI is installed
+if ! command -v stripe &> /dev/null; then
+  echo "❌ Error: Stripe CLI not found. Install it with:"
+  echo "   brew install stripe/stripe-cli/stripe"
+  exit 1
+fi
+
+# Check if .env file exists and has required variables
+if [ -f .env ]; then
+  if ! grep -q "STRIPE_SECRET_KEY" .env; then
+    echo "⚠️  Warning: STRIPE_SECRET_KEY not found in .env file"
+  fi
+  if ! grep -q "STRIPE_MONTHLY_V1_PRICE_ID" .env; then
+    echo "⚠️  Warning: STRIPE_MONTHLY_V1_PRICE_ID not found in .env file"
+  fi
+else
+  echo "⚠️  Warning: .env file not found. Create one with:"
+  echo "   STRIPE_SECRET_KEY=sk_..."
+  echo "   STRIPE_MONTHLY_V1_PRICE_ID=price_..."
+fi
+
+echo ""
+echo "🚀 Starting Stripe webhook forwarding..."
+echo "   Forwarding to: http://localhost:3000/stripe/webhooks"
+echo ""
+echo "📝 The webhook secret will be displayed below."
+echo "   Copy it and add to your .env file:"
+echo "   STRIPE_WEBHOOK_SECRET=whsec_..."
+echo ""
+echo "🛑 Press Ctrl+C to stop"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# Start stripe listen (this will run in foreground)
+stripe listen --forward-to localhost:3000/stripe/webhooks

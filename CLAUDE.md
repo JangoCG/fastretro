@@ -19,6 +19,22 @@ bin/ci                 # Full CI suite (rubocop, security audits, all tests, see
 bin/rubocop -A         # Lint and auto-fix Ruby code
 ```
 
+## Development Workflow
+
+**IMPORTANT**: After making any changes, always run the local pipeline to ensure code quality:
+
+```sh
+bin/ci
+```
+
+This runs the full CI suite including:
+- RuboCop linting
+- Security audits (brakeman, bundler-audit)
+- All unit and system tests
+- Database seed tests
+
+Fix any findings before considering the work complete. The pipeline must pass.
+
 ## Architecture
 
 ### Multi-Tenant Structure

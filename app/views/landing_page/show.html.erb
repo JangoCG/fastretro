@@ -199,8 +199,8 @@
     </h2>
     <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
       No credit card required. No time limit.<br>
-      Want to keep going past <%= number_with_delimiter(@free_limit) %> It's only €9.99/month<br class="hidden sm:block">
-      for unlimited everything. Cancel anytime.
+      Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for €9.99/month<br class="hidden sm:block">
+      to get unlimited feedback and unlimited users. Cancel anytime.
     </p>
 
 
@@ -227,20 +227,20 @@
 
         <div class="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-8 relative z-10">
           <div>
-            <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 block mb-2">ALL ACCESS PASS</span>
+            <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 block mb-2">PER ACCOUNT</span>
             <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-4">
-              "TICKET"<br>
-              <span class="text-zinc-400">UNLIMITED</span>
+              "PAID"<br>
+              <span class="text-zinc-400">PLAN</span>
             </h2>
             <ul class="font-mono text-sm space-y-2 mt-6">
-              <li class="flex items-center gap-2">
-                <span class="w-3 h-3 bg-black"></span> UNLIMITED ACCOUNTS
-              </li>
               <li class="flex items-center gap-2">
                 <span class="w-3 h-3 bg-black"></span> UNLIMITED USERS
               </li>
               <li class="flex items-center gap-2">
                 <span class="w-3 h-3 bg-black"></span> UNLIMITED FEEDBACK
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-black"></span> €9.99/MONTH PER ACCOUNT
               </li>
             </ul>
           </div>
@@ -340,7 +340,7 @@
       <div class="space-y-8">
         <div>
           <h4 class="font-bold mb-2">What counts toward the free tier?</h4>
-          <p class="text-zinc-600">Every feedback card created counts toward your <%= number_with_delimiter(@free_limit) %> free items. After that, upgrade to unlimited for €9.99/month. Deleted cards still count—we don't play games with limits.</p>
+          <p class="text-zinc-600">Every feedback card created counts toward your <%= number_with_delimiter(@free_limit) %> free items. After that, upgrade to unlimited feedback for €9.99/month per account. Deleted cards still count toward the limit to keep tracking straightforward.</p>
         </div>
         <div>
           <h4 class="font-bold mb-2">Do participants need accounts?</h4>

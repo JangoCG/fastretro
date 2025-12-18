@@ -1,17 +1,20 @@
-<% owner_identity = Current.account_owner_identity %>
-<% if FastRetro.saas? && owner_identity&.near_feedback_limit? %>
+<% if FastRetro.saas? && Current.account.nearing_plan_feedbacks_limit? %>
+  <% feedbacks_remaining = [Current.account.plan.feedback_limit - Current.account.feedbacks_count, 0].max %>
   <div class="near-limit-notice mb-6 animate-wiggle-hover border-2 border-black bg-[#ffe600] p-4 font-mono text-xs font-bold uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-between gap-4">
     <span class="text-black">
-      <span class="fill-highlighter"><%= owner_identity.feedbacks_remaining %></span> feedbacks remaining
+      <span class="fill-highlighter"><%= feedbacks_remaining %></span> feedbacks remaining
     </span>
 
     <% if Current.user&.owner? %>
-      <%= link_to stripe_checkout_path(script_name: nil), class: "inline-flex items-center gap-2 bg-black text-white hover:bg-zinc-800 px-4 py-2 text-xs tracking-wider transition-all" do %>
-        UPGRADE NOW
-        <span class="font-mono">-></span>
-      <% end %>
+      <span class="text-black">
+        You've used <%= Current.account.feedbacks_count %> out of <%= Current.account.plan.feedback_limit %> free feedbacks.
+        <strong><%= link_to "Upgrade to unlimited", account_settings_path(anchor: "subscription"), class: "underline" %></strong>
+      </span>
     <% else %>
-      <span class="text-black/70 text-xs normal-case">Ask account owner to upgrade</span>
+      <span class="text-black">
+        This account has used <%= Current.account.feedbacks_count %> out of <%= Current.account.plan.feedback_limit %> free feedbacks.
+        <strong>Upgrade soon</strong>
+      </span>
     <% end %>
   </div>
 <% end %>

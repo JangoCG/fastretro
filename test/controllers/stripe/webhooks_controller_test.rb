@@ -1,163 +1,100 @@
-# frozen_string_literal: true
-
 require "test_helper"
+require "ostruct"
 
 class Stripe::WebhooksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @identity = identities(:one)
-    @identity.update!(stripe_customer_id: "cus_test123")
-
-    # Clear webhook secret so tests can run without signature verification
-    # (signature verification is tested explicitly in specific tests)
-    @original_webhook_secret = ENV["STRIPE_WEBHOOK_SECRET"]
-    ENV["STRIPE_WEBHOOK_SECRET"] = nil
+    @account = accounts(:one)
+    @subscription = @account.create_subscription! \
+      plan_key: "monthly_v1",
+      status: "incomplete",
+      stripe_customer_id: "cus_test123"
   end
 
-  teardown do
-    ENV["STRIPE_WEBHOOK_SECRET"] = @original_webhook_secret
-    FastRetro.reset_saas!
-  end
+  test "invalid signature returns bad request" do
+    Stripe::Webhook.stubs(:construct_event).raises(Stripe::SignatureVerificationError.new("invalid", "sig"))
 
-  test "rejects requests with invalid signature when webhook secret is configured" do
-    # Controller reads from ENV["STRIPE_WEBHOOK_SECRET"]
-    with_env("STRIPE_WEBHOOK_SECRET" => "whsec_test") do
-      post stripe_webhooks_path,
-        params: { type: "customer.created" }.to_json,
-        headers: {
-          "Content-Type" => "application/json",
-          "HTTP_STRIPE_SIGNATURE" => "invalid_signature"
-        }
-
-      assert_response :bad_request
-    end
-  end
-
-  test "rejects requests with invalid JSON" do
-    # No webhook secret = skip signature verification, but still validate JSON
-    post stripe_webhooks_path,
-      params: "not valid json",
-      headers: { "Content-Type" => "application/json" }
-
+    post stripe_webhooks_path, params: "{}", as: :json
     assert_response :bad_request
   end
 
-  test "handles customer.created event" do
-    # No webhook secret configured = skip signature verification
+  test "checkout session completed activates subscription" do
+    stripe_sub = OpenStruct.new(id: "sub_123", customer: "cus_test123", status: "active", cancel_at: nil, items: stub_items(1.month.from_now.to_i))
 
-    new_identity = Identity.create!(email_address: "stripe-test@example.com")
+    event = stripe_event("checkout.session.completed",
+      mode: "subscription",
+      customer: "cus_test123",
+      subscription: "sub_123",
+      metadata: { "plan_key" => "monthly_v1" }
+    )
 
-    payload = {
-      type: "customer.created",
-      data: {
-        object: {
-          id: "cus_new123",
-          email: "stripe-test@example.com",
-          object: "customer"
-        }
-      }
-    }
+    Stripe::Webhook.stubs(:construct_event).returns(event)
+    Stripe::Subscription.stubs(:retrieve).returns(stripe_sub)
+    Stripe::Invoice.stubs(:create_preview).returns(OpenStruct.new(amount_due: 1999))
 
-    post stripe_webhooks_path,
-      params: payload.to_json,
-      headers: { "Content-Type" => "application/json" }
+    post stripe_webhooks_path, params: "{}", as: :json
 
-    assert_response :success
-    assert_equal "cus_new123", new_identity.reload.stripe_customer_id
+    assert_response :ok
+    @subscription.reload
+    assert_equal "sub_123", @subscription.stripe_subscription_id
+    assert_equal "active", @subscription.status
   end
 
-  test "handles customer.subscription.created event" do
-    payload = build_subscription_payload("customer.subscription.created", "active")
+  test "subscription updated changes status and syncs next amount due" do
+    @subscription.update!(stripe_subscription_id: "sub_123", status: "active")
 
-    post stripe_webhooks_path,
-      params: payload.to_json,
-      headers: { "Content-Type" => "application/json" }
+    stripe_sub = OpenStruct.new(
+      id: "sub_123",
+      customer: "cus_test123",
+      status: "past_due",
+      cancel_at: nil,
+      items: stub_items(1.month.from_now.to_i)
+    )
 
-    assert_response :success
-    @identity.reload
-    assert_equal "active", @identity.subscription_status
-    assert_equal "pro_monthly", @identity.plan
+    event = stripe_event("customer.subscription.updated", id: "sub_123")
+
+    Stripe::Webhook.stubs(:construct_event).returns(event)
+    Stripe::Subscription.stubs(:retrieve).returns(stripe_sub)
+    Stripe::Invoice.stubs(:create_preview).returns(OpenStruct.new(amount_due: 1999))
+
+    post stripe_webhooks_path, params: "{}", as: :json
+
+    assert_response :ok
+    @subscription.reload
+    assert_equal "past_due", @subscription.status
+    assert_equal 1999, @subscription.next_amount_due_in_cents
   end
 
-  test "handles customer.subscription.updated event" do
-    payload = build_subscription_payload("customer.subscription.updated", "past_due")
+  test "subscription deleted cancels subscription" do
+    @subscription.update!(stripe_subscription_id: "sub_123", status: "active")
 
-    post stripe_webhooks_path,
-      params: payload.to_json,
-      headers: { "Content-Type" => "application/json" }
+    stripe_sub = OpenStruct.new(
+      id: "sub_123",
+      customer: "cus_test123",
+      status: "canceled",
+      cancel_at: nil,
+      items: stub_items(1.month.from_now.to_i)
+    )
 
-    assert_response :success
-    assert_equal "past_due", @identity.reload.subscription_status
-  end
+    event = stripe_event("customer.subscription.deleted", id: "sub_123")
 
-  test "handles customer.subscription.deleted event" do
-    @identity.update!(subscription_status: "active")
+    Stripe::Webhook.stubs(:construct_event).returns(event)
+    Stripe::Subscription.stubs(:retrieve).returns(stripe_sub)
 
-    payload = build_subscription_payload("customer.subscription.deleted", "canceled")
+    post stripe_webhooks_path, params: "{}", as: :json
 
-    post stripe_webhooks_path,
-      params: payload.to_json,
-      headers: { "Content-Type" => "application/json" }
-
-    assert_response :success
-    assert_equal "canceled", @identity.reload.subscription_status
-  end
-
-  test "ignores events for unknown customers" do
-    payload = {
-      type: "customer.subscription.created",
-      data: {
-        object: {
-          id: "sub_unknown",
-          customer: "cus_unknown",
-          status: "active",
-          items: {
-            data: [ {
-              price: { id: "price_123", lookup_key: "pro_monthly" },
-              current_period_end: 1.month.from_now.to_i
-            } ]
-          }
-        }
-      }
-    }
-
-    post stripe_webhooks_path,
-      params: payload.to_json,
-      headers: { "Content-Type" => "application/json" }
-
-    assert_response :success
-  end
-
-  test "handles unrecognized event types gracefully" do
-    payload = {
-      type: "some.unknown.event",
-      data: { object: { id: "obj_123" } }
-    }
-
-    post stripe_webhooks_path,
-      params: payload.to_json,
-      headers: { "Content-Type" => "application/json" }
-
-    assert_response :success
+    assert_response :ok
+    @subscription.reload
+    assert_equal "canceled", @subscription.status
+    assert_nil @subscription.stripe_subscription_id
+    assert_nil @subscription.next_amount_due_in_cents
   end
 
   private
+    def stripe_event(type, **attributes)
+      OpenStruct.new(type: type, data: OpenStruct.new(object: OpenStruct.new(attributes)))
+    end
 
-  def build_subscription_payload(event_type, status)
-    {
-      type: event_type,
-      data: {
-        object: {
-          id: "sub_test123",
-          customer: @identity.stripe_customer_id,
-          status: status,
-          items: {
-            data: [ {
-              price: { id: "price_123", lookup_key: "pro_monthly" },
-              current_period_end: 1.month.from_now.to_i
-            } ]
-          }
-        }
-      }
-    }
-  end
+    def stub_items(current_period_end)
+      OpenStruct.new(data: [ OpenStruct.new(current_period_end: current_period_end) ])
+    end
 end
