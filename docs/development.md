@@ -98,3 +98,50 @@ The `-q` flag controls the quality (0-100):
    ```erb
    <%= image_tag "hero-image.webp", class: "..." %>
    ```
+
+### Billing Waivers (Comping Accounts)
+
+For testing or providing free unlimited access to specific accounts (e.g., beta testers, partners), you can "comp" an account to bypass billing limits without requiring a Stripe subscription.
+
+#### Comping an Account
+
+To grant unlimited access to an account on production:
+
+```ruby
+# Open Rails console on production
+bin/rails console -e production
+
+# Find the account (by ID, name, or owner email)
+account = Account.find(123)
+# or
+account = Account.find_by(name: "Company Name")
+# or via user email
+account = Identity.find_by(email_address: "user@example.com").accounts.first
+
+# Comp the account (grants unlimited feedbacks)
+account.comp
+
+# Verify it worked
+account.comped?  # => true
+account.plan     # => Plan.paid (even without Stripe subscription)
+```
+
+#### Removing a Comp
+
+To remove unlimited access and return the account to normal billing:
+
+```ruby
+account.uncomp
+
+# Verify
+account.comped?  # => false
+account.plan     # => Plan.free (or Plan.paid if they have active subscription)
+```
+
+#### How It Works
+
+- A comped account gets a `billing_waiver` record
+- The waiver acts like a paid subscription without Stripe
+- Comped accounts bypass all feedback limits
+- The subscription panel won't show for comped accounts (only admins/owners see billing UI for regular accounts)
+- Comping is idempotent - calling `comp` multiple times won't create duplicates

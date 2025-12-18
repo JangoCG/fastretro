@@ -15,6 +15,7 @@ class Account::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     Plan.stubs(:paid).returns(plan)
 
     Stripe::Customer.stubs(:retrieve).returns(customer)
+    Stripe::Customer.stubs(:create).returns(customer)
     Stripe::Checkout::Session.stubs(:create).returns(session)
 
     post account_subscriptions_path
