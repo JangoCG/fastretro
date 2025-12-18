@@ -10,6 +10,10 @@ class Account::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     customer = OpenStruct.new(id: "cus_test_fastretro")
     session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
 
+    # Stub Plan.paid to return a plan with a stripe_price_id
+    plan = OpenStruct.new(key: "monthly_v1", stripe_price_id: "price_test123")
+    Plan.stubs(:paid).returns(plan)
+
     Stripe::Customer.stubs(:retrieve).returns(customer)
     Stripe::Checkout::Session.stubs(:create).returns(session)
 
