@@ -96,46 +96,55 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-8 sm:mb-16">
         <h2 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block">
-          HOW IT WORKS: 4 PHASES
+          HOW IT WORKS: UP TO 5 PHASES
         </h2>
         <p class="mt-3 font-mono text-sm sm:text-base text-zinc-600 max-w-2xl leading-relaxed">
-          Create a retro, share the link with your team, and guide everyone through four structured phases.
+          Create a retro, share the link with your team, and guide everyone through structured phases.
+          Optionally review past action items first, then work through the four core phases.
           The moderator controls the pace—when you're ready, advance to the next phase with one click.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 sm:gap-x-8 sm:gap-y-14 lg:gap-8 justify-items-center">
-        <%# Feature 1: Brainstorming %>
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-x-4 gap-y-12 sm:gap-x-8 sm:gap-y-14 lg:gap-6 justify-items-center">
+        <%# Phase 1: Action Review (Optional) %>
+        <%= render PhaseTagComponent.new(
+              phase: :action_review,
+              phase_title: "PHASE 01 REVIEW",
+              phase_instruction: "REVIEW ACTION ITEMS FROM YOUR LAST RETRO. CHECK OFF WHAT'S DONE.",
+              phase_footer: "OPTIONAL PHASE",
+              rotation: -2
+            ) %>
+        <%# Phase 2: Brainstorming %>
         <%= render PhaseTagComponent.new(
               phase: :brainstorming,
-              phase_title: "PHASE 01\nREFLECT",
+              phase_title: "PHASE 02\nREFLECT",
               phase_instruction: "EVERYONE WRITES DOWN THEIR THOUGHTS PRIVATELY. NO ONE SEES UNTIL THE REVEAL.",
               phase_footer: "ANONYMOUS INPUT",
               rotation: -5
             ) %>
 
-        <%# Feature 2: Grouping %>
+        <%# Phase 3: Grouping %>
         <%= render PhaseTagComponent.new(
               phase: :grouping,
-              phase_title: "PHASE 02\nCLUSTER",
+              phase_title: "PHASE 03\nCLUSTER",
               phase_instruction: "DRAG SIMILAR IDEAS TOGETHER INTO GROUPS. FIND THE PATTERNS.",
               phase_footer: "ORGANIZE THEMES",
               rotation: 4
             ) %>
 
-        <%# Feature 3: Voting %>
+        <%# Phase 4: Voting %>
         <%= render PhaseTagComponent.new(
               phase: :voting,
-              phase_title: "PHASE 03\nPRIORITIZE",
+              phase_title: "PHASE 04\nPRIORITIZE",
               phase_instruction: "EACH PERSON GETS 3 VOTES. SPEND THEM ON WHAT MATTERS MOST.",
               phase_footer: "DEMOCRATIC FOCUS",
               rotation: -3
             ) %>
 
-        <%# Feature 4: Discussion %>
+        <%# Phase 5: Discussion %>
         <%= render PhaseTagComponent.new(
               phase: :discussion,
-              phase_title: "PHASE 04\nACT",
+              phase_title: "PHASE 05\nACT",
               phase_instruction: "TALK THROUGH TOP-VOTED ITEMS. CREATE ACTION ITEMS. ASSIGN OWNERS.",
               phase_footer: "DRIVE CHANGE",
               rotation: 6
@@ -144,32 +153,40 @@
 
       <%# Phase descriptions %>
       <div class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 font-mono text-sm">
+        <div class="border-l-4 border-violet-400 pl-4 sm:pl-6">
+          <h4 class="font-bold text-base mb-2">01. Review (Optional)</h4>
+          <p class="text-zinc-600 leading-relaxed">
+            Starting a new retro? Review action items from your previous session together.
+            Check off completed items—they'll be removed. Leave items unchecked to carry them forward to this retro.
+          </p>
+        </div>
         <div class="border-l-4 border-amber-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">01. Reflect</h4>
+          <h4 class="font-bold text-base mb-2">02. Reflect</h4>
           <p class="text-zinc-600 leading-relaxed">
             Team members write feedback into two columns: "What went well" and "What could be better."
             Cards are private until the moderator reveals them so no one is influenced.
           </p>
         </div>
         <div class="border-l-4 border-sky-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">02. Cluster</h4>
+          <h4 class="font-bold text-base mb-2">03. Cluster</h4>
           <p class="text-zinc-600 leading-relaxed">
             The moderator drags related cards together to form groups. Similar ideas get consolidated,
             making it easier to see themes and avoid discussing the same point multiple times.
           </p>
         </div>
         <div class="border-l-4 border-violet-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">03. Prioritize</h4>
+          <h4 class="font-bold text-base mb-2">04. Prioritize</h4>
           <p class="text-zinc-600 leading-relaxed">
             Everyone gets 3 votes to spend on the items that matter most to them. Cards and groups
             automatically sort by vote count so the team focuses on high-priority topics first.
           </p>
         </div>
         <div class="border-l-4 border-emerald-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">04. Act</h4>
+          <h4 class="font-bold text-base mb-2">05. Act</h4>
           <p class="text-zinc-600 leading-relaxed">
             Work through the top-voted items together. Create action items with owners and due dates.
-            Actions persist after the retro ends so you can track follow-through in future sessions.
+            Actions persist after the retro ends. When starting your next retro, review past action items
+            together—check off what's done, carry forward what's still open.
           </p>
         </div>
       </div>

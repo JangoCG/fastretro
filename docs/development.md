@@ -17,6 +17,19 @@ bin/dev
 
 You'll be able to access the app in development at http://localhost:3000.
 
+### Seeding the Database
+
+Fast Retro includes demo data for development and screenshots.
+
+```sh
+bin/rails runner db/seeds/demo.rb
+```
+Login credentials:
+- **Owner**: sarah@acmecorp.com
+- **Admin**: marcus@acmecorp.com
+- **Member**: emily@acmecorp.com
+
+
 ### Linting
 
 To run RuboCop and auto-fix all files:

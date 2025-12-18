@@ -272,6 +272,36 @@ completed_actions.each_with_index do |content, i|
 end
 
 # =============================================================================
+# RETRO 3: Action Review Phase (reviewing past sprint's action items)
+# =============================================================================
+
+puts "  Creating Sprint 48 retro (action_review phase)..."
+
+retro3 = Retro.create!(
+  account: account,
+  name: "Sprint 48 Retrospective",
+  phase: :action_review
+)
+
+# Add participants
+[ sarah, marcus, emily, david, alex, priya ].each_with_index do |user, index|
+  role = index < 2 ? :admin : :participant
+  retro3.add_participant(user, role: role)
+end
+
+# Import action items from the previous completed retro (retro2)
+# Simulating what happens when a team reviews their past action items
+retro3.import_actions_from(retro2)
+
+# Mark some actions as completed (team did these!)
+retro3.actions.limit(3).each do |action|
+  action.update!(completed: true)
+end
+
+# Leave 2 actions unchecked (still in progress)
+# These will be carried forward to the discussion phase
+
+# =============================================================================
 # SUMMARY
 # =============================================================================
 
@@ -284,6 +314,7 @@ puts ""
 puts "Retros:"
 puts "  1. #{retro1.name} - #{retro1.phase} (#{retro1.feedbacks.count} feedbacks, #{retro1.participants.count} participants)"
 puts "  2. #{retro2.name} - #{retro2.phase} (#{retro2.feedbacks.count} feedbacks, #{retro2.actions.published.count} actions)"
+puts "  3. #{retro3.name} - #{retro3.phase} (#{retro3.actions.count} actions: #{retro3.actions.completed_actions.count} completed, #{retro3.actions.incomplete.count} pending)"
 puts ""
 puts "To log in as Sarah (owner): Use email sarah@acmecorp.com"
 puts "To log in as Marcus (admin): Use email marcus@acmecorp.com"
