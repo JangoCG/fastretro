@@ -7,12 +7,16 @@ class Retro < ApplicationRecord
   has_many :participants, class_name: "Retro::Participant", dependent: :destroy
   has_many :users, through: :participants
 
-  enum :phase, { waiting_room: "waiting_room", brainstorming: "brainstorming", grouping: "grouping", voting: "voting", discussion: "discussion", complete: "complete" }
+  enum :phase, { waiting_room: "waiting_room", action_review: "action_review", brainstorming: "brainstorming", grouping: "grouping", voting: "voting", discussion: "discussion", complete: "complete" }
 
-  PHASE_ORDER = %i[waiting_room brainstorming grouping voting discussion complete].freeze
+  PHASE_ORDER = %i[waiting_room action_review brainstorming grouping voting discussion complete].freeze
 
-  def start!
-    update!(phase: :brainstorming)
+  def start!(skip_action_review: false)
+    if skip_action_review || !account.has_completed_retros_with_actions?
+      update!(phase: :brainstorming)
+    else
+      update!(phase: :action_review)
+    end
   end
 
   def finish_brainstorming!
@@ -22,6 +26,9 @@ class Retro < ApplicationRecord
   def advance_phase!
     current_index = PHASE_ORDER.index(phase.to_sym)
     return if current_index.nil? || current_index >= PHASE_ORDER.length - 1
+
+    # Clean up completed actions when leaving action_review phase
+    cleanup_completed_actions if action_review?
 
     next_phase = PHASE_ORDER[current_index + 1]
     update!(phase: next_phase, highlighted_user_id: nil)
@@ -54,5 +61,31 @@ class Retro < ApplicationRecord
 
   def owner
     participants.admin.order(:created_at).first&.user
+  end
+
+  # Find completed retros with published actions
+  def self.completed_with_actions
+    where(phase: :complete)
+      .joins(:actions)
+      .where(actions: { status: :published })
+      .distinct
+      .order(created_at: :desc)
+  end
+
+  # Copy published actions from another retro
+  def import_actions_from(source_retro)
+    source_retro.actions.published.find_each do |action|
+      actions.create!(
+        user: action.user,
+        status: :published,
+        content: action.content.body.to_s,
+        completed: false
+      )
+    end
+  end
+
+  # Remove completed actions (called when leaving action_review phase)
+  def cleanup_completed_actions
+    actions.completed_actions.destroy_all
   end
 end

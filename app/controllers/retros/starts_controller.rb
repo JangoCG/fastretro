@@ -5,9 +5,21 @@ class Retros::StartsController < ApplicationController
   before_action :ensure_retro_admin
 
   def create
-    @retro.start!
-    broadcast_phase_redirect
-    redirect_to retro_brainstorming_path(@retro)
+    if Current.account.has_completed_retros_with_actions?
+      @past_retros = Current.account.retros.completed_with_actions.limit(20)
+      render turbo_stream: turbo_stream.replace(
+        "start-retro-container",
+        partial: "retros/starts/action_review_selection_modal",
+        locals: {
+          retro: @retro,
+          past_retros: @past_retros
+        }
+      )
+    else
+      @retro.start!(skip_action_review: true)
+      broadcast_phase_redirect(retro_brainstorming_path(@retro))
+      redirect_to retro_brainstorming_path(@retro)
+    end
   end
 
   private
@@ -16,11 +28,10 @@ class Retros::StartsController < ApplicationController
     @retro = Current.account.retros.find(params[:retro_id])
   end
 
-  def broadcast_phase_redirect
-    redirect_url = retro_brainstorming_path(@retro)
+  def broadcast_phase_redirect(url)
     Turbo::StreamsChannel.broadcast_stream_to(
       @retro,
-      content: %(<turbo-stream action="redirect" url="#{redirect_url}"></turbo-stream>)
+      content: %(<turbo-stream action="redirect" url="#{url}"></turbo-stream>)
     )
   end
 end

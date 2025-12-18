@@ -1,0 +1,41 @@
+<% content_for :title, @retro.name %>
+
+<% content_for :phase_tag do %>
+  <%= render PhaseTagComponent.new(phase: :action_review) %>
+<% end %>
+
+<% content_for :board_columns do %>
+  <div class="space-y-6">
+    <%# Header Instructions %>
+    <div class="bg-violet-50 border-[3px] border-zinc-900 p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+      <h2 class="font-black text-xl uppercase tracking-tight text-zinc-900 mb-2">
+        "ACTION ITEM REVIEW"
+      </h2>
+      <p class="text-sm text-zinc-600 font-mono mb-3">
+        Review the action items from your previous retro. Check off items that have been completed.
+        When everyone is ready, the facilitator can advance to brainstorming.
+      </p>
+      <div class="flex items-start gap-2 mt-4 p-3 bg-amber-50 border-2 border-amber-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-600 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+        </svg>
+        <p class="text-xs font-bold text-amber-800 uppercase">
+          Completed items will be removed. Unchecked items will carry forward to this retro.
+        </p>
+      </div>
+    </div>
+
+    <%# Actions Grid %>
+    <% if @retro.actions.published.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <% @retro.actions.published.order(:created_at).each do |action| %>
+          <%= render Actions::ReviewActionComponent.new(action: action) %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="border-2 border-dashed border-zinc-300 p-8 text-center">
+        <p class="font-mono text-sm text-zinc-400 uppercase">NO ACTIONS TO REVIEW</p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

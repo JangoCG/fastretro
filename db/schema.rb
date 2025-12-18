@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_18_143434) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_18_143434) do
   end
 
   create_table "actions", force: :cascade do |t|
+    t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.integer "retro_id", null: false
     t.string "status", default: "drafted"

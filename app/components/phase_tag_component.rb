@@ -1,5 +1,14 @@
 class PhaseTagComponent < ApplicationComponent
   PHASE_CONFIG = {
+    action_review: {
+      title: "ACTION\nREVIEW",
+      instruction: "Review action items from your previous retro.",
+      footer: "CHECK PROGRESS.",
+      bg_color: "bg-violet-50",
+      border_color: "border-violet-300",
+      stripe_hex: "#7c3aed",
+      accent_color: "text-violet-700"
+    },
     brainstorming: {
       title: "BRAIN\nSTORMING",
       instruction: "Write down your ideas. No one can see them yet",

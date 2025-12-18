@@ -1,0 +1,61 @@
+<div id="<%= dom_id(@action) %>"
+     class="relative group select-none transition-transform duration-200 hover:-translate-y-1"
+     data-controller="action-completion"
+     data-action-completion-url-value="<%= retro_action_completion_path(@action.retro, @action) %>"
+     data-action-completion-completed-value="<%= @action.completed %>">
+
+  <%# Card Body %>
+  <div class="<%= @action.completed ? 'bg-emerald-50 opacity-75' : 'bg-violet-50' %> relative border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden flex flex-col min-h-[140px] group-hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">
+
+    <%# Completion Checkbox - Top Right %>
+    <div class="absolute top-3 right-3 z-10">
+      <button type="button"
+              data-action="click->action-completion#toggle"
+              class="w-8 h-8 border-2 border-zinc-900 <%= @action.completed ? 'bg-emerald-500' : 'bg-white' %> hover:bg-emerald-200 transition-colors flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+        <% if @action.completed %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        <% end %>
+      </button>
+    </div>
+
+    <%# Internal Content Area %>
+    <div class="flex-1 p-4 flex flex-col gap-2">
+      <%# Technical Header Label %>
+      <div class="flex justify-between items-center border-b-[2px] border-zinc-100 pb-2 mb-1">
+        <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono">ACTION_00<%= @action.id %></span>
+        <div class="flex gap-1">
+          <div class="w-1.5 h-1.5 rounded-full border border-zinc-900 <%= @action.completed ? 'bg-emerald-400' : 'bg-violet-400' %>"></div>
+        </div>
+      </div>
+
+      <%# The Content %>
+      <div class="text-zinc-900 font-bold text-sm leading-snug break-words pr-10 <%= @action.completed ? 'line-through opacity-60' : '' %>">
+        <div class="rich-text-content">
+          <%= @action.content %>
+        </div>
+      </div>
+    </div>
+
+    <%# Footer Section %>
+    <div class="px-4 py-3 flex items-center justify-between mt-auto">
+      <%# User Info %>
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 bg-zinc-900 text-white flex items-center justify-center text-[0.55rem] font-black uppercase tracking-wider">
+          <%= @action.user.initials %>
+        </div>
+        <span class="text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider line-clamp-1 max-w-[80px]">
+          <%= @action.user.name %>
+        </span>
+      </div>
+
+      <%# Status Badge %>
+      <% if @action.completed %>
+        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-wider px-2 py-1 bg-emerald-200 border border-emerald-400">
+          DONE
+        </span>
+      <% end %>
+    </div>
+  </div>
+</div>

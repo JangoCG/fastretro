@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :retros do
     scope module: :retros do
       resource :waiting_room, only: :show
+      resource :action_review, only: :show
       resource :brainstorming, only: :show
       resource :grouping, only: :show
       resource :voting, only: :show
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
       resource :complete, only: :show
       resource :export, only: :show
       resource :start, only: :create
+      resource :action_review_selection, only: :create
       resource :finished, only: :update
       resource :finish_brainstorming, only: :create
       resource :phase_transition, only: :create
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
     end
     resources :actions, only: %i[ new create show edit update destroy ] do
       resource :publish, only: :create, module: :actions
+      resource :completion, only: :update, module: :actions
     end
   end
 

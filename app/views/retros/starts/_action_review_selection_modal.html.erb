@@ -1,0 +1,58 @@
+<div data-controller="dialog" data-dialog-modal-value="true" data-dialog-open-on-load-value="true">
+  <dialog data-dialog-target="dialog"
+          open
+          class="fixed m-auto inset-0 z-50 w-[90vw] sm:w-[580px] max-w-[580px] p-0 bg-[#F8F5EC] text-zinc-900 shadow-[8px_8px_0px_0px_rgba(24,24,27,1)] border-[3px] border-zinc-900 outline-none backdrop:bg-zinc-900/50 backdrop:backdrop-blur-sm">
+
+    <%# Header %>
+    <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b-[3px] border-zinc-900">
+      <span class="font-black text-sm uppercase tracking-widest">"ACTION REVIEW"</span>
+    </div>
+
+    <%# Content %>
+    <div class="p-6">
+      <div class="mb-6">
+        <p class="font-black text-lg uppercase tracking-tight text-zinc-900 mb-2">
+          "REVIEW PAST ACTION ITEMS?"
+        </p>
+        <p class="text-sm text-zinc-600">
+          You have completed retros with action items. Would you like to review them before starting this retro?
+        </p>
+      </div>
+
+      <%= form_with url: retro_action_review_selection_path(retro), method: :post, class: "space-y-4" do |f| %>
+        <%# Retro Selection Dropdown %>
+        <div>
+          <label class="block font-bold text-xs uppercase tracking-wider text-zinc-700 mb-2">
+            SELECT PAST RETRO
+          </label>
+          <select name="source_retro_id"
+                  class="w-full px-4 py-3 bg-white border-2 border-zinc-900 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-violet-500">
+            <% past_retros.each do |past_retro| %>
+              <option value="<%= past_retro.id %>">
+                <%= past_retro.name %> - <%= past_retro.created_at.strftime("%Y-%m-%d") %> (<%= past_retro.actions.published.count %> actions)
+              </option>
+            <% end %>
+          </select>
+        </div>
+
+        <%# Action Buttons %>
+        <div class="flex gap-3 justify-end pt-4">
+          <%= button_tag type: "submit",
+                         name: "skip",
+                         value: "true",
+                         class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100" do %>
+            Skip Review
+          <% end %>
+
+          <%= button_tag type: "submit",
+                         class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-violet-600 border-violet-700 text-white hover:bg-violet-700" do %>
+            Review Actions
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Footer Decoration %>
+    <div class="h-2 w-full bg-[repeating-linear-gradient(-45deg,#000,#000_2px,transparent_2px,transparent_4px)] opacity-10"></div>
+  </dialog>
+</div>

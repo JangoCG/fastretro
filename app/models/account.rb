@@ -32,6 +32,10 @@ class Account < ApplicationRecord
     self
   end
 
+  def has_completed_retros_with_actions?
+    retros.completed_with_actions.exists?
+  end
+
   private
     def assign_external_account_id
       self.external_account_id ||= ExternalIdSequence.next
