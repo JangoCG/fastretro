@@ -1,0 +1,54 @@
+<%= form_with model: webhook, url: url, method: local_assigns[:method] || :post, class: "flex flex-col gap-6" do |form| %>
+  <%# Name %>
+  <div class="flex flex-col gap-2">
+    <label for="webhook_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+      NAME
+    </label>
+    <%= form.text_field :name,
+      required: true,
+      autofocus: true,
+      class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none",
+      placeholder: "My Webhook" %>
+  </div>
+
+  <%# URL %>
+  <% unless local_assigns[:show_url] == false %>
+    <div class="flex flex-col gap-2">
+      <label for="webhook_url" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+        PAYLOAD URL
+      </label>
+      <%= form.url_field :url,
+        required: true,
+        pattern: "https?://.*",
+        title: "Must be an http:// or https:// URL",
+        class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none font-mono text-sm",
+        placeholder: "https://example.com/webhook" %>
+      <p class="text-xs text-zinc-500">This URL will receive POST requests when events occur.</p>
+    </div>
+  <% else %>
+    <div class="flex flex-col gap-2">
+      <label class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+        PAYLOAD URL
+      </label>
+      <p class="px-4 py-3 bg-zinc-100 border-[2px] border-zinc-200 font-mono text-sm text-zinc-600 break-all"><%= webhook.url %></p>
+      <p class="text-xs text-zinc-500">URL cannot be changed after creation.</p>
+    </div>
+  <% end %>
+
+  <%# Events %>
+  <div class="flex flex-col gap-2">
+    <label class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+      EVENTS
+    </label>
+    <p class="text-xs text-zinc-500 mb-2">Trigger this webhook when:</p>
+    <%= render "account/webhooks/form/actions", form: form %>
+  </div>
+
+  <%# Submit %>
+  <div class="flex justify-end pt-4">
+    <button type="submit"
+      class="px-6 py-3 bg-zinc-900 text-white border-[2px] border-zinc-900 hover:bg-white hover:text-zinc-900 transition-colors font-bold text-sm uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none">
+      <%= webhook.persisted? ? "UPDATE WEBHOOK" : "CREATE WEBHOOK" %>
+    </button>
+  </div>
+<% end %>

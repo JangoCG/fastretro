@@ -1,0 +1,29 @@
+pending_delivery:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  webhook_id: <%= ActiveRecord::FixtureSet.identify(:active) %>
+  event_id: <%= ActiveRecord::FixtureSet.identify(:retro_created) %>
+  state: pending
+  request: '{}'
+  response: '{}'
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+completed_delivery:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  webhook_id: <%= ActiveRecord::FixtureSet.identify(:active) %>
+  event_id: <%= ActiveRecord::FixtureSet.identify(:feedback_published) %>
+  state: completed
+  request: '{"headers": {"Content-Type": "application/json"}}'
+  response: '{"code": 200}'
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+failed_delivery:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  webhook_id: <%= ActiveRecord::FixtureSet.identify(:active) %>
+  event_id: <%= ActiveRecord::FixtureSet.identify(:retro_created) %>
+  state: errored
+  request: '{"headers": {"Content-Type": "application/json"}}'
+  response: '{"error": "connection_timeout"}'
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>

@@ -7,6 +7,8 @@ class Account < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :retros, dependent: :destroy
   has_many :feedbacks, through: :retros
+  has_many :webhooks, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   before_create :assign_external_account_id
   after_create :create_join_code

@@ -11,6 +11,10 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
+    # Map fixtures to namespaced models
+    set_fixture_class webhook_deliveries: "Webhook::Delivery"
+    set_fixture_class webhook_delinquency_trackers: "Webhook::DelinquencyTracker"
+
     include ActiveJob::TestHelper
     include SessionTestHelper
 

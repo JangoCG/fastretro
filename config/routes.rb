@@ -45,6 +45,11 @@ Rails.application.routes.draw do
     resource :settings, only: %i[ show update ]
     resources :subscriptions, only: :create
     resource :billing_portal, only: :show
+    resources :webhooks do
+      scope module: :webhooks do
+        resource :activation, only: :create
+      end
+    end
   end
 
   # Join codes for multi-account

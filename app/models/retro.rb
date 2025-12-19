@@ -1,4 +1,6 @@
 class Retro < ApplicationRecord
+  include Eventable
+
   belongs_to :account
 
   has_many :feedbacks, dependent: :destroy
@@ -6,10 +8,13 @@ class Retro < ApplicationRecord
   has_many :actions, dependent: :destroy
   has_many :participants, class_name: "Retro::Participant", dependent: :destroy
   has_many :users, through: :participants
+  has_many :retro_events, class_name: "Event", dependent: :destroy
 
   enum :phase, { waiting_room: "waiting_room", action_review: "action_review", brainstorming: "brainstorming", grouping: "grouping", voting: "voting", discussion: "discussion", complete: "complete" }
 
   PHASE_ORDER = %i[waiting_room action_review brainstorming grouping voting discussion complete].freeze
+
+  after_create_commit -> { record_event("retro.created") }
 
   def start!(skip_action_review: false)
     if skip_action_review || !account.has_completed_retros_with_actions?
@@ -17,6 +22,7 @@ class Retro < ApplicationRecord
     else
       update!(phase: :action_review)
     end
+    record_event("retro.started", particulars: { phase: phase })
   end
 
   def finish_brainstorming!
@@ -30,9 +36,13 @@ class Retro < ApplicationRecord
     # Clean up completed actions when leaving action_review phase
     cleanup_completed_actions if action_review?
 
+    from_phase = phase
     next_phase = PHASE_ORDER[current_index + 1]
     update!(phase: next_phase, highlighted_user_id: nil)
     participants.update_all(finished: false)
+
+    record_event("retro.phase_changed", particulars: { from: from_phase, to: phase })
+    record_event("retro.completed") if complete?
   end
 
   def next_phase

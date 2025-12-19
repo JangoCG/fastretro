@@ -7,5 +7,6 @@ module Action::Statuses
 
   def publish
     update!(status: :published)
+    record_event("action.published")
   end
 end

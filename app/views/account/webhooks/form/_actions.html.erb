@@ -1,0 +1,8 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  <% webhook_action_options.each do |action, label| %>
+    <label class="flex items-center gap-3 p-3 bg-white border-[2px] border-zinc-200 cursor-pointer hover:border-zinc-400 has-[:checked]:border-zinc-900 has-[:checked]:bg-yellow-50 transition-all">
+      <%= form.check_box :subscribed_actions, { multiple: true, class: "w-5 h-5 border-[2px] border-zinc-900 bg-white checked:bg-zinc-900 focus:ring-0 focus:ring-offset-0 cursor-pointer" }, action, nil %>
+      <span class="text-sm font-bold text-zinc-700"><%= label %></span>
+    </label>
+  <% end %>
+</div>

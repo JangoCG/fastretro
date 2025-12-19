@@ -8,13 +8,16 @@ module Feedback::Statuses
   end
 
   def publish
-    return update!(status: :published) unless FastRetro.saas?
+    if FastRetro.saas?
+      transaction do
+        raise LimitReached if retro.account.exceeding_feedback_limit?
 
-    transaction do
-      raise LimitReached if retro.account.exceeding_feedback_limit?
-
+        update!(status: :published)
+        retro.account.increment!(:feedbacks_count)
+      end
+    else
       update!(status: :published)
-      retro.account.increment!(:feedbacks_count)
     end
+    record_event("feedback.published")
   end
 end

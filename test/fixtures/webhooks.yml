@@ -1,0 +1,29 @@
+active:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  name: Active Webhook
+  url: https://api.example.com/webhooks
+  signing_secret: test_signing_secret_abc123 # gitleaks:allow test fixture
+  subscribed_actions: '<%= %w[ retro.created retro.completed feedback.published ].to_json %>'
+  active: true
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+inactive:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  name: Inactive Webhook
+  url: https://test.example.com/webhooks
+  signing_secret: test_signing_secret_xyz789 # gitleaks:allow test fixture
+  subscribed_actions: '<%= %w[ retro.created ].to_json %>'
+  active: false
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+other_account:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  name: Other Account Webhook
+  url: https://other.example.com/webhooks
+  signing_secret: test_signing_secret_other456 # gitleaks:allow test fixture
+  subscribed_actions: '<%= %w[ action.completed ].to_json %>'
+  active: true
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>

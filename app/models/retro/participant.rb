@@ -1,4 +1,6 @@
 class Retro::Participant < ApplicationRecord
+  include Eventable
+
   self.table_name = "retro_participants"
 
   belongs_to :retro
@@ -10,6 +12,8 @@ class Retro::Participant < ApplicationRecord
   enum :role, { admin: "admin", participant: "participant" }
 
   validates :user_id, uniqueness: { scope: :retro_id }
+
+  after_create_commit :record_joined_event
 
   delegate :name, :initials, to: :user
 
@@ -24,4 +28,9 @@ class Retro::Participant < ApplicationRecord
   def toggle_finished!
     update!(finished: !finished)
   end
+
+  private
+    def record_joined_event
+      record_event("participant.joined", creator: user)
+    end
 end

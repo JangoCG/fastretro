@@ -1,0 +1,23 @@
+active_tracker:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  webhook_id: <%= ActiveRecord::FixtureSet.identify(:active) %>
+  consecutive_failures_count: 0
+  first_failure_at: null
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+inactive_tracker:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  webhook_id: <%= ActiveRecord::FixtureSet.identify(:inactive) %>
+  consecutive_failures_count: 10
+  first_failure_at: <%= 2.hours.ago.to_fs(:db) %>
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+other_tracker:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  webhook_id: <%= ActiveRecord::FixtureSet.identify(:other_account) %>
+  consecutive_failures_count: 0
+  first_failure_at: null
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>

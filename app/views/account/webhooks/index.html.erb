@@ -1,0 +1,45 @@
+<div class="max-w-xl mx-auto px-4 py-8 font-sans">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10 flex items-center justify-between">
+        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+          WEBHOOKS
+        </h1>
+        <%= link_to new_account_webhook_path, class: "px-4 py-2 bg-zinc-900 text-white border-[2px] border-zinc-900 hover:bg-white hover:text-zinc-900 transition-colors font-bold text-sm uppercase tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none" do %>
+          + ADD WEBHOOK
+        <% end %>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="p-6 relative">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+      <div class="relative z-10">
+        <% if @webhooks.any? %>
+          <div class="flex flex-col gap-3">
+            <% @webhooks.each do |webhook| %>
+              <%= render "webhook", webhook: webhook %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-8">
+            <p class="text-zinc-600 text-sm mb-4">
+              Webhooks notify external applications when events happen in your retros.
+            </p>
+            <p class="text-zinc-500 text-xs">
+              For example, post to Slack when a retro completes or an action item is created.
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Footer %>
+    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+  </div>
+</div>

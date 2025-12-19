@@ -1,0 +1,17 @@
+<div class="flex items-center justify-between p-3 bg-white border-[2px] <%= delivery.succeeded? ? 'border-green-300' : 'border-zinc-200' %>">
+  <div class="flex items-center gap-3">
+    <% if delivery.succeeded? %>
+      <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+    <% elsif delivery.failed? %>
+      <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+    <% else %>
+      <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+    <% end %>
+    <span class="font-bold text-sm uppercase <%= delivery.succeeded? ? 'text-green-700' : delivery.failed? ? 'text-red-700' : 'text-yellow-700' %>">
+      <%= delivery.state %>
+    </span>
+  </div>
+  <span class="text-xs text-zinc-500">
+    <%= time_ago_in_words(delivery.created_at) %> ago
+  </span>
+</div>

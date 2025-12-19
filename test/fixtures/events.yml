@@ -1,0 +1,21 @@
+retro_created:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  retro_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  creator_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  action: retro.created
+  eventable_type: Retro
+  eventable_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  particulars: '{}'
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
+
+feedback_published:
+  account_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  retro_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  creator_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  action: feedback.published
+  eventable_type: Feedback
+  eventable_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  particulars: '{}'
+  created_at: <%= Time.current.to_fs(:db) %>
+  updated_at: <%= Time.current.to_fs(:db) %>
