@@ -64,7 +64,7 @@ jobs:
         with:
           images: ${{ steps.vars.outputs.canonical }}
           tags: |
-            type=ref,event=tag
+            type=raw,value=${{ github.sha }}
             type=raw,value=latest
           flavor: |
             suffix=-${{ matrix.arch }}
@@ -132,13 +132,15 @@ jobs:
         with:
           images: ${{ steps.vars.outputs.canonical }}
           tags: |
-            type=ref,event=tag
+            type=raw,value=${{ github.sha }}
             type=raw,value=latest
           labels: |
             org.opencontainers.image.source=${{ env.SOURCE_URL }}
 
       - name: Create multi-arch manifests
         shell: bash
+        env:
+          COMMIT_SHA: ${{ github.sha }}
         run: |
           set -eu
           tags="${{ steps.meta.outputs.tags }}"
@@ -148,9 +150,8 @@ jobs:
             [ -z "$tag" ] && continue
             echo "Creating manifest for $tag"
             src_tag="$tag"
-            if [[ "$tag" == *:latest && "${GITHUB_REF}" == refs/tags/* ]]; then
-              ref="${GITHUB_REF#refs/tags/}"
-              src_tag="${tag%:latest}:$ref"
+            if [[ "$tag" == *:latest ]]; then
+              src_tag="${tag%:latest}:${COMMIT_SHA}"
             fi
             if [ -n "${IMAGE_DESCRIPTION:-}" ]; then
               docker buildx imagetools create \
