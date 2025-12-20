@@ -9,14 +9,11 @@ If you want to run your own Fast Retro instance, you can use Docker or deploy wi
 
 ### Docker
 
-```bash
-docker build -t fastretro .
-docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name fastretro fastretro
-```
+We provide pre-built Docker images at `ghcr.io/jangocg/fastretro`. See the [Docker deployment guide](docs/docker-deployment.md) for detailed instructions.
 
 ### Kamal
 
-For more flexibility to customize your Fast Retro installation and deploy changes to your server, we recommend deploying with [Kamal](https://kamal-deploy.org/). Configure `config/deploy.yml` for your environment.
+For more flexibility to customize your Fast Retro installation and deploy changes to your server, we recommend deploying with [Kamal](https://kamal-deploy.org/). See the [Kamal deployment guide](docs/kamal-deployment.md) for step-by-step instructions.
 
 
 ## Development

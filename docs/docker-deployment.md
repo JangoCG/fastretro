@@ -132,7 +132,6 @@ services:
       - "443:443"
     environment:
       - SECRET_KEY_BASE=your-secret-key-base
-      - TLS_DOMAIN=retro.example.com
       - MAILER_FROM_ADDRESS=retro@example.com
       - SMTP_ADDRESS=email-smtp.eu-central-1.amazonaws.com
       - SMTP_AUTHENTICATION=login
