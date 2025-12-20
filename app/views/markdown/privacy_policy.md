@@ -41,6 +41,8 @@ Data is primarily stored in the EU. I have concluded Data Processing Agreements 
 
 **Payment Processing with Stripe.** For payment processing, I use Stripe (Stripe Payments Europe, Ltd., Ireland). Stripe processes your payment data (e.g., credit card information, billing address) to handle subscriptions. Stripe is certified under the EU-US Data Privacy Framework. [Stripe Privacy Policy](https://stripe.com/privacy).
 
+**Error Tracking with Sentry.** To identify and fix bugs, I use Sentry (Functional Software, Inc., USA). Sentry receives error reports containing technical information (e.g., stack traces, browser info) but no personally identifiable information. Sentry is certified under the EU-US Data Privacy Framework. [Sentry Privacy Policy](https://sentry.io/privacy/).
+
 ## 3. How long do I keep your data?
 
 * **Account Data:** As long as the account exists.
@@ -55,7 +57,7 @@ Under GDPR, you have the right to access, rectification, erasure, restriction of
 
 ## 5. Updates
 
-Last updated: December 17, 2025.
+Last updated: December 20, 2025.
 
 ---
 
@@ -102,6 +104,8 @@ Deine Daten werden primär in der EU gespeichert. Ich habe mit allen Dienstleist
 
 **Zahlungsabwicklung durch Stripe.** Für die Zahlungsabwicklung nutze ich Stripe (Stripe Payments Europe, Ltd., Irland). Stripe verarbeitet deine Zahlungsdaten (z.B. Kreditkarteninformationen, Rechnungsadresse) zur Abwicklung von Abonnements. Stripe ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von Stripe](https://stripe.com/de/privacy).
 
+**Fehlerverfolgung durch Sentry.** Um Fehler zu erkennen und zu beheben, nutze ich Sentry (Functional Software, Inc., USA). Sentry erhält Fehlerberichte mit technischen Informationen (z.B. Stack-Traces, Browser-Informationen), jedoch keine personenbezogenen Daten. Sentry ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von Sentry](https://sentry.io/privacy/).
+
 ## 3. Wie lange speichere ich deine Daten?
 
 * **Kontodaten & Inhalte:** Solange dein Konto oder das Team existiert.
@@ -119,4 +123,4 @@ Der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Postfach 31
 
 ## 5. Aktualität
 
-Diese Datenschutzerklärung wurde zuletzt am 17. Dezember 2025 aktualisiert.
+Diese Datenschutzerklärung wurde zuletzt am 20. Dezember 2025 aktualisiert.

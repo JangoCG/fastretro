@@ -15,9 +15,7 @@ module SmtpDeliveryErrorHandling
       case error.message
       when /\A501 5\.1\.3/
         # Ignore undeliverable email addresses.
-        # TODO: ADD SENTRY LOGGING HERE TO MONITOR FREQUENCY.
-        # Sentry.capture_exception error, level: :info if FastRetro.saas?
-        Rails.logger.info("Ignored undeliverable email address: #{error.message}")
+        Sentry.capture_exception(error, level: :info) if defined?(Sentry)
       else
         raise
       end
@@ -29,9 +27,8 @@ module SmtpDeliveryErrorHandling
     rescue_from Net::SMTPFatalError do |error|
       case error.message
       when /\A550 5\.1\.1/, /\A552 5\.6\.0/, /\A555 5\.5\.4/
-        # TODO ADD SENTRY LOGGING HERE TO MONITOR FREQUENCY.
-        # Sentry.capture_exception error, level: :info if FastRetro.saas?
-        Rails.logger.info("Ignored undeliverable email address or message too large: #{error.message}")
+        # Ignore undeliverable email addresses or oversized messages.
+        Sentry.capture_exception(error, level: :info) if defined?(Sentry)
       else
         raise
       end

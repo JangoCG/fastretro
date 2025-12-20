@@ -3,5 +3,7 @@ require "rubygems"
 require "bundler/setup"
 
 ARGV.unshift("--ensure-latest")
+ARGV.unshift("fizzy/")
+ARGV.unshift("--skip-files")
 
 load Gem.bin_path("brakeman", "brakeman")
