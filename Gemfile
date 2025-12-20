@@ -54,10 +54,6 @@ gem "redcarpet"
 # Syntax highlighting for code blocks
 gem "rouge"
 
-# AWS SES for email delivery
-gem "aws-sdk-rails", "~> 5"
-gem "aws-actionmailer-ses", "~> 1"
-
 gem "stripe", "~> 18.0"
 gem "simple_analytics_rails"
 

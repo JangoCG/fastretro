@@ -14,7 +14,11 @@ module Fastretro
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks])
+    #
+    # rails_ext/ is excluded because it contains patches to Rails internals that
+    # don't follow autoload naming conventions. These files are manually required
+    # via config/initializers/extensions.rb instead.
+    config.autoload_lib(ignore: %w[assets tasks rails_ext])
 
     # Configuration for the application, engines, and railties goes here.
     #
