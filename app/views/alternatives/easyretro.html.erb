@@ -1,0 +1,321 @@
+<% content_for :full_width, true %>
+<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
+<% content_for :title, "Fast Retro vs EasyRetro | Best Free Alternative to EasyRetro (2025)" %>
+<% content_for :meta_title, "Fast Retro vs EasyRetro | Best Free Alternative to EasyRetro (2025)" %>
+<% content_for :meta_description, "Looking for an EasyRetro alternative? Fast Retro is 100% open source, offers flat-rate pricing with no board limits, and can be self-hosted for free. Compare features now." %>
+<% content_for :meta_keywords, "easyretro alternative, funretro alternative, retrospective tool, agile retrospective, sprint retrospective, open source retrospective, free retrospective tool" %>
+
+<%# === BACKGROUND TEXTURE === %>
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+
+<%# === HEADER === %>
+<%= render LandingPageHeaderComponent.new %>
+
+<main class="pt-24 pb-0 overflow-x-hidden">
+
+  <%# === HERO === %>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 mb-20">
+    <div class="text-center">
+      <p class="font-mono text-[10px] text-zinc-500 mb-3 uppercase tracking-widest">
+        ALTERNATIVE COMPARISON
+      </p>
+      <h1 class="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] leading-[0.95] font-black uppercase tracking-tighter text-black mb-6">
+        FAST RETRO VS<br>
+        <span class="text-zinc-400">EASYRETRO</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base font-mono text-zinc-600 leading-relaxed mb-8">
+        Looking for an <strong class="text-black">EasyRetro alternative</strong>? Fast Retro offers
+        <strong class="text-black">100% open source</strong> code, flat-rate pricing with no board limits,
+        and the option to self-host for free forever.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-6 py-3 border-2 border-transparent" do %>
+          <span>TRY FAST RETRO FREE</span>
+          <span class="font-mono">-></span>
+        <% end %>
+        <a href="https://github.com/JangoCG/fastretro" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-zinc-600 hover:text-black">
+          <svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span>VIEW SOURCE CODE</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <%# === COMPARISON TABLE === %>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 mb-20">
+    <div class="border-2 border-black bg-white overflow-hidden">
+      <%# Table Header %>
+      <div class="grid grid-cols-3 border-b-2 border-black">
+        <div class="p-4 sm:p-6 bg-zinc-100 border-r-2 border-black">
+          <span class="font-mono text-xs uppercase tracking-wider text-zinc-500">FEATURE</span>
+        </div>
+        <div class="p-4 sm:p-6 bg-[#ffe600] border-r-2 border-black text-center">
+          <span class="font-black text-sm sm:text-base uppercase tracking-tight">FAST RETRO</span>
+        </div>
+        <div class="p-4 sm:p-6 bg-zinc-200 text-center">
+          <span class="font-bold text-sm sm:text-base uppercase tracking-tight text-zinc-600">EASYRETRO</span>
+        </div>
+      </div>
+
+      <%# Pricing %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Pricing Model</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="font-mono text-sm text-emerald-600 font-bold">Flat rate</span>
+          <p class="text-xs text-zinc-500 mt-1">No per-board limits</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="font-mono text-sm text-zinc-600">Per-board tiers</span>
+          <p class="text-xs text-zinc-500 mt-1">1-30 boards/month</p>
+        </div>
+      </div>
+
+      <%# Paid Price %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Paid Plan</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="font-mono text-lg font-black">&#8364;9.99</span>
+          <span class="text-xs text-zinc-500">/month</span>
+          <p class="text-xs text-emerald-600 font-bold mt-1">Unlimited everything</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="font-mono text-lg font-bold text-zinc-600">&#8364;22-77</span>
+          <span class="text-xs text-zinc-500">/month</span>
+          <p class="text-xs text-zinc-500 mt-1">Depends on boards/teams</p>
+        </div>
+      </div>
+
+      <%# Open Source %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Open Source</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full font-bold">&#10003;</span>
+          <p class="text-xs text-zinc-500 mt-1">100% open source</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-red-100 text-red-500 rounded-full font-bold">&#10005;</span>
+          <p class="text-xs text-zinc-500 mt-1">Proprietary</p>
+        </div>
+      </div>
+
+      <%# Self-Hosting %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Self-Hosting</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full font-bold">&#10003;</span>
+          <p class="text-xs text-zinc-500 mt-1">Free forever</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-red-100 text-red-500 rounded-full font-bold">&#10005;</span>
+          <p class="text-xs text-zinc-500 mt-1">Not available</p>
+        </div>
+      </div>
+
+      <%# Unlimited Boards %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Unlimited Boards</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full font-bold">&#10003;</span>
+          <p class="text-xs text-zinc-500 mt-1">On paid plan</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-amber-100 text-amber-600 rounded-full font-bold">~</span>
+          <p class="text-xs text-zinc-500 mt-1">Limited per tier</p>
+        </div>
+      </div>
+
+      <%# Login Method %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Login Method</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="font-mono text-sm text-emerald-600 font-bold">Magic Link</span>
+          <p class="text-xs text-zinc-500 mt-1">No passwords</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="font-mono text-sm text-zinc-600">Email/Password</span>
+          <p class="text-xs text-zinc-500 mt-1">Traditional auth</p>
+        </div>
+      </div>
+
+      <%# Data Hosting %>
+      <div class="grid grid-cols-3 border-b border-zinc-200">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Data Hosting</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="font-mono text-sm text-emerald-600 font-bold">Germany (EU)</span>
+          <p class="text-xs text-zinc-500 mt-1">GDPR compliant</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="font-mono text-sm text-zinc-600">Not specified</span>
+          <p class="text-xs text-zinc-500 mt-1">-</p>
+        </div>
+      </div>
+
+      <%# Free Tier %>
+      <div class="grid grid-cols-3">
+        <div class="p-4 sm:p-6 border-r-2 border-black bg-zinc-50">
+          <span class="font-bold text-sm">Free Tier</span>
+        </div>
+        <div class="p-4 sm:p-6 border-r-2 border-black text-center">
+          <span class="font-mono text-sm font-bold"><%= number_with_delimiter(@free_limit) %> feedbacks</span>
+          <p class="text-xs text-zinc-500 mt-1">No time limit</p>
+        </div>
+        <div class="p-4 sm:p-6 text-center">
+          <span class="font-mono text-sm text-zinc-600">1 public board</span>
+          <p class="text-xs text-zinc-500 mt-1">Per month</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === WHY SWITCH === %>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 mb-20">
+    <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-8 text-center">
+      WHY SWITCH FROM <span class="text-zinc-400">EASYRETRO</span>?
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <%# Reason 1 %>
+      <div class="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-emerald-100 border-2 border-black flex items-center justify-center flex-shrink-0">
+            <span class="font-black">1</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base uppercase tracking-tight mb-2">No Board Limits</h3>
+            <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+              EasyRetro limits your public boards per month (1-30 depending on plan).
+              Fast Retro's paid plan gives you <strong class="text-black">unlimited retrospectives</strong> for a flat &#8364;9.99/month.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <%# Reason 2 %>
+      <div class="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-amber-100 border-2 border-black flex items-center justify-center flex-shrink-0">
+            <span class="font-black">2</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base uppercase tracking-tight mb-2">True Open Source</h3>
+            <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+              Don't trust a vendor with your retrospective data? <strong class="text-black">Self-host Fast Retro</strong> on your own
+              infrastructure. It's 100% open source with <a href="https://github.com/JangoCG/fastretro/blob/main/LICENSE.md" target="_blank" class="underline hover:text-black">minimal license restrictions</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <%# Reason 3 %>
+      <div class="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-violet-100 border-2 border-black flex items-center justify-center flex-shrink-0">
+            <span class="font-black">3</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base uppercase tracking-tight mb-2">Simpler Pricing</h3>
+            <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+              EasyRetro has 4 pricing tiers (&#8364;0-77/month) based on boards and teams.
+              Fast Retro has <strong class="text-black">one paid plan: &#8364;9.99/month</strong> for unlimited everything.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <%# Reason 4 %>
+      <div class="border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-sky-100 border-2 border-black flex items-center justify-center flex-shrink-0">
+            <span class="font-black">4</span>
+          </div>
+          <div>
+            <h3 class="font-bold text-base uppercase tracking-tight mb-2">EU Data Hosting</h3>
+            <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+              Fast Retro is <strong class="text-black">hosted in Germany</strong> with full GDPR compliance.
+              Your team's retrospective data stays protected under strict EU privacy laws.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === WHAT YOU GET === %>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 mb-20">
+    <div class="border-2 border-black bg-[#F8F5EC] p-8 sm:p-12">
+      <h2 class="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-6">
+        EVERYTHING YOU NEED FOR EFFECTIVE RETROSPECTIVES
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Anonymous brainstorming phase</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Drag-and-drop grouping</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Dot voting (3 votes per person)</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Action items with owners</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Real-time collaboration</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Export to Excel</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Action item review phase</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 bg-black"></span>
+          <span>Magic link login (passwordless)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === CTA === %>
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-20 text-center">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-tight mb-6">
+      READY TO SWITCH FROM<br>
+      <span class="text-zinc-400">EASYRETRO?</span>
+    </h2>
+    <p class="font-mono text-sm text-zinc-600 mb-8 max-w-xl mx-auto">
+      Start with <%= number_with_delimiter(@free_limit) %> feedbacks for free. No credit card required.
+      Self-host for free forever, or use our cloud for &#8364;9.99/month unlimited.
+    </p>
+    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm font-black uppercase tracking-wider px-10 py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+      <span>GET STARTED FREE</span>
+      <span class="font-mono">-></span>
+    <% end %>
+  </section>
+
+  <%# === FOOTER === %>
+  <%= render LandingPageFooterComponent.new %>
+
+</main>

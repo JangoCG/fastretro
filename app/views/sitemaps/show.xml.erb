@@ -24,6 +24,13 @@
   </url>
   <% end %>
 
+  <%# Alternative Pages (SEO) %>
+  <url>
+    <loc><%= alternative_easyretro_url(script_name: nil) %></loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <%# Auth Pages %>
   <url>
     <loc><%= new_session_url(script_name: nil) %></loc>
