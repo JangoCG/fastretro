@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   get "/signup", to: redirect("/signup/new")
+  get "/landing_page", to: redirect("/")
 
   # Signup flow
   resource :signup, only: %i[ new create ] do
