@@ -91,6 +91,9 @@
     <% unless content_for?(:skip_javascript) %>
       <%= javascript_importmap_tags %>
     <% end %>
+
+    <%# === ANALYTICS === %>
+    <%= simple_analytics_tag %>
   </head>
   <body class="<%= content_for(:body_class) || "bg-gray-50 min-h-screen" %>">
     <%= yield :header %>

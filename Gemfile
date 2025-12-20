@@ -55,7 +55,6 @@ gem "redcarpet"
 gem "rouge"
 
 gem "stripe", "~> 18.0"
-gem "simple_analytics_rails"
 
 # Error tracking
 gem "sentry-ruby"

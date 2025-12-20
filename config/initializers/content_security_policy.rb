@@ -52,7 +52,7 @@ Rails.application.configure do
 
   config.content_security_policy do |policy|
     policy.default_src :self, *sources.(:default_src)
-    policy.script_src :self, *sources.(:script_src)
+    policy.script_src :self, "https://scripts.simpleanalyticscdn.com", *sources.(:script_src)
     policy.connect_src :self, *sources.(:connect_src)
     policy.frame_src :self, *sources.(:frame_src)
 
