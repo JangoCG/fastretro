@@ -14,7 +14,7 @@ Fast Retro needs to be able to send email for its magic link sign up/sign in flo
 The easiest way to set this up is to use a 3rd-party email provider (such as AWS SES, Postmark, Sendgrid, and so on).
 You can then plug all your SMTP settings from that provider into Fast Retro via the following environment variables:
 
-- `MAILER_FROM_ADDRESS` - the "from" address that Fast Retro should use to send email (e.g. `Fast Retro <noreply@example.com>`)
+- `MAILER_FROM_ADDRESS` - the "from" address that Fast Retro should use to send email (e.g. `support@fastretro.com`)
 - `SMTP_ADDRESS` - the address of the SMTP server you'll send through
 - `SMTP_PORT` - the port number (defaults to 465 when `SMTP_TLS` is set, 587 otherwise)
 - `SMTP_USERNAME`/`SMTP_PASSWORD` - the credentials for logging in to the SMTP server
@@ -34,11 +34,10 @@ If you're using AWS SES, your configuration would look like this:
 
 ```sh
 SMTP_ADDRESS=email-smtp.eu-central-1.amazonaws.com
-SMTP_PORT=587
 SMTP_USERNAME=<your-ses-smtp-username>
 SMTP_PASSWORD=<your-ses-smtp-password>
 SMTP_AUTHENTICATION=login
-MAILER_FROM_ADDRESS=Fast Retro <noreply@yourdomain.com>
+MAILER_FROM_ADDRESS=support@fastretro.app
 ```
 
 **Important:** AWS SES SMTP credentials are different from your IAM access keys. You need to generate them separately in the AWS SES Console under "SMTP Settings" → "Create SMTP Credentials".
