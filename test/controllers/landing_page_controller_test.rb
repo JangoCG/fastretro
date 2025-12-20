@@ -5,7 +5,7 @@ class LandingPageControllerTest < ActionDispatch::IntegrationTest
     untenanted do
       get root_path
       assert_response :success
-      assert_select "h1", /RETROSPECTIVES/i
+      assert_select "h1", /RETROSPECTIVE/i
     end
   end
 
@@ -57,7 +57,7 @@ class LandingPageControllerTest < ActionDispatch::IntegrationTest
 
       # Verify key landing page content is present
       assert_response :success
-      assert_select "h1", text: /RETROSPECTIVES/i
+      assert_select "h1", text: /RETROSPECTIVE/i
 
       # Verify navigation links are present
       assert_select "a[href*='#features']", minimum: 1

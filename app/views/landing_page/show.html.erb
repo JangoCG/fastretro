@@ -1,9 +1,9 @@
 <% content_for :full_width, true %>
 <% content_for :skip_javascript, true %>
 <% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
-<% content_for :title, "Fast Retro — Run Better Retrospectives" %>
-<% content_for :meta_title, "Fast Retro — Open Source Retrospective Tool for Agile Teams" %>
-<% content_for :meta_description, "Fast Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss in real-time. No per-user fees. Free tier with 300 items." %>
+<% content_for :title, "Fast Retro | Free Open Source Retrospective Tool (No Password Needed)" %>
+<% content_for :meta_title, "Fast Retro | Free Open Source Retrospective Tool (No Password Needed)" %>
+<% content_for :meta_description, "Run effective Sprint Retrospectives in seconds. The free, open-source alternative to Parabol. GDPR-compliant, magic link login, and real-time. Start now." %>
 <% content_for :meta_keywords, "retrospective tool, agile retrospective, sprint retrospective, team retrospective, scrum retrospective, remote retrospective, online retrospective, open source retrospective, free retrospective tool" %>
 
 <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
@@ -33,17 +33,22 @@
     <div class="flex flex-col items-center gap-12">
       <div class="text-center max-w-4xl mx-auto">
         <div class="py-4">
-          <p class="font-mono text-[10px] text-zinc-500 mb-2 uppercase tracking-widest">
-            FAST. STRAIGHTFORWARD. OPEN SOURCE.
-          </p>
-          <h1 class="text-[2rem] sm:text-[3rem] md:text-[5rem] leading-[0.85] font-black uppercase tracking-tighter text-black mb-4 sm:mb-6">
-            RETROSPECTIVES<br>
-            DONE<br>
-            RIGHT
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-2 mb-3">
+            <a href="https://github.com/JangoCG/fastretro" target="_blank" class="inline-flex items-center gap-1.5 bg-black text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider hover:bg-zinc-800 transition-colors whitespace-nowrap">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current flex-shrink-0" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>100% OPEN SOURCE</span>
+            </a>
+            <span class="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">FAST. STRAIGHTFORWARD.</span>
+          </div>
+          <h1 class="text-[1.5rem] sm:text-[2.5rem] md:text-[4rem] leading-[0.9] font-black uppercase tracking-tighter text-black mb-4 sm:mb-6">
+            FREE AGILE<br>
+            RETROSPECTIVE TOOL<br>
+            FOR REMOTE TEAMS
           </h1>
           <p class="max-w-xl mx-auto text-xs sm:text-sm font-bold font-mono text-zinc-600 bg-zinc-200/50 p-2 inline-block">
             BRAINSTORM. GROUP. VOTE. DISCUSS.<br>
-            <span class="bg-black text-white px-1">THE MODERN SPIN</span> ON TEAM RETROSPECTIVES.
+            <span class="bg-black text-white px-1">THE MODERN SPIN</span> ON TEAM RETROSPECTIVES.<br>
+            <span class="text-zinc-500">STREAMLINED AND PASSWORDLESS. SELF-HOST OR USE OUR CLOUD.</span>
           </p>
         </div>
 
@@ -53,6 +58,9 @@
             <span class="font-mono">-></span>
           <% end %>
         </div>
+        <p class="mt-3 font-mono text-[10px] text-zinc-500 uppercase tracking-wide">
+          Start for free (<%= number_with_delimiter(@free_limit) %> feedbacks included). No credit card required.
+        </p>
 
         <%# Retro Counter - Mobile/Tablet (below CTA) %>
         <div class="lg:hidden mt-6">
@@ -109,8 +117,8 @@
         <%# Phase 1: Action Review (Optional) %>
         <%= render PhaseTagComponent.new(
               phase: :action_review,
-              phase_title: "PHASE 01 REVIEW",
-              phase_instruction: "REVIEW ACTION ITEMS FROM YOUR LAST RETRO. CHECK OFF WHAT'S DONE.",
+              phase_title: "PHASE 01\nREVIEW",
+              phase_instruction: "REVIEW SCRUM ACTION ITEMS FROM YOUR LAST RETRO. TRACK PROGRESS.",
               phase_footer: "OPTIONAL PHASE",
               rotation: -2
             ) %>
@@ -118,8 +126,8 @@
         <%= render PhaseTagComponent.new(
               phase: :brainstorming,
               phase_title: "PHASE 02\nREFLECT",
-              phase_instruction: "EVERYONE WRITES DOWN THEIR THOUGHTS PRIVATELY. NO ONE SEES UNTIL THE REVEAL.",
-              phase_footer: "ANONYMOUS INPUT",
+              phase_instruction: "COLLECT ANONYMOUS FEEDBACK: WHAT WENT WELL & WHAT COULD BE BETTER.",
+              phase_footer: "GOOD & BAD",
               rotation: -5
             ) %>
 
@@ -127,7 +135,7 @@
         <%= render PhaseTagComponent.new(
               phase: :grouping,
               phase_title: "PHASE 03\nCLUSTER",
-              phase_instruction: "DRAG SIMILAR IDEAS TOGETHER INTO GROUPS. FIND THE PATTERNS.",
+              phase_instruction: "GROUP SIMILAR FEEDBACK IN REAL-TIME. FIND PATTERNS TOGETHER.",
               phase_footer: "ORGANIZE THEMES",
               rotation: 4
             ) %>
@@ -135,8 +143,8 @@
         <%# Phase 4: Voting %>
         <%= render PhaseTagComponent.new(
               phase: :voting,
-              phase_title: "PHASE 04\nPRIORITIZE",
-              phase_instruction: "EACH PERSON GETS 3 VOTES. SPEND THEM ON WHAT MATTERS MOST.",
+              phase_title: "PHASE 04\nVOTE",
+              phase_instruction: "EACH PERSON GETS 3 VOTES. PRIORITIZE WHAT MATTERS MOST.",
               phase_footer: "DEMOCRATIC FOCUS",
               rotation: -3
             ) %>
@@ -145,7 +153,7 @@
         <%= render PhaseTagComponent.new(
               phase: :discussion,
               phase_title: "PHASE 05\nACT",
-              phase_instruction: "TALK THROUGH TOP-VOTED ITEMS. CREATE ACTION ITEMS. ASSIGN OWNERS.",
+              phase_instruction: "DISCUSS TOP-VOTED ITEMS. CREATE ACTION ITEMS FOR YOUR NEXT SPRINT.",
               phase_footer: "DRIVE CHANGE",
               rotation: 6
             ) %>
@@ -154,39 +162,38 @@
       <%# Phase descriptions %>
       <div class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 font-mono text-sm">
         <div class="border-l-4 border-violet-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">01. Review (Optional)</h4>
+          <h3 class="font-bold text-base mb-2">01. Review Scrum Action Items (Optional)</h3>
           <p class="text-zinc-600 leading-relaxed">
-            Starting a new retro? Review action items from your previous session together.
-            Check off completed items—they'll be removed. Leave items unchecked to carry them forward to this retro.
+            Starting a new sprint retrospective? Review action items from your previous session together.
+            Check off completed items—they'll be removed. Carry forward open items to maintain accountability.
           </p>
         </div>
         <div class="border-l-4 border-amber-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">02. Reflect</h4>
+          <h3 class="font-bold text-base mb-2">02. Reflect: Good & Bad Feedback</h3>
           <p class="text-zinc-600 leading-relaxed">
-            Team members write feedback into two columns: "What went well" and "What could be better."
-            Cards are private until the moderator reveals them so no one is influenced.
+            Team members write anonymous feedback into two columns: "What went well" and "What could be better."
+            Cards stay private until revealed—no groupthink, just honest feedback.
           </p>
         </div>
         <div class="border-l-4 border-sky-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">03. Cluster</h4>
+          <h3 class="font-bold text-base mb-2">03. Cluster Feedback in Real-Time</h3>
           <p class="text-zinc-600 leading-relaxed">
-            The moderator drags related cards together to form groups. Similar ideas get consolidated,
-            making it easier to see themes and avoid discussing the same point multiple times.
+            The Scrum Master drags related cards together in real-time. All participants see changes instantly.
+            Group similar feedback to identify themes and avoid redundant discussions.
           </p>
         </div>
         <div class="border-l-4 border-violet-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">04. Prioritize</h4>
+          <h3 class="font-bold text-base mb-2">04. Vote to Prioritize</h3>
           <p class="text-zinc-600 leading-relaxed">
-            Everyone gets 3 votes to spend on the items that matter most to them. Cards and groups
-            automatically sort by vote count so the team focuses on high-priority topics first.
+            Everyone gets 3 votes to spend on the items that matter most. Cards and groups sort by vote count
+            in real-time so the team focuses on high-priority topics first.
           </p>
         </div>
         <div class="border-l-4 border-emerald-400 pl-4 sm:pl-6">
-          <h4 class="font-bold text-base mb-2">05. Act</h4>
+          <h3 class="font-bold text-base mb-2">05. Act: Create Sprint Actions</h3>
           <p class="text-zinc-600 leading-relaxed">
-            Work through the top-voted items together. Create action items with owners and due dates.
-            Actions persist after the retro ends. When starting your next retro, review past action items
-            together—check off what's done, carry forward what's still open.
+            Work through top-voted feedback together. Create action items with owners and due dates for your next sprint.
+            Actions persist after the retro ends—track progress and drive continuous improvement.
           </p>
         </div>
       </div>
@@ -203,6 +210,65 @@
         <p class="mt-4 font-mono text-sm text-zinc-600 max-w-md mx-auto">
           When the retro is complete, export everything to Excel.
           Review action items before your next retro and track what got done.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <%# === WHY FAST RETRO? === %>
+  <section id="why-fastretro" class="max-w-7xl mx-auto px-4 sm:px-6 mb-32">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tighter mb-4">
+        WHY <span class="bg-[#ffe600] px-2">FAST RETRO</span>?
+      </h2>
+      <p class="font-mono text-sm text-zinc-600 max-w-2xl mx-auto">
+        Built for agile teams who want effective retrospectives without enterprise complexity.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <%# Scrum Optimized %>
+      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+        <div class="w-12 h-12 bg-amber-100 border-2 border-black flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-lg uppercase tracking-tight mb-3">Scrum Optimized</h3>
+        <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+          Built specifically for <strong class="text-black">Scrum methodology</strong> and the "Inspect and Adapt" cycle.
+          Our structured 4-phase process guides your team from anonymous reflection to concrete action items—ensuring
+          your agile ceremonies result in actionable change, not just complaints.
+        </p>
+      </div>
+
+      <%# No Lock-In %>
+      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+        <div class="w-12 h-12 bg-emerald-100 border-2 border-black flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-lg uppercase tracking-tight mb-3">No Lock-In</h3>
+        <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+          <strong class="text-black">Cloud Version:</strong> Free to start, fair flat-rate pricing for power users.
+          <br><br>
+          <strong class="text-black">Self-Hosted:</strong> 100% free forever. It's open source. Run it on your own infrastructure with no license fees and  <a href="https://github.com/JangoCG/fastretro/blob/main/LICENSE.md" target="_blank" class="underline hover:text-black">minimal restrictions</a>.
+        </p>
+      </div>
+
+      <%# Zero Friction %>
+      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+        <div class="w-12 h-12 bg-violet-100 border-2 border-black flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <h3 class="font-bold text-lg uppercase tracking-tight mb-3">Zero Friction</h3>
+        <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+          No enterprise bloat or feature overload. Magic link login means <strong class="text-black">no passwords to remember</strong>.
+          Keyboard accessible for power users. Real-time updates keep everyone in sync.
+          <strong class="text-black">Hosted in Germany</strong> for full GDPR compliance.
         </p>
       </div>
     </div>
