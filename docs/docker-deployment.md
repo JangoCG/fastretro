@@ -4,7 +4,7 @@ We provide pre-built Docker images that can be used to run Fast Retro on your ow
 
 If you don't need to change the source code, and just want the out-of-the-box Fast Retro experience, this can be a great way to get started.
 
-You'll find the latest version of Fast Retro's Docker image at `<PUBLIC_IMAGE_WILL_BE_PROVIDED_SOON>`.
+You'll find the latest version of Fast Retro's Docker image at `ghcr.io/jangocg/fastretro`.
 To run it you'll need three things: a machine that runs Docker; a mounted volume (so that your database is stored somewhere that is kept around between restarts); and some environment variables for configuration.
 
 ### Mounting a storage volume
@@ -15,7 +15,7 @@ By default Docker containers don't persist storage between runs, so you'll want 
 The simplest way to do this is with the `--volume` flag with `docker run`. For example:
 
 ```sh
-docker run --volume fastretro:/rails/storage <PUBLIC_IMAGE_WILL_BE_PROVIDED_SOON>
+docker run --volume fastretro:/rails/storage ghcr.io/jangocg/fastretro
 ```
 
 That will create a named volume (called `fastretro`) and mount it into the correct path.
@@ -125,7 +125,7 @@ Here's an example of a `docker-compose.yml` that you could use to run Fast Retro
 ```yaml
 services:
   web:
-    image: <PUBLIC_IMAGE_WILL_BE_PROVIDED_SOON>
+    image: ghcr.io/jangocg/fastretro
     restart: unless-stopped
     ports:
       - "80:80"
