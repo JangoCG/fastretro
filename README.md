@@ -29,3 +29,4 @@ We welcome contributions!
 ## License
 
 Fast Retro is released under the [O'Saasy License](LICENSE.md).
+
