@@ -302,6 +302,210 @@ end
 # These will be carried forward to the discussion phase
 
 # =============================================================================
+# RETRO 4: Waiting Room Phase (team gathering before starting)
+# =============================================================================
+
+puts "  Creating Sprint 49 retro (waiting_room phase)..."
+
+retro4 = Retro.create!(
+  account: account,
+  name: "Sprint 49 Retrospective",
+  phase: :waiting_room
+)
+
+# Only some participants have joined - others still arriving
+[ sarah, marcus, emily ].each_with_index do |user, index|
+  role = index < 1 ? :admin : :participant
+  retro4.add_participant(user, role: role)
+end
+
+# =============================================================================
+# RETRO 5: Brainstorming Phase (team actively writing feedback)
+# =============================================================================
+
+puts "  Creating Q4 Planning retro (brainstorming phase)..."
+
+retro5 = Retro.create!(
+  account: account,
+  name: "Q4 Planning Retrospective",
+  phase: :brainstorming
+)
+
+# All participants joined
+[ sarah, marcus, emily, david, alex, priya ].each_with_index do |user, index|
+  role = index < 2 ? :admin : :participant
+  retro5.add_participant(user, role: role)
+end
+
+# Published feedbacks (already submitted)
+brainstorm_went_well = [
+  "The Q3 OKR review process was thorough and helped us identify key learnings.",
+  "Cross-functional team alignment meetings improved communication significantly.",
+  "We hit 95% of our Q3 targets - great execution by the whole team!",
+  "The new sprint demo format got positive feedback from stakeholders."
+]
+
+brainstorm_could_be_better = [
+  "Roadmap priorities shifted 3 times this quarter - need more stability.",
+  "Technical debt backlog grew by 40% - we need dedicated cleanup sprints.",
+  "Remote team members felt less included in spontaneous discussions."
+]
+
+brainstorm_went_well.each_with_index do |content, i|
+  create_feedback(retro: retro5, user: [ sarah, marcus, emily, david ][i], category: :went_well, content: content)
+end
+
+brainstorm_could_be_better.each_with_index do |content, i|
+  create_feedback(retro: retro5, user: [ alex, priya, david ][i], category: :could_be_better, content: content)
+end
+
+# Drafted feedbacks (still being written)
+create_feedback(retro: retro5, user: priya, category: :went_well, content: "The mentorship program helped junior devs ramp up quickly.", status: :drafted)
+create_feedback(retro: retro5, user: emily, category: :could_be_better, content: "Need better async communication guidelines for the distributed team.", status: :drafted)
+
+# =============================================================================
+# RETRO 6: Grouping Phase (organizing feedback into themes)
+# =============================================================================
+
+puts "  Creating Release 2.0 retro (grouping phase)..."
+
+retro6 = Retro.create!(
+  account: account,
+  name: "Release 2.0 Retrospective",
+  phase: :grouping
+)
+
+[ sarah, marcus, emily, david, alex, priya ].each_with_index do |user, index|
+  role = index < 2 ? :admin : :participant
+  participant = retro6.add_participant(user, role: role)
+  participant.finish! # All done brainstorming
+end
+
+# Create feedbacks for grouping
+grouping_went_well = [
+  "Feature flags allowed us to do gradual rollouts safely.",
+  "Zero downtime deployment was a huge achievement for 2.0 launch.",
+  "QA automation coverage reached 90% before release.",
+  "The launch day war room coordination was excellent.",
+  "Customer support was well-prepared with updated documentation.",
+  "Performance benchmarks exceeded our targets by 20%."
+]
+
+grouping_could_be_better = [
+  "Last-minute scope additions created unnecessary stress.",
+  "The feature freeze was broken twice - need stricter enforcement.",
+  "Some edge cases weren't caught until staging testing.",
+  "Release notes were rushed and had inaccuracies.",
+  "Load testing happened too late in the cycle."
+]
+
+grouping_went_well_feedbacks = grouping_went_well.each_with_index.map do |content, i|
+  create_feedback(retro: retro6, user: [ sarah, marcus, emily, david, alex, priya ][i], category: :went_well, content: content)
+end
+
+grouping_could_be_better_feedbacks = grouping_could_be_better.each_with_index.map do |content, i|
+  create_feedback(retro: retro6, user: [ david, alex, priya, emily, marcus ][i], category: :could_be_better, content: content)
+end
+
+# Create some groups (some feedback grouped, some ungrouped)
+deploy_group = FeedbackGroup.create!(retro: retro6, name: "Deployment & Release Process")
+grouping_went_well_feedbacks[0].update!(feedback_group: deploy_group)
+grouping_went_well_feedbacks[1].update!(feedback_group: deploy_group)
+
+testing_group = FeedbackGroup.create!(retro: retro6, name: "Testing & Quality")
+grouping_went_well_feedbacks[2].update!(feedback_group: testing_group)
+grouping_could_be_better_feedbacks[2].update!(feedback_group: testing_group)
+grouping_could_be_better_feedbacks[4].update!(feedback_group: testing_group)
+
+scope_group = FeedbackGroup.create!(retro: retro6, name: "Scope Management")
+grouping_could_be_better_feedbacks[0].update!(feedback_group: scope_group)
+grouping_could_be_better_feedbacks[1].update!(feedback_group: scope_group)
+
+# =============================================================================
+# RETRO 7: Discussion Phase (reviewing top-voted items)
+# =============================================================================
+
+puts "  Creating Platform Migration retro (discussion phase)..."
+
+retro7 = Retro.create!(
+  account: account,
+  name: "Platform Migration Retrospective",
+  phase: :discussion
+)
+
+[ sarah, marcus, emily, david, alex, priya ].each_with_index do |user, index|
+  role = index < 2 ? :admin : :participant
+  participant = retro7.add_participant(user, role: role)
+  participant.finish!
+end
+
+# Create feedbacks with votes already cast
+discussion_went_well = [
+  "The phased migration approach minimized customer impact.",
+  "Rollback procedures were tested and worked flawlessly.",
+  "Team stayed calm under pressure during the cutover weekend.",
+  "Communication to customers was clear and timely.",
+  "Performance improved 50% on the new platform.",
+  "Knowledge transfer sessions prepared the team well."
+]
+
+discussion_could_be_better = [
+  "Data migration scripts needed multiple iterations - start earlier next time.",
+  "Some legacy integrations broke unexpectedly - need better dependency mapping.",
+  "Weekend work for cutover was exhausting - consider phased approach.",
+  "Monitoring gaps meant we missed some issues initially.",
+  "Documentation for the new platform was incomplete at launch."
+]
+
+discussion_went_well_feedbacks = discussion_went_well.each_with_index.map do |content, i|
+  create_feedback(retro: retro7, user: [ sarah, marcus, emily, david, alex, priya ][i], category: :went_well, content: content)
+end
+
+discussion_could_be_better_feedbacks = discussion_could_be_better.each_with_index.map do |content, i|
+  create_feedback(retro: retro7, user: [ alex, priya, david, emily, marcus ][i], category: :could_be_better, content: content)
+end
+
+# Create groups for discussion
+migration_group = FeedbackGroup.create!(retro: retro7, name: "Migration Strategy")
+discussion_went_well_feedbacks[0].update!(feedback_group: migration_group)
+discussion_went_well_feedbacks[1].update!(feedback_group: migration_group)
+discussion_could_be_better_feedbacks[0].update!(feedback_group: migration_group)
+
+team_group = FeedbackGroup.create!(retro: retro7, name: "Team & Communication")
+discussion_went_well_feedbacks[2].update!(feedback_group: team_group)
+discussion_went_well_feedbacks[3].update!(feedback_group: team_group)
+discussion_could_be_better_feedbacks[2].update!(feedback_group: team_group)
+
+# Add votes (voting already completed)
+discussion_participants = retro7.participants.to_a
+
+# High-voted items (these will be discussed first)
+[ sarah, marcus, emily, david, alex ].each do |voter|
+  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_could_be_better_feedbacks[0])
+end
+
+[ sarah, marcus, emily, priya ].each do |voter|
+  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_went_well_feedbacks[0])
+end
+
+[ marcus, david, alex, priya ].each do |voter|
+  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_could_be_better_feedbacks[1])
+end
+
+[ emily, david, alex ].each do |voter|
+  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_could_be_better_feedbacks[2])
+end
+
+[ sarah, priya ].each do |voter|
+  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_went_well_feedbacks[4])
+end
+
+# Some action items already created during discussion
+create_action(retro: retro7, user: sarah, content: "Create comprehensive dependency map before next migration", status: :published)
+create_action(retro: retro7, user: marcus, content: "Schedule migration script development 2 sprints earlier", status: :published)
+create_action(retro: retro7, user: emily, content: "Evaluate weekday cutover with feature flags instead of weekend work", status: :drafted)
+
+# =============================================================================
 # SUMMARY
 # =============================================================================
 
@@ -311,10 +515,14 @@ puts ""
 puts "Account: #{account.name} (#{account.slug})"
 puts "Users: #{users.map(&:name).join(', ')}"
 puts ""
-puts "Retros:"
-puts "  1. #{retro1.name} - #{retro1.phase} (#{retro1.feedbacks.count} feedbacks, #{retro1.participants.count} participants)"
-puts "  2. #{retro2.name} - #{retro2.phase} (#{retro2.feedbacks.count} feedbacks, #{retro2.actions.published.count} actions)"
-puts "  3. #{retro3.name} - #{retro3.phase} (#{retro3.actions.count} actions: #{retro3.actions.completed_actions.count} completed, #{retro3.actions.incomplete.count} pending)"
+puts "Retros (one for each phase):"
+puts "  1. #{retro4.name} - #{retro4.phase} (#{retro4.participants.count} participants waiting)"
+puts "  2. #{retro3.name} - #{retro3.phase} (#{retro3.actions.count} actions: #{retro3.actions.completed_actions.count} completed, #{retro3.actions.incomplete.count} pending)"
+puts "  3. #{retro5.name} - #{retro5.phase} (#{retro5.feedbacks.count} feedbacks, #{retro5.feedbacks.drafted.count} drafts)"
+puts "  4. #{retro6.name} - #{retro6.phase} (#{retro6.feedbacks.count} feedbacks, #{retro6.feedback_groups.count} groups)"
+puts "  5. #{retro1.name} - #{retro1.phase} (#{retro1.feedbacks.count} feedbacks, #{Vote.where(voteable: retro1.feedbacks).count} votes)"
+puts "  6. #{retro7.name} - #{retro7.phase} (#{retro7.feedbacks.count} feedbacks, #{retro7.actions.count} actions)"
+puts "  7. #{retro2.name} - #{retro2.phase} (#{retro2.feedbacks.count} feedbacks, #{retro2.actions.published.count} actions)"
 puts ""
 puts "To log in as Sarah (owner): Use email sarah@acmecorp.com"
 puts "To log in as Marcus (admin): Use email marcus@acmecorp.com"

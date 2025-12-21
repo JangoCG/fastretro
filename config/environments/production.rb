@@ -6,6 +6,10 @@ Rails.application.configure do
   # CSP: Allow form submissions to Stripe Checkout and Billing Portal
   config.x.content_security_policy.form_action = "https://checkout.stripe.com https://billing.stripe.com"
 
+  # CSP: Allow analytics scripts (Simple Analytics, Cloudflare)
+  config.x.content_security_policy.script_src = "https://scripts.simpleanalyticscdn.com https://static.cloudflareinsights.com"
+  config.x.content_security_policy.connect_src = "https://scripts.simpleanalyticscdn.com https://queue.simpleanalyticscdn.com https://cloudflareinsights.com"
+
   # Email provider Settings
   #
   # SMTP setting can be configured via environment variables.
