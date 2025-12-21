@@ -3,6 +3,9 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # CSP: Allow form submissions to Stripe Checkout and Billing Portal
+  config.x.content_security_policy.form_action = "https://checkout.stripe.com https://billing.stripe.com"
+
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true
 
