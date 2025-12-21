@@ -40,19 +40,20 @@
         </p>
 
         <%# Link Input with Copy Button %>
-        <div class="flex gap-2">
+        <div class="flex gap-2" data-controller="clipboard">
           <div class="flex-1 relative">
             <input
               type="text"
               value="<%= full_invite_url %>"
               readonly
-              id="invite-link-input"
+              data-clipboard-target="source"
               class="w-full px-3 py-2 text-sm font-mono bg-white border-[2px] border-zinc-900 rounded-[2px] text-zinc-700 truncate pr-10"
             >
           </div>
           <button
             type="button"
-            onclick="copyInviteLink()"
+            data-action="clipboard#copy"
+            data-clipboard-target="button"
             class="px-4 py-2 bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider border-[2px] border-zinc-900 rounded-[2px] hover:bg-zinc-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]"
           >
             Copy
@@ -69,17 +70,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function copyInviteLink() {
-    const input = document.getElementById('invite-link-input');
-    navigator.clipboard.writeText(input.value).then(() => {
-      const button = event.target;
-      const originalText = button.textContent;
-      button.textContent = 'Copied!';
-      setTimeout(() => {
-        button.textContent = originalText;
-      }, 2000);
-    });
-  }
-</script>

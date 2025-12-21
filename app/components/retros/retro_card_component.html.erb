@@ -1,18 +1,14 @@
-<div
-  id="<%= dom_id(@retro) %>"
-  class="group relative border-[2.5px] border-zinc-800 bg-[#F8F5EC] shadow-[5px_5px_0px_0px_rgba(39,39,42,1)] hover:shadow-[2px_2px_0px_0px_rgba(39,39,42,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer overflow-hidden rounded-sm"
-  onclick="window.location.href='<%= retro_path(@retro) %>'"
->
+<%= link_to retro_path(@retro), id: dom_id(@retro), class: "block group relative border-[2.5px] border-zinc-800 bg-[#F8F5EC] shadow-[5px_5px_0px_0px_rgba(39,39,42,1)] hover:shadow-[2px_2px_0px_0px_rgba(39,39,42,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer overflow-hidden rounded-sm" do %>
   <%# Top "Serial Number" Bar %>
   <div class="px-3 py-2 flex items-center gap-2 border-b-[2.5px] border-zinc-800 bg-white">
     <span class="text-[0.6rem] font-black text-zinc-900 uppercase tracking-widest">
       NO. <%= @retro.id %>
     </span>
-    
+
     <div class="flex-1"></div>
 
     <%# Raw Action Buttons %>
-    <div class="flex items-center gap-2" onclick="event.stopPropagation()">
+    <div class="flex items-center gap-2" data-action="click->stop-propagation#stop">
       <%= render IconButtonComponent.new(
         icon: "pencil",
         variant: :ghost,
@@ -65,4 +61,4 @@
   
   <%# Decorative Stripe Corner (Optional visual flourish) %>
   <div class="absolute bottom-0 right-0 w-3 h-3 bg-[repeating-linear-gradient(-45deg,#000,#000_2px,transparent_2px,transparent_4px)] opacity-20 pointer-events-none"></div>
-</div>
+<% end %>

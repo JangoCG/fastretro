@@ -139,10 +139,12 @@ jobs:
 
       - name: Create multi-arch manifests
         shell: bash
-        env:
-          COMMIT_SHA: ${{ github.sha }}
         run: |
           set -eu
+          # Get the SHA tag (first non-latest tag) to use as source for latest
+          sha_tag="${{ github.sha }}"
+          canonical="${{ steps.vars.outputs.canonical }}"
+
           tags="${{ steps.meta.outputs.tags }}"
           echo "Creating manifests for tags:"
           printf '%s\n' "$tags"
@@ -151,7 +153,8 @@ jobs:
             echo "Creating manifest for $tag"
             src_tag="$tag"
             if [[ "$tag" == *:latest ]]; then
-              src_tag="${tag%:latest}:${COMMIT_SHA}"
+              # For latest, use the SHA-based tag as source
+              src_tag="${canonical}:${sha_tag}"
             fi
             if [ -n "${IMAGE_DESCRIPTION:-}" ]; then
               docker buildx imagetools create \
