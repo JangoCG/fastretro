@@ -46,7 +46,7 @@ gem "image_processing", "~> 1.2"
 gem "view_component"
 
 # Modern rich text editor built on Lexical
-gem "lexxy", "~> 0.1.23.beta"
+gem "lexxy", "~> 0.1.26.beta"
 
 # Markdown rendering for legal pages
 gem "redcarpet"
