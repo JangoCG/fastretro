@@ -1,0 +1,66 @@
+<div data-controller="dialog" data-dialog-modal-value="true">
+  <%# Trigger Button %>
+  <button type="button"
+          data-action="click->dialog#open"
+          class="h-10 sm:h-12 px-4 sm:px-8 font-bold uppercase tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100">
+    Go Back
+  </button>
+
+  <%# Modal Dialog %>
+  <dialog data-dialog-target="dialog"
+          class="fixed m-auto inset-0 z-50 w-[90vw] sm:w-[480px] max-w-[480px] p-0 bg-[#F8F5EC] text-zinc-900 shadow-[8px_8px_0px_0px_rgba(24,24,27,1)] border-[3px] border-zinc-900 outline-none backdrop:bg-zinc-900/50 backdrop:backdrop-blur-sm">
+
+    <%# Header %>
+    <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b-[3px] border-zinc-900">
+      <span class="font-black text-sm uppercase tracking-widest">"CONFIRM"</span>
+      <button type="button" data-action="click->dialog#close" class="text-white hover:text-zinc-300 transition-colors">
+        <%= icon_tag "close", class: "text-xl" %>
+      </button>
+    </div>
+
+    <%# Content %>
+    <div class="p-6">
+      <div class="text-center mb-6">
+        <p class="font-black text-lg uppercase tracking-tight text-zinc-900 mb-2">
+          "GO BACK?"
+        </p>
+        <p class="text-sm text-zinc-600">
+          You are about to go back to <span class="font-bold text-zinc-900">"<%= previous_phase_name %>"</span>
+        </p>
+      </div>
+
+      <%# Warning about going back %>
+      <div class="mb-6 p-4 bg-amber-100 border-2 border-amber-500">
+        <div class="flex items-start gap-3">
+          <span class="w-8 h-8 flex items-center justify-center bg-amber-500 text-white font-black text-lg flex-shrink-0 border-2 border-amber-700">!</span>
+          <div>
+            <p class="font-bold text-sm uppercase tracking-wide text-amber-800 mb-1">
+              Participants will be redirected
+            </p>
+            <p class="text-sm text-amber-700">
+              All participants will be taken back to the previous phase.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <%# Action Buttons %>
+      <div class="flex gap-3 justify-end">
+        <button type="button"
+                data-action="click->dialog#close"
+                class="h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100">
+          Cancel
+        </button>
+
+        <%= button_to retro_phase_back_path(@retro),
+              method: :post,
+              class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-zinc-900 border-zinc-900 text-white hover:bg-zinc-700" do %>
+          Yes, Go Back
+        <% end %>
+      </div>
+    </div>
+
+    <%# Footer Decoration %>
+    <div class="h-2 w-full bg-[repeating-linear-gradient(-45deg,#000,#000_2px,transparent_2px,transparent_4px)] opacity-10"></div>
+  </dialog>
+</div>

@@ -45,6 +45,29 @@ class Retro < ApplicationRecord
     phase.to_sym == PHASE_ORDER.last
   end
 
+  def back_phase!
+    current_index = PHASE_ORDER.index(phase.to_sym)
+    return if current_index.nil? || current_index <= PHASE_ORDER.index(:brainstorming)
+
+    from_phase = phase
+    prev_phase = PHASE_ORDER[current_index - 1]
+    update!(phase: prev_phase, highlighted_user_id: nil)
+    participants.update_all(finished: false)
+
+    record_event("retro.phase_changed", particulars: { from: from_phase, to: phase, direction: "back" })
+  end
+
+  def previous_phase
+    current_index = PHASE_ORDER.index(phase.to_sym)
+    return nil if current_index.nil? || current_index <= PHASE_ORDER.index(:brainstorming)
+    PHASE_ORDER[current_index - 1]
+  end
+
+  def can_go_back?
+    current_index = PHASE_ORDER.index(phase.to_sym)
+    current_index.present? && current_index > PHASE_ORDER.index(:brainstorming)
+  end
+
   def add_participant(user, role: :participant)
     participants.find_or_create_by!(user: user) do |p|
       p.role = role

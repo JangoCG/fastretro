@@ -1,22 +1,5 @@
 {
-  "ignored_warnings": [
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "7c922d5793fec09548004f709c579bcec4f00b78bd5ff362bedb8d3148d39a9b",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/feedbacks/edit.html.erb",
-      "line": 53,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(action => ButtonComponent.new(:variant => :primary, :href => retro_path(Current.account.retros.find(params[:retro_id])), :data => ({ :controller => \"hotkey\", :action => \"keydown.ctrl+enter@document->hotkey#click keydown.meta+enter@document->hotkey#click\" })).with_content(\"Done\"), {})",
-      "render_path": null,
-      "location": null,
-      "user_input": "params[:retro_id]",
-      "confidence": "Weak",
-      "note": "False positive - this is rendering a ViewComponent with a safe href attribute, not a dynamic template path"
-    }
-  ],
-  "updated": "2025-12-13",
+  "ignored_warnings": [],
+  "updated": "2026-01-06",
   "brakeman_version": "7.1.1"
 }

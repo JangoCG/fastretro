@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resource :finished, only: :update
       resource :finish_brainstorming, only: :create
       resource :phase_transition, only: :create
+      resource :phase_back, only: :create
       resources :feedback_groups, only: %i[create destroy] do
         delete :remove_feedback, on: :collection
       end
