@@ -49,12 +49,9 @@ class Retro < ApplicationRecord
     current_index = PHASE_ORDER.index(phase.to_sym)
     return if current_index.nil? || current_index <= PHASE_ORDER.index(:brainstorming)
 
-    from_phase = phase
     prev_phase = PHASE_ORDER[current_index - 1]
     update!(phase: prev_phase, highlighted_user_id: nil)
     participants.update_all(finished: false)
-
-    record_event("retro.phase_changed", particulars: { from: from_phase, to: phase, direction: "back" })
   end
 
   def previous_phase

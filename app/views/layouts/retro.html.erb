@@ -90,9 +90,39 @@
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2 justify-center sm:justify-end w-full sm:w-auto">
+        <div class="flex flex-wrap items-center gap-2 justify-center sm:justify-end w-full sm:w-auto"
+             data-controller="elevator-music"
+             data-elevator-music-url-value="<%= retro_music_path(@retro) %>"
+             data-elevator-music-playing-value="<%= @retro.music_playing? %>">
+
+          <%# Hidden audio element for elevator music %>
+          <audio id="elevator-music-audio"
+                 data-elevator-music-target="audio"
+                 src="<%= asset_path('elevator-music-bossa-nova-background-music-version-60s-10900.mp3') %>"
+                 loop
+                 preload="auto"
+                 style="display: none;">
+          </audio>
+
+          <%# Enable audio prompt for participants (shown when browser blocks autoplay) %>
+          <button type="button"
+                  id="music-enable-prompt"
+                  data-elevator-music-target="prompt"
+                  data-action="click->elevator-music#enableAudio"
+                  class="hidden h-10 sm:h-12 px-4 sm:px-6 font-bold uppercase tracking-widest text-xs sm:text-sm bg-amber-400 text-zinc-900 border-[2px] border-zinc-900 rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 animate-pulse">
+            <span class="flex items-center gap-2">
+              <span>🎵</span>
+              <span>Click to enable music</span>
+            </span>
+          </button>
+
           <%# Phase-specific actions (e.g., votes remaining) %>
           <%= yield :header_actions %>
+
+          <%# Music toggle button - admin only %>
+          <% if @retro.admin?(Current.user) %>
+            <%= render MusicToggleComponent.new(retro: @retro) %>
+          <% end %>
 
           <%# I am finished button - available to all participants, hidden when retro is complete %>
           <% if @current_participant.present? && !@retro.complete? %>

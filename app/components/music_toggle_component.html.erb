@@ -1,0 +1,11 @@
+<button type="button"
+        id="music-toggle-button"
+        data-elevator-music-target="button"
+        data-action="click->elevator-music#toggle"
+        <%= "data-playing" if playing? %>
+        class="h-10 sm:h-12 w-10 sm:w-12 font-bold text-lg border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 border-zinc-900 flex items-center justify-center
+               data-[playing]:bg-emerald-400 data-[playing]:text-zinc-900
+               bg-white text-zinc-900 hover:bg-zinc-100"
+        title="<%= playing? ? 'Stop elevator music' : 'Play elevator music' %>">
+  <span class="text-base"><%= playing? ? "🔊" : "🎵" %></span>
+</button>

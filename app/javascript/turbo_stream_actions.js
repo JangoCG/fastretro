@@ -41,3 +41,29 @@ Turbo.StreamActions.highlight = function() {
     }
   })
 }
+
+// Custom Turbo Stream action to control elevator music across all connected clients
+Turbo.StreamActions.music = function() {
+  const state = this.getAttribute("state")
+  const audio = document.getElementById("elevator-music-audio")
+  const toggleButton = document.getElementById("music-toggle-button")
+  const enablePrompt = document.getElementById("music-enable-prompt")
+
+  if (!audio) return
+
+  if (state === "playing") {
+    audio.play().then(() => {
+      // Autoplay worked, hide prompt if visible
+      if (enablePrompt) enablePrompt.classList.add("hidden")
+      if (toggleButton) toggleButton.dataset.playing = "true"
+    }).catch(e => {
+      console.log("[Music] Autoplay blocked:", e)
+      // Show prompt for users to click to enable audio
+      if (enablePrompt) enablePrompt.classList.remove("hidden")
+    })
+  } else {
+    audio.pause()
+    if (toggleButton) delete toggleButton.dataset.playing
+    if (enablePrompt) enablePrompt.classList.add("hidden")
+  }
+}

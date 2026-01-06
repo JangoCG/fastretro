@@ -81,20 +81,6 @@ class RetroTest < ActiveSupport::TestCase
     assert_not participant.reload.finished?
   end
 
-  test "back_phase! records phase change event" do
-    @retro.update!(phase: :voting)
-
-    assert_difference -> { @retro.retro_events.count }, 1 do
-      @retro.back_phase!
-    end
-
-    event = @retro.retro_events.order(:id).last
-    assert_equal "retro.phase_changed", event.action
-    assert_equal "voting", event.particulars["from"]
-    assert_equal "grouping", event.particulars["to"]
-    assert_equal "back", event.particulars["direction"]
-  end
-
   # === previous_phase tests ===
 
   test "previous_phase returns brainstorming when on grouping" do

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       end
       resources :votes, only: %i[create destroy]
       resource :highlight, only: %i[update destroy]
+      resource :music, only: :update
     end
     resources :feedbacks, only: %i[ new create show edit update destroy ] do
       resource :publish, only: :create, module: :feedbacks

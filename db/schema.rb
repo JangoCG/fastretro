@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_06_192433) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -108,6 +108,23 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "events", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.integer "creator_id"
+    t.integer "eventable_id", null: false
+    t.string "eventable_type", null: false
+    t.json "particulars", default: {}
+    t.integer "retro_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "action"], name: "index_events_on_account_id_and_action"
+    t.index ["account_id"], name: "index_events_on_account_id"
+    t.index ["creator_id"], name: "index_events_on_creator_id"
+    t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
+    t.index ["retro_id"], name: "index_events_on_retro_id"
+  end
+
   create_table "feedback_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -166,6 +183,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.integer "highlighted_user_id"
+    t.boolean "music_playing", default: false, null: false
     t.string "name"
     t.string "phase", default: "waiting_room", null: false
     t.datetime "updated_at", null: false
@@ -207,6 +225,43 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
   end
 
+  create_table "webhook_delinquency_trackers", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.integer "consecutive_failures_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "first_failure_at"
+    t.datetime "updated_at", null: false
+    t.integer "webhook_id", null: false
+    t.index ["account_id"], name: "index_webhook_delinquency_trackers_on_account_id"
+    t.index ["webhook_id"], name: "index_webhook_delinquency_trackers_on_webhook_id", unique: true
+  end
+
+  create_table "webhook_deliveries", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "event_id", null: false
+    t.text "request"
+    t.text "response"
+    t.string "state", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.integer "webhook_id", null: false
+    t.index ["account_id"], name: "index_webhook_deliveries_on_account_id"
+    t.index ["event_id"], name: "index_webhook_deliveries_on_event_id"
+    t.index ["webhook_id"], name: "index_webhook_deliveries_on_webhook_id"
+  end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.string "signing_secret", null: false
+    t.text "subscribed_actions"
+    t.datetime "updated_at", null: false
+    t.text "url", null: false
+    t.index ["account_id"], name: "index_webhooks_on_account_id"
+  end
+
   add_foreign_key "account_billing_waivers", "accounts"
   add_foreign_key "account_join_codes", "accounts"
   add_foreign_key "account_subscriptions", "accounts"
@@ -214,6 +269,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
   add_foreign_key "actions", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "accounts"
+  add_foreign_key "events", "retros"
+  add_foreign_key "events", "users", column: "creator_id"
   add_foreign_key "feedback_groups", "retros"
   add_foreign_key "feedbacks", "feedback_groups"
   add_foreign_key "feedbacks", "retros"
@@ -226,4 +284,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_18_182341) do
   add_foreign_key "users", "accounts"
   add_foreign_key "users", "identities"
   add_foreign_key "votes", "retro_participants"
+  add_foreign_key "webhook_delinquency_trackers", "accounts"
+  add_foreign_key "webhook_delinquency_trackers", "webhooks"
+  add_foreign_key "webhook_deliveries", "accounts"
+  add_foreign_key "webhook_deliveries", "events"
+  add_foreign_key "webhook_deliveries", "webhooks"
+  add_foreign_key "webhooks", "accounts"
 end
