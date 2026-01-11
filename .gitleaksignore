@@ -1,0 +1,2 @@
+# Add commit:file:rule:line entries here to ignore specific findings
+# Example: d8463077:gems/example/bin/setup:generic-api-key:54
