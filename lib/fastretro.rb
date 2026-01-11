@@ -33,10 +33,8 @@ module FastRetro
     def saas?
       return @saas if defined?(@saas)
 
-      @saas = !!(
-        (ENV["SAAS"].present? || File.exist?(Rails.root.join("tmp/saas.txt"))) &&
-        ENV["SAAS"] != "false"
-      )
+      saas_file = File.expand_path("../tmp/saas.txt", __dir__)
+      @saas = !!((ENV["SAAS"] || File.exist?(saas_file)) && ENV["SAAS"] != "false")
     end
 
     # Resets the cached SaaS mode value.
