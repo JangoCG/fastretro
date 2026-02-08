@@ -15,7 +15,7 @@
   <div class="bg-white relative border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden flex flex-col h-full min-h-[100px] group-hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">
 
     <% unless show_voting? %>
-      <%= link_to retro_feedback_path(@feedback.retro, @feedback), class: "absolute inset-0 z-10" do %><% end %>
+      <%= link_to retro_feedback_path(@feedback.retro, @feedback, script_name: @feedback.retro.account.slug), class: "absolute inset-0 z-10" do %><% end %>
     <% end %>
 
     <%# Internal Content Area %>
@@ -26,7 +26,7 @@
         <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono">ID_00<%= @feedback.id %></span>
         <div class="flex items-center gap-2">
           <% if @grouping_enabled && in_group? %>
-            <%= button_to remove_feedback_retro_feedback_groups_path(@feedback.retro, feedback_id: @feedback.id),
+            <%= button_to remove_feedback_retro_feedback_groups_path(@feedback.retro, feedback_id: @feedback.id, script_name: @feedback.retro.account.slug),
                 method: :delete,
                 class: "text-[0.55rem] font-bold text-zinc-500 hover:text-zinc-900 uppercase tracking-wider transition-colors px-1.5 py-0.5 border border-zinc-300 hover:border-zinc-500 rounded bg-zinc-50 hover:bg-zinc-100 relative z-20" do %>
               Ungroup

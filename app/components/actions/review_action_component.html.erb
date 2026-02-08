@@ -1,7 +1,7 @@
 <div id="<%= dom_id(@action) %>"
      class="relative group select-none transition-transform duration-200 hover:-translate-y-1"
      data-controller="action-completion"
-     data-action-completion-url-value="<%= retro_action_completion_path(@action.retro, @action) %>"
+     data-action-completion-url-value="<%= retro_action_completion_path(@action.retro, @action, script_name: @action.retro.account.slug) %>"
      data-action-completion-completed-value="<%= @action.completed %>">
 
   <%# Card Body %>

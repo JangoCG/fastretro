@@ -51,7 +51,7 @@
                   </div>
                 </div>
                 <% if @grouping_enabled %>
-                  <%= button_to remove_feedback_retro_feedback_groups_path(feedback.retro, feedback_id: feedback.id),
+                  <%= button_to remove_feedback_retro_feedback_groups_path(feedback.retro, feedback_id: feedback.id, script_name: feedback.retro.account.slug),
                       method: :delete,
                       class: "shrink-0 text-[0.5rem] font-bold text-zinc-500 hover:text-zinc-900 uppercase tracking-wider transition-colors px-1.5 py-0.5 border border-zinc-300 hover:border-zinc-500 rounded bg-zinc-50 hover:bg-zinc-100",
                       title: "Remove from group" do %>
@@ -75,7 +75,7 @@
       <%# Ungroup button for admins %>
       <% if @grouping_enabled %>
         <div class="px-4 py-2 border-t border-zinc-200 bg-zinc-50">
-          <%= button_to retro_feedback_group_path(primary_feedback.retro, @group),
+          <%= button_to retro_feedback_group_path(primary_feedback.retro, @group, script_name: primary_feedback.retro.account.slug),
               method: :delete,
               class: "text-[0.6rem] font-bold text-zinc-500 hover:text-zinc-900 uppercase tracking-wider transition-colors" do %>
             Ungroup all

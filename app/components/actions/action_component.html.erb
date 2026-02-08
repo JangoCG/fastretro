@@ -1,4 +1,4 @@
-<%= link_to retro_action_path(@action.retro, @action), id: dom_id(@action), class: "block relative group mt-3 select-none transition-transform duration-200 hover:-translate-y-1 cursor-pointer no-underline" do %>
+<%= link_to retro_action_path(@action.retro, @action, script_name: @action.retro.account.slug), id: dom_id(@action), class: "block relative group mt-3 select-none transition-transform duration-200 hover:-translate-y-1 cursor-pointer no-underline" do %>
 
   <%# Card Body: Clean Industrial with purple accent %>
   <div class="bg-violet-50 relative border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden flex flex-col h-full min-h-[100px] group-hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">

@@ -111,6 +111,23 @@ class TargetedStreamUpdatesTest < ActiveSupport::TestCase
     Action.create!(retro: @retro, user: @user, status: :drafted)
   end
 
+  test "action review grid renders tenant-scoped completion paths" do
+    action = Action.create!(retro: @retro, user: @user, status: :published)
+
+    html = ApplicationController.renderer.render(
+      partial: "retros/action_reviews/actions_grid",
+      locals: { retro: @retro }
+    )
+
+    expected_path = Rails.application.routes.url_helpers.retro_action_completion_path(
+      @retro,
+      action,
+      script_name: @retro.account.slug
+    )
+
+    assert_includes html, expected_path
+  end
+
   private
 
   def expect_column_replacements

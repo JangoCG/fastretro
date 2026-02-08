@@ -43,7 +43,7 @@
         class="space-y-4 relative z-10"
         <% if grouping_enabled? %>
           data-controller="feedback-grouping"
-          data-feedback-grouping-group-url-value="<%= retro_feedback_groups_path(@retro) %>"
+          data-feedback-grouping-group-url-value="<%= retro_feedback_groups_path(@retro, script_name: @retro.account.slug) %>"
           data-feedback-grouping-target="list"
         <% elsif voting_enabled? %>
           data-controller="vote-sorting"

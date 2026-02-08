@@ -62,11 +62,11 @@ class VoteButtonComponent < ApplicationComponent
   end
 
   def vote_path
-    retro_votes_path(@retro)
+    retro_votes_path(@retro, script_name: @retro.account.slug)
   end
 
   def remove_vote_path(vote)
-    retro_vote_path(@retro, vote)
+    retro_vote_path(@retro, vote, script_name: @retro.account.slug)
   end
 
   def voteable_type
