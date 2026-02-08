@@ -35,22 +35,22 @@ class VoteButtonComponent < ApplicationComponent
   private
 
   def total_votes
-    @voteable.votes.count
+    @voteable.votes.size
   end
 
   def user_votes
-    @user_votes ||= @participant.votes.where(voteable: @voteable)
+    @user_votes ||= @participant.votes.select { |v| v.voteable_type == @voteable.class.name && v.voteable_id == @voteable.id }
   end
 
   def user_vote_count
-    user_votes.count
+    user_votes.size
   end
 
   # Whether the participant can cast another vote (has < 3 total votes).
   # NOTE: This is a GLOBAL condition, not specific to this voteable.
   # When this changes, ALL vote buttons on the page need re-rendering.
   def can_add_vote?
-    @participant.votes.count < 3
+    @participant.votes.size < 3
   end
 
   def can_remove_vote?

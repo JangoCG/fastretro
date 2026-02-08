@@ -17,6 +17,6 @@ class Retros::VotingsController < ApplicationController
   end
 
   def set_current_participant
-    @current_participant = @retro.participants.find_by(user: Current.user)
+    @current_participant = @retro.participants.includes(:votes).find_by(user: Current.user)
   end
 end

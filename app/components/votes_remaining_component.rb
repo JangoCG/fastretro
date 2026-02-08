@@ -10,7 +10,7 @@ class VotesRemainingComponent < ApplicationComponent
   end
 
   def votes_remaining
-    3 - participant.votes.count
+    3 - participant.votes.size
   end
 
   def render?

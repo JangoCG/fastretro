@@ -166,8 +166,8 @@
           <%= yield :board_columns %>
         <% else %>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <%= render Retros::ColumnComponent.new(retro: @retro, category: "went_well") %>
-            <%= render Retros::ColumnComponent.new(retro: @retro, category: "could_be_better") %>
+            <%= render Retros::ColumnComponent.new(retro: @retro, category: "went_well", participant: @current_participant) %>
+            <%= render Retros::ColumnComponent.new(retro: @retro, category: "could_be_better", participant: @current_participant) %>
           </div>
         <% end %>
       </div>

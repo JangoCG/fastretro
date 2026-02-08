@@ -14,9 +14,10 @@ class Retros::ColumnComponent < ApplicationComponent
     "could_be_better" => "border-amber-200 dark:border-amber-500/50"
   }.freeze
 
-  def initialize(retro:, category:)
+  def initialize(retro:, category:, participant: nil)
     @retro = retro
     @category = category
+    @participant = participant
   end
 
   private
@@ -77,7 +78,7 @@ class Retros::ColumnComponent < ApplicationComponent
   end
 
   def current_participant
-    @current_participant ||= @retro.participants.find_by(user: Current.user)
+    @current_participant ||= @participant || @retro.participants.includes(:votes).find_by(user: Current.user)
   end
 
   def title

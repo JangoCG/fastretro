@@ -135,7 +135,7 @@ class Retros::VotesController < ApplicationController
   #
   def render_vote_button_update(status, votes_before:)
     @current_participant.reload
-    votes_after = @current_participant.votes.count
+    votes_after = @current_participant.votes.size
 
     # Did we cross the max votes threshold? If so, ALL buttons need updating.
     # - Going 2→3: all "+" buttons must disappear (no votes left)
