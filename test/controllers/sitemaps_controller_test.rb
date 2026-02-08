@@ -11,14 +11,14 @@ class SitemapsControllerTest < ActionDispatch::IntegrationTest
       assert_in_body root_url(script_name: nil)
       assert_in_body blog_url(script_name: nil)
       assert_in_body shoutouts_url(script_name: nil)
-      assert_in_body imprint_url(script_name: nil)
-      assert_in_body privacy_policy_url(script_name: nil)
       assert_in_body alternative_easyretro_url(script_name: nil)
       assert_in_body alternative_parabol_url(script_name: nil)
       assert_in_body alternative_metroretro_url(script_name: nil)
       assert_in_body alternative_teamretro_url(script_name: nil)
-      assert_in_body new_session_url(script_name: nil)
-      assert_in_body new_signup_url(script_name: nil)
+      assert_not_includes response.body, imprint_url(script_name: nil)
+      assert_not_includes response.body, privacy_policy_url(script_name: nil)
+      assert_not_includes response.body, new_session_url(script_name: nil)
+      assert_not_includes response.body, new_signup_url(script_name: nil)
     end
   end
 end

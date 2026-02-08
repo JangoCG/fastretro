@@ -8,7 +8,7 @@
     <meta name="description" content="<%= content_for(:meta_description) || "Fast Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
     <meta name="keywords" content="<%= content_for(:meta_keywords) || "retrospective, retro, agile, scrum, sprint retrospective, team retrospective, remote retrospective, online retrospective, retrospective tool, agile retrospective, scrum master, sprint review" %>">
     <meta name="author" content="Fast Retro">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="<%= content_for(:robots) || "index, follow" %>">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
     <meta name="viewport" content="width=device-width,initial-scale=1">

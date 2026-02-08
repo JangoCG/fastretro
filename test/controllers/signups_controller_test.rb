@@ -6,6 +6,7 @@ class SignupsControllerTest < ActionDispatch::IntegrationTest
       get new_signup_path
 
       assert_response :success
+      assert_includes response.body, 'name="robots" content="noindex, follow"'
     end
   end
 
