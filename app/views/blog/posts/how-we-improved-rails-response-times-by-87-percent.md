@@ -7,22 +7,75 @@ description: We added Prometheus monitoring to Fast Retro and immediately spotte
 
 I recently added Prometheus monitoring to Fast Retro. Within hours of deploying it, I was staring at Grafana dashboards that told me exactly where my app was slow. Three controllers stood out with p95 response times between 240ms and 400ms. All of them turned out to be N+1 query problems hiding in plain sight.
 
-## Setting Up the Metrics Pipeline
+## The Monitoring Stack
 
-Fast Retro runs on Rails 8.1 with [Yabeda](https://github.com/yabeda-rb/yabeda) as the metrics framework and Prometheus as the backend. The setup is straightforward:
+The whole observability setup lives on a single server, locked behind [Tailscale](https://tailscale.com/) so nothing is exposed to the public internet. I deploy it with [Kamal 2](https://kamal-deploy.org/) — the same tool I use for Fast Retro itself.
+
+The stack has four pieces:
+
+- **Prometheus** — scrapes metrics every 5 seconds, stores 30 days of data
+- **Grafana** — dashboards and exploration UI
+- **Loki + Promtail** — log aggregation (auto-discovers container logs via Docker socket)
+- **Node Exporter + cAdvisor** — server and container resource metrics
+
+Everything is defined in config files and auto-provisioned. Grafana boots with datasources and dashboards already configured — no manual clicking around.
+
+### Rails Side: Yabeda Gems
+
+On the Rails side, I use [Yabeda](https://github.com/yabeda-rb/yabeda) to expose metrics. The gems hook into Rails internals and export everything in Prometheus format:
 
 ```ruby
 # Gemfile
 gem "yabeda"
-gem "yabeda-rails"
-gem "yabeda-prometheus-mmap"
-gem "yabeda-actioncable"
-gem "yabeda-activejob"
+gem "yabeda-rails"           # controller latency, request counts, status codes
+gem "yabeda-prometheus-mmap" # Prometheus exposition on port 9306
+gem "yabeda-actioncable"     # WebSocket connection metrics
+gem "yabeda-activejob"       # background job metrics
 ```
 
-The `yabeda-rails` gem automatically tracks controller response times, request counts, and status codes. Once Prometheus scrapes those metrics, you can build Grafana dashboards that show p50, p95, and p99 latency per controller action.
+The initializer configures the metrics server and installs the adapters:
 
-That's exactly what I did. And the numbers were not great.
+```ruby
+# config/initializers/yabeda.rb
+Yabeda::Rails.install!
+Yabeda::ActiveJob.install!
+Yabeda::ActionCable.install!
+
+# Start the metrics server when SolidQueue boots
+SolidQueue.on_start do
+  Yabeda::Prometheus::Exporter.start_metrics_server!
+end
+```
+
+This exposes a `/metrics` endpoint on port 9306 that Prometheus scrapes.
+
+### Prometheus Scrape Config
+
+Prometheus is configured to scrape the Rails app every 5 seconds. The targets use Docker network aliases, so containers can find each other by name:
+
+```yaml
+# prometheus.yml
+scrape_configs:
+  - job_name: fastretro
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+          - fastretro-prod:9306
+```
+
+### Grafana Dashboard
+
+The dashboard is provisioned from a JSON file at deploy time. It has panels for request latency (p50/p95/p99), request rate, error rate, SolidQueue job health, ActionCable connections, and custom Fast Retro gauges like active retros by phase.
+
+The key panel for this story is the **p95 latency by controller** — a time series that breaks down response times per `controller#action`. This is what made the slow endpoints jump out immediately.
+
+### Tailscale-Only Access
+
+The DNS record for the Grafana domain points to a Tailscale IP. Without the Tailscale client, the IP is simply not routable — it's in the CGNAT range (`100.64.0.0/10`), unreachable from the public internet. No firewall rules needed, no VPN config. If you're on the Tailnet, you can access it. If you're not, the connection times out.
+
+## The Three Slow Controllers
+
+With the dashboard live, I immediately spotted three controllers with concerning p95 latency:
 
 ## The Three Slow Controllers
 
@@ -184,8 +237,10 @@ The fixes also followed a pattern:
 
 ## What Prometheus Gave Us
 
-Without metrics, these issues would have been invisible. The app "worked fine" — pages loaded, votes were cast, discussions happened. The N+1 queries added maybe 200-300ms of latency, spread across dozens of tiny queries that individually looked fast.
+Without metrics, these issues would have been invisible. The app "worked fine" — pages loaded, votes were cast, discussions happened. The N+1 queries added maybe 200-300ms of latency, spread across dozens of tiny queries that individually looked fast in development. In production, under real load with real data, they added up.
 
 Prometheus made the slow controllers impossible to ignore. A p95 of 400ms on a Grafana dashboard is a clear signal that something is wrong. From there, it was just a matter of reading the code and asking "where are the loops?"
 
-If you're running a Rails app without request-level metrics, you're flying blind. Yabeda + Prometheus + Grafana took about an hour to set up and immediately paid for itself.
+The entire monitoring stack — Prometheus, Grafana, Loki, Promtail, node exporter, cAdvisor — is deployed with a single `kamal setup` command. Dashboards and datasources are auto-provisioned from config files. After the initial setup, I never had to touch the Grafana UI to configure anything. It just works.
+
+If you're running a Rails app without request-level metrics, you're flying blind. The Yabeda gems take 15 minutes to add to your Rails app, and the Prometheus/Grafana stack is a one-time setup. It immediately paid for itself — three N+1 bugs found and fixed within hours of the first deploy.
