@@ -40,6 +40,6 @@ class Feedbacks::FeedbackGroupComponent < ApplicationComponent
   end
 
   def show_vote_count?
-    @show_votes && @group.votes.any?
+    @show_votes
   end
 end
