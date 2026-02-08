@@ -8,14 +8,15 @@ class Retros::RetroCardComponent < ApplicationComponent
     "orange" => { card_bg: "bg-orange-50 dark:bg-orange-900/20", border: "border-orange-200 dark:border-orange-800", tag_bg: "bg-orange-500", text: "text-orange-600 dark:text-orange-400" }
   }.freeze
 
-  def initialize(retro:)
+  def initialize(retro:, feedback_count: 0)
     @retro = retro
+    @feedback_count = feedback_count
   end
 
   private
 
   def feedback_count
-    @retro.feedbacks.published.count
+    @feedback_count
   end
 
   def color_key

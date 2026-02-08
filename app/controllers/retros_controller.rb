@@ -9,6 +9,7 @@ class RetrosController < ApplicationController
   # GET /retros or /retros.json
   def index
     @retros = Current.account.retros
+    @feedback_counts = Feedback.where(retro: @retros).published.group(:retro_id).count
   end
 
   # GET /retros/1 or /retros/1.json

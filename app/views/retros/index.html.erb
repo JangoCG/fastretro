@@ -52,7 +52,7 @@
     <% if @retros.any? %>
       <% @retros.each do |retro| %>
         <div data-filter-target="item">
-          <%= render Retros::RetroCardComponent.new(retro: retro) %>
+          <%= render Retros::RetroCardComponent.new(retro: retro, feedback_count: @feedback_counts[retro.id] || 0) %>
         </div>
       <% end %>
 
