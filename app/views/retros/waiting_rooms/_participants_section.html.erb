@@ -1,0 +1,24 @@
+<div id="waiting-room-participants" class="mb-8">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="font-black text-lg uppercase tracking-tight text-zinc-900">
+      <span class="relative px-1 inline-block">
+        <span class="absolute inset-0 bg-[#FFFF00] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+        "TEAM MEMBERS"
+      </span>
+    </h2>
+    <span class="font-mono text-xs text-zinc-500 uppercase"><%= retro.participants.count %> JOINED</span>
+  </div>
+
+  <% if retro.participants.any? %>
+    <div id="participants-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <% retro.participants.includes(:user).order(:created_at).each_with_index do |participant, index| %>
+        <%= render WaitingParticipantCardComponent.new(participant: participant, index: index) %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="border-2 border-dashed border-zinc-300 p-8 text-center">
+      <p class="font-mono text-sm text-zinc-400 uppercase">NO PARTICIPANTS YET</p>
+      <p class="font-mono text-xs text-zinc-400 mt-1">SHARE THE INVITE LINK TO ADD TEAM MEMBERS</p>
+    </div>
+  <% end %>
+</div>

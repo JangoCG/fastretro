@@ -5,7 +5,7 @@ class Retro::Participant < ApplicationRecord
   belongs_to :user
   has_many :votes, class_name: "Vote", foreign_key: :retro_participant_id, inverse_of: :retro_participant, dependent: :destroy
 
-  broadcasts_refreshes_to :retro
+  after_commit :broadcast_targeted_participant_updates
 
   enum :role, { admin: "admin", participant: "participant" }
 
@@ -23,5 +23,33 @@ class Retro::Participant < ApplicationRecord
 
   def toggle_finished!
     update!(finished: !finished)
+  end
+
+  private
+
+  def broadcast_targeted_participant_updates
+    return unless retro.present?
+
+    if retro.waiting_room?
+      Turbo::StreamsChannel.broadcast_replace_to(
+        retro,
+        target: "waiting-room-participants",
+        partial: "retros/waiting_rooms/participants_section",
+        locals: { retro: }
+      )
+    else
+      retro.participants.includes(:user).each do |participant|
+        next unless participant.user.present?
+
+        Current.set(account: retro.account, user: participant.user) do
+          Turbo::StreamsChannel.broadcast_replace_to(
+            [ retro, participant.user ],
+            target: "participant-list",
+            partial: "retros/streams/participant_list",
+            locals: { retro: }
+          )
+        end
+      end
+    end
   end
 end
