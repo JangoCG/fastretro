@@ -133,6 +133,16 @@ Login: david@example.com (passwordless magic link auth)
 
 Use Chrome MCP tools to interact with the running dev app for UI testing and debugging.
 
+## Pre-commit checklist
+
+Always run the local CI suite before committing:
+
+```bash
+bin/ci
+```
+
+This catches style violations, security issues, and test failures before they reach the remote pipeline.
+
 ## Coding style
 
 @STYLE.md

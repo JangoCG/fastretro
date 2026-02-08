@@ -18,7 +18,7 @@ module Fastretro
     # rails_ext/ is excluded because it contains patches to Rails internals that
     # don't follow autoload naming conventions. These files are manually required
     # via config/initializers/extensions.rb instead.
-    config.autoload_lib(ignore: %w[assets tasks rails_ext])
+    config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda])
 
     # Configuration for the application, engines, and railties goes here.
     #
