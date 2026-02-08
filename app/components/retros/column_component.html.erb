@@ -50,8 +50,8 @@
         <% end %>
       >
         <% if feedbacks.any? %>
-          <% if voting_enabled? %>
-            <%# During voting: render all items sorted by votes %>
+          <% if show_vote_results? %>
+            <%# During voting/discussion: render all items sorted by votes %>
             <% all_items_sorted_by_votes.each do |item| %>
               <% if item[:type] == :group %>
                 <%= render Feedbacks::FeedbackGroupComponent.new(
@@ -59,6 +59,7 @@
                   feedbacks: item[:feedbacks],
                   grouping_enabled: grouping_enabled?,
                   voting_enabled: voting_enabled?,
+                  show_votes: @retro.discussion?,
                   participant: current_participant,
                   retro: @retro
                 ) %>
@@ -68,6 +69,7 @@
                   draggable: grouping_enabled?,
                   grouping_enabled: grouping_enabled?,
                   voting_enabled: voting_enabled?,
+                  show_votes: @retro.discussion?,
                   participant: current_participant,
                   retro: @retro
                 ) %>

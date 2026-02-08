@@ -81,6 +81,32 @@ class RetroTest < ActiveSupport::TestCase
     assert_not participant.reload.finished?
   end
 
+  test "back_phase! clears votes when leaving voting phase" do
+    @retro.update!(phase: :voting)
+    participant = @retro.add_participant(users(:one), role: :admin)
+    feedback = feedbacks(:one)
+    Vote.create!(retro_participant: participant, voteable: feedback)
+
+    assert_equal 1, Vote.where(retro_participant: participant).count
+
+    @retro.back_phase!
+
+    assert_equal 0, Vote.where(retro_participant: participant).count
+    assert_equal "grouping", @retro.phase
+  end
+
+  test "back_phase! does not clear votes when leaving discussion phase" do
+    @retro.update!(phase: :discussion)
+    participant = @retro.add_participant(users(:one), role: :admin)
+    feedback = feedbacks(:one)
+    Vote.create!(retro_participant: participant, voteable: feedback)
+
+    @retro.back_phase!
+
+    assert_equal 1, Vote.where(retro_participant: participant).count
+    assert_equal "voting", @retro.phase
+  end
+
   # === previous_phase tests ===
 
   test "previous_phase returns brainstorming when on grouping" do
