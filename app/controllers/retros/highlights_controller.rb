@@ -1,7 +1,9 @@
 class Retros::HighlightsController < ApplicationController
+  include RetroAuthorization
+
   before_action :set_retro
-  before_action :ensure_participant
-  before_action :ensure_admin
+  before_action :ensure_retro_participant
+  before_action :ensure_retro_admin
 
   def update
     user_id = params[:user_id].to_i
@@ -24,14 +26,6 @@ class Retros::HighlightsController < ApplicationController
 
   def set_retro
     @retro = Current.account.retros.find(params[:retro_id])
-  end
-
-  def ensure_participant
-    redirect_to retros_path unless @retro.participant?(Current.user)
-  end
-
-  def ensure_admin
-    head :forbidden unless @retro.admin?(Current.user)
   end
 
   def broadcast_highlight(user_id)

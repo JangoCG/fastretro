@@ -95,4 +95,6 @@ group :test do
   gem "selenium-webdriver"
   # Mocking and stubbing library
   gem "mocha"
+  # Pin minitest to 5.x for Rails 8.1 compatibility
+  gem "minitest", "~> 5.0"
 end

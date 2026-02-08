@@ -35,7 +35,7 @@ class Retros::MusicControllerTest < ActionDispatch::IntegrationTest
 
     patch retro_music_path(@retro)
 
-    assert_response :forbidden
+    assert_redirected_to retros_path
     assert_not @retro.reload.music_playing?
   end
 
