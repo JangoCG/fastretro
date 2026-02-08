@@ -1,0 +1,13 @@
+<div id="action-review-grid">
+  <% if retro.actions.published.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% retro.actions.published.order(:created_at).each do |action| %>
+        <%= render Actions::ReviewActionComponent.new(action: action) %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="border-2 border-dashed border-zinc-300 p-8 text-center">
+      <p class="font-mono text-sm text-zinc-400 uppercase">NO ACTIONS TO REVIEW</p>
+    </div>
+  <% end %>
+</div>

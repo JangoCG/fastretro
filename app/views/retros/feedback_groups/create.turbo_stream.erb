@@ -1,1 +1,7 @@
-<%= turbo_stream.refresh request_id: request.request_id %>
+<%= turbo_stream.replace "retro-column-went_well" do %>
+  <%= render "retros/streams/column", retro: @retro, category: "went_well" %>
+<% end %>
+
+<%= turbo_stream.replace "retro-column-could_be_better" do %>
+  <%= render "retros/streams/column", retro: @retro, category: "could_be_better" %>
+<% end %>
