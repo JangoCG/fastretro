@@ -61,7 +61,7 @@
     <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
   </div>
 
-  <% if Rails.env.development? && flash[:magic_link_code].present? %>
+  <% if flash[:magic_link_code].present? %>
     <div class="flex items-center justify-center gap-4 bg-zinc-900 border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(251,191,36,1)] p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden">
       <span class="absolute top-0 bottom-0 left-0 bg-yellow-400 px-2 flex items-center justify-center text-[0.55rem] uppercase font-black text-center rotate-180 [writing-mode:vertical-rl] text-zinc-900">DEV</span>
       <span class="text-xs font-mono font-bold text-white uppercase ml-6">PSST, HERE'S YOUR CODE:</span>
