@@ -90,6 +90,24 @@
     </div>
   </section>
 
+  <%# === ALTERNATIVE PAGES LINKS === %>
+  <section class="mb-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="border-2 border-black bg-white p-5 sm:p-6">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-3">Alternative Comparisons</p>
+        <p class="font-mono text-sm text-zinc-700 mb-4">
+          Looking for an alternative to other retro tools? Compare Fast Retro with popular options:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <%= link_to "EasyRetro alternative", alternative_easyretro_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
+          <%= link_to "Parabol alternative", alternative_parabol_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
+          <%= link_to "Metro Retro alternative", alternative_metroretro_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
+          <%= link_to "TeamRetro alternative", alternative_teamretro_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <%# === WHAT PEOPLE SAY === %>
   <section class="mb-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
