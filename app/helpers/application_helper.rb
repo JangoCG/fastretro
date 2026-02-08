@@ -13,7 +13,7 @@ module ApplicationHelper
   def simple_analytics_tag
     return unless Rails.env.production? || ENV["SIMPLE_ANALYTICS"] == "true"
 
-    tag.script(async: true, src: "https://scripts.simpleanalyticscdn.com/latest.js", "data-collect-dnt": "true")
+    tag.script(async: true, src: "https://scripts.simpleanalyticscdn.com/latest.js", "data-collect-dnt": "true", nonce: content_security_policy_nonce)
   end
 
   def icon_tag(name, **options)
