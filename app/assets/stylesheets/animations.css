@@ -61,3 +61,36 @@
   transform: skewX(-10deg) rotate(1deg);
   z-index: -1;
 }
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  will-change: transform;
+}
+
+.marquee-left {
+  animation: marquee-left 28s linear infinite;
+}
+
+.marquee-right {
+  animation: marquee-right 32s linear infinite;
+}

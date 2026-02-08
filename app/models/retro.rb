@@ -1,4 +1,6 @@
 class Retro < ApplicationRecord
+  LANDING_PAGE_RETRO_COUNT_CACHE_KEY = "landing_page:retro_count".freeze
+
   belongs_to :account
 
   has_many :feedbacks, dependent: :destroy
@@ -10,6 +12,16 @@ class Retro < ApplicationRecord
   enum :phase, { waiting_room: "waiting_room", action_review: "action_review", brainstorming: "brainstorming", grouping: "grouping", voting: "voting", discussion: "discussion", complete: "complete" }
 
   PHASE_ORDER = %i[waiting_room action_review brainstorming grouping voting discussion complete].freeze
+
+  after_commit :expire_landing_page_retro_count_cache, on: %i[create destroy]
+
+  def self.cached_global_count
+    Rails.cache.fetch(
+      LANDING_PAGE_RETRO_COUNT_CACHE_KEY,
+      expires_in: 12.hours,
+      race_condition_ttl: 10.minutes
+    ) { count }
+  end
 
   def start!(skip_action_review: false)
     if skip_action_review || !account.has_completed_retros_with_actions?
@@ -115,4 +127,9 @@ class Retro < ApplicationRecord
   def cleanup_votes
     Vote.where(retro_participant: participants).delete_all
   end
+
+  private
+    def expire_landing_page_retro_count_cache
+      Rails.cache.delete(LANDING_PAGE_RETRO_COUNT_CACHE_KEY)
+    end
 end

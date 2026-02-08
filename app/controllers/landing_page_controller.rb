@@ -10,9 +10,7 @@ class LandingPageController < ApplicationController
 
   def show
     @free_limit = Plan.free.feedback_limit
-    @retro_count = Rails.cache.fetch("retro_count", expires_in: 4.hours) do
-      Retro.count + LEGACY_RETRO_COUNT
-    end
+    @retro_count = Retro.cached_global_count + LEGACY_RETRO_COUNT
   end
 
   private

@@ -109,6 +109,7 @@ Rails.application.routes.draw do
   # Blog
   get "blog", to: "blog#index", as: :blog
   get "blog/:id", to: "blog#show", as: :blog_post
+  get "shoutouts", to: "shoutouts#index", as: :shoutouts
 
   # Alternative pages (SEO)
   get "alternative/easyretro", to: "alternatives#easyretro", as: :alternative_easyretro

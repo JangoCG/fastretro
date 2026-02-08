@@ -16,7 +16,8 @@
         ["HOW IT WORKS", root_path(anchor: "features", script_name: nil)],
         ["OPEN SOURCE", root_path(anchor: "opensource", script_name: nil)],
         ["FAQ", root_path(anchor: "faq", script_name: nil)],
-        ["PRICING", root_path(anchor: "pricing", script_name: nil)]
+        ["PRICING", root_path(anchor: "pricing", script_name: nil)],
+        ["SHOUTOUTS", shoutouts_path(script_name: nil)]
       ].each_with_index do |(label, href), i| %>
         <a href="<%= href %>" class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-black transition-colors">
           [<%= sprintf('%02d', i + 1) %>] <%= label %>

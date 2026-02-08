@@ -1,0 +1,105 @@
+<% content_for :full_width, true %>
+<% content_for :skip_javascript, true %>
+<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
+<% content_for :title, "Fast Retro Shoutouts | What People Are Saying" %>
+<% content_for :meta_title, "Fast Retro Shoutouts | What People Are Saying" %>
+<% content_for :meta_description, "Shoutouts for Fast Retro from builders and teams." %>
+
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
+     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+
+<%= render LandingPageHeaderComponent.new %>
+
+<main class="pt-24 pb-16 overflow-x-hidden">
+  <section class="max-w-4xl mx-auto px-4 sm:px-6">
+    <p class="font-mono text-[10px] text-zinc-500 mb-3 uppercase tracking-widest">
+      SOCIAL PROOF
+    </p>
+    <h1 class="text-[1.75rem] sm:text-[2.5rem] md:text-[3rem] leading-[0.95] font-black uppercase tracking-tighter text-black mb-4">
+      SHOUTOUTS
+    </h1>
+    <p class="font-mono text-sm text-zinc-600 max-w-2xl mb-10">
+      Notes from people we respect.
+    </p>
+
+    <% shoutouts = [
+      {
+        name: "Jason Fried",
+        avatar: "shoutouts/jasonfried.png",
+        url: "https://x.com/jasonfried/status/2001073704608923705?s=20",
+        quote: "Fun UI too!"
+      },
+      {
+        name: "Paul Kayo",
+        avatar: "shoutouts/pkayokay.jpg",
+        url: "https://x.com/pkayokay/status/2001098651112706176?s=20",
+        quote: "From Laravel to Rails wow, that's a first! Looks great."
+      },
+      {
+        name: "zdehassek",
+        avatar: "shoutouts/zdehassek.jpg",
+        url: "https://x.com/zdehassek/status/2001242253692645809?s=20",
+        quote: "The UI is rally cool"
+      },
+      {
+        name: "Nauman Thanvi",
+        avatar: "shoutouts/naumanthanvi.jpg",
+        url: "https://x.com/naumanthanvi/status/2001249601224151109?s=20",
+        quote: "I shared this project today because really liked the UI and also stumbled on this tweet now, really good work!"
+      },
+      {
+        name: "ConquistaRod",
+        avatar: "shoutouts/conquistarod.jpg",
+        url: "https://x.com/ConquistaRod/status/2001077072735953322?s=20",
+        quote: "Nice design"
+      },
+      {
+        name: "Iuvnriki",
+        avatar: "shoutouts/iuvnriki.jpg",
+        url: "https://x.com/Iuvnriki/status/2001063645682229453?s=20",
+        quote: "i respect the vanilla rails migration"
+      },
+      {
+        name: "bOnstine",
+        avatar: "shoutouts/bonstine.jpg",
+        url: "https://x.com/bOnstine/status/2001292528536948859?s=20",
+        quote: "Wow, love the aesthetic!!"
+      },
+      {
+        name: "DHH",
+        avatar: "shoutouts/dhh.jpg",
+        url: "https://x.com/dhh/status/2001066176521355308?s=20",
+        quote: "Great to see the O'Sassy license being used in the wild already! And Fast Retro looks pretty sweet too 🤘"
+      }
+    ] %>
+
+    <div class="grid grid-cols-1 gap-6">
+      <% shoutouts.each do |shoutout| %>
+        <%= link_to shoutout[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{shoutout[:name]} on X" }, class: "block border-2 border-black bg-white p-5 sm:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+          <article>
+            <div class="flex items-center gap-4 mb-6">
+              <div class="inline-flex w-14 h-14 flex-shrink-0">
+                <%= image_tag shoutout[:avatar], alt: shoutout[:name], class: "w-full h-full rounded-full border-2 border-black object-cover", loading: "lazy" %>
+              </div>
+              <div>
+                <h2 class="font-black text-lg uppercase tracking-tight"><%= shoutout[:name] %></h2>
+                <p class="font-mono text-xs uppercase tracking-wide text-zinc-600 underline">
+                  View post on X
+                </p>
+              </div>
+            </div>
+
+            <blockquote class="border-l-4 border-[#ffe600] pl-4 sm:pl-6">
+              <p class="font-mono text-sm sm:text-base text-zinc-700 leading-relaxed">
+                "<%= shoutout[:quote] %>"
+              </p>
+            </blockquote>
+          </article>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</main>
+
+<%= render LandingPageFooterComponent.new %>

@@ -194,4 +194,26 @@ class RetroTest < ActiveSupport::TestCase
 
     assert_not @retro.can_go_back?
   end
+
+  test "cached_global_count fetches retro count from cache using shared key" do
+    Rails.cache.expects(:fetch).with(
+      Retro::LANDING_PAGE_RETRO_COUNT_CACHE_KEY,
+      expires_in: 12.hours,
+      race_condition_ttl: 10.minutes
+    ).returns(42)
+
+    assert_equal 42, Retro.cached_global_count
+  end
+
+  test "creating retro expires landing page retro count cache" do
+    Rails.cache.expects(:delete).with(Retro::LANDING_PAGE_RETRO_COUNT_CACHE_KEY)
+
+    Retro.create!(name: "Cache Test Retro", account: accounts(:one))
+  end
+
+  test "destroying retro expires landing page retro count cache" do
+    Rails.cache.expects(:delete).with(Retro::LANDING_PAGE_RETRO_COUNT_CACHE_KEY)
+
+    retros(:two).destroy!
+  end
 end

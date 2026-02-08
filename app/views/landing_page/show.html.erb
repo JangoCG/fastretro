@@ -61,21 +61,15 @@
         <p class="mt-3 font-mono text-[10px] text-zinc-500 uppercase tracking-wide">
           Start for free (<%= number_with_delimiter(@free_limit) %> feedbacks included). No credit card required.
         </p>
+        <p class="mt-2 font-mono text-[10px] text-zinc-500 uppercase tracking-wide">
+          <%= link_to "Read shoutouts", shoutouts_path(script_name: nil), class: "underline hover:text-black" %>
+        </p>
 
         <%# Retro Counter - Mobile/Tablet (below CTA) %>
         <div class="lg:hidden mt-6">
           <div class="inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <span class="font-black text-xl tabular-nums tracking-tighter"><%= number_with_delimiter(@retro_count) %></span>
             <span class="font-bold text-[0.6rem] uppercase leading-tight text-zinc-500">RETROS<br>COMPLETED</span>
-          </div>
-        </div>
-
-        <div class="mt-12 w-full max-w-md mx-auto">
-          <div class="flex items-center justify-center gap-4">
-            <p class="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-400">
-              TRUSTED BY ENGINEERS AT
-            </p>
-            <%= image_tag "aws.svg", class: "h-6 sm:h-8 w-auto", alt: "AWS logo", width: "50", height: "30" %>
           </div>
         </div>
 
@@ -92,6 +86,72 @@
              <%# Desktop image %>
              <%= image_tag "retro-image-no-padding.webp", class: "w-full h-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 hidden sm:block", alt: "Fast Retro retrospective interface showing brainstorming phase", width: "3452", height: "2248", loading: "eager", fetchpriority: "high" %>
          </div>
+      </div>
+    </div>
+  </section>
+
+  <%# === WHAT PEOPLE SAY === %>
+  <section class="mb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="mb-6 sm:mb-8 text-center">
+        <h2 class="font-black text-3xl sm:text-4xl uppercase tracking-tighter">
+          WHAT PEOPLE SAY
+        </h2>
+      </div>
+    </div>
+
+    <% top_row = [
+      { quote: "Fun UI too!", author: "Jason Fried", avatar: "shoutouts/jasonfried.png", url: "https://x.com/jasonfried/status/2001073704608923705?s=20" },
+      { quote: "From Laravel to Rails wow, that's a first! Looks great.", author: "Paul Kayo", avatar: "shoutouts/pkayokay.jpg", url: "https://x.com/pkayokay/status/2001098651112706176?s=20" },
+      { quote: "The UI is rally cool", author: "zdehassek", avatar: "shoutouts/zdehassek.jpg", url: "https://x.com/zdehassek/status/2001242253692645809?s=20" },
+      { quote: "Nice design", author: "ConquistaRod", avatar: "shoutouts/conquistarod.jpg", url: "https://x.com/ConquistaRod/status/2001077072735953322?s=20" }
+    ] %>
+    <% bottom_row = [
+      { quote: "i respect the vanilla rails migration", author: "Iuvnriki", avatar: "shoutouts/iuvnriki.jpg", url: "https://x.com/Iuvnriki/status/2001063645682229453?s=20" },
+      { quote: "Wow, love the aesthetic!!", author: "bOnstine", avatar: "shoutouts/bonstine.jpg", url: "https://x.com/bOnstine/status/2001292528536948859?s=20" },
+      { quote: "Great to see the O'Sassy license being used in the wild already! And Fast Retro looks pretty sweet too", author: "DHH", avatar: "shoutouts/dhh.jpg", url: "https://x.com/dhh/status/2001066176521355308?s=20" },
+      { quote: "I shared this project today because really liked the UI and also stumbled on this tweet now, really good work!", author: "Nauman Thanvi", avatar: "shoutouts/naumanthanvi.jpg", url: "https://x.com/naumanthanvi/status/2001249601224151109?s=20" }
+    ] %>
+
+    <div class="space-y-4">
+      <div class="overflow-hidden py-1">
+        <div class="marquee-track marquee-left">
+          <% 2.times do %>
+            <% top_row.each do |item| %>
+              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-white px-4 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+                <div class="flex items-center gap-3">
+                  <div class="inline-flex w-8 h-8 flex-shrink-0">
+                    <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover", loading: "lazy" %>
+                  </div>
+                  <div>
+                    <p class="font-mono text-xs text-zinc-700 leading-snug">"<%= item[:quote] %>"</p>
+                    <p class="font-black text-[10px] uppercase tracking-widest mt-1"><%= item[:author] %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="overflow-hidden py-1">
+        <div class="marquee-track marquee-right">
+          <% 2.times do %>
+            <% bottom_row.each do |item| %>
+              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-[#ffe600] px-4 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+                <div class="flex items-center gap-3">
+                  <div class="inline-flex w-8 h-8 flex-shrink-0">
+                    <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover bg-white", loading: "lazy" %>
+                  </div>
+                  <div>
+                    <p class="font-mono text-xs text-zinc-800 leading-snug">"<%= item[:quote] %>"</p>
+                    <p class="font-black text-[10px] uppercase tracking-widest mt-1"><%= item[:author] %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </section>
