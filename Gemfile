@@ -94,6 +94,9 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   gem "dotenv", groups: [ :development, :test ]
+
+  # N+1 query detection [https://github.com/charkost/prosopite]
+  gem "prosopite"
 end
 
 group :development do

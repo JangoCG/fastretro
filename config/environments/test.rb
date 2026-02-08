@@ -52,4 +52,10 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.x.multi_tenant.enabled = true
+
+  # Log N+1 queries detected by Prosopite (don't raise in tests)
+  config.after_initialize do
+    Prosopite.raise = false
+    Prosopite.rails_logger = true
+  end
 end

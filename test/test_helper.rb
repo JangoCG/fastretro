@@ -16,9 +16,11 @@ module ActiveSupport
 
     setup do
       Current.account = accounts(:one)
+      Prosopite.scan
     end
 
     teardown do
+      Prosopite.finish
       Current.clear_all
     end
   end

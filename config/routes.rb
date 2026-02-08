@@ -105,6 +105,8 @@ Rails.application.routes.draw do
   # Legal pages
   get "imprint", to: "legal#imprint", as: :imprint
   get "privacy_policy", to: "legal#privacy_policy", as: :privacy_policy
+  get "privacy-policy", to: redirect("/privacy_policy")
+  get "privacy", to: redirect("/privacy_policy")
 
   # Blog
   get "blog", to: "blog#index", as: :blog
@@ -113,6 +115,10 @@ Rails.application.routes.draw do
 
   # Alternative pages (SEO)
   get "alternative/easyretro", to: "alternatives#easyretro", as: :alternative_easyretro
+  get "alternative/parabol", to: "alternatives#parabol", as: :alternative_parabol
+  get "alternative/metroretro", to: "alternatives#metroretro", as: :alternative_metroretro
+  get "alternative/teamretro", to: "alternatives#teamretro", as: :alternative_teamretro
+  get "retro/create", to: redirect("/retros/new")
 
   # Admin
   namespace :admin do
