@@ -2,6 +2,13 @@
 
 return unless FastRetro.saas?
 
+require "yabeda"
+require "yabeda/rails"
+require "yabeda/actioncable"
+require "yabeda/activejob"
+require "yabeda/gc"
+require "yabeda/http_requests"
+require "yabeda/prometheus/mmap"
 require "prometheus/client/support/puma"
 
 Prometheus::Client.configuration.logger = Rails.logger

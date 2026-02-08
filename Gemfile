@@ -60,17 +60,19 @@ gem "stripe", "~> 18.2"
 gem "sentry-ruby"
 gem "sentry-rails"
 
-# Monitoring (Prometheus metrics, SaaS only at runtime)
-gem "yabeda"
-gem "yabeda-rails"
-gem "yabeda-actioncable"
-gem "yabeda-activejob"
-gem "yabeda-gc"
-gem "yabeda-http_requests"
-gem "yabeda-prometheus-mmap"
-gem "yabeda-puma-plugin"
-gem "prometheus-client-mmap", "~> 1.3"
-gem "webrick"
+# Monitoring (Prometheus metrics, SaaS only at runtime).
+# All require: false — loaded explicitly in config/initializers/yabeda.rb
+# to avoid hooking into ActionCable/ActiveJob during test/CI boot.
+gem "yabeda", require: false
+gem "yabeda-rails", require: false
+gem "yabeda-actioncable", require: false
+gem "yabeda-activejob", require: false
+gem "yabeda-gc", require: false
+gem "yabeda-http_requests", require: false
+gem "yabeda-prometheus-mmap", require: false
+gem "yabeda-puma-plugin", require: false
+gem "prometheus-client-mmap", "~> 1.3", require: false
+gem "webrick", require: false
 
 # CSV export (required explicitly since Ruby 3.4)
 gem "csv"
