@@ -1,5 +1,6 @@
 class Retros::StartsController < ApplicationController
   include RetroAuthorization
+  include RetroPhaseNavigation
 
   before_action :set_retro
   before_action :ensure_retro_admin
@@ -26,12 +27,5 @@ class Retros::StartsController < ApplicationController
 
   def set_retro
     @retro = Current.account.retros.find(params[:retro_id])
-  end
-
-  def broadcast_phase_redirect(url)
-    Turbo::StreamsChannel.broadcast_stream_to(
-      @retro,
-      content: %(<turbo-stream action="redirect" url="#{url}"></turbo-stream>)
-    )
   end
 end

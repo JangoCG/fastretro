@@ -1,5 +1,6 @@
 class Retros::ActionReviewsController < ApplicationController
   include RetroAuthorization
+  include RetroPhaseNavigation
 
   layout "retro"
 
@@ -21,17 +22,5 @@ class Retros::ActionReviewsController < ApplicationController
 
   def set_current_participant
     @current_participant = @retro.participants.find_by(user: Current.user)
-  end
-
-  def phase_path_for(retro)
-    case retro.phase.to_sym
-    when :waiting_room then retro_waiting_room_path(retro)
-    when :brainstorming then retro_brainstorming_path(retro)
-    when :grouping then retro_grouping_path(retro)
-    when :voting then retro_voting_path(retro)
-    when :discussion then retro_discussion_path(retro)
-    when :complete then retro_complete_path(retro)
-    else retro_path(retro)
-    end
   end
 end

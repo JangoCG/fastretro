@@ -184,8 +184,8 @@ class Retros::VotesController < ApplicationController
 
   # Returns all voteable items (Feedbacks and FeedbackGroups) for this retro.
   # Used when we need to update all vote buttons after a threshold crossing.
+  # Eager-loads votes to avoid N+1 queries when rendering VoteButtonComponents.
   def all_voteables
-    # to_a converts relations to arrays for concatenation
-    @retro.feedbacks.to_a + @retro.feedback_groups.to_a
+    @retro.feedbacks.includes(:votes).to_a + @retro.feedback_groups.includes(:votes).to_a
   end
 end
