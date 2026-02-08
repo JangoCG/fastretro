@@ -12,6 +12,7 @@ class FeedbackGroup < ApplicationRecord
   private
 
   def broadcast_targeted_columns
+    return if Current.skip_targeted_broadcasts
     return unless retro.present?
 
     each_retro_user do |user|

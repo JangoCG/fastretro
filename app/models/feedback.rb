@@ -17,6 +17,7 @@ class Feedback < ApplicationRecord
   private
 
   def broadcast_targeted_columns
+    return if Current.skip_targeted_broadcasts
     return unless broadcast_columns?
 
     each_retro_user do |user|
