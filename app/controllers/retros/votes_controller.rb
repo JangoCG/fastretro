@@ -97,19 +97,19 @@ class Retros::VotesController < ApplicationController
   def broadcast_vote_count_update
     return unless @voteable
 
-    # Broadcast just the vote count to all users (no user-specific data)
-    # This doesn't cause page morph, so WebSocket stays connected
-    vote_count_dom_id = "vote_count_#{@voteable.class.name.underscore}_#{@voteable.id}"
+    @retro.participants.includes(:user).find_each do |participant|
+      next unless participant.user.present?
 
-    Turbo::StreamsChannel.broadcast_replace_to(
-      @retro,
-      target: vote_count_dom_id,
-      partial: "retros/votes/vote_count",
-      locals: {
-        dom_id: vote_count_dom_id,
-        count: @voteable.votes.count
-      }
-    )
+      Current.set(account: @retro.account, user: participant.user) do
+        vote_button = VoteButtonComponent.new(voteable: @voteable.reload, participant:, retro: @retro)
+        Turbo::StreamsChannel.broadcast_replace_to(
+          [ @retro, participant.user ],
+          target: vote_button.dom_id,
+          partial: "retros/votes/vote_button",
+          locals: { voteable: @voteable, participant:, retro: @retro }
+        )
+      end
+    end
   end
 
   # Renders Turbo Stream updates for vote buttons after a vote action.
