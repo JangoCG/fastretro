@@ -19,14 +19,16 @@ Yabeda::Rails.config.ignore_actions = %w[
   Rails::HealthController#show
 ]
 
+Yabeda::Rails.install!
 Yabeda::ActiveJob.install!
-
-require "yabeda/solid_queue"
-Yabeda::SolidQueue.install!
 
 Yabeda::ActionCable.configure do |config|
   config.channel_class_name = "ActionCable::Channel::Base"
 end
+Yabeda::ActionCable.install!
+
+require "yabeda/solid_queue"
+Yabeda::SolidQueue.install!
 
 require "yabeda/fast_retro"
 Yabeda::FastRetro.install!

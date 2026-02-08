@@ -11,15 +11,13 @@ module Yabeda
         gauge :recurring_tasks_delayed_count, comment: "Number of recurring jobs that haven't been enqueued within their schedule"
 
         collect do
-          if ::SolidQueue.supervisor?
-            solid_queue.jobs_failed_count.set({}, ::SolidQueue::FailedExecution.count)
-            solid_queue.jobs_unreleased_count.set({}, ::SolidQueue::ClaimedExecution.where(process: nil).count)
-            solid_queue.jobs_scheduled_and_delayed_count.set({}, ::SolidQueue::ScheduledExecution.where(scheduled_at: ..5.minutes.ago).count)
-            solid_queue.recurring_tasks_count.set({}, ::SolidQueue::RecurringTask.count)
-            solid_queue.recurring_tasks_delayed_count.set({}, ::SolidQueue::RecurringTask.count do |task|
-              task.last_enqueued_time.present? && (task.previous_time - task.last_enqueued_time) > 5.minutes
-            end)
-          end
+          solid_queue.jobs_failed_count.set({}, ::SolidQueue::FailedExecution.count)
+          solid_queue.jobs_unreleased_count.set({}, ::SolidQueue::ClaimedExecution.where(process: nil).count)
+          solid_queue.jobs_scheduled_and_delayed_count.set({}, ::SolidQueue::ScheduledExecution.where(scheduled_at: ..5.minutes.ago).count)
+          solid_queue.recurring_tasks_count.set({}, ::SolidQueue::RecurringTask.count)
+          solid_queue.recurring_tasks_delayed_count.set({}, ::SolidQueue::RecurringTask.count do |task|
+            task.last_enqueued_time.present? && (task.previous_time - task.last_enqueued_time) > 5.minutes
+          end)
         end
       end
     end
