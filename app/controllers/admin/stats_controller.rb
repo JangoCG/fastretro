@@ -20,6 +20,7 @@ class Admin::StatsController < AdminController
 
     @top_accounts = Account
       .where("feedbacks_count > 0")
+      .select("accounts.*, (SELECT MAX(retros.created_at) FROM retros WHERE retros.account_id = accounts.id) AS last_retro_at")
       .order(feedbacks_count: :desc)
       .limit(20)
 

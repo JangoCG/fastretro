@@ -158,6 +158,23 @@
               <div class="flex-shrink-0 text-right">
                 <div class="text-2xl font-black text-amber-600"><%= number_with_delimiter(account.feedbacks_count) %></div>
                 <div class="font-mono text-xs text-zinc-500 uppercase">feedbacks</div>
+                <% if account.last_retro_at.present? %>
+                  <% days_ago = (Time.current - account.last_retro_at.to_time).to_i / 1.day %>
+                  <div class="font-mono text-xs mt-1.5 px-2 py-0.5 inline-block border
+                    <%= if days_ago <= 7
+                          'text-emerald-700 bg-emerald-50 border-emerald-200'
+                        elsif days_ago <= 30
+                          'text-amber-700 bg-amber-50 border-amber-200'
+                        else
+                          'text-red-700 bg-red-50 border-red-200'
+                        end %>">
+                    <%= time_ago_in_words(account.last_retro_at) %> ago
+                  </div>
+                <% else %>
+                  <div class="font-mono text-xs mt-1.5 px-2 py-0.5 inline-block border text-zinc-400 bg-zinc-50 border-zinc-200">
+                    no retros
+                  </div>
+                <% end %>
               </div>
             </div>
           </li>
