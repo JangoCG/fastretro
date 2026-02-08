@@ -37,6 +37,15 @@ plugin :tmp_restart
 # Run the Solid Queue supervisor inside of Puma for single-server deployments.
 plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 
+# Expose Prometheus metrics (SaaS only).
+# In dev, overridden to http://127.0.0.1:9306/metrics in .mise.toml.
+if FastRetro.saas?
+  control_uri = Rails.env.local? ? "unix://tmp/pumactl.sock" : "auto"
+  activate_control_app control_uri, no_token: true
+  plugin :yabeda
+  plugin :yabeda_prometheus
+end
+
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]

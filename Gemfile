@@ -60,6 +60,18 @@ gem "stripe", "~> 18.2"
 gem "sentry-ruby"
 gem "sentry-rails"
 
+# Monitoring (Prometheus metrics, SaaS only at runtime)
+gem "yabeda"
+gem "yabeda-rails"
+gem "yabeda-actioncable"
+gem "yabeda-activejob"
+gem "yabeda-gc"
+gem "yabeda-http_requests"
+gem "yabeda-prometheus-mmap"
+gem "yabeda-puma-plugin"
+gem "prometheus-client-mmap", "~> 1.3"
+gem "webrick"
+
 # CSV export (required explicitly since Ruby 3.4)
 gem "csv"
 
