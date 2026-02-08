@@ -68,7 +68,7 @@
           <%= render VoteButtonComponent.new(voteable: @feedback, participant: @participant, retro: @retro) %>
         </div>
       <% elsif show_vote_count? %>
-        <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
+        <div class="relative z-20 flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
           <%= @feedback.votes.count %>
         </div>
       <% end %>

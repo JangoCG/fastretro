@@ -32,6 +32,6 @@ class Feedbacks::FeedbackComponent < ApplicationComponent
   end
 
   def show_vote_count?
-    @show_votes && !in_group? && @feedback.votes.any?
+    @show_votes && !in_group?
   end
 end
