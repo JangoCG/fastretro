@@ -34,6 +34,7 @@
 
 <%# Turbo 8: Subscribe to retro stream for real-time updates %>
 <%= turbo_stream_from @retro %>
+<%= turbo_stream_from [@retro, Current.user] if Current.user.present? %>
 
 <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
 <%# This creates a technical 'cutting mat' feel behind your content %>
@@ -203,7 +204,9 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
             <%= render RetroInviteCardComponent.new(retro: @retro) %>
             <%= yield :sidebar_tip %>
-            <%= render ParticipantListComponent.new(retro: @retro, highlight_enabled: @retro.grouping? && @retro.admin?(Current.user)) %>
+            <div id="participant-list">
+              <%= render ParticipantListComponent.new(retro: @retro, highlight_enabled: @retro.grouping? && @retro.admin?(Current.user)) %>
+            </div>
           </div>
         </div>
       </div>

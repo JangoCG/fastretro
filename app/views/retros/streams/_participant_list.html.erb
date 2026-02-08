@@ -1,0 +1,3 @@
+<div id="participant-list">
+  <%= render ParticipantListComponent.new(retro: retro, highlight_enabled: retro.grouping? && retro.admin?(Current.user)) %>
+</div>
