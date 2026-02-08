@@ -1,9 +1,10 @@
 class Feedbacks::FeedbackComponent < ApplicationComponent
-  def initialize(feedback:, draggable: false, grouping_enabled: false, voting_enabled: false, participant: nil, retro: nil)
+  def initialize(feedback:, draggable: false, grouping_enabled: false, voting_enabled: false, show_votes: false, participant: nil, retro: nil)
     @feedback = feedback
     @draggable = draggable
     @grouping_enabled = grouping_enabled
     @voting_enabled = voting_enabled
+    @show_votes = show_votes
     @participant = participant
     @retro = retro || @feedback.retro
   end
@@ -28,5 +29,9 @@ class Feedbacks::FeedbackComponent < ApplicationComponent
 
   def show_voting?
     @voting_enabled && @participant.present? && !in_group?
+  end
+
+  def show_vote_count?
+    @show_votes && !in_group? && @feedback.votes.any?
   end
 end

@@ -49,6 +49,8 @@ class Retro < ApplicationRecord
     current_index = PHASE_ORDER.index(phase.to_sym)
     return if current_index.nil? || current_index <= PHASE_ORDER.index(:brainstorming)
 
+    cleanup_votes if voting?
+
     prev_phase = PHASE_ORDER[current_index - 1]
     update!(phase: prev_phase, highlighted_user_id: nil)
     participants.update_all(finished: false)
@@ -107,5 +109,10 @@ class Retro < ApplicationRecord
   # Remove completed actions (called when leaving action_review phase)
   def cleanup_completed_actions
     actions.completed_actions.destroy_all
+  end
+
+  # Remove all votes (called when going back from voting phase)
+  def cleanup_votes
+    Vote.where(retro_participant: participants).delete_all
   end
 end

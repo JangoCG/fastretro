@@ -34,7 +34,7 @@ class Retros::ColumnComponent < ApplicationComponent
 
   def ungrouped_feedbacks
     base = feedbacks.where(feedback_group_id: nil)
-    if voting_enabled?
+    if show_vote_results?
       sort_by_votes(base)
     else
       base
@@ -43,7 +43,7 @@ class Retros::ColumnComponent < ApplicationComponent
 
   def grouped_feedbacks_by_group
     groups = feedbacks.where.not(feedback_group_id: nil).group_by(&:feedback_group)
-    if voting_enabled?
+    if show_vote_results?
       groups.sort_by { |group, _| -group.votes.count }.to_h
     else
       groups
@@ -70,6 +70,10 @@ class Retros::ColumnComponent < ApplicationComponent
 
   def grouping_enabled?
     @retro.grouping? && @retro.admin?(Current.user)
+  end
+
+  def show_vote_results?
+    @retro.voting? || @retro.discussion?
   end
 
   def voting_enabled?
