@@ -20,6 +20,7 @@ class RetrosController < ApplicationController
   # GET /retros/new
   def new
     @retro = Retro.new
+    @retro.configure_column_layout(layout_mode: "default", column_names: [], votes_per_participant: Retro::DEFAULT_VOTES_PER_PARTICIPANT)
   end
 
 
@@ -29,7 +30,13 @@ class RetrosController < ApplicationController
 
   # POST /retros or /retros.json
   def create
-    @retro = Current.account.retros.new(retro_params)
+    create_params = retro_create_params
+    @retro = Current.account.retros.new(name: create_params[:name])
+    @retro.configure_column_layout(
+      layout_mode: create_params[:layout_mode],
+      column_names: create_params[:column_names],
+      votes_per_participant: create_params[:votes_per_participant]
+    )
 
     respond_to do |format|
       if @retro.save
@@ -75,5 +82,9 @@ class RetrosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def retro_params
       params.expect(retro: [ :name ])
+    end
+
+    def retro_create_params
+      params.require(:retro).permit(:name, :layout_mode, :votes_per_participant, column_names: [])
     end
 end

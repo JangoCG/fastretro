@@ -7,8 +7,9 @@ class Vote < ApplicationRecord
   private
 
   def participant_vote_limit
-    if retro_participant.votes.count >= 3
-      errors.add(:base, "Maximum 3 votes per participant")
+    max_votes = retro_participant.retro.max_votes_per_participant
+    if retro_participant.votes.count >= max_votes
+      errors.add(:base, "Maximum #{max_votes} votes per participant")
     end
   end
 end

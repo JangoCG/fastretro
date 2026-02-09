@@ -32,7 +32,11 @@ class ParticipantListComponent < ApplicationComponent
   end
 
   def participants
-    @retro.participants.includes(:user).order(:created_at)
+    @participants ||= begin
+      records = @retro.participants.order(:created_at).to_a
+      ActiveRecord::Associations::Preloader.new(records: records, associations: :user).call
+      records
+    end
   end
 
   def avatar_color(index)

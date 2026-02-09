@@ -1,8 +1,9 @@
 class VotesRemainingComponent < ApplicationComponent
-  attr_reader :participant
+  attr_reader :participant, :retro
 
-  def initialize(participant:)
+  def initialize(participant:, retro:)
     @participant = participant
+    @retro = retro
   end
 
   def dom_id
@@ -10,7 +11,7 @@ class VotesRemainingComponent < ApplicationComponent
   end
 
   def votes_remaining
-    3 - participant.votes.size
+    [ retro.max_votes_per_participant - participant.votes.size, 0 ].max
   end
 
   def render?

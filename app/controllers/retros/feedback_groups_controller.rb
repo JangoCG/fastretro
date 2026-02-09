@@ -99,16 +99,21 @@ class Retros::FeedbackGroupsController < ApplicationController
   end
 
   def broadcast_grouping_columns_to_participants
-    @retro.participants.includes(:user).find_each do |participant|
+    feedbacks_by_category = @retro.feedbacks.published
+      .includes(:user, :rich_text_content, :feedback_group)
+      .to_a
+      .group_by(&:category)
+
+    @retro.participants.includes(:user).each do |participant|
       next unless participant.user.present?
 
       Current.set(account: @retro.account, user: participant.user) do
-        %w[went_well could_be_better].each do |category|
+        @retro.column_categories.each do |category|
           Turbo::StreamsChannel.broadcast_replace_to(
             [ @retro, participant.user ],
             target: "retro-column-#{category}",
             partial: "retros/streams/column",
-            locals: { retro: @retro, category: }
+            locals: { retro: @retro, category:, participant:, feedbacks_by_category: }
           )
         end
       end

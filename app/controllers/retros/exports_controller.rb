@@ -28,12 +28,10 @@ module Retros
     def feedbacks_data
       data = []
 
-      @retro.feedbacks.published.went_well.includes(:user, :votes).each do |feedback|
-        data << [ "Went Well", strip_html(feedback.content.to_plain_text), feedback.user.name, feedback.votes.size ]
-      end
-
-      @retro.feedbacks.published.could_be_better.includes(:user, :votes).each do |feedback|
-        data << [ "Could Be Better", strip_html(feedback.content.to_plain_text), feedback.user.name, feedback.votes.size ]
+      @retro.column_definitions.each do |column|
+        @retro.feedbacks.published.in_category(column["id"]).includes(:user, :votes).each do |feedback|
+          data << [ column["name"], strip_html(feedback.content.to_plain_text), feedback.user.name, feedback.votes.size ]
+        end
       end
 
       data
@@ -62,8 +60,7 @@ module Retros
 
       # Styles
       header_style = workbook.styles.add_style(b: true, bg_color: "000000", fg_color: "FFFFFF", sz: 12)
-      went_well_style = workbook.styles.add_style(bg_color: "D1FAE5")
-      could_be_better_style = workbook.styles.add_style(bg_color: "FEF3C7")
+      feedback_style = workbook.styles.add_style(bg_color: "F4F4F5")
       action_style = workbook.styles.add_style(bg_color: "EDE9FE")
 
       # Feedbacks sheet
@@ -71,8 +68,7 @@ module Retros
         sheet.add_row [ "Category", "Feedback", "Author", "Votes" ], style: header_style
 
         feedbacks_data.each do |row|
-          style = row[0] == "Went Well" ? went_well_style : could_be_better_style
-          sheet.add_row row, style: style
+          sheet.add_row row, style: feedback_style
         end
 
         sheet.column_widths 15, 80, 20, 8

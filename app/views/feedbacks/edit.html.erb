@@ -14,10 +14,20 @@
 
       <div class="relative z-10 flex items-center justify-between">
         <%# Category Badge (Technical Rectangular) %>
-        <span class="inline-flex items-center px-3 py-1 border-[2px] border-zinc-900 text-xs font-bold uppercase tracking-widest
-          <%= @feedback.went_well? ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800' %>">
-          <span class="mr-2 w-2 h-2 rounded-full border border-black <%= @feedback.went_well? ? 'bg-green-500' : 'bg-orange-400' %>"></span>
-          <%= @feedback.went_well? ? "WENT WELL" : "COULD BE BETTER" %>
+        <%
+          category_label = @retro.column_name_for(@feedback.category).upcase
+          badge_classes, dot_classes = case @feedback.category
+          when "went_well"
+            [ "bg-green-100 text-green-800", "bg-green-500" ]
+          when "could_be_better"
+            [ "bg-orange-100 text-orange-800", "bg-orange-400" ]
+          else
+            [ "bg-sky-100 text-sky-800", "bg-sky-400" ]
+          end
+        %>
+        <span class="inline-flex items-center px-3 py-1 border-[2px] border-zinc-900 text-xs font-bold uppercase tracking-widest <%= badge_classes %>">
+          <span class="mr-2 w-2 h-2 rounded-full border border-black <%= dot_classes %>"></span>
+          <%= category_label %>
         </span>
 
         <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest">EDITING</span>

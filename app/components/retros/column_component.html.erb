@@ -8,16 +8,6 @@
     <div class="px-5 py-5 border-b-[3px] border-zinc-900 bg-white relative overflow-hidden">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
 
-      <%
-        highlight_color = if title.downcase.include?("well")
-                           "#22c55e"
-                         elsif title.downcase.include?("better") || title.downcase.include?("improve")
-                           "#fb923c"
-                         else
-                           "#FFFF00"
-                         end
-      %>
-
       <div class="relative z-10 flex justify-between items-start gap-4">
         <div class="flex-1 min-w-0 overflow-hidden">
           <h2 class="font-black text-2xl uppercase tracking-tighter text-zinc-900 leading-[0.85] filter drop-shadow-sm">
@@ -49,7 +39,7 @@
           data-controller="vote-sorting"
         <% end %>
       >
-        <% if feedbacks.any? %>
+        <% if has_feedbacks? %>
           <% if show_vote_results? %>
             <%# During voting/discussion: render all items sorted by votes %>
             <% all_items_sorted_by_votes.each do |item| %>
@@ -103,7 +93,7 @@
           <div class="flex flex-col items-center justify-center py-16 text-center select-none no-drag">
              <div class="w-20 h-20 border-[3px] border-zinc-900 flex items-center justify-center mb-6 relative">
                <span class="font-black text-4xl text-zinc-900">"</span>
-               <div class="absolute -top-2 -right-2 w-4 h-4 bg-<%= title.downcase.include?("well") ? "[#22c55e]" : "[#fb923c]" %>"></div>
+               <div class="absolute -top-2 -right-2 w-4 h-4" style="background-color: <%= highlight_color %>;"></div>
              </div>
 
              <p class="font-black text-zinc-900 text-xs uppercase tracking-widest mb-1">

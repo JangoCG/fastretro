@@ -17,7 +17,7 @@ class FeedbackGroup < ApplicationRecord
 
     each_retro_user do |user|
       Current.set(account: retro.account, user:) do
-        %w[went_well could_be_better].each do |target_category|
+        retro.column_categories.each do |target_category|
           Turbo::StreamsChannel.broadcast_replace_to(
             [ retro, user ],
             target: "retro-column-#{target_category}",

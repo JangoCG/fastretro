@@ -18,12 +18,14 @@
 
       <%# Feedbacks Card %>
       <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+        <% feedback_counts = @retro.feedbacks.published.group(:category).count %>
         <div class="text-center">
           <div class="text-6xl font-black text-zinc-900"><%= @retro.feedbacks.published.count %></div>
           <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500">Total Feedbacks</div>
-          <div class="mt-3 flex justify-center gap-4 text-xs">
-            <span class="text-emerald-600 font-bold"><%= @retro.feedbacks.published.went_well.count %> went well</span>
-            <span class="text-amber-600 font-bold"><%= @retro.feedbacks.published.could_be_better.count %> to improve</span>
+          <div class="mt-3 flex flex-wrap justify-center gap-3 text-xs">
+            <% @retro.column_definitions.each do |column| %>
+              <span class="text-zinc-700 font-bold"><%= feedback_counts[column["id"]].to_i %> <%= column["name"].downcase %></span>
+            <% end %>
           </div>
         </div>
       </div>

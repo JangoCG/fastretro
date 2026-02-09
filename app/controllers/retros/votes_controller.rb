@@ -1,12 +1,12 @@
 # Handles voting on Feedbacks and FeedbackGroups during a retro's voting phase.
 #
-# Each participant has a maximum of 3 votes they can distribute across items.
+# Each participant has a retro-specific vote limit they can distribute across items.
 # Uses targeted Turbo Stream updates for instant feedback (see docs/turbo-patterns-guide.md).
 #
 # == Vote Button Update Strategy
 #
 # The VoteButtonComponent shows/hides the "+" button based on whether the participant
-# has votes remaining (participant.votes.count < 3). This creates a challenge:
+# has votes remaining (participant.votes.count < limit). This creates a challenge:
 #
 # When a user casts their 3rd vote, we can't just update the clicked button—ALL other
 # buttons on the page still show "+" because they haven't been re-rendered. Similarly,
@@ -20,8 +20,6 @@
 class Retros::VotesController < ApplicationController
   include RetroAuthorization
 
-  MAX_VOTES_PER_PARTICIPANT = 3
-
   before_action :set_retro
   before_action :ensure_retro_participant
   before_action :set_current_participant
@@ -34,14 +32,15 @@ class Retros::VotesController < ApplicationController
 
     return render_vote_button_update(:not_found, votes_before:) unless @voteable
 
-    if votes_before >= MAX_VOTES_PER_PARTICIPANT
-      Rails.logger.warn "Vote limit reached: participant #{@current_participant.id} has 3 votes"
+    if votes_before >= max_votes_per_participant
+      Rails.logger.warn "Vote limit reached: participant #{@current_participant.id} reached #{max_votes_per_participant} votes"
       return render_vote_button_update(:unprocessable_entity, votes_before:)
     end
 
     @vote = @current_participant.votes.build(voteable: @voteable)
 
     if @vote.save
+      refresh_voteable_votes!
       broadcast_vote_count_update
       render_vote_button_update(:ok, votes_before:)
     else
@@ -61,6 +60,7 @@ class Retros::VotesController < ApplicationController
 
     @voteable = @vote.voteable
     @vote.destroy
+    refresh_voteable_votes!
     broadcast_vote_count_update
     render_vote_button_update(:ok, votes_before:)
   end
@@ -88,23 +88,24 @@ class Retros::VotesController < ApplicationController
   def find_voteable
     case params[:voteable_type]
     when "Feedback"
-      @retro.feedbacks.find_by(id: params[:voteable_id])
+      @retro.feedbacks.includes(:votes).find_by(id: params[:voteable_id])
     when "FeedbackGroup"
-      @retro.feedback_groups.find_by(id: params[:voteable_id])
+      @retro.feedback_groups.includes(:votes).find_by(id: params[:voteable_id])
     end
   end
 
   def broadcast_vote_count_update
     return unless @voteable
 
-    @retro.participants.includes(:user).find_each do |participant|
+    vote_button_dom_id = voteable_dom_id(@voteable)
+
+    @retro.participants.includes(:user, :votes).each do |participant|
       next unless participant.user.present?
 
       Current.set(account: @retro.account, user: participant.user) do
-        vote_button = VoteButtonComponent.new(voteable: @voteable.reload, participant:, retro: @retro)
         Turbo::StreamsChannel.broadcast_replace_to(
           [ @retro, participant.user ],
-          target: vote_button.dom_id,
+          target: vote_button_dom_id,
           partial: "retros/votes/vote_button",
           locals: { voteable: @voteable, participant:, retro: @retro }
         )
@@ -115,7 +116,7 @@ class Retros::VotesController < ApplicationController
   # Renders Turbo Stream updates for vote buttons after a vote action.
   #
   # This method handles the "threshold crossing" problem: VoteButtonComponent decides
-  # whether to show the "+" button based on participant.votes.count < 3. When a user
+  # whether to show the "+" button based on participant.votes.count < limit. When a user
   # uses their last vote (or regains a vote), ALL buttons need updating, not just
   # the one they clicked.
   #
@@ -135,13 +136,15 @@ class Retros::VotesController < ApplicationController
   #
   def render_vote_button_update(status, votes_before:)
     @current_participant.reload
+    @current_participant.votes.load
     votes_after = @current_participant.votes.size
 
     # Did we cross the max votes threshold? If so, ALL buttons need updating.
     # - Going 2→3: all "+" buttons must disappear (no votes left)
     # - Going 3→2: all "+" buttons must reappear (votes available again)
-    crossed_threshold = (votes_before < MAX_VOTES_PER_PARTICIPANT && votes_after >= MAX_VOTES_PER_PARTICIPANT) ||
-                        (votes_before >= MAX_VOTES_PER_PARTICIPANT && votes_after < MAX_VOTES_PER_PARTICIPANT)
+    crossed_threshold = (votes_before < max_votes_per_participant && votes_after >= max_votes_per_participant) ||
+                        (votes_before >= max_votes_per_participant && votes_after < max_votes_per_participant)
+    voteables_for_threshold = crossed_threshold ? all_voteables : nil
 
     respond_to do |format|
       format.turbo_stream do
@@ -152,7 +155,7 @@ class Retros::VotesController < ApplicationController
           # We iterate through every voteable (Feedback + FeedbackGroup) and send
           # a turbo_stream.replace for each one. This ensures all "+" buttons
           # appear/disappear consistently.
-          all_voteables.each do |voteable|
+          voteables_for_threshold.each do |voteable|
             vote_button = VoteButtonComponent.new(
               voteable: voteable,
               participant: @current_participant,
@@ -165,7 +168,7 @@ class Retros::VotesController < ApplicationController
           # This is the common case (voting 0→1, 1→2, 2→1, 1→0) and keeps
           # the response payload small for snappy feedback.
           vote_button = VoteButtonComponent.new(
-            voteable: @voteable.reload,
+            voteable: @voteable,
             participant: @current_participant,
             retro: @retro
           )
@@ -173,7 +176,7 @@ class Retros::VotesController < ApplicationController
         end
 
         # Always update the "votes remaining" counter in the header
-        votes_remaining = VotesRemainingComponent.new(participant: @current_participant)
+        votes_remaining = VotesRemainingComponent.new(participant: @current_participant, retro: @retro)
         streams << turbo_stream.replace(votes_remaining.dom_id, votes_remaining)
 
         render turbo_stream: streams, status: status
@@ -186,6 +189,29 @@ class Retros::VotesController < ApplicationController
   # Used when we need to update all vote buttons after a threshold crossing.
   # Eager-loads votes to avoid N+1 queries when rendering VoteButtonComponents.
   def all_voteables
-    @retro.feedbacks.includes(:votes).to_a + @retro.feedback_groups.includes(:votes).to_a
+    return @all_voteables if defined?(@all_voteables)
+
+    feedbacks = @retro.feedbacks.to_a
+    feedback_groups = @retro.feedback_groups.to_a
+
+    ActiveRecord::Associations::Preloader.new(records: feedbacks, associations: :votes).call
+    ActiveRecord::Associations::Preloader.new(records: feedback_groups, associations: :votes).call
+
+    @all_voteables = feedbacks + feedback_groups
+  end
+
+  def refresh_voteable_votes!
+    return unless @voteable
+
+    @voteable.association(:votes).reset
+    @voteable.votes.load
+  end
+
+  def voteable_dom_id(voteable)
+    "vote_button_#{voteable.class.name.underscore}_#{voteable.id}"
+  end
+
+  def max_votes_per_participant
+    @retro.max_votes_per_participant
   end
 end

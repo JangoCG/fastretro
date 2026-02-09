@@ -8,6 +8,10 @@ class Retros::VotingsController < ApplicationController
   before_action :set_current_participant
 
   def show
+    @feedbacks_by_category = @retro.feedbacks.published
+      .includes(:user, :rich_text_content, :votes, feedback_group: :votes)
+      .to_a
+      .group_by(&:category)
   end
 
   private

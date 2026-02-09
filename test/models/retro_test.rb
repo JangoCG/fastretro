@@ -195,6 +195,47 @@ class RetroTest < ActiveSupport::TestCase
     assert_not @retro.can_go_back?
   end
 
+  test "default layout exposes three columns" do
+    assert_equal "default", @retro.layout_mode
+    assert_equal %w[went_well could_be_better wants], @retro.column_categories
+    assert_equal [ "Good", "Bad", "Want" ], @retro.column_definitions.map { |column| column["name"] }
+  end
+
+  test "configure_column_layout with custom mode normalizes and de-duplicates column ids" do
+    @retro.configure_column_layout(
+      layout_mode: "custom",
+      column_names: [ "Start", "Start", "  ", "Stop" ]
+    )
+    @retro.save!
+
+    assert_equal "custom", @retro.layout_mode
+    assert_equal %w[start start_2 stop], @retro.column_categories
+    assert_equal [ "Start", "Start", "Stop" ], @retro.column_definitions.map { |column| column["name"] }
+    assert_equal 3, @retro.votes_per_participant
+  end
+
+  test "configure_column_layout with custom mode keeps custom vote limit" do
+    @retro.configure_column_layout(
+      layout_mode: "custom",
+      column_names: [ "Start", "Stop" ],
+      votes_per_participant: 7
+    )
+    @retro.save!
+
+    assert_equal 7, @retro.votes_per_participant
+  end
+
+  test "default layout always resets votes per participant to 3" do
+    @retro.configure_column_layout(
+      layout_mode: "default",
+      column_names: [ "Anything" ],
+      votes_per_participant: 9
+    )
+    @retro.save!
+
+    assert_equal 3, @retro.votes_per_participant
+  end
+
   test "cached_global_count fetches retro count from cache using shared key" do
     Rails.cache.expects(:fetch).with(
       Retro::LANDING_PAGE_RETRO_COUNT_CACHE_KEY,

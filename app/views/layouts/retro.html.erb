@@ -162,44 +162,37 @@
     >
 
       <%# The Board %>
-      <div class="col-span-12 lg:col-span-9 order-2 lg:order-1">
+      <div class="col-span-12 lg:col-span-10 order-2 lg:order-1">
         <% if content_for?(:board_columns) %>
           <%= yield :board_columns %>
         <% else %>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <%= render Retros::ColumnComponent.new(retro: @retro, category: "went_well", participant: @current_participant) %>
-            <%= render Retros::ColumnComponent.new(retro: @retro, category: "could_be_better", participant: @current_participant) %>
+          <div class="grid gap-6 sm:gap-8" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <% feedbacks_by_category = @feedbacks_by_category %>
+            <% @retro.column_definitions.each_with_index do |column, index| %>
+              <% column_feedbacks = feedbacks_by_category&.[](column["id"]) %>
+              <%= render Retros::ColumnComponent.new(
+                retro: @retro,
+                category: column["id"],
+                title: column["name"],
+                position: index,
+                participant: @current_participant,
+                feedbacks: feedbacks_by_category.nil? ? nil : (column_feedbacks || []),
+                has_feedbacks: feedbacks_by_category.nil? ? nil : column_feedbacks.present?
+              ) %>
+            <% end %>
           </div>
         <% end %>
       </div>
 
       <%# Participants - on mobile, show compact version at top %>
-      <div class="col-span-12 lg:col-span-3 order-1 lg:order-2">
+      <div class="col-span-12 lg:col-span-2 order-1 lg:order-2">
         <div class="lg:sticky lg:top-8 flex flex-col gap-4 sm:gap-6">
-          <%# Phase tag: Show simple text on mobile, fancy badge on desktop %>
-          <div class="flex justify-center lg:-translate-x-4 mb-1 sm:mb-3">
-            <%# Simple mobile phase indicator %>
-            <div class="lg:hidden">
-              <%
-                mobile_phase_colors = {
-                  "action_review" => "bg-violet-100 text-violet-800 border-violet-400",
-                  "brainstorming" => "bg-amber-100 text-amber-800 border-amber-400",
-                  "grouping" => "bg-sky-100 text-sky-800 border-sky-400",
-                  "voting" => "bg-violet-100 text-violet-800 border-violet-400",
-                  "discussion" => "bg-emerald-100 text-emerald-800 border-emerald-400",
-                  "complete" => "bg-zinc-100 text-zinc-800 border-zinc-400"
-                }
-                mobile_colors = mobile_phase_colors[@retro.phase] || "bg-zinc-100 text-zinc-800 border-zinc-400"
-              %>
-              <div class="px-4 py-2 border-2 <%= mobile_colors %> font-black text-sm uppercase tracking-wider">
-                "<%= @retro.phase.tr('_', ' ') %>"
-              </div>
-            </div>
-            <%# Fancy badge on desktop %>
-            <div class="hidden lg:block">
+          <% if content_for?(:phase_tag) %>
+            <div class="flex justify-center">
               <%= yield :phase_tag %>
             </div>
-          </div>
+          <% end %>
+
           <%# On mobile/tablet, show invite and participants side by side %>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
             <%= render RetroInviteCardComponent.new(retro: @retro) %>

@@ -7,7 +7,7 @@
 #
 # == Important: can_add_vote? is a global condition
 #
-# The "+" button visibility depends on participant.votes.count < 3, which is
+# The "+" button visibility depends on participant.votes.count < retro limit, which is
 # NOT specific to this voteable. This means when a user exhausts their votes,
 # ALL VoteButtonComponents need to be re-rendered to hide their "+" buttons.
 #
@@ -46,11 +46,11 @@ class VoteButtonComponent < ApplicationComponent
     user_votes.size
   end
 
-  # Whether the participant can cast another vote (has < 3 total votes).
+  # Whether the participant can cast another vote.
   # NOTE: This is a GLOBAL condition, not specific to this voteable.
   # When this changes, ALL vote buttons on the page need re-rendering.
   def can_add_vote?
-    @participant.votes.size < 3
+    @participant.votes.size < @retro.max_votes_per_participant
   end
 
   def can_remove_vote?

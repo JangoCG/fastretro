@@ -37,4 +37,24 @@ class Retros::VotesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal expected_calls.sort_by(&:to_s), calls.sort_by(&:to_s)
   end
+
+  test "create enforces retro-specific vote limit" do
+    sign_in_as :one
+    @retro.configure_column_layout(layout_mode: "custom", column_names: [ "Went well" ], votes_per_participant: 1)
+    @retro.save!
+
+    assert_difference("Vote.count", 1) do
+      post retro_votes_path(@retro),
+        params: { voteable_type: "Feedback", voteable_id: @feedback.id },
+        as: :turbo_stream
+    end
+    assert_response :success
+
+    assert_no_difference("Vote.count") do
+      post retro_votes_path(@retro),
+        params: { voteable_type: "Feedback", voteable_id: @feedback.id },
+        as: :turbo_stream
+    end
+    assert_response :unprocessable_entity
+  end
 end

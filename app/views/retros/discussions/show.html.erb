@@ -5,9 +5,18 @@
 <% end %>
 
 <% content_for :board_columns do %>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <%= render Retros::ColumnComponent.new(retro: @retro, category: "went_well") %>
-    <%= render Retros::ColumnComponent.new(retro: @retro, category: "could_be_better") %>
+  <div class="grid gap-6" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+    <% @retro.column_definitions.each_with_index do |column, index| %>
+      <%= render Retros::ColumnComponent.new(
+        retro: @retro,
+        category: column["id"],
+        title: column["name"],
+        position: index,
+        participant: @current_participant,
+        feedbacks: (@feedbacks_by_category[column["id"]] || []),
+        has_feedbacks: @feedbacks_by_category[column["id"]].present?
+      ) %>
+    <% end %>
     <%= render Actions::ColumnComponent.new(retro: @retro) %>
   </div>
 <% end %>

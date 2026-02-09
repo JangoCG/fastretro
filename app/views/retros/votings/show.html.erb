@@ -5,5 +5,5 @@
 <% end %>
 
 <% content_for :header_actions do %>
-  <%= render VotesRemainingComponent.new(participant: @current_participant) %>
+  <%= render VotesRemainingComponent.new(participant: @current_participant, retro: @retro) %>
 <% end %>

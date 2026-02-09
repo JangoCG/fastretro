@@ -10,11 +10,29 @@ class Feedback < ApplicationRecord
 
   has_rich_text :content
 
-  enum :category, { went_well: "went_well", could_be_better: "could_be_better" }
+  validates :category, presence: true
+  validate :category_exists_in_retro
 
   scope :in_category, ->(cat) { where(category: cat) }
+  scope :went_well, -> { in_category("went_well") }
+  scope :could_be_better, -> { in_category("could_be_better") }
+
+  def went_well?
+    category == "went_well"
+  end
+
+  def could_be_better?
+    category == "could_be_better"
+  end
 
   private
+
+  def category_exists_in_retro
+    return unless retro.present?
+    return if retro.category_exists?(category)
+
+    errors.add(:category, "is not part of this retro layout")
+  end
 
   def broadcast_targeted_columns
     return if Current.skip_targeted_broadcasts
@@ -22,7 +40,7 @@ class Feedback < ApplicationRecord
 
     each_retro_user do |user|
       Current.set(account: retro.account, user:) do
-        %w[went_well could_be_better].each do |target_category|
+        retro.column_categories.each do |target_category|
           Turbo::StreamsChannel.broadcast_replace_to(
             [ retro, user ],
             target: "retro-column-#{target_category}",

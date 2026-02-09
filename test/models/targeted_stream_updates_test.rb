@@ -131,22 +131,15 @@ class TargetedStreamUpdatesTest < ActiveSupport::TestCase
   private
 
   def expect_column_replacements
-    Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
-      [ @retro, @user ],
-      has_entries(
-        target: "retro-column-went_well",
-        partial: "retros/streams/column",
-        locals: has_entries(retro: @retro, category: "went_well")
+    @retro.column_categories.each do |category|
+      Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
+        [ @retro, @user ],
+        has_entries(
+          target: "retro-column-#{category}",
+          partial: "retros/streams/column",
+          locals: has_entries(retro: @retro, category:)
+        )
       )
-    )
-
-    Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
-      [ @retro, @user ],
-      has_entries(
-        target: "retro-column-could_be_better",
-        partial: "retros/streams/column",
-        locals: has_entries(retro: @retro, category: "could_be_better")
-      )
-    )
+    end
   end
 end

@@ -1,1 +1,13 @@
-<%= render Retros::ColumnComponent.new(retro: retro, category: category) %>
+<%
+  column_position = retro.column_categories.index(category.to_s) || 0
+  column_feedbacks = local_assigns[:feedbacks_by_category]&.[](category.to_s) || local_assigns[:feedbacks_by_category]&.[](category)
+%>
+<%= render Retros::ColumnComponent.new(
+  retro: retro,
+  category: category,
+  title: retro.column_name_for(category),
+  position: column_position,
+  participant: local_assigns[:participant],
+  feedbacks: local_assigns[:feedbacks_by_category].nil? ? nil : (column_feedbacks || []),
+  has_feedbacks: local_assigns[:feedbacks_by_category].nil? ? nil : column_feedbacks.present?
+) %>

@@ -1,33 +1,35 @@
 class Retros::ColumnComponent < ApplicationComponent
-  TITLES = {
-    "went_well" => "What went well",
-    "could_be_better" => "What could be better"
-  }.freeze
+  HIGHLIGHT_COLORS = %w[#22c55e #fb923c #38bdf8 #a78bfa #eab308 #f43f5e].freeze
 
-  HEADER_STYLES = {
-    "went_well" => "bg-emerald-500 dark:bg-emerald-600 text-white",
-    "could_be_better" => "bg-amber-500 dark:bg-amber-600 text-white"
-  }.freeze
-
-  BORDER_STYLES = {
-    "went_well" => "border-emerald-200 dark:border-emerald-500/50",
-    "could_be_better" => "border-amber-200 dark:border-amber-500/50"
-  }.freeze
-
-  def initialize(retro:, category:, participant: nil)
+  def initialize(retro:, category:, title: nil, position: 0, participant: nil, feedbacks: nil, has_feedbacks: nil)
     @retro = retro
     @category = category
+    @title = title
+    @position = position.to_i
     @participant = participant
+    @preloaded_feedbacks = feedbacks
+    @has_feedbacks = has_feedbacks
   end
 
   private
 
   def feedbacks
     @feedbacks ||= begin
-      base = @retro.feedbacks.published.in_category(@category).includes(:user, :rich_text_content)
-      base = base.includes(:votes, feedback_group: :votes) if show_vote_results?
-      if @retro.brainstorming?
-        base.where(user: Current.user)
+      base = if @preloaded_feedbacks
+        @preloaded_feedbacks
+      else
+        relation = @retro.feedbacks.published.in_category(@category).includes(:user, :rich_text_content, :feedback_group)
+        relation = relation.includes(:votes, feedback_group: :votes) if show_vote_results?
+        if @retro.brainstorming?
+          relation.where(user: Current.user)
+        else
+          relation
+        end
+      end
+
+      if @preloaded_feedbacks && @retro.brainstorming?
+        current_user_id = Current.user&.id
+        base.select { |feedback| feedback.user_id == current_user_id }
       else
         base
       end
@@ -35,11 +37,12 @@ class Retros::ColumnComponent < ApplicationComponent
   end
 
   def ungrouped_feedbacks
-    feedbacks.where(feedback_group_id: nil)
+    split_feedbacks[:ungrouped]
   end
 
   def grouped_feedbacks_by_group
-    groups = feedbacks.where.not(feedback_group_id: nil).group_by(&:feedback_group)
+    groups = split_feedbacks[:grouped].group_by(&:feedback_group)
+
     if show_vote_results?
       groups.sort_by { |group, _| -group.votes.size }.to_h
     else
@@ -66,7 +69,13 @@ class Retros::ColumnComponent < ApplicationComponent
   end
 
   def grouping_enabled?
-    @retro.grouping? && @retro.admin?(Current.user)
+    return false unless @retro.grouping?
+
+    if @participant
+      @participant.admin?
+    else
+      @retro.admin?(Current.user)
+    end
   end
 
   def show_vote_results?
@@ -81,19 +90,46 @@ class Retros::ColumnComponent < ApplicationComponent
     @current_participant ||= @participant || @retro.participants.includes(:votes).find_by(user: Current.user)
   end
 
+  def has_feedbacks?
+    return @has_feedbacks unless @has_feedbacks.nil?
+
+    if @preloaded_feedbacks
+      feedbacks.any?
+    else
+      categories_with_feedbacks.include?(@category)
+    end
+  end
+
   def title
-    TITLES[@category]
+    @title.presence || @retro.column_name_for(@category)
   end
 
-  def emoji
-    EMOJIS[@category]
+  def highlight_color
+    HIGHLIGHT_COLORS[@position % HIGHLIGHT_COLORS.length]
   end
 
-  def header_style
-    HEADER_STYLES[@category]
+  def categories_with_feedbacks
+    cache_key = if @retro.brainstorming?
+      :@_published_feedback_categories_for_current_user
+    else
+      :@_published_feedback_categories
+    end
+
+    @retro.instance_variable_get(cache_key) || @retro.instance_variable_set(cache_key, begin
+      scope = @retro.feedbacks.published
+      scope = scope.where(user: Current.user) if @retro.brainstorming?
+      scope.distinct.pluck(:category)
+    end)
   end
 
-  def border_style
-    BORDER_STYLES[@category]
+  def feedback_records
+    @feedback_records ||= feedbacks.is_a?(ActiveRecord::Relation) ? feedbacks.to_a : feedbacks
+  end
+
+  def split_feedbacks
+    @split_feedbacks ||= begin
+      grouped, ungrouped = feedback_records.partition { |feedback| feedback.feedback_group_id.present? }
+      { grouped:, ungrouped: }
+    end
   end
 end

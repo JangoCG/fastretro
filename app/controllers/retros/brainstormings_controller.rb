@@ -8,6 +8,11 @@ class Retros::BrainstormingsController < ApplicationController
   before_action :set_current_participant
 
   def show
+    @feedbacks_by_category = @retro.feedbacks.published
+      .where(user: Current.user)
+      .includes(:user, :rich_text_content, :feedback_group)
+      .to_a
+      .group_by(&:category)
   end
 
   private

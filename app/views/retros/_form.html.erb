@@ -1,4 +1,12 @@
-<%= form_with(model: retro, id: "retro-form", data: { controller: "hotkey", action: "keydown.ctrl+enter@document->hotkey#submit keydown.meta+enter@document->hotkey#submit" }, class: "space-y-6") do |form| %>
+<%= form_with(
+  model: retro,
+  id: "retro-form",
+  data: {
+    controller: "hotkey retro-layout",
+    action: "keydown.ctrl+enter@document->hotkey#submit keydown.meta+enter@document->hotkey#submit"
+  },
+  class: "space-y-6"
+) do |form| %>
   <% if retro.errors.any? %>
     <div id="error_explanation" class="bg-red-50 border border-red-500 p-4">
       <div class="flex items-center gap-2 mb-2 text-red-600">
@@ -25,6 +33,114 @@
       </div>
     </div>
   </div>
+
+  <% if retro.new_record? %>
+    <% is_custom_layout = retro.layout_mode == "custom" %>
+    <% initial_columns = retro.column_definitions %>
+
+    <div class="space-y-4 pt-2 border-t border-dashed border-zinc-300">
+      <p class="font-mono text-xs font-bold uppercase">LAYOUT MODE</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <label class="cursor-pointer border-2 border-zinc-900 bg-white px-4 py-3 font-mono text-xs uppercase">
+          <div class="flex items-start gap-2">
+            <%= form.radio_button :layout_mode,
+                "default",
+                checked: !is_custom_layout,
+                data: { action: "change->retro-layout#toggle" } %>
+            <div>
+              <p class="font-black text-zinc-900">DEFAULT (3 COLUMNS)</p>
+              <p class="text-zinc-500 mt-1">Good, Bad, Want</p>
+            </div>
+          </div>
+        </label>
+
+        <label class="cursor-pointer border-2 border-zinc-900 bg-white px-4 py-3 font-mono text-xs uppercase">
+          <div class="flex items-start gap-2">
+            <%= form.radio_button :layout_mode,
+                "custom",
+                checked: is_custom_layout,
+                data: { action: "change->retro-layout#toggle" } %>
+            <div>
+              <p class="font-black text-zinc-900">CUSTOM LAYOUT</p>
+              <p class="text-zinc-500 mt-1">Add, remove, rename columns</p>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div data-retro-layout-target="defaultInfo" class="<%= is_custom_layout ? 'hidden ' : '' %>border-2 border-zinc-900 bg-zinc-50 px-4 py-3 font-mono text-xs uppercase text-zinc-600">
+        This retro will start with 3 columns: <strong>Good</strong>, <strong>Bad</strong>, <strong>Want</strong>.
+      </div>
+
+      <div data-retro-layout-target="customPanel" class="<%= is_custom_layout ? '' : 'hidden ' %>space-y-3 border-2 border-zinc-900 bg-white p-4">
+        <div class="space-y-1">
+          <label for="retro_votes_per_participant" class="font-mono text-xs font-bold uppercase text-zinc-700">
+            Votes Per Participant
+          </label>
+          <%= form.number_field :votes_per_participant,
+              min: 1,
+              max: 20,
+              step: 1,
+              value: retro.votes_per_participant || Retro::DEFAULT_VOTES_PER_PARTICIPANT,
+              class: "w-full sm:w-40 bg-zinc-50 border-2 border-zinc-300 px-3 py-2 font-mono text-sm focus:outline-none focus:border-zinc-900" %>
+          <p class="font-mono text-[10px] uppercase text-zinc-500">
+            Only applied for custom layouts.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between gap-2">
+          <p class="font-mono text-xs font-bold uppercase text-zinc-700">CUSTOM COLUMNS</p>
+          <button
+            type="button"
+            data-action="click->retro-layout#addColumn"
+            class="px-3 py-1.5 bg-zinc-900 text-white text-[11px] font-bold uppercase tracking-wider border-2 border-zinc-900 hover:bg-zinc-800"
+          >
+            + ADD COLUMN
+          </button>
+        </div>
+
+        <div data-retro-layout-target="columnsContainer" class="space-y-2">
+          <% initial_columns.each do |column| %>
+            <div class="flex items-center gap-2" data-retro-layout-target="columnRow">
+              <input
+                type="text"
+                name="retro[column_names][]"
+                value="<%= column["name"] %>"
+                placeholder="Column name"
+                class="w-full bg-zinc-50 border-2 border-zinc-300 px-3 py-2 font-mono text-sm focus:outline-none focus:border-zinc-900"
+              />
+              <button
+                type="button"
+                data-action="click->retro-layout#removeColumn"
+                class="shrink-0 px-3 py-2 bg-white border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-100 text-xs font-bold uppercase"
+              >
+                Remove
+              </button>
+            </div>
+          <% end %>
+        </div>
+
+        <template data-retro-layout-target="template">
+          <div class="flex items-center gap-2" data-retro-layout-target="columnRow">
+            <input
+              type="text"
+              name="retro[column_names][]"
+              placeholder="Column name"
+              class="w-full bg-zinc-50 border-2 border-zinc-300 px-3 py-2 font-mono text-sm focus:outline-none focus:border-zinc-900"
+            />
+            <button
+              type="button"
+              data-action="click->retro-layout#removeColumn"
+              class="shrink-0 px-3 py-2 bg-white border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-100 text-xs font-bold uppercase"
+            >
+              Remove
+            </button>
+          </div>
+        </template>
+      </div>
+    </div>
+  <% end %>
 
   <div class="pt-4 border-t border-dashed border-zinc-300">
      <button type="submit" class="group w-full bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider flex items-center justify-between border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1">

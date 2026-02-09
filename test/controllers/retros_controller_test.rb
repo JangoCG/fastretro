@@ -26,6 +26,32 @@ class RetrosControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "should create retro with default layout when mode is not provided" do
+    post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Default Layout Retro" } }
+
+    created_retro = Retro.order(:id).last
+    assert_equal "default", created_retro.layout_mode
+    assert_equal %w[went_well could_be_better wants], created_retro.column_categories
+    assert_equal 3, created_retro.votes_per_participant
+  end
+
+  test "should create retro with custom layout columns" do
+    post "#{account_path_prefix(@account)}/retros", params: {
+      retro: {
+        name: "Custom Layout Retro",
+        layout_mode: "custom",
+        votes_per_participant: 5,
+        column_names: [ "Start", "Stop", "Continue" ]
+      }
+    }
+
+    created_retro = Retro.order(:id).last
+    assert_equal "custom", created_retro.layout_mode
+    assert_equal %w[start stop continue], created_retro.column_categories
+    assert_equal [ "Start", "Stop", "Continue" ], created_retro.column_definitions.map { |column| column["name"] }
+    assert_equal 5, created_retro.votes_per_participant
+  end
+
   test "should show retro" do
     get "#{account_path_prefix(@account)}/retros/#{@retro.id}"
     assert_response :redirect

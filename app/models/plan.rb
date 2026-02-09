@@ -3,7 +3,7 @@ class Plan
     free_v1: {
       name: "Free",
       price: 0,
-      feedback_limit: ENV.fetch("FREE_FEEDBACK_LIMIT", 3).to_i,
+      feedback_limit: ENV.fetch("FREE_FEEDBACK_LIMIT", 10).to_i,
       stripe_price_id: nil
     },
     monthly_v1: {

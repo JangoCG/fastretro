@@ -40,12 +40,12 @@ class Retros::FeedbackGroupsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    expected_calls = [
-      [ [ @retro, @admin_user ], "retro-column-went_well", "retros/streams/column" ],
-      [ [ @retro, @admin_user ], "retro-column-could_be_better", "retros/streams/column" ],
-      [ [ @retro, @member_user ], "retro-column-went_well", "retros/streams/column" ],
-      [ [ @retro, @member_user ], "retro-column-could_be_better", "retros/streams/column" ]
-    ]
+    expected_calls = @retro.column_categories.flat_map do |category|
+      [
+        [ [ @retro, @admin_user ], "retro-column-#{category}", "retros/streams/column" ],
+        [ [ @retro, @member_user ], "retro-column-#{category}", "retros/streams/column" ]
+      ]
+    end
 
     assert_equal expected_calls.sort_by(&:to_s), calls.sort_by(&:to_s)
   end
