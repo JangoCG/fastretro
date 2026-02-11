@@ -45,7 +45,7 @@
     <meta name="twitter:creator" content="@fastretro">
 
     <%# === STRUCTURED DATA (JSON-LD) === %>
-    <script type="application/ld+json">
+    <script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
