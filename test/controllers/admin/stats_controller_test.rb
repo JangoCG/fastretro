@@ -13,6 +13,19 @@ class Admin::StatsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "admin stats shows companies, owner email, and user count" do
+    sign_in_as :staff
+
+    untenanted do
+      get admin_stats_path
+    end
+
+    assert_response :success
+    assert_in_body "Companies Using Fast Retro"
+    assert_match(/Test Account.*one@example\.com.*3/m, response.body)
+    assert_match(/Another Account.*other@example\.com.*1/m, response.body)
+  end
+
   test "non-staff member cannot access admin stats" do
     sign_in_as :one
 

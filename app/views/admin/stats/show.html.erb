@@ -105,14 +105,14 @@
       </div>
       <ul class="divide-y-2 divide-zinc-200">
         <% @recent_accounts.each do |account| %>
-          <% owner = account.users.owner.first %>
+          <% owner_email = account.owner_identity&.email_address %>
           <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
             <div class="flex justify-between items-start gap-4">
               <div class="min-w-0 flex-1">
                 <div class="text-base font-bold text-zinc-900 truncate"><%= account.name %></div>
                 <div class="font-mono text-xs text-zinc-500 mt-1">
                   #<%= account.external_account_id %> &middot;
-                  <%= owner&.identity&.email_address || "No owner" %>
+                  <%= owner_email || "No owner" %>
                 </div>
               </div>
               <div class="font-mono text-xs text-zinc-500 whitespace-nowrap bg-zinc-200 px-3 py-1.5 border border-zinc-300">
@@ -134,7 +134,7 @@
       </div>
       <ul class="divide-y-2 divide-zinc-200">
         <% @top_accounts.each_with_index do |account, index| %>
-          <% owner = account.users.owner.first %>
+          <% owner_email = account.owner_identity&.email_address %>
           <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
             <div class="flex justify-between items-start gap-4">
               <div class="flex items-center gap-4 min-w-0 flex-1">
@@ -151,7 +151,7 @@
                   <div class="text-base font-bold text-zinc-900 truncate"><%= account.name %></div>
                   <div class="font-mono text-xs text-zinc-500 mt-1">
                     #<%= account.external_account_id %> &middot;
-                    <%= owner&.identity&.email_address || "No owner" %>
+                    <%= owner_email || "No owner" %>
                   </div>
                 </div>
               </div>
@@ -180,6 +180,44 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  </div>
+
+  <%# Companies By User Count %>
+  <div class="mt-8 bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)] overflow-hidden">
+    <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-emerald-600">
+      <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
+        <%= icon_tag "domain", class: "text-2xl opacity-90" %>
+        Companies Using Fast Retro
+      </h2>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[720px]">
+        <thead>
+          <tr class="border-b-2 border-zinc-300 bg-[#f4f1ea]">
+            <th class="text-left px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Company (from owner email)</th>
+            <th class="text-left px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Account</th>
+            <th class="text-left px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Owner Email</th>
+            <th class="text-right px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Users</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y-2 divide-zinc-200">
+          <% @accounts_with_user_counts.each do |account| %>
+            <% owner_email = account.owner_identity&.email_address %>
+            <% company = owner_email.to_s.split("@", 2).last.presence || "Unknown company" %>
+            <tr class="hover:bg-[#f4f1ea] transition-colors">
+              <td class="px-6 py-3 font-mono text-sm text-zinc-700"><%= company %></td>
+              <td class="px-6 py-3 text-sm font-bold text-zinc-900">
+                <%= account.name %>
+                <span class="font-mono text-xs text-zinc-500">#<%= account.external_account_id %></span>
+              </td>
+              <td class="px-6 py-3 font-mono text-sm text-zinc-700"><%= owner_email || "No owner" %></td>
+              <td class="px-6 py-3 text-right text-sm font-black text-emerald-700"><%= number_with_delimiter(account[:users_count].to_i) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

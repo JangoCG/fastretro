@@ -21,9 +21,17 @@ class Admin::StatsController < AdminController
     @top_accounts = Account
       .where("feedbacks_count > 0")
       .select("accounts.*, (SELECT MAX(retros.created_at) FROM retros WHERE retros.account_id = accounts.id) AS last_retro_at")
+      .includes(owner_user: :identity)
       .order(feedbacks_count: :desc)
       .limit(20)
 
-    @recent_accounts = Account.order(created_at: :desc).limit(10)
+    @recent_accounts = Account.includes(owner_user: :identity).order(created_at: :desc).limit(10)
+
+    @accounts_with_user_counts = Account
+      .left_joins(:users)
+      .select("accounts.*, COUNT(users.id) AS users_count")
+      .group("accounts.id")
+      .includes(owner_user: :identity)
+      .order(Arel.sql("users_count DESC"), :name)
   end
 end
