@@ -16,15 +16,13 @@ class BlogPost
   end
 
   def self.all
-    Dir.glob(POSTS_PATH.join("*.md")).map do |file|
-      parse_file(file)
-    end.compact
+    Rails.cache.fetch(cache_key_for_posts, expires_in: 12.hours) do
+      post_files.filter_map { |file| parse_file(file) }.sort_by(&:date).reverse
+    end
   end
 
   def self.find(slug)
-    file = POSTS_PATH.join("#{slug}.md")
-    return nil unless File.exist?(file)
-    parse_file(file)
+    all.find { |post| post.slug == slug.to_s }
   end
 
   def self.parse_file(file)
@@ -66,6 +64,16 @@ class BlogPost
     else
       Date.today
     end
+  end
+
+  def self.post_files
+    Dir.glob(POSTS_PATH.join("*.md"))
+  end
+
+  def self.cache_key_for_posts
+    files = post_files
+    latest_mtime = files.max_by { |file| File.mtime(file) }&.then { |file| File.mtime(file).to_i } || 0
+    "blog_posts:v1:#{files.size}:#{latest_mtime}"
   end
 
   def read_time

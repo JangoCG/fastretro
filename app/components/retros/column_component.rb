@@ -28,7 +28,7 @@ class Retros::ColumnComponent < ApplicationComponent
       end
 
       if @preloaded_feedbacks && @retro.brainstorming?
-        current_user_id = Current.user&.id
+        current_user_id = @participant&.user_id || Current.user&.id
         base.select { |feedback| feedback.user_id == current_user_id }
       else
         base
@@ -117,7 +117,7 @@ class Retros::ColumnComponent < ApplicationComponent
 
     @retro.instance_variable_get(cache_key) || @retro.instance_variable_set(cache_key, begin
       scope = @retro.feedbacks.published
-      scope = scope.where(user: Current.user) if @retro.brainstorming?
+      scope = scope.where(user_id: @participant&.user_id || Current.user&.id) if @retro.brainstorming?
       scope.distinct.pluck(:category)
     end)
   end

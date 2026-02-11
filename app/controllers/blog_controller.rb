@@ -6,7 +6,7 @@ class BlogController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    @posts = BlogPost.all.sort_by(&:date).reverse
+    @posts = BlogPost.all
   end
 
   def show

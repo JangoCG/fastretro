@@ -28,7 +28,7 @@ class Retros::VotesController < ApplicationController
 
   def create
     # Capture vote count BEFORE the action to detect threshold crossings
-    votes_before = @current_participant.votes.count
+    votes_before = @current_participant.votes.size
 
     return render_vote_button_update(:not_found, votes_before:) unless @voteable
 
@@ -41,7 +41,7 @@ class Retros::VotesController < ApplicationController
 
     if @vote.save
       refresh_voteable_votes!
-      broadcast_vote_count_update
+      broadcast_vote_total_update
       render_vote_button_update(:ok, votes_before:)
     else
       Rails.logger.error "Vote save failed: #{@vote.errors.full_messages.join(', ')}"
@@ -51,7 +51,7 @@ class Retros::VotesController < ApplicationController
 
   def destroy
     # Capture vote count BEFORE the action to detect threshold crossings
-    votes_before = @current_participant.votes.count
+    votes_before = @current_participant.votes.size
 
     @vote = @current_participant.votes.find_by(id: params[:id])
     unless @vote
@@ -61,7 +61,7 @@ class Retros::VotesController < ApplicationController
     @voteable = @vote.voteable
     @vote.destroy
     refresh_voteable_votes!
-    broadcast_vote_count_update
+    broadcast_vote_total_update
     render_vote_button_update(:ok, votes_before:)
   end
 
@@ -72,7 +72,8 @@ class Retros::VotesController < ApplicationController
   end
 
   def set_current_participant
-    @current_participant = @retro.participants.find_by(user: Current.user)
+    @current_participant = @retro.participants.includes(:votes).find_by(user: Current.user)
+    @current_participant&.votes&.load
   end
 
   def set_voteable
@@ -88,29 +89,25 @@ class Retros::VotesController < ApplicationController
   def find_voteable
     case params[:voteable_type]
     when "Feedback"
-      @retro.feedbacks.includes(:votes).find_by(id: params[:voteable_id])
+      @retro.feedbacks.published.includes(:votes).find_by(id: params[:voteable_id])
     when "FeedbackGroup"
-      @retro.feedback_groups.includes(:votes).find_by(id: params[:voteable_id])
+      @retro.feedback_groups
+        .joins(:feedbacks)
+        .merge(@retro.feedbacks.published)
+        .includes(:votes)
+        .distinct
+        .find_by(id: params[:voteable_id])
     end
   end
 
-  def broadcast_vote_count_update
+  def broadcast_vote_total_update
     return unless @voteable
 
-    vote_button_dom_id = voteable_dom_id(@voteable)
-
-    @retro.participants.includes(:user, :votes).each do |participant|
-      next unless participant.user.present?
-
-      Current.set(account: @retro.account, user: participant.user) do
-        Turbo::StreamsChannel.broadcast_replace_to(
-          [ @retro, participant.user ],
-          target: vote_button_dom_id,
-          partial: "retros/votes/vote_button",
-          locals: { voteable: @voteable, participant:, retro: @retro }
-        )
-      end
-    end
+    Turbo::StreamsChannel.broadcast_update_to(
+      @retro,
+      target: vote_total_dom_id(@voteable),
+      html: @voteable.votes.size.to_s
+    )
   end
 
   # Renders Turbo Stream updates for vote buttons after a vote action.
@@ -135,7 +132,7 @@ class Retros::VotesController < ApplicationController
   #     → Update only the clicked button (efficient)
   #
   def render_vote_button_update(status, votes_before:)
-    @current_participant.reload
+    @current_participant.votes.reset
     @current_participant.votes.load
     votes_after = @current_participant.votes.size
 
@@ -191,11 +188,9 @@ class Retros::VotesController < ApplicationController
   def all_voteables
     return @all_voteables if defined?(@all_voteables)
 
-    feedbacks = @retro.feedbacks.to_a
-    feedback_groups = @retro.feedback_groups.to_a
-
-    ActiveRecord::Associations::Preloader.new(records: feedbacks, associations: :votes).call
-    ActiveRecord::Associations::Preloader.new(records: feedback_groups, associations: :votes).call
+    feedbacks = @retro.feedbacks.published.includes(:votes).to_a
+    feedback_group_ids = feedbacks.filter_map(&:feedback_group_id).uniq
+    feedback_groups = @retro.feedback_groups.where(id: feedback_group_ids).includes(:votes).to_a
 
     @all_voteables = feedbacks + feedback_groups
   end
@@ -207,8 +202,8 @@ class Retros::VotesController < ApplicationController
     @voteable.votes.load
   end
 
-  def voteable_dom_id(voteable)
-    "vote_button_#{voteable.class.name.underscore}_#{voteable.id}"
+  def vote_total_dom_id(voteable)
+    "vote_total_#{voteable.class.name.underscore}_#{voteable.id}"
   end
 
   def max_votes_per_participant

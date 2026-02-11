@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <%= render "participants_section", retro: @retro %>
+      <%= render "participants_section", retro: @retro, participants: @participants %>
 
       <%# Start Retro Button %>
       <% if Current.user && @retro.admin?(Current.user) %>

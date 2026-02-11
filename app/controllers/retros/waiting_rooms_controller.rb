@@ -7,6 +7,7 @@ class Retros::WaitingRoomsController < ApplicationController
   before_action :ensure_retro_participant
 
   def show
+    @participants = @retro.participants.includes(:user).order(:created_at).to_a
   end
 
   private

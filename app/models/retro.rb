@@ -172,7 +172,16 @@ class Retro < ApplicationRecord
   end
 
   def admin?(user)
-    participants.admin.exists?(user: user)
+    return false if user.blank?
+
+    if participants.loaded?
+      participants.any? { |participant| participant.user_id == user.id && participant.admin? }
+    else
+      @admin_by_user_id ||= {}
+      @admin_by_user_id.fetch(user.id) do
+        @admin_by_user_id[user.id] = participants.admin.exists?(user:)
+      end
+    end
   end
 
   def owner

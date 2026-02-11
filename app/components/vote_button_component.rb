@@ -32,6 +32,10 @@ class VoteButtonComponent < ApplicationComponent
     "vote_count_#{voteable.class.name.underscore}_#{voteable.id}"
   end
 
+  def vote_total_dom_id
+    "vote_total_#{voteable.class.name.underscore}_#{voteable.id}"
+  end
+
   private
 
   def total_votes

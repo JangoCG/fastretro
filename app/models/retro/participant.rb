@@ -30,15 +30,17 @@ class Retro::Participant < ApplicationRecord
   def broadcast_targeted_participant_updates
     return unless retro.present?
 
+    participants = retro.participants.includes(:user).order(:created_at).to_a
+
     if retro.waiting_room?
       Turbo::StreamsChannel.broadcast_replace_to(
         retro,
         target: "waiting-room-participants",
         partial: "retros/waiting_rooms/participants_section",
-        locals: { retro: }
+        locals: { retro:, participants: }
       )
     else
-      retro.participants.includes(:user).each do |participant|
+      participants.each do |participant|
         next unless participant.user.present?
 
         Current.set(account: retro.account, user: participant.user) do
@@ -46,7 +48,7 @@ class Retro::Participant < ApplicationRecord
             [ retro, participant.user ],
             target: "participant-list",
             partial: "retros/streams/participant_list",
-            locals: { retro: }
+            locals: { retro:, participants: }
           )
         end
       end

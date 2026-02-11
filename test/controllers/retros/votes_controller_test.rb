@@ -12,12 +12,12 @@ class Retros::VotesControllerTest < ActionDispatch::IntegrationTest
     @feedback = feedbacks(:one)
   end
 
-  test "create broadcasts updated vote button to all participant streams" do
+  test "create broadcasts vote total update to retro stream" do
     sign_in_as :one
 
     calls = []
-    Turbo::StreamsChannel.stubs(:broadcast_replace_to).with do |stream, options|
-      calls << [ stream, options[:target], options[:partial] ]
+    Turbo::StreamsChannel.stubs(:broadcast_update_to).with do |stream, options|
+      calls << [ stream, options[:target], options[:html] ]
       true
     end
 
@@ -31,11 +31,10 @@ class Retros::VotesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     expected_calls = [
-      [ [ @retro, @admin_user ], "vote_button_feedback_#{@feedback.id}", "retros/votes/vote_button" ],
-      [ [ @retro, @member_user ], "vote_button_feedback_#{@feedback.id}", "retros/votes/vote_button" ]
+      [ @retro, "vote_total_feedback_#{@feedback.id}", "1" ]
     ]
 
-    assert_equal expected_calls.sort_by(&:to_s), calls.sort_by(&:to_s)
+    assert_equal expected_calls, calls
   end
 
   test "create enforces retro-specific vote limit" do

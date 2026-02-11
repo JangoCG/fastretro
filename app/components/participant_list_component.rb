@@ -14,9 +14,10 @@ class ParticipantListComponent < ApplicationComponent
     offline: "bg-gray-400"
   }.freeze
 
-  def initialize(retro:, highlight_enabled: false)
+  def initialize(retro:, highlight_enabled: false, participants: nil)
     @retro = retro
     @highlight_enabled = highlight_enabled
+    @preloaded_participants = participants
   end
 
   def highlight_enabled?
@@ -32,6 +33,8 @@ class ParticipantListComponent < ApplicationComponent
   end
 
   def participants
+    return @preloaded_participants if @preloaded_participants
+
     @participants ||= begin
       records = @retro.participants.order(:created_at).to_a
       ActiveRecord::Associations::Preloader.new(records: records, associations: :user).call
