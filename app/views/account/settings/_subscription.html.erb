@@ -1,4 +1,5 @@
 <% if FastRetro.saas? && Current.user.owner? %>
+  <% subscription = Current.account.subscription %>
   <div class="subscription-section" id="subscription">
     <h2 class="text-lg font-black text-zinc-900 uppercase tracking-tight mb-4">Subscription</h2>
 
@@ -12,6 +13,12 @@
           form: { data: { turbo: false } } %>
     <% else %>
       <p class="text-zinc-700 mb-4">Thank you for upgrading to <%= Current.account.plan.name %>!</p>
+      <% if subscription&.current_period_end %>
+        <p class="text-zinc-700 mb-4">
+          <%= subscription_period_end_action(subscription) %>
+          <span class="font-bold"><%= subscription.current_period_end.to_date.to_fs(:long) %></span>
+        </p>
+      <% end %>
       <%= link_to "Manage Billing", account_billing_portal_path,
           class: "inline-flex items-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]" %>
     <% end %>
