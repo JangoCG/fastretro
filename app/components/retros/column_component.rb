@@ -50,22 +50,25 @@ class Retros::ColumnComponent < ApplicationComponent
     end
   end
 
-  # Returns all items (groups and ungrouped feedbacks) sorted by votes for voting/discussion phase
+  # Returns all items (groups and ungrouped feedbacks) sorted by discussion state and votes.
   def all_items_sorted_by_votes
     items = []
 
     # Add groups with their vote counts
     grouped_feedbacks_by_group.each do |group, group_feedbacks|
-      items << { type: :group, group: group, feedbacks: group_feedbacks, votes: group.votes.size }
+      items << { type: :group, group: group, feedbacks: group_feedbacks, votes: group.votes.size, discussed: group.discussed? }
     end
 
     # Add ungrouped feedbacks with their vote counts
     ungrouped_feedbacks.each do |feedback|
-      items << { type: :feedback, feedback: feedback, votes: feedback.votes.size }
+      items << { type: :feedback, feedback: feedback, votes: feedback.votes.size, discussed: feedback.discussed? }
     end
 
-    # Sort all items by votes descending
-    items.sort_by { |item| -item[:votes] }
+    # In discussion phase keep undiscussed items at the top, then sort by votes.
+    items.sort_by do |item|
+      discussion_sort_weight = @retro.discussion? && item[:discussed] ? 1 : 0
+      [ discussion_sort_weight, -item[:votes] ]
+    end
   end
 
   def grouping_enabled?

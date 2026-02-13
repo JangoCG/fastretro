@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_09_103500) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_13_110000) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -110,6 +110,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_09_103500) do
 
   create_table "feedback_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.boolean "discussed", default: false, null: false
     t.string "name"
     t.integer "retro_id", null: false
     t.datetime "updated_at", null: false
@@ -119,6 +120,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_09_103500) do
   create_table "feedbacks", force: :cascade do |t|
     t.string "category", null: false
     t.datetime "created_at", null: false
+    t.boolean "discussed", default: false, null: false
     t.integer "feedback_group_id"
     t.integer "retro_id", null: false
     t.string "status", default: "drafted", null: false

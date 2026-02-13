@@ -1,6 +1,6 @@
 <div
   id="<%= dom_id(@group) %>"
-  class="relative mt-3 p-2 border-2 border-dashed border-yellow-500 rounded-lg bg-yellow-50/30 transition-all duration-200"
+  class="relative mt-3 p-2 border-2 border-dashed rounded-lg transition-all duration-200 <%= discussed? ? 'border-emerald-600 bg-emerald-50/50' : 'border-yellow-500 bg-yellow-50/30' %>"
   data-user-ids="<%= author_user_ids %>"
   <% if @grouping_enabled %>
     data-feedback-id="group-<%= @group.id %>"
@@ -23,7 +23,7 @@
     <%# Primary card %>
     <div class="relative bg-white border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden">
       <%# Group badge %>
-      <div class="absolute top-2 right-2 z-10 flex items-center gap-1 bg-yellow-400 px-2 py-0.5 border border-zinc-900">
+      <div class="absolute top-2 right-2 z-10 flex items-center gap-1 <%= discussed? ? 'bg-emerald-300' : 'bg-yellow-400' %> px-2 py-0.5 border border-zinc-900">
         <span class="text-[0.6rem] font-black text-zinc-900 uppercase tracking-wider">
           <%= @feedbacks.size %> grouped
         </span>
@@ -36,6 +36,11 @@
           <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono">
             GROUP_<%= @group.id %>
           </span>
+          <% if discussion_enabled? && discussed? %>
+            <span class="text-[0.55rem] font-bold text-emerald-700 uppercase tracking-wider px-1.5 py-0.5 border border-emerald-600 rounded bg-emerald-100">
+              Discussed
+            </span>
+          <% end %>
         </div>
 
         <%# Show preview of all feedbacks in group %>
@@ -88,11 +93,25 @@
         <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end">
           <%= render VoteButtonComponent.new(voteable: @group, participant: @participant, retro: @retro) %>
         </div>
-      <% elsif show_vote_count? %>
-        <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end">
-          <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
-            <%= @group.votes.size %>
-          </div>
+      <% elsif show_vote_count? || can_mark_discussed? %>
+        <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end gap-2">
+          <% if show_vote_count? %>
+            <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
+              <%= @group.votes.size %>
+            </div>
+          <% end %>
+          <% if can_mark_discussed? %>
+            <%= button_to retro_discussion_item_path(@retro, script_name: @retro.account.slug),
+                method: :patch,
+                params: {
+                  item_type: "FeedbackGroup",
+                  item_id: @group.id,
+                  discussed: !discussed?
+                },
+                class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
+              <%= discussed? ? "Undo" : "Mark discussed" %>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     </div>
