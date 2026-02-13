@@ -7,7 +7,7 @@
       <p class="text-zinc-600 text-sm mb-4">
         Used <%= Current.account.feedbacks_count %> of <%= Current.account.plan.feedback_limit %> feedbacks.
       </p>
-      <%= button_to "Upgrade to Paid", account_subscriptions_path,
+      <%= button_to "Upgrade to Paid", account_subscription_path,
           class: "inline-flex items-center gap-2 bg-[#ffe600] text-black hover:bg-[#ffd700] px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
           form: { data: { turbo: false } } %>
     <% else %>

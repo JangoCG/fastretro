@@ -1,7 +1,7 @@
 class Stripe::WebhooksController < ApplicationController
   allow_unauthenticated_access
   skip_before_action :require_account
-  skip_before_action :verify_authenticity_token
+  skip_forgery_protection
 
   def create
     if event = verify_webhook_signature
@@ -49,7 +49,8 @@ class Stripe::WebhooksController < ApplicationController
           status: stripe_subscription.status,
           current_period_end: current_period_end_for(stripe_subscription),
           cancel_at: stripe_subscription.cancel_at ? Time.at(stripe_subscription.cancel_at) : nil,
-          next_amount_due_in_cents: next_amount_due_for(stripe_subscription)
+          next_amount_due_in_cents: next_amount_due_for(stripe_subscription),
+          plan_key: plan_key_for(stripe_subscription) || subscription.plan_key
         }
 
         yield subscription_properties if block_given?
@@ -75,5 +76,10 @@ class Stripe::WebhooksController < ApplicationController
       preview.amount_due
     rescue Stripe::InvalidRequestError
       nil
+    end
+
+    def plan_key_for(stripe_subscription)
+      price_id = stripe_subscription.items.data.first&.price&.id
+      Plan.find_by_price_id(price_id)&.key
     end
 end

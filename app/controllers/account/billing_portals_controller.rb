@@ -13,7 +13,7 @@ class Account::BillingPortalsController < ApplicationController
 
     def ensure_subscribed_account
       unless Current.account.subscribed?
-        redirect_to account_settings_path, alert: "No billing information found"
+        redirect_to account_subscription_path, alert: "No billing information found"
       end
     end
 

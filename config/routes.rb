@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   namespace :account do
     resource :join_code, only: %i[ show edit update destroy ]
     resource :settings, only: %i[ show update ]
-    resources :subscriptions, only: :create
+    resource :subscription, only: %i[ show create ]
     resource :billing_portal, only: :show
   end
 

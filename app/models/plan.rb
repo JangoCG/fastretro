@@ -34,6 +34,10 @@ class Plan
       @all_by_key[key]
     end
 
+    def find_by_price_id(price_id)
+      all.find { |plan| plan.stripe_price_id == price_id }
+    end
+
     alias [] find
   end
 
