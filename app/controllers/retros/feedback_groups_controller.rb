@@ -104,19 +104,50 @@ class Retros::FeedbackGroupsController < ApplicationController
       .to_a
       .group_by(&:category)
 
-    @retro.participants.includes(:user).each do |participant|
-      next unless participant.user.present?
+    participants = @retro.participants.includes(:user).select { |participant| participant.user.present? }
+    return if participants.empty?
 
-      Current.set(account: @retro.account, user: participant.user) do
-        @retro.column_categories.each do |category|
-          Turbo::StreamsChannel.broadcast_replace_to(
-            [ @retro, participant.user ],
-            target: "retro-column-#{category}",
-            partial: "retros/streams/column",
-            locals: { retro: @retro, category:, participant:, feedbacks_by_category: }
-          )
-        end
+    rendered_columns_by_role = pre_render_grouping_columns_by_role(
+      participants:,
+      feedbacks_by_category:
+    )
+
+    participants.each do |participant|
+      role = participant.admin? ? :admin : :member
+      column_html_by_category = rendered_columns_by_role[role]
+      next if column_html_by_category.blank?
+
+      @retro.column_categories.each do |category|
+        Turbo::StreamsChannel.broadcast_replace_to(
+          [ @retro, participant.user ],
+          target: "retro-column-#{category}",
+          html: column_html_by_category[category]
+        )
       end
+    end
+  end
+
+  def pre_render_grouping_columns_by_role(participants:, feedbacks_by_category:)
+    {
+      admin: pre_render_grouping_columns(
+        participant: participants.find(&:admin?),
+        feedbacks_by_category:
+      ),
+      member: pre_render_grouping_columns(
+        participant: participants.find { |participant| !participant.admin? },
+        feedbacks_by_category:
+      )
+    }
+  end
+
+  def pre_render_grouping_columns(participant:, feedbacks_by_category:)
+    return if participant.blank?
+
+    @retro.column_categories.index_with do |category|
+      ApplicationController.render(
+        partial: "retros/streams/column",
+        locals: { retro: @retro, category:, participant:, feedbacks_by_category: }
+      )
     end
   end
 end
