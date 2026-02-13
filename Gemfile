@@ -60,6 +60,15 @@ gem "stripe", "~> 18.2"
 gem "sentry-ruby"
 gem "sentry-rails"
 
+# OpenTelemetry traces (enabled only when OTEL_EXPORTER_OTLP_ENDPOINT is set)
+gem "opentelemetry-sdk", require: false
+gem "opentelemetry-exporter-otlp", require: false
+gem "opentelemetry-instrumentation-rails", require: false
+gem "opentelemetry-instrumentation-rack", require: false
+gem "opentelemetry-instrumentation-active_record", require: false
+gem "opentelemetry-instrumentation-active_job", require: false
+gem "opentelemetry-instrumentation-net_http", require: false
+
 # Monitoring (Prometheus metrics, SaaS only at runtime).
 # All require: false — loaded explicitly in config/initializers/yabeda.rb
 # to avoid hooking into ActionCable/ActiveJob during test/CI boot.
