@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_13_213812) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_13_221337) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -84,6 +84,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_213812) do
   create_table "actions", force: :cascade do |t|
     t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
+    t.datetime "exported_to_jira_at"
     t.integer "retro_id", null: false
     t.string "status", default: "drafted"
     t.datetime "updated_at", null: false

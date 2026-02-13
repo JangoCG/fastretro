@@ -9,10 +9,6 @@ class Account::JiraIntegration < ApplicationRecord
   normalizes :email, with: ->(email) { email.strip }
   normalizes :project_key, with: ->(key) { key.strip.upcase }
 
-  def configured?
-    persisted? && site_url.present? && email.present? && api_token.present? && project_key.present?
-  end
-
   def create_issue(summary:, description:)
     response = connection.post("/rest/api/3/issue") do |req|
       req.body = {
@@ -36,18 +32,6 @@ class Account::JiraIntegration < ApplicationRecord
     end
 
     response
-  end
-
-  def test_connection
-    response = connection.get("/rest/api/3/myself")
-
-    if response.success?
-      { success: true }
-    else
-      { success: false, error: "HTTP #{response.status}: #{response.body}" }
-    end
-  rescue Faraday::Error => e
-    { success: false, error: e.message }
   end
 
   private

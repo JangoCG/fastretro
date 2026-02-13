@@ -11,12 +11,12 @@
           <div>
             <div class="font-bold text-zinc-900 text-sm">Jira</div>
             <div class="text-[0.6rem] font-mono text-zinc-500 uppercase">
-              <%= Current.account.jira_integration&.configured? ? "Connected" : "Not configured" %>
+              <%= Current.account.jira_integration&.persisted? ? "Connected" : "Not configured" %>
             </div>
           </div>
         </div>
         <span class="text-zinc-400 group-hover:text-zinc-900 transition-colors font-bold text-xs uppercase tracking-wide">
-          <%= Current.account.jira_integration&.configured? ? "Manage" : "Setup" %> &rarr;
+          <%= Current.account.jira_integration&.persisted? ? "Manage" : "Setup" %> &rarr;
         </span>
       <% end %>
     </div>

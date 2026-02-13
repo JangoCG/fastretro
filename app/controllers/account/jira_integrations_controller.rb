@@ -6,9 +6,7 @@ class Account::JiraIntegrationsController < ApplicationController
   end
 
   def create
-    @jira_integration = Current.account.build_jira_integration(jira_integration_params)
-
-    if @jira_integration.save
+    if @jira_integration.update(jira_integration_params)
       redirect_to account_jira_integration_path, notice: "Jira integration saved."
     else
       render :show, status: :unprocessable_entity
@@ -34,6 +32,8 @@ class Account::JiraIntegrationsController < ApplicationController
     end
 
     def jira_integration_params
-      params.expect(account_jira_integration: %i[site_url email api_token project_key issue_type])
+      permitted = params.expect(account_jira_integration: %i[site_url email api_token project_key issue_type])
+      permitted.delete(:api_token) if permitted[:api_token].blank? && @jira_integration.persisted?
+      permitted
     end
 end

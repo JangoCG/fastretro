@@ -24,14 +24,13 @@
 
       <div class="relative z-10">
         <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">CONFIGURATION</h2>
-        <p class="text-sm font-bold text-zinc-900 max-w-sm">Connect your Jira account to export action items as issues after each retro.</p>
+        <p class="text-sm font-bold text-zinc-900 max-w-sm">Connect your Jira account to automatically export action items as issues after each retro. Retro moderators will see an "Export to Jira" button on the completed retro page.</p>
       </div>
 
       <div class="relative z-10">
-        <% url = @jira_integration.persisted? ? account_jira_integration_path : account_jira_integration_path %>
         <% method = @jira_integration.persisted? ? :patch : :post %>
 
-        <%= form_with model: @jira_integration, url: url, method: method, class: "flex flex-col gap-5" do |form| %>
+        <%= form_with model: @jira_integration, url: account_jira_integration_path, method: method, class: "flex flex-col gap-5" do |form| %>
           <div>
             <label for="account_jira_integration_site_url" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
               JIRA SITE URL
@@ -43,6 +42,9 @@
             <% if @jira_integration.errors[:site_url].any? %>
               <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:site_url].first %></p>
             <% end %>
+            <p class="text-[0.6rem] font-mono text-zinc-400 uppercase mt-1 tracking-wide">
+              The base URL of your Atlassian site, e.g. https://your-team.atlassian.net
+            </p>
           </div>
 
           <div>
@@ -56,6 +58,9 @@
             <% if @jira_integration.errors[:email].any? %>
               <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:email].first %></p>
             <% end %>
+            <p class="text-[0.6rem] font-mono text-zinc-400 uppercase mt-1 tracking-wide">
+              The email address associated with your Atlassian account
+            </p>
           </div>
 
           <div>
@@ -70,7 +75,7 @@
               <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:api_token].first %></p>
             <% end %>
             <p class="text-[0.6rem] font-mono text-zinc-400 uppercase mt-1 tracking-wide">
-              Generate at <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank" rel="noopener" class="underline hover:text-zinc-900">id.atlassian.com</a>
+              Generate one at <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank" rel="noopener" class="underline hover:text-zinc-900">id.atlassian.com &rarr; Security &rarr; API tokens</a><% if @jira_integration.persisted? %> &mdash; leave blank to keep current token<% end %>
             </p>
           </div>
 
@@ -86,6 +91,9 @@
               <% if @jira_integration.errors[:project_key].any? %>
                 <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:project_key].first %></p>
               <% end %>
+              <p class="text-[0.6rem] font-mono text-zinc-400 uppercase mt-1 tracking-wide">
+                Find it in Jira under Project Settings &rarr; Details, or in the issue prefix (e.g. RETRO-123 &rarr; key is RETRO)
+              </p>
             </div>
 
             <div class="flex-1">
@@ -96,6 +104,9 @@
                 options_for_select([ "Task", "Story", "Bug" ], @jira_integration.issue_type),
                 {},
                 class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-none text-sm" %>
+              <p class="text-[0.6rem] font-mono text-zinc-400 uppercase mt-1 tracking-wide">
+                The Jira issue type created for each action item
+              </p>
             </div>
           </div>
 
