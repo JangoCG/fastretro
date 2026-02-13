@@ -87,7 +87,7 @@
       </p>
 
       <%# Export Buttons %>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
         <%= link_to retro_export_path(@retro, format: :xlsx),
               class: "inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-emerald-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
           <span>Export Excel (.xlsx)</span>
@@ -95,6 +95,10 @@
         <%= link_to retro_export_path(@retro, format: :csv),
               class: "inline-flex items-center gap-2 px-6 py-3 bg-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
           <span>Export CSV</span>
+        <% end %>
+        <%= button_to retro_jira_export_path(@retro),
+              class: "inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+          <span>Export to Jira</span>
         <% end %>
       </div>
     </div>

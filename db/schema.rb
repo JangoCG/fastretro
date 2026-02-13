@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_13_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_13_213812) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -21,6 +21,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_110000) do
   create_table "account_external_id_sequences", force: :cascade do |t|
     t.bigint "value", default: 0, null: false
     t.index ["value"], name: "index_account_external_id_sequences_on_value", unique: true
+  end
+
+  create_table "account_jira_integrations", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.string "api_token", null: false
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.string "issue_type", default: "Task"
+    t.string "project_key", null: false
+    t.string "site_url", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_jira_integrations_on_account_id", unique: true
   end
 
   create_table "account_join_codes", force: :cascade do |t|
@@ -213,6 +225,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_110000) do
   end
 
   add_foreign_key "account_billing_waivers", "accounts"
+  add_foreign_key "account_jira_integrations", "accounts"
   add_foreign_key "account_join_codes", "accounts"
   add_foreign_key "account_subscriptions", "accounts"
   add_foreign_key "actions", "retros"

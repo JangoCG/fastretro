@@ -1,0 +1,137 @@
+<div class="max-w-xl mx-auto px-4 py-8 font-sans">
+
+  <%# Industrial Container %>
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+
+    <%# Header Section %>
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10 flex items-center justify-between">
+        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+          JIRA INTEGRATION
+        </h1>
+
+        <span class="inline-flex items-center px-2 py-1 border-[2px] border-zinc-900 bg-blue-100 text-zinc-900 text-[0.6rem] font-bold uppercase tracking-widest">
+          INTEGRATION
+        </span>
+      </div>
+    </div>
+
+    <%# Body %>
+    <div class="p-8 relative flex flex-col gap-6">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+
+      <div class="relative z-10">
+        <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">CONFIGURATION</h2>
+        <p class="text-sm font-bold text-zinc-900 max-w-sm">Connect your Jira account to export action items as issues after each retro.</p>
+      </div>
+
+      <div class="relative z-10">
+        <% url = @jira_integration.persisted? ? account_jira_integration_path : account_jira_integration_path %>
+        <% method = @jira_integration.persisted? ? :patch : :post %>
+
+        <%= form_with model: @jira_integration, url: url, method: method, class: "flex flex-col gap-5" do |form| %>
+          <div>
+            <label for="account_jira_integration_site_url" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+              JIRA SITE URL
+            </label>
+            <%= form.text_field :site_url,
+              placeholder: "https://your-team.atlassian.net",
+              required: true,
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none text-sm" %>
+            <% if @jira_integration.errors[:site_url].any? %>
+              <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:site_url].first %></p>
+            <% end %>
+          </div>
+
+          <div>
+            <label for="account_jira_integration_email" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+              JIRA ACCOUNT EMAIL
+            </label>
+            <%= form.email_field :email,
+              placeholder: "you@example.com",
+              required: true,
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none text-sm" %>
+            <% if @jira_integration.errors[:email].any? %>
+              <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:email].first %></p>
+            <% end %>
+          </div>
+
+          <div>
+            <label for="account_jira_integration_api_token" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+              API TOKEN
+            </label>
+            <%= form.password_field :api_token,
+              placeholder: @jira_integration.persisted? ? "••••••••" : "Enter your Jira API token",
+              required: !@jira_integration.persisted?,
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none text-sm" %>
+            <% if @jira_integration.errors[:api_token].any? %>
+              <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:api_token].first %></p>
+            <% end %>
+            <p class="text-[0.6rem] font-mono text-zinc-400 uppercase mt-1 tracking-wide">
+              Generate at <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank" rel="noopener" class="underline hover:text-zinc-900">id.atlassian.com</a>
+            </p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-1">
+              <label for="account_jira_integration_project_key" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+                PROJECT KEY
+              </label>
+              <%= form.text_field :project_key,
+                placeholder: "RETRO",
+                required: true,
+                class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none text-sm" %>
+              <% if @jira_integration.errors[:project_key].any? %>
+                <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:project_key].first %></p>
+              <% end %>
+            </div>
+
+            <div class="flex-1">
+              <label for="account_jira_integration_issue_type" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+                ISSUE TYPE
+              </label>
+              <%= form.select :issue_type,
+                options_for_select([ "Task", "Story", "Bug" ], @jira_integration.issue_type),
+                {},
+                class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-none text-sm" %>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 pt-2">
+            <button type="submit"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-zinc-900 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none">
+              <%= @jira_integration.persisted? ? "UPDATE" : "SAVE" %>
+            </button>
+
+            <% if @jira_integration.persisted? %>
+              <%= button_to "DISCONNECT", account_jira_integration_path, method: :delete,
+                class: "inline-flex items-center gap-2 px-6 py-3 bg-white text-red-600 border-[2px] border-red-600 font-bold uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white transition-colors shadow-[4px_4px_0px_0px_rgba(220,38,38,0.4)] hover:translate-y-0.5 hover:shadow-none",
+                data: { turbo_confirm: "Remove Jira integration? This will not affect existing Jira issues." } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @jira_integration.persisted? %>
+        <div class="border-t-[2px] border-zinc-200 pt-6 relative z-10">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-wider">STATUS</span>
+              <p class="text-xs font-mono font-bold text-green-600">CONNECTED</p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= link_to account_settings_path, class: "inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors relative z-10 group" do %>
+        <%= icon_tag "arrow-left", class: "text-lg group-hover:-translate-x-1 transition-transform" %>
+        <span class="text-xs font-bold uppercase tracking-wide">RETURN TO SETTINGS</span>
+      <% end %>
+    </div>
+
+    <%# Technical Footer %>
+    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+  </div>
+</div>

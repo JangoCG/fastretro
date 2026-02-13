@@ -4,6 +4,7 @@ class Account < ApplicationRecord
   include Account::Limited
 
   has_one :join_code, class_name: "Account::JoinCode", dependent: :destroy
+  has_one :jira_integration, class_name: "Account::JiraIntegration", dependent: :destroy
   has_many :users, dependent: :destroy
   has_many :retros, dependent: :destroy
   has_many :feedbacks, through: :retros
