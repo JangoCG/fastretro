@@ -7,6 +7,7 @@ if ENV["OTEL_EXPORTER_OTLP_ENDPOINT"].present? && ENV["SKIP_TELEMETRY"].blank? &
   require "opentelemetry/sdk"
   require "opentelemetry/exporter/otlp"
   require "opentelemetry/instrumentation/rails"
+  require "opentelemetry/instrumentation/action_pack"
   require "opentelemetry/instrumentation/rack"
   require "opentelemetry/instrumentation/active_record"
   require "opentelemetry/instrumentation/active_job"
@@ -17,6 +18,7 @@ if ENV["OTEL_EXPORTER_OTLP_ENDPOINT"].present? && ENV["SKIP_TELEMETRY"].blank? &
   OpenTelemetry::SDK.configure do |config|
     config.service_name = ENV.fetch("OTEL_SERVICE_NAME", default_service_name)
     config.use "OpenTelemetry::Instrumentation::Rails"
+    config.use "OpenTelemetry::Instrumentation::ActionPack"
     config.use "OpenTelemetry::Instrumentation::Rack"
     config.use "OpenTelemetry::Instrumentation::ActiveRecord"
     config.use "OpenTelemetry::Instrumentation::ActiveJob"
