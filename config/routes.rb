@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :votes, only: %i[create destroy]
       resource :highlight, only: %i[update destroy]
       resource :music, only: :update
+      resource :jira_export, only: :create
     end
     resources :feedbacks, only: %i[ new create show edit update destroy ] do
       resource :publish, only: :create, module: :feedbacks
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
     resource :settings, only: %i[ show update ]
     resource :subscription, only: %i[ show create ]
     resource :billing_portal, only: :show
+    resource :jira_integration, only: %i[ show create update destroy ]
   end
 
   # Join codes for multi-account

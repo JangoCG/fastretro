@@ -1,4 +1,6 @@
 class Retro < ApplicationRecord
+  include Retro::JiraExporting
+
   LANDING_PAGE_RETRO_COUNT_CACHE_KEY = "landing_page:retro_count".freeze
   DEFAULT_VOTES_PER_PARTICIPANT = 3
   LAYOUT_MODES = %w[default custom].freeze
