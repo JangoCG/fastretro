@@ -2,6 +2,8 @@ class Account::SubscriptionsController < ApplicationController
   before_action :ensure_admin
   before_action :set_stripe_session, only: :show
 
+  rescue_from Stripe::StripeError, with: :handle_stripe_error
+
   def show
   end
 
@@ -10,7 +12,7 @@ class Account::SubscriptionsController < ApplicationController
       redirect_to account_settings_path, alert: "Stripe is not configured. Please set the price id environment variable." and return
     end
 
-    session = Stripe::Checkout::Session.create \
+    checkout_session = Stripe::Checkout::Session.create \
       customer: find_or_create_stripe_customer,
       mode: "subscription",
       line_items: [ { price: plan_param.stripe_price_id, quantity: 1 } ],
@@ -22,7 +24,7 @@ class Account::SubscriptionsController < ApplicationController
       billing_address_collection: "required",
       customer_update: { address: "auto", name: "auto" }
 
-    redirect_to session.url, allow_other_host: true
+    redirect_to checkout_session.url, allow_other_host: true
   end
 
   private
@@ -50,5 +52,9 @@ class Account::SubscriptionsController < ApplicationController
       Stripe::Customer.create(email: Current.user.identity.email_address, name: Current.account.name, metadata: { account_id: Current.account.id }).tap do |customer|
         Current.account.create_subscription!(stripe_customer_id: customer.id, plan_key: plan_param.key, status: "incomplete")
       end
+    end
+
+    def handle_stripe_error(error)
+      redirect_to account_settings_path, alert: "Something went wrong with the payment provider. Please try again."
     end
 end

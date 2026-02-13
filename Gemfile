@@ -71,7 +71,7 @@ gem "yabeda-gc", require: false
 gem "yabeda-http_requests", require: false
 gem "yabeda-prometheus-mmap", require: false
 gem "yabeda-puma-plugin", require: false
-gem "prometheus-client-mmap", "~> 1.3", require: false
+gem "prometheus-client-mmap", "~> 1.4.0", require: false
 gem "webrick", require: false
 
 # CSV export (required explicitly since Ruby 3.4)

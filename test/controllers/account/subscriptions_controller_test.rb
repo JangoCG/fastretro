@@ -20,18 +20,30 @@ class Account::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "create redirects to stripe checkout" do
     customer = OpenStruct.new(id: "cus_test_37signals")
-    session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
+    checkout_session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
 
     plan = OpenStruct.new(key: "monthly_v1", stripe_price_id: "price_test123")
     Plan.stubs(:paid).returns(plan)
 
     Stripe::Customer.stubs(:retrieve).returns(customer)
     Stripe::Customer.stubs(:create).returns(customer)
-    Stripe::Checkout::Session.stubs(:create).returns(session)
+    Stripe::Checkout::Session.stubs(:create).returns(checkout_session)
 
     post account_subscription_path
 
     assert_redirected_to "https://checkout.stripe.com/session123"
+  end
+
+  test "create handles stripe errors gracefully" do
+    plan = OpenStruct.new(key: "monthly_v1", stripe_price_id: "price_test123")
+    Plan.stubs(:paid).returns(plan)
+
+    Stripe::Customer.stubs(:create).raises(Stripe::AuthenticationError.new("No API key provided"))
+
+    post account_subscription_path
+
+    assert_redirected_to account_settings_path
+    assert_equal "Something went wrong with the payment provider. Please try again.", flash[:alert]
   end
 
   test "show requires admin" do
