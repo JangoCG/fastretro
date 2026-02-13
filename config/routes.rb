@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resource :grouping, only: :show
       resource :voting, only: :show
       resource :discussion, only: :show
+      resource :discussion_item, only: :update
       resource :complete, only: :show
       resource :export, only: :show
       resource :start, only: :create

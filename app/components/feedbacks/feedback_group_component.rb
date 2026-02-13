@@ -21,6 +21,10 @@ class Feedbacks::FeedbackGroupComponent < ApplicationComponent
     @retro.highlighted_user_id.present? && feedback.user_id != @retro.highlighted_user_id
   end
 
+  def discussed?
+    @group.discussed?
+  end
+
   private
 
   def primary_feedback
@@ -41,5 +45,13 @@ class Feedbacks::FeedbackGroupComponent < ApplicationComponent
 
   def show_vote_count?
     @show_votes
+  end
+
+  def discussion_enabled?
+    @retro.discussion?
+  end
+
+  def can_mark_discussed?
+    discussion_enabled? && @retro.admin?(Current.user)
   end
 end

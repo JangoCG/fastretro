@@ -12,7 +12,7 @@
   <% end %>
 >
   <%# Card Body: Clean Industrial (White, heavy border, sharp shadow) %>
-  <div class="bg-white relative border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden flex flex-col h-full min-h-[100px] group-hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">
+  <div class="<%= discussed? ? 'bg-emerald-50/80 border-emerald-700' : 'bg-white border-zinc-900' %> relative border-[2px] shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden flex flex-col h-full min-h-[100px] group-hover:shadow-[6px_6px_0px_0px_rgba(24,24,27,1)] transition-all">
 
     <% unless show_voting? %>
       <%= link_to retro_feedback_path(@feedback.retro, @feedback, script_name: @feedback.retro.account.slug), class: "absolute inset-0 z-10" do %><% end %>
@@ -25,6 +25,11 @@
       <div class="flex justify-between items-center border-b-[2px] border-zinc-100 pb-2 mb-1">
         <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono">ID_00<%= @feedback.id %></span>
         <div class="flex items-center gap-2">
+          <% if discussion_enabled? && discussed? %>
+            <span class="text-[0.55rem] font-bold text-emerald-700 uppercase tracking-wider px-1.5 py-0.5 border border-emerald-600 rounded bg-emerald-100">
+              Discussed
+            </span>
+          <% end %>
           <% if @grouping_enabled && in_group? %>
             <%= button_to remove_feedback_retro_feedback_groups_path(@feedback.retro, feedback_id: @feedback.id, script_name: @feedback.retro.account.slug),
                 method: :delete,
@@ -68,8 +73,22 @@
           <%= render VoteButtonComponent.new(voteable: @feedback, participant: @participant, retro: @retro) %>
         </div>
       <% elsif show_vote_count? %>
-        <div class="relative z-20 flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
-          <%= @feedback.votes.size %>
+        <div class="relative z-20 flex items-center gap-2">
+          <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
+            <%= @feedback.votes.size %>
+          </div>
+          <% if can_mark_discussed? %>
+            <%= button_to retro_discussion_item_path(@feedback.retro, script_name: @feedback.retro.account.slug),
+                method: :patch,
+                params: {
+                  item_type: "Feedback",
+                  item_id: @feedback.id,
+                  discussed: !discussed?
+                },
+                class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
+              <%= discussed? ? "Undo" : "Mark discussed" %>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     </div>
