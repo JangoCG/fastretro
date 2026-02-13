@@ -55,6 +55,13 @@ class Account::SubscriptionsController < ApplicationController
     end
 
     def handle_stripe_error(error)
+      Rails.logger.error(
+        "[billing] Stripe error in Account::SubscriptionsController#create " \
+        "request_id=#{Current.request_id} account_id=#{Current.account&.id} " \
+        "user_id=#{Current.user&.id} #{error.class}: #{error.message}"
+      )
+      Rails.logger.error(error.backtrace.first(15).join("\n")) if error.backtrace.present?
+
       redirect_to account_settings_path, alert: "Something went wrong with the payment provider. Please try again."
     end
 end
