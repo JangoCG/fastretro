@@ -18,6 +18,22 @@ class TargetedStreamUpdatesTest < ActiveSupport::TestCase
     )
   end
 
+  test "feedback in brainstorming broadcasts only to the author stream" do
+    @retro.update!(phase: :brainstorming)
+    @retro.participants.create!(user: users(:two), role: :participant)
+
+    expect_column_replacements
+
+    Turbo::StreamsChannel.expects(:broadcast_replace_to).with([ @retro, users(:two) ], anything).never
+
+    Feedback.create!(
+      retro: @retro,
+      user: @user,
+      category: :went_well,
+      status: :published
+    )
+  end
+
   test "feedback does not broadcast column replacements when drafted" do
     Turbo::StreamsChannel.expects(:broadcast_replace_to).never
 

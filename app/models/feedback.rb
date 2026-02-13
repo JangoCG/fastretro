@@ -68,7 +68,10 @@ class Feedback < ApplicationRecord
   end
 
   def participants_for_broadcast
-    retro.participants.includes(:user).select { |participant| participant.user.present? }
+    participants = retro.participants.includes(:user).select { |participant| participant.user.present? }
+    return participants unless retro.brainstorming?
+
+    participants.select { |participant| participant.user_id == user_id }
   end
 
   def preload_feedbacks_by_category(user: nil)
