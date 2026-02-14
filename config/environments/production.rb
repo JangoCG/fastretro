@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require "json"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -58,9 +59,29 @@ Rails.application.configure do
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
-  # Log to STDOUT with the current request id as a default log tag.
+  # Log to STDOUT in JSON format so log shipping can reliably extract level/message.
   config.log_tags = [ :request_id ]
-  config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
+  json_logger = ActiveSupport::Logger.new(STDOUT)
+  json_logger.formatter = proc do |severity, timestamp, progname, msg|
+    message = case msg
+    when ::String
+      msg
+    when ::Exception
+      "#{msg.message} (#{msg.class})\n#{Array(msg.backtrace).join("\n")}"
+    else
+      msg.inspect
+    end
+
+    payload = {
+      time: timestamp.utc.iso8601(6),
+      level: severity.downcase,
+      msg: message
+    }
+    payload[:progname] = progname if progname.present?
+
+    "#{JSON.generate(payload)}\n"
+  end
+  config.logger = ActiveSupport::TaggedLogging.new(json_logger)
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!).
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
