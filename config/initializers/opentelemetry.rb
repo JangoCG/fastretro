@@ -14,9 +14,26 @@ if ENV["OTEL_EXPORTER_OTLP_ENDPOINT"].present? && ENV["SKIP_TELEMETRY"].blank? &
   require "opentelemetry/instrumentation/net/http"
 
   default_service_name = [ "fastretro", ENV["KAMAL_DESTINATION"].presence || Rails.env ].join("-")
+  sample_ratio = begin
+    ratio = Float(ENV.fetch("OTEL_TRACE_SAMPLE_RATIO", "0.2"))
+    [[ ratio, 0.0 ].max, 1.0].min
+  rescue ArgumentError, TypeError
+    0.2
+  end
+
+  sampler = if Rails.env.production?
+    OpenTelemetry::SDK::Trace::Samplers.parent_based(
+      root: OpenTelemetry::SDK::Trace::Samplers.trace_id_ratio_based(sample_ratio)
+    )
+  else
+    OpenTelemetry::SDK::Trace::Samplers.parent_based(
+      root: OpenTelemetry::SDK::Trace::Samplers::ALWAYS_ON
+    )
+  end
 
   OpenTelemetry::SDK.configure do |config|
     config.service_name = ENV.fetch("OTEL_SERVICE_NAME", default_service_name)
+    config.sampler = sampler
     config.use "OpenTelemetry::Instrumentation::Rails"
     config.use "OpenTelemetry::Instrumentation::ActionPack"
     config.use "OpenTelemetry::Instrumentation::Rack"
