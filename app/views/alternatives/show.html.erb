@@ -39,7 +39,11 @@
       </div>
       <p class="font-mono text-[10px] text-zinc-500 mt-4 uppercase tracking-wide">
         Free tier includes <%= number_with_delimiter(@free_limit) %> feedbacks. Paid plan is
-        <%= number_to_currency(@paid_price, unit: "€", format: "%u%n") %>/month per account.
+        <% if @paid_price.present? %>
+          <%= number_to_currency(@paid_price, unit: "€", format: "%u%n") %>/month per account.
+        <% else %>
+          currently unavailable.
+        <% end %>
       </p>
     </div>
   </section>
@@ -129,7 +133,11 @@
     </h2>
     <p class="font-mono text-sm text-zinc-600 mb-8 max-w-xl mx-auto">
       Start free with <%= number_with_delimiter(@free_limit) %> feedbacks.
-      Upgrade to <%= number_to_currency(@paid_price, unit: "€", format: "%u%n") %>/month for unlimited feedback and users.
+      <% if @paid_price.present? %>
+        Upgrade to <%= number_to_currency(@paid_price, unit: "€", format: "%u%n") %>/month for unlimited feedback and users.
+      <% else %>
+        Live pricing is currently unavailable.
+      <% end %>
     </p>
     <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm font-black uppercase tracking-wider px-10 py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
       <span>GET STARTED FREE</span>

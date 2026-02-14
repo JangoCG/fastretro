@@ -130,12 +130,20 @@ class AlternativesController < ApplicationController
   private
     def render_alternative(key)
       @free_limit = Plan.free.feedback_limit
-      @paid_price = Plan.paid.price
+      @paid_price = Plan.paid.price_for_display
       @alternative = ALTERNATIVES.fetch(key)
       @comparison_rows = comparison_rows(@alternative.fetch(:competitor_values))
       @fast_retro_features = FAST_RETRO_FEATURES
       @other_alternatives = ALTERNATIVES.values.reject { |alternative| alternative[:slug] == @alternative[:slug] }
 
+      render :show
+    rescue Plan::StripePriceUnavailableError => error
+      @paid_price = nil
+      @alternative = ALTERNATIVES.fetch(key)
+      @comparison_rows = comparison_rows(@alternative.fetch(:competitor_values))
+      @fast_retro_features = FAST_RETRO_FEATURES
+      @other_alternatives = ALTERNATIVES.values.reject { |alternative| alternative[:slug] == @alternative[:slug] }
+      flash.now[:alert] = error.message
       render :show
     end
 

@@ -11,6 +11,10 @@ class LandingPageController < ApplicationController
   def show
     @free_limit = Plan.free.feedback_limit
     @retro_count = Retro.cached_global_count + LEGACY_RETRO_COUNT
+    @paid_price = Plan.paid.price_for_display
+  rescue Plan::StripePriceUnavailableError => error
+    @paid_price = nil
+    flash.now[:alert] = error.message
   end
 
   private

@@ -1,8 +1,8 @@
 <% if FastRetro.saas? && Current.user.owner? %>
   <% subscription = Current.account.subscription %>
   <% free_limit = @free_limit || Plan.free.feedback_limit %>
-  <% paid_price = @paid_price || Plan.paid.price %>
-  <% formatted_paid_price = format_currency(paid_price) %>
+  <% paid_price = @paid_price %>
+  <% formatted_paid_price = paid_price.present? ? format_currency(paid_price) : nil %>
   <section id="subscription" class="border-[3px] border-zinc-900 bg-[#efece6] shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)]">
     <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white text-center">
       <h2 class="text-lg font-black text-zinc-900 uppercase tracking-wider">Subscription</h2>
@@ -15,15 +15,25 @@
           <%= number_with_delimiter(free_limit) %>
         </h3>
 
-        <p class="text-zinc-800 text-lg md:text-2xl leading-snug">
-          To keep using Fast Retro past <%= number_with_delimiter(free_limit) %> feedbacks,
-          it's only <strong><%= formatted_paid_price %>/month</strong> for
-          <strong>unlimited feedbacks, unlimited users</strong>.
-        </p>
+        <% if formatted_paid_price.present? %>
+          <p class="text-zinc-800 text-lg md:text-2xl leading-snug">
+            To keep using Fast Retro past <%= number_with_delimiter(free_limit) %> feedbacks,
+            it's only <strong><%= formatted_paid_price %>/month</strong> for
+            <strong>unlimited feedbacks, unlimited users</strong>.
+          </p>
 
-        <%= button_to "Upgrade to Unlimited for #{formatted_paid_price}/month", account_subscription_path,
-            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
-            form: { data: { turbo: false } } %>
+          <%= button_to "Upgrade to Unlimited for #{formatted_paid_price}/month", account_subscription_path,
+              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+              form: { data: { turbo: false } } %>
+        <% else %>
+          <p class="text-red-700 text-base md:text-xl leading-snug font-bold">
+            Live pricing is currently unavailable. Please try again in a moment.
+          </p>
+
+          <%= button_to "Open Stripe Checkout", account_subscription_path,
+              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+              form: { data: { turbo: false } } %>
+        <% end %>
 
         <p class="text-zinc-700 text-lg md:text-2xl">Cancel anytime, no contracts.</p>
 
