@@ -3,7 +3,7 @@ class SiteFeedbacksController < ApplicationController
   allow_unauthenticated_access
   rate_limit to: 5, within: 10.minutes, only: :create, with: -> { redirect_to new_site_feedback_path, alert: "Too many submissions. Please try again later." }
 
-  layout "admin"
+  layout "application"
 
   def new
   end

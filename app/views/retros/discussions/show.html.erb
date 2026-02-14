@@ -1,9 +1,5 @@
 <% content_for :title, @retro.name %>
 
-<% content_for :phase_tag do %>
-  <%= render PhaseTagComponent.new(phase: :discussion) %>
-<% end %>
-
 <% content_for :board_columns do %>
   <div class="grid gap-6" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
     <% @retro.column_definitions.each_with_index do |column, index| %>

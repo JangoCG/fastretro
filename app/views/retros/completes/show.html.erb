@@ -1,9 +1,5 @@
 <% content_for :title, "#{@retro.name} - Complete" %>
 
-<% content_for :phase_tag do %>
-  <%= render PhaseTagComponent.new(phase: :complete) %>
-<% end %>
-
 <% content_for :board_columns do %>
   <div class="space-y-8">
     <%# Summary Stats %>

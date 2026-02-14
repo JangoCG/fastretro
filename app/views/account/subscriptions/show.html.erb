@@ -1,12 +1,9 @@
 <% @page_title = "Thank you" %>
 
 <% if @stripe_session&.payment_status == "paid" %>
-  <section class="max-w-2xl mx-auto mt-10 p-8 bg-white border border-zinc-200 rounded-lg text-center shadow-sm">
-    <h1 class="text-2xl font-black text-zinc-900 mb-3">Thanks for upgrading!</h1>
-    <p class="text-zinc-700 mb-6">
-      Your payment was successful. You are now on the <strong><%= Current.account.plan.name %></strong> plan.
-    </p>
-    <%= link_to "Done", account_settings_path,
-        class: "inline-flex items-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all border-2 border-zinc-900" %>
+  <section class="panel panel--wide panel--centered center borderless">
+    <h1 class="txt-x-large font-weight-black margin-none">Thanks for buying Fast Retro!</h1>
+    <p class="txt-medium margin-none-block-start">Your payment was successful. You're now on the <strong><%= Current.account.plan.name %></strong> plan.</p>
+    <%= link_to "Done", account_settings_path, class: "btn settings-subscription__button txt-medium" %>
   </section>
 <% end %>

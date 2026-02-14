@@ -70,7 +70,14 @@
         <div class="p-8 flex flex-col items-center justify-center opacity-50">
           <span class="font-mono text-xs uppercase animate-pulse">LOADING...</span>
         </div>
-        <%= render("my/menus/jump") { } %>
+        <% if Current.account.present? %>
+          <%= render("my/menus/jump") { } %>
+        <% else %>
+          <div class="p-6 text-center">
+            <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">Open your account menu</p>
+            <%= link_to "Go to account menu", session_menu_path(script_name: nil), class: "inline-flex items-center justify-center px-4 py-2 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-800 transition-colors" %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 

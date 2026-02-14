@@ -42,3 +42,14 @@
   padding: 4px;
   margin: -4px;
 }
+
+/* Desktop-only utility class for retro sidebar tip card */
+.desktop-only-block {
+  display: none;
+}
+
+@media (min-width: 1280px) and (hover: hover) and (pointer: fine) {
+  .desktop-only-block {
+    display: block;
+  }
+}

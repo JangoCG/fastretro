@@ -3,7 +3,7 @@
 <div class="px-8 xl:px-16 py-8">
   <%# Back Button %>
   <div class="pb-6">
-    <%= render BackButtonComponent.new(label: "Home", href: authenticated? ? session_menu_path(script_name: nil) : root_path(script_name: nil)) %>
+    <%= render BackButtonComponent.new(label: "Home", href: authenticated? ? session_menu_path(script_name: nil) : root_path(script_name: nil), variant: :fizzy) %>
   </div>
 
   <div class="max-w-2xl mx-auto">
