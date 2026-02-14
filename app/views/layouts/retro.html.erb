@@ -142,6 +142,7 @@
             <% if @current_participant.present? && !@retro.complete? %>
               <%= button_to retro_finished_path(@retro),
                       method: :patch,
+                      id: "participant-finished-button",
                       class: class_names(
                       "w-full md:w-auto h-10 sm:h-12 px-3 sm:px-8 min-w-0 justify-center whitespace-nowrap font-bold uppercase tracking-[0.12em] md:tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0",
                       @current_participant.finished? ? "bg-emerald-100 border-emerald-700 text-emerald-900 hover:bg-emerald-200" : "bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-600"

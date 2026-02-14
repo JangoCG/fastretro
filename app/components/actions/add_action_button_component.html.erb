@@ -1,4 +1,5 @@
 <%= link_to new_retro_action_path(@retro, script_name: @retro.account.slug),
+      id: "add-action-button",
       class: "group inline-flex items-center gap-2 px-4 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-[#F8F5EC] border-2 border-transparent hover:border-zinc-900 transition-all shadow-sm rounded-sm",
       data: {
         controller: "hotkey",

@@ -32,7 +32,7 @@
 
       <%# Primary Actions %>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 xl:flex xl:items-center">
-        <%= link_to new_retro_path, class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
+        <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
           <span>NEW RETRO</span>
           <span class="font-mono group-hover:translate-x-1 transition-transform">-></span>
           <span class="hidden sm:inline">
