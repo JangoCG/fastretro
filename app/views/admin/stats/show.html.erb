@@ -8,9 +8,14 @@
 
   <%# Page Title %>
   <div class="mb-10">
-    <h1 class="font-black text-3xl sm:text-4xl lg:text-5xl text-zinc-900 uppercase tracking-tighter leading-none">
-      Admin Stats
-    </h1>
+    <div class="flex items-center justify-between gap-4">
+      <h1 class="font-black text-3xl sm:text-4xl lg:text-5xl text-zinc-900 uppercase tracking-tighter leading-none">
+        Admin Stats
+      </h1>
+      <%= button_to "Trigger Test Exception", admin_test_exception_path, method: :post,
+        class: "flex-shrink-0 font-mono text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,0.9)] hover:bg-red-700 hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,0.9)] active:shadow-none transition-all cursor-pointer",
+        data: { confirm: "This will raise an exception in the backend. Continue?" } %>
+    </div>
     <div class="h-[3px] bg-zinc-900 mt-4"></div>
   </div>
 
@@ -219,12 +224,5 @@
         </tbody>
       </table>
     </div>
-  </div>
-
-  <%# Test Exception %>
-  <div class="mt-8">
-    <%= button_to "Trigger Test Exception", admin_test_exception_path, method: :post,
-      class: "font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-red-600 text-white border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,0.9)] hover:bg-red-700 hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,0.9)] active:shadow-none transition-all cursor-pointer",
-      data: { confirm: "This will raise an exception in the backend. Continue?" } %>
   </div>
 </div>

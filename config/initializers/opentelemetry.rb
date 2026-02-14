@@ -21,19 +21,15 @@ if ENV["OTEL_EXPORTER_OTLP_ENDPOINT"].present? && ENV["SKIP_TELEMETRY"].blank? &
     0.2
   end
 
-  sampler = if Rails.env.production?
-    OpenTelemetry::SDK::Trace::Samplers.parent_based(
-      root: OpenTelemetry::SDK::Trace::Samplers.trace_id_ratio_based(sample_ratio)
-    )
+  if Rails.env.production?
+    ENV["OTEL_TRACES_SAMPLER"] ||= "parentbased_traceidratio"
+    ENV["OTEL_TRACES_SAMPLER_ARG"] ||= sample_ratio.to_s
   else
-    OpenTelemetry::SDK::Trace::Samplers.parent_based(
-      root: OpenTelemetry::SDK::Trace::Samplers::ALWAYS_ON
-    )
+    ENV["OTEL_TRACES_SAMPLER"] ||= "parentbased_always_on"
   end
 
   OpenTelemetry::SDK.configure do |config|
     config.service_name = ENV.fetch("OTEL_SERVICE_NAME", default_service_name)
-    config.sampler = sampler
     config.use "OpenTelemetry::Instrumentation::Rails"
     config.use "OpenTelemetry::Instrumentation::ActionPack"
     config.use "OpenTelemetry::Instrumentation::Rack"
