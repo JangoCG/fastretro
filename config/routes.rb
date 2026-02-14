@@ -104,6 +104,7 @@ Rails.application.routes.draw do
 
   # SEO
   get "sitemap.xml", to: "sitemaps#show", as: :sitemap, defaults: { format: :xml }
+  get "favicon.ico", to: redirect("/icon.png")
 
   # Legal pages
   get "imprint", to: "legal#imprint", as: :imprint
