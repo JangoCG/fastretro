@@ -19,6 +19,6 @@ class SubscriptionsHelperTest < ActionView::TestCase
   test "subscription_period_end_action shows next payment amount for active subscription" do
     subscription = OpenStruct.new(to_be_canceled?: false, canceled?: false, next_amount_due: 20)
 
-    assert_equal "Your next payment is <b>$20</b> on", subscription_period_end_action(subscription)
+    assert_equal "Your next payment is <b>€20</b> on", subscription_period_end_action(subscription)
   end
 end

@@ -1,9 +1,9 @@
-<li class="flex items-center gap-4 px-3 py-3 hover:bg-zinc-50 transition-colors border-b border-zinc-200 group relative" data-filter-target="item" data-navigable-list-target="item">
+<li class="flex items-center gap-3 sm:gap-4 px-3 py-3 hover:bg-zinc-50 transition-colors border-b border-zinc-200 group relative min-w-0" data-filter-target="item" data-navigable-list-target="item">
   
   <%# Hover Marker %>
   <div class="absolute left-0 top-0 bottom-0 w-1 bg-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-  <%= link_to user_path(user), class: "flex items-center gap-4 min-w-0 text-zinc-900 hover:text-zinc-600 transition-colors shrink-0 group/link" do %>
+  <%= link_to user_path(user), class: "flex items-center gap-3 sm:gap-4 min-w-0 flex-1 text-zinc-900 hover:text-zinc-600 transition-colors group/link" do %>
     <%# Squared Avatar %>
     <div class="w-10 h-10 border-[2px] border-zinc-900 bg-zinc-200 flex items-center justify-center shrink-0 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover/link:translate-y-0.5 group-hover/link:shadow-none transition-all">
       <%= icon_tag "person", class: "w-5 h-5 text-zinc-900" %>
@@ -17,7 +17,7 @@
   <% end %>
 
   <%# Industrial Connector %>
-  <div class="flex-1 border-t-[2px] border-dashed border-zinc-300 mx-3"></div>
+  <div class="flex-1 min-w-0 border-t-[2px] border-dashed border-zinc-300 mx-2 sm:mx-3"></div>
 
   <div class="flex items-center gap-3 shrink-0">
     <%# Crown button to toggle admin role %>
