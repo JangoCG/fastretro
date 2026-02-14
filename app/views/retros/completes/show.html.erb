@@ -51,9 +51,9 @@
 
       <%# Content %>
       <div class="p-6">
-        <% if @retro.actions.published.any? %>
+        <% if @actions.any? %>
           <div class="space-y-4">
-            <% @retro.actions.published.each_with_index do |action, index| %>
+            <% @actions.each_with_index do |action, index| %>
               <div class="flex gap-4 items-start p-4 bg-white border-[2px] border-zinc-900 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)]">
                 <div class="flex-shrink-0 w-8 h-8 bg-violet-100 border-[2px] border-zinc-900 flex items-center justify-center">
                   <span class="font-black text-sm text-violet-700"><%= index + 1 %></span>
