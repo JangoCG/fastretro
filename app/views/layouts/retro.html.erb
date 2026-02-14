@@ -55,7 +55,7 @@
         <%= render MusicToggleComponent.new(retro: @retro, style: :topbar) %>
       <% end %>
 
-      <%= link_to new_site_feedback_path(script_name: nil), class: "hidden sm:inline-flex w-10 h-10 xl:w-[15rem] xl:h-11 justify-center items-center gap-2 px-0 xl:px-4 bg-violet-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-violet-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+      <%= link_to new_site_feedback_path(script_name: nil), class: "hidden sm:inline-flex w-10 h-10 xl:w-[15rem] xl:h-11 justify-center items-center gap-2 px-0 xl:px-4 bg-slate-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-slate-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
         <%= icon_tag "chat", class: "w-3.5 h-3.5 sm:w-4 sm:h-4" %>
         <span class="hidden xl:inline">Give us feedback</span>
       <% end %>

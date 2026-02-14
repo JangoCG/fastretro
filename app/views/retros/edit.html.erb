@@ -1,6 +1,6 @@
 <% content_for :title, "Edit #{@retro.name}" %>
 <div class="px-4 py-4">
-  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro)) %>
+  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro), variant: :fizzy) %>
 </div>
 
 <div class="max-w-2xl mx-auto px-4 py-8 font-sans">
