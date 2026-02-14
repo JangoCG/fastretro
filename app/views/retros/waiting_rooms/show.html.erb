@@ -1,5 +1,6 @@
 <% content_for :title, "#{@retro.name} - Waiting Room" %>
 <%= turbo_stream_from @retro %>
+<%= turbo_stream_from [@retro, Current.user] if Current.user.present? %>
 <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
 
 <div class="max-w-7xl mx-auto px-4 py-12">
@@ -63,7 +64,9 @@
       <%# Start Retro Button %>
       <% if Current.user && @retro.admin?(Current.user) %>
         <%= turbo_frame_tag "start-retro-container" do %>
-          <%= button_to retro_start_path(@retro), method: :post, class: "group w-full bg-[#ffe600] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" do %>
+          <%= button_to retro_start_path(@retro), method: :post,
+              form: { data: { turbo_frame: "_top" } },
+              class: "group w-full bg-[#ffe600] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" do %>
             <span>START RETRO</span>
             <span class="font-mono group-hover:translate-x-2 transition-transform text-lg">-></span>
           <% end %>

@@ -9,6 +9,8 @@ module OtelLogTags
 
   private
     def with_otel_log_tags
+      return yield unless tracing_enabled?
+
       span_context = OpenTelemetry::Trace.current_span.context
 
       if span_context.valid?
@@ -18,7 +20,9 @@ module OtelLogTags
       else
         yield
       end
-    rescue NameError
-      yield
+    end
+
+    def tracing_enabled?
+      defined?(OpenTelemetry::Trace)
     end
 end

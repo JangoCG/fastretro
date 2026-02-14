@@ -1,5 +1,6 @@
 class Retros::WaitingRoomsController < ApplicationController
   include RetroAuthorization
+  include RetroPhaseNavigation
 
   layout "application"
 
@@ -7,6 +8,10 @@ class Retros::WaitingRoomsController < ApplicationController
   before_action :ensure_retro_participant
 
   def show
+    unless @retro.waiting_room?
+      redirect_to phase_path_for(@retro) and return
+    end
+
     @participants = @retro.participants.includes(:user).order(:created_at).to_a
   end
 
