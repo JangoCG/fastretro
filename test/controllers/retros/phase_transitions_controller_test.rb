@@ -42,6 +42,14 @@ class Retros::PhaseTransitionsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as :one
     @retro.update!(phase: :discussion)
 
+    Turbo::StreamsChannel.expects(:broadcast_stream_to).with(
+      [ @retro, @member_user ],
+      has_entries(
+        content: %(<turbo-stream action="redirect" url="#{retro_complete_path(@retro)}"></turbo-stream>)
+      )
+    ).once
+    Turbo::StreamsChannel.expects(:broadcast_stream_to).with([ @retro, @admin_user ], anything).never
+
     post retro_phase_transition_path(@retro)
 
     assert_redirected_to retro_complete_path(@retro)

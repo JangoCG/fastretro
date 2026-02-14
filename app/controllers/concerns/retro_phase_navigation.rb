@@ -19,9 +19,15 @@ module RetroPhaseNavigation
   def broadcast_phase_redirect(url = nil)
     url ||= phase_path_for(@retro)
 
-    Turbo::StreamsChannel.broadcast_stream_to(
-      @retro,
-      content: %(<turbo-stream action="redirect" url="#{url}"></turbo-stream>)
-    )
+    stream_content = %(<turbo-stream action="redirect" url="#{url}"></turbo-stream>)
+    participant_users = @retro.users
+    participant_users = participant_users.where.not(id: Current.user.id) if Current.user.present?
+
+    participant_users.find_each do |user|
+      Turbo::StreamsChannel.broadcast_stream_to(
+        [ @retro, user ],
+        content: stream_content
+      )
+    end
   end
 end
