@@ -132,4 +132,7 @@ Rails.application.routes.draw do
 
   # Stripe webhooks
   post "stripe/webhooks", to: "stripe/webhooks#create"
+
+  # Catch-all route for unmatched paths (must be last)
+  match "*unmatched", to: "errors#not_found", via: :all
 end
