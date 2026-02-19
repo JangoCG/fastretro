@@ -1,4 +1,7 @@
 class Plan
+  STRIPE_PRICE_CACHE_TTL = 12.hours
+  StripePriceUnavailableError = Class.new(StandardError)
+
   PLANS = {
     free_v1: {
       name: "Free",
@@ -59,5 +62,24 @@ class Plan
 
   def limit_feedbacks?
     feedback_limit != Float::INFINITY
+  end
+
+  def price_for_display
+    return price if free?
+    raise StripePriceUnavailableError, "Stripe price is not configured." unless stripe_price_id.present?
+    raise StripePriceUnavailableError, "Stripe API key is missing." unless Stripe.api_key.present?
+
+    Rails.cache.fetch("stripe/price/#{stripe_price_id}/unit_amount", expires_in: STRIPE_PRICE_CACHE_TTL) do
+      stripe_price = Stripe::Price.retrieve(stripe_price_id)
+      raise StripePriceUnavailableError, "Stripe price is missing unit_amount." unless stripe_price&.unit_amount
+
+      BigDecimal(stripe_price.unit_amount.to_s) / 100
+    end
+  rescue Stripe::StripeError, StripePriceUnavailableError => error
+    Rails.logger.warn(
+      "[billing] Failed to fetch Stripe price for display " \
+      "price_id=#{stripe_price_id} error=#{error.class}: #{error.message}"
+    )
+    raise StripePriceUnavailableError, "Live pricing is currently unavailable. Please try again in a moment."
   end
 end

@@ -1,12 +1,42 @@
 <% @page_title = "Thank you" %>
 
 <% if @stripe_session&.payment_status == "paid" %>
-  <section class="max-w-2xl mx-auto mt-10 p-8 bg-white border border-zinc-200 rounded-lg text-center shadow-sm">
-    <h1 class="text-2xl font-black text-zinc-900 mb-3">Thanks for upgrading!</h1>
-    <p class="text-zinc-700 mb-6">
-      Your payment was successful. You are now on the <strong><%= Current.account.plan.name %></strong> plan.
-    </p>
-    <%= link_to "Done", account_settings_path,
-        class: "inline-flex items-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 px-4 py-2 text-sm font-bold uppercase tracking-wide transition-all border-2 border-zinc-900" %>
-  </section>
+  <div class="max-w-2xl mx-auto px-4 py-8 font-sans">
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+      <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+        <div class="relative z-10 flex items-center justify-between gap-3">
+          <h1 class="text-2xl sm:text-3xl font-black uppercase tracking-tighter text-zinc-900">
+            Payment Confirmed
+          </h1>
+          <span class="inline-flex items-center px-3 py-1 bg-[#ffe600] border-[2px] border-zinc-900 text-zinc-900 text-[0.65rem] font-black uppercase tracking-widest">
+            <%= Current.account.plan.name %>
+          </span>
+        </div>
+      </div>
+
+      <div class="p-8 relative">
+        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+        <div class="relative z-10 space-y-6">
+          <div class="space-y-2">
+            <p class="text-xl font-black text-zinc-900 tracking-tight">
+              Thanks for buying Fast Retro.
+            </p>
+            <p class="text-sm sm:text-base text-zinc-700">
+              Your payment was successful. You are now on the <strong class="text-zinc-900"><%= Current.account.plan.name %></strong> plan.
+            </p>
+          </div>
+
+          <div class="pt-2">
+            <%= link_to account_settings_path,
+                  class: "inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs sm:text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 transition-all" do %>
+              Done
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+    </div>
+  </div>
 <% end %>

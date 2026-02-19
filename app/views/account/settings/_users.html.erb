@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-5 min-h-0 flex-1" data-controller="filter navigable-list" data-action="keydown->navigable-list#navigate filter:changed->navigable-list#reset" data-navigable-list-focus-on-selection-value="true" data-navigable-list-actionable-items-value="true">
+<div class="flex flex-col gap-5 min-h-0 flex-1 overflow-x-hidden" data-controller="filter navigable-list" data-action="keydown->navigable-list#navigate filter:changed->navigable-list#reset" data-navigable-list-focus-on-selection-value="true" data-navigable-list-actionable-items-value="true">
   <header class="border-t-[2px] border-zinc-200 pt-5">
     <h2 class="text-sm font-black text-zinc-900 uppercase tracking-widest">TEAM MEMBERS</h2>
   </header>
@@ -16,7 +16,7 @@
         data-action="input->filter#filter">
     </div>
 
-    <ul class="flex-1 overflow-y-auto space-y-2 -mx-3 px-3 scrollbar-thin scrollbar-thumb-zinc-400 scrollbar-track-transparent" data-filter-target="list">
+    <ul class="flex-1 overflow-y-auto overflow-x-hidden space-y-2 -mx-3 px-3 scrollbar-thin scrollbar-thumb-zinc-400 scrollbar-track-transparent" data-filter-target="list">
       <% @users.each do |user| %>
         <%= render "user", user: user %>
       <% end %>

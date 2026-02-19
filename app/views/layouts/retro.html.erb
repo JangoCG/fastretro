@@ -30,7 +30,10 @@
     - selection:bg-[#ffe600]: Highlights text in "Highlighter Yellow".
     - overflow-x-hidden: Prevents horizontal scroll from the hanging tag animations.
   %>
-<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
+<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black"
+      data-controller="elevator-music"
+      data-elevator-music-url-value="<%= retro_music_path(@retro) %>"
+      data-elevator-music-playing-value="<%= @retro.music_playing? %>">
 
 <%# Turbo 8: Subscribe to retro stream for real-time updates %>
 <%= turbo_stream_from @retro %>
@@ -47,18 +50,24 @@
 <% if authenticated? %>
   <header class="z-40 relative flex justify-start sm:justify-center px-4 sm:px-6 md:px-8 xl:px-16">
     <%= render "my/menu" %>
-    <%= link_to new_site_feedback_path(script_name: nil), class: "hidden sm:inline-flex absolute right-4 sm:right-6 md:right-8 xl:right-16 top-4 items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-violet-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-violet-700 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
-      <%= icon_tag "chat", class: "w-3.5 h-3.5 sm:w-4 sm:h-4" %>
-      <span class="hidden sm:inline">Feedback</span>
-    <% end %>
+    <div class="absolute right-4 sm:right-6 md:right-8 xl:right-16 top-4 flex items-center gap-2">
+      <% if @retro.admin?(Current.user) %>
+        <%= render MusicToggleComponent.new(retro: @retro, style: :topbar) %>
+      <% end %>
+
+      <%= link_to new_site_feedback_path(script_name: nil), class: "hidden sm:inline-flex w-10 h-10 xl:w-[15rem] xl:h-11 justify-center items-center gap-2 px-0 xl:px-4 bg-slate-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[10px] sm:text-xs hover:bg-slate-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+        <%= icon_tag "chat", class: "w-3.5 h-3.5 sm:w-4 sm:h-4" %>
+        <span class="hidden xl:inline">Give us feedback</span>
+      <% end %>
+    </div>
   </header>
 <% end %>
 
 <%# === MAIN CONTENT === %>
 <main id="main">
   <div class="px-4 sm:px-6 md:px-8 xl:px-16 pt-2 sm:pt-0 pb-8 sm:pb-16">
-    <div class="pb-4 sm:pb-4">
-      <%= render BackButtonComponent.new(label: "Retros", href: retros_path) %>
+    <div class="pt-3 sm:pt-0 pb-4 sm:pb-4">
+      <%= render BackButtonComponent.new(label: "Retros", href: retros_path, variant: :fizzy) %>
     </div>
 
     <%= render "feedbacks/near_limit_notice" %>
@@ -69,10 +78,11 @@
 
     <%# Header - all screen sizes %>
     <div id="header-container" class="mt-0 sm:mt-4 md:mt-0 mb-6 sm:mb-8 font-sans">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 md:items-start">
         <div class="text-center sm:text-left">
+          <% retro_display_name = @retro.name.presence || "Retro" %>
           <h1 class="font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-900 uppercase tracking-tighter leading-none">
-            "<%= @retro.name %>"
+            "<%= retro_display_name %>"
           </h1>
           <%
             phase_colors = {
@@ -89,12 +99,21 @@
           <p class="hidden sm:inline-block font-bold text-xs sm:text-sm md:text-base uppercase tracking-widest mt-1.5 sm:mt-2 px-1.5 sm:px-2 py-0.5 -rotate-1 <%= color_classes %>">
             "<%= @retro.phase.tr('_', ' ') %>"
           </p>
+          <p class="mt-2 text-xs sm:text-sm text-zinc-700 font-medium leading-relaxed max-w-xl">
+            <span class="font-black uppercase tracking-wide text-zinc-900">What to do:</span>
+            <%= retro_phase_instruction(@retro.phase) %>
+          </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2 justify-center sm:justify-end w-full sm:w-auto"
-             data-controller="elevator-music"
-             data-elevator-music-url-value="<%= retro_music_path(@retro) %>"
-             data-elevator-music-playing-value="<%= @retro.music_playing? %>">
+        <% if content_for?(:header_actions) %>
+          <div class="flex justify-center md:justify-center md:pt-1">
+            <%= yield :header_actions %>
+          </div>
+        <% else %>
+          <div class="hidden md:block"></div>
+        <% end %>
+
+        <div class="w-full md:w-auto flex flex-col items-stretch gap-2 md:items-end md:justify-self-end">
 
           <%# Hidden audio element for elevator music %>
           <audio id="elevator-music-audio"
@@ -110,44 +129,41 @@
                   id="music-enable-prompt"
                   data-elevator-music-target="prompt"
                   data-action="click->elevator-music#enableAudio"
-                  class="hidden h-10 sm:h-12 px-4 sm:px-6 font-bold uppercase tracking-widest text-xs sm:text-sm bg-amber-400 text-zinc-900 border-[2px] border-zinc-900 rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 animate-pulse">
+                  class="hidden w-full md:w-auto h-10 sm:h-12 px-4 sm:px-6 font-bold uppercase tracking-widest text-xs sm:text-sm bg-amber-400 text-zinc-900 border-[2px] border-zinc-900 rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 animate-pulse">
             <span class="flex items-center gap-2">
               <span>🎵</span>
               <span>Click to enable music</span>
             </span>
           </button>
 
-          <%# Phase-specific actions (e.g., votes remaining) %>
-          <%= yield :header_actions %>
-
-          <%# Music toggle button - admin only %>
-          <% if @retro.admin?(Current.user) %>
-            <%= render MusicToggleComponent.new(retro: @retro) %>
-          <% end %>
-
-          <%# I am finished button - available to all participants, hidden when retro is complete %>
-          <% if @current_participant.present? && !@retro.complete? %>
-            <%= button_to retro_finished_path(@retro),
-                  method: :patch,
-                  class: class_names(
-                    "h-10 sm:h-12 px-4 sm:px-8 font-bold uppercase tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0",
-                    @current_participant.finished? ? "bg-[#FFFF00] border-zinc-900 text-zinc-900 hover:bg-[#f4f1ea]" : "bg-[#f4f1ea] border-zinc-900 text-zinc-900 hover:bg-[#FFFF00]"
-                  ) do %>
-              <%= @current_participant.finished? ? "Finished!" : "I am finished" %>
+          <%# Primary controls stack: full-width mobile actions in meaningful order %>
+          <div class="w-full flex flex-col items-stretch gap-2 md:flex-row md:flex-nowrap md:justify-end">
+            <%# 1) Participant finishes own work %>
+            <% if @current_participant.present? && !@retro.complete? %>
+              <%= button_to retro_finished_path(@retro),
+                      method: :patch,
+                      id: "participant-finished-button",
+                      class: class_names(
+                      "w-full md:w-auto h-10 sm:h-12 px-3 sm:px-8 min-w-0 justify-center whitespace-nowrap font-bold uppercase tracking-[0.12em] md:tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0",
+                      @current_participant.finished? ? "bg-emerald-100 border-emerald-700 text-emerald-900 hover:bg-emerald-200" : "bg-emerald-500 border-emerald-700 text-white hover:bg-emerald-600"
+                    ) do %>
+                <%= @current_participant.finished? ? "Finished" : "I am finished" %>
+              <% end %>
             <% end %>
-          <% end %>
 
-          <%# Go Back button with confirmation modal - admin only, when can go back %>
-          <% if @retro.admin?(Current.user) && @retro.can_go_back? %>
-            <%= render ConfirmBackPhaseModalComponent.new(retro: @retro) %>
-          <% end %>
+            <%# 2) Admin advances phase %>
+            <% if @retro.admin?(Current.user) && !@retro.last_phase? %>
+              <%= render ConfirmPhaseModalComponent.new(retro: @retro) %>
+            <% end %>
 
-          <%# Complete Phase button with confirmation modal - admin only, not shown on last phase %>
-          <% if @retro.admin?(Current.user) && !@retro.last_phase? %>
-            <%= render ConfirmPhaseModalComponent.new(retro: @retro) %>
-          <% end %>
+            <%# 3) Admin goes back phase %>
+            <% if @retro.admin?(Current.user) && @retro.can_go_back? %>
+              <%= render ConfirmBackPhaseModalComponent.new(retro: @retro) %>
+            <% end %>
+          </div>
         </div>
       </div>
+
       <div class="h-[2px] sm:h-[3px] bg-zinc-900 mt-3 sm:mt-4"></div>
     </div>
 
@@ -162,7 +178,7 @@
     >
 
       <%# The Board %>
-      <div class="col-span-12 lg:col-span-10 order-2 lg:order-1">
+      <div class="col-span-12 lg:col-span-9 order-2 lg:order-1">
         <% if content_for?(:board_columns) %>
           <%= yield :board_columns %>
         <% else %>
@@ -185,18 +201,16 @@
       </div>
 
       <%# Participants - on mobile, show compact version at top %>
-      <div class="col-span-12 lg:col-span-2 order-1 lg:order-2">
+      <div class="col-span-12 lg:col-span-3 order-1 lg:order-2">
         <div class="lg:sticky lg:top-8 flex flex-col gap-4 sm:gap-6">
-          <% if content_for?(:phase_tag) %>
-            <div class="flex justify-center">
-              <%= yield :phase_tag %>
-            </div>
-          <% end %>
-
           <%# On mobile/tablet, show invite and participants side by side %>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 items-start gap-4 sm:gap-6">
             <%= render RetroInviteCardComponent.new(retro: @retro) %>
-            <%= yield :sidebar_tip %>
+            <% if content_for?(:sidebar_tip) %>
+              <div class="desktop-only-block">
+                <%= yield :sidebar_tip %>
+              </div>
+            <% end %>
             <div id="participant-list">
               <%= render ParticipantListComponent.new(retro: @retro, highlight_enabled: @retro.grouping? && @retro.admin?(Current.user)) %>
             </div>

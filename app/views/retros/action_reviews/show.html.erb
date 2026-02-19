@@ -1,9 +1,5 @@
 <% content_for :title, @retro.name %>
 
-<% content_for :phase_tag do %>
-  <%= render PhaseTagComponent.new(phase: :action_review) %>
-<% end %>
-
 <% content_for :board_columns do %>
   <div class="space-y-6">
     <%# Header Instructions %>

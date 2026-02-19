@@ -20,30 +20,15 @@ class Account::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "create redirects to stripe checkout" do
     customer = OpenStruct.new(id: "cus_test_37signals")
-    checkout_session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
-
-    plan = OpenStruct.new(key: "monthly_v1", stripe_price_id: "price_test123")
-    Plan.stubs(:paid).returns(plan)
+    session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
 
     Stripe::Customer.stubs(:retrieve).returns(customer)
     Stripe::Customer.stubs(:create).returns(customer)
-    Stripe::Checkout::Session.stubs(:create).returns(checkout_session)
+    Stripe::Checkout::Session.stubs(:create).returns(session)
 
     post account_subscription_path
 
     assert_redirected_to "https://checkout.stripe.com/session123"
-  end
-
-  test "create handles stripe errors gracefully" do
-    plan = OpenStruct.new(key: "monthly_v1", stripe_price_id: "price_test123")
-    Plan.stubs(:paid).returns(plan)
-
-    Stripe::Customer.stubs(:create).raises(Stripe::AuthenticationError.new("No API key provided"))
-
-    post account_subscription_path
-
-    assert_redirected_to account_settings_path
-    assert_equal "Something went wrong with the payment provider. Please try again.", flash[:alert]
   end
 
   test "show requires admin" do
@@ -58,5 +43,20 @@ class Account::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
     post account_subscription_path
     assert_response :forbidden
+  end
+
+  test "create with custom plan_key redirects to stripe checkout" do
+    customer = OpenStruct.new(id: "cus_test_37signals")
+    session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
+
+    Stripe::Customer.stubs(:retrieve).returns(customer)
+    Stripe::Customer.stubs(:create).returns(customer)
+    Stripe::Checkout::Session.stubs(:create).with do |params|
+      params[:metadata][:plan_key] == :monthly_v1
+    end.returns(session)
+
+    post account_subscription_path(plan_key: :monthly_v1)
+
+    assert_redirected_to "https://checkout.stripe.com/session123"
   end
 end

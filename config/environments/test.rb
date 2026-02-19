@@ -6,6 +6,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # CSP: allow local host/port form submissions for system tests and Stripe checkout.
+  config.x.content_security_policy.form_action = [
+    "https://checkout.stripe.com",
+    "https://billing.stripe.com"
+  ]
+
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 

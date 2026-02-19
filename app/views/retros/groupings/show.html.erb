@@ -1,9 +1,5 @@
 <% content_for :title, @retro.name %>
 
-<% content_for :phase_tag do %>
-  <%= render PhaseTagComponent.new(phase: :grouping) %>
-<% end %>
-
 <% if @retro.admin?(Current.user) %>
   <% content_for :sidebar_tip do %>
     <div class="bg-sky-50 border-2 border-sky-200 p-3 sm:p-4 rounded-sm">

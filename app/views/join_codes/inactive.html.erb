@@ -1,14 +1,32 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-md w-full space-y-8 text-center">
-    <div>
-      <h1 class="text-3xl font-bold text-gray-900">That code is all used up</h1>
-      <p class="mt-4 text-gray-600">
-        Ask someone from <%= @join_code.account.name %> to send you a new link or increase the limit.
-      </p>
+<% content_for :title, "Join link expired" %>
+
+<div class="px-4 py-4">
+  <%= render BackButtonComponent.new(label: "Home", href: root_path(script_name: nil), variant: :fizzy) %>
+</div>
+
+<div class="max-w-md mx-auto px-4 py-8 font-sans">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+      <div class="relative z-10">
+        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+          Join Link Expired
+        </h1>
+      </div>
     </div>
 
-    <div>
-      <%= link_to "OK", root_path, class: "inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700" %>
+    <div class="p-8 relative">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+      <div class="relative z-10 space-y-4">
+        <p class="text-sm text-zinc-700">
+          This join link has reached its usage limit.
+        </p>
+        <p class="text-sm text-zinc-600">
+          Ask someone from <strong><%= @join_code.account.name %></strong> to send you a new link or increase the usage limit.
+        </p>
+      </div>
     </div>
+
+    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
   </div>
 </div>

@@ -8,6 +8,7 @@ class Retros::CompletesController < ApplicationController
   before_action :set_current_participant
 
   def show
+    @actions = @retro.actions.published.with_rich_text_content.includes(:user)
   end
 
   private

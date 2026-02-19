@@ -1,6 +1,6 @@
 <% content_for :title, @user.name %>
 <div class="px-4 py-4">
-  <%= render BackButtonComponent.new(label: "Back", href: root_path) %>
+  <%= render BackButtonComponent.new(label: "Retros", href: retros_path, variant: :fizzy) %>
 </div>
 
 <div class="max-w-xl mx-auto px-4 py-8 font-sans">
@@ -13,24 +13,17 @@
        <%# Background Grid %>
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       
-      <div class="relative z-10 flex items-center justify-between">
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
-           USER_PROFILE
+          User Profile
         </h1>
-        
-        <span class="inline-flex items-center px-2 py-1 border-[2px] border-zinc-900 bg-zinc-100 text-zinc-900 text-[0.6rem] font-bold uppercase tracking-widest">
-           ID_REF_<%= @user.id %>
-        </span>
-      </div>
-
-       <%# Edit Button (Absolute) %>
-       <% if Current.user == @user %>
-        <%= link_to edit_user_path(@user), class: "absolute top-4 right-4 z-20 group" do %>
-          <div class="w-8 h-8 flex items-center justify-center bg-white border-[2px] border-zinc-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all">
-             <%= icon_tag "pencil", class: "w-4 h-4 text-zinc-900" %>
-          </div>
+        <% if Current.user == @user %>
+          <%= link_to edit_user_path(@user), class: "group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 bg-zinc-900 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+            <%= icon_tag "pencil", class: "w-4 h-4" %>
+            <span>Edit profile</span>
+          <% end %>
         <% end %>
-       <% end %>
+      </div>
     </div>
 
     <%# Profile Body %>
@@ -49,14 +42,22 @@
             
             <div class="text-xs font-mono font-bold uppercase tracking-wider">
               <% if !@user.active? %>
-                <span class="text-red-600">STATUS: INACTIVE</span>
+                <span class="text-red-600">Inactive Member</span>
               <% elsif !@user.verified? %>
-                <span class="text-amber-600">STATUS: UNVERIFIED</span>
-                <p class="text-[0.6rem] text-zinc-500 mt-1 max-w-xs">AWAITING_VERIFICATION_CODE</p>
+                <span class="text-amber-600">Email Verification Pending</span>
+                <p class="text-[0.7rem] text-zinc-500 mt-1 max-w-xs normal-case tracking-normal">
+                  Check your inbox and confirm your email address.
+                </p>
               <% else %>
-                <%= mail_to @user.identity.email_address, class: "text-zinc-500 hover:text-zinc-900 underline decoration-zinc-400 decoration-2 underline-offset-2" %>
+                <%= mail_to @user.identity.email_address, class: "text-zinc-600 hover:text-zinc-900 transition-colors normal-case tracking-normal" %>
               <% end %>
             </div>
+
+            <% if Current.user == @user %>
+              <p class="text-xs text-zinc-500 font-mono uppercase tracking-wide mt-1">
+                Want to update your details? Tap edit profile.
+              </p>
+            <% end %>
          </div>
        </div>
 
@@ -69,7 +70,7 @@
 
         <div class="w-full flex justify-center pt-6">
            <%= button_to session_url, method: :delete, class: "group relative inline-flex items-center justify-center px-6 py-2 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors", data: { turbo: false } do %>
-             TERMINATE_SESSION
+             Sign Out
            <% end %>
         </div>
        <% end %>

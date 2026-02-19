@@ -72,4 +72,13 @@ class Account::SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal CROSS_ACCOUNT_ALERT, flash[:alert]
     assert_equal original_name, @account.reload.name, "Account name should not be changed"
   end
+
+  test "show displays pricing error when stripe price is unavailable" do
+    Plan.any_instance.stubs(:price_for_display).raises(Plan::StripePriceUnavailableError.new("Live pricing is currently unavailable. Please try again in a moment."))
+
+    get "#{account_path_prefix(@account)}/account/settings"
+
+    assert_response :success
+    assert_in_body "Live pricing is currently unavailable. Please try again in a moment."
+  end
 end

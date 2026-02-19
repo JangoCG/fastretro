@@ -73,4 +73,15 @@ class LandingPageControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to session_menu_url(script_name: nil)
     end
   end
+
+  test "landing page shows pricing error when stripe price is unavailable" do
+    Plan.any_instance.stubs(:price_for_display).raises(Plan::StripePriceUnavailableError.new("Live pricing is currently unavailable. Please try again in a moment."))
+
+    untenanted do
+      get root_path
+
+      assert_response :success
+      assert_in_body "Live pricing is currently unavailable. Please try again in a moment."
+    end
+  end
 end

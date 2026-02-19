@@ -1,9 +1,5 @@
 <% content_for :title, "#{@retro.name} - Complete" %>
 
-<% content_for :phase_tag do %>
-  <%= render PhaseTagComponent.new(phase: :complete) %>
-<% end %>
-
 <% content_for :board_columns do %>
   <div class="space-y-8">
     <%# Summary Stats %>
@@ -51,9 +47,9 @@
 
       <%# Content %>
       <div class="p-6">
-        <% if @retro.actions.published.any? %>
+        <% if @actions.any? %>
           <div class="space-y-4">
-            <% @retro.actions.published.each_with_index do |action, index| %>
+            <% @actions.each_with_index do |action, index| %>
               <div class="flex gap-4 items-start p-4 bg-white border-[2px] border-zinc-900 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)]">
                 <div class="flex-shrink-0 w-8 h-8 bg-violet-100 border-[2px] border-zinc-900 flex items-center justify-center">
                   <span class="font-black text-sm text-violet-700"><%= index + 1 %></span>
@@ -89,10 +85,12 @@
       <%# Export Buttons %>
       <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
         <%= link_to retro_export_path(@retro, format: :xlsx),
+              id: "export-xlsx-button",
               class: "inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-emerald-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
           <span>Export Excel (.xlsx)</span>
         <% end %>
         <%= link_to retro_export_path(@retro, format: :csv),
+              id: "export-csv-button",
               class: "inline-flex items-center gap-2 px-6 py-3 bg-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
           <span>Export CSV</span>
         <% end %>

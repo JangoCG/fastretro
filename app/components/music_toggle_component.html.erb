@@ -3,9 +3,21 @@
         data-elevator-music-target="button"
         data-action="click->elevator-music#toggle"
         <%= "data-playing" if playing? %>
-        class="h-10 sm:h-12 w-10 sm:w-12 font-bold text-lg border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 border-zinc-900 flex items-center justify-center
+        class="<%= topbar? ? 'w-10 h-10 px-0 font-bold text-[10px] uppercase tracking-widest' : (inline? ? 'w-auto h-10 sm:h-12 px-3 sm:px-4 font-bold text-xs sm:text-sm' : 'w-full md:w-12 h-10 sm:h-12 px-3 md:px-0 font-bold text-xs md:text-lg') %> border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 border-zinc-900 flex items-center justify-center
                data-[playing]:bg-emerald-400 data-[playing]:text-zinc-900
                bg-white text-zinc-900 hover:bg-zinc-100"
         title="<%= playing? ? 'Stop elevator music' : 'Play elevator music' %>">
-  <span class="text-base"><%= playing? ? "🔊" : "🎵" %></span>
+  <span class="inline-flex items-center gap-1.5 <%= (inline? || topbar?) ? '' : 'md:gap-0' %>">
+    <span class="text-base"><%= playing? ? "🔊" : "🎵" %></span>
+    <% if inline? %>
+      <span class="font-black uppercase tracking-[0.12em]">
+        <%= playing? ? "Sound On" : "Music" %>
+      </span>
+    <% elsif topbar? %>
+    <% else %>
+      <span class="font-black uppercase tracking-[0.12em] md:hidden">
+        <%= playing? ? "Sound On" : "Music" %>
+      </span>
+    <% end %>
+  </span>
 </button>

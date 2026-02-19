@@ -2,14 +2,16 @@
   <% url = session_transfer_url(user.identity.transfer_id, script_name: nil) %>
 
   <header class="w-full">
-    <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">DEVICE_LINKING_PROTOCOL</h2>
-    <p class="text-[0.6rem] text-zinc-400 uppercase mt-0.5 tracking-wide" id="session_transfer_label">GENERATE_TRANSFER_LINK_FOR_EXTERNAL_LOGIN</p>
+    <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">Sign In On Another Device</h2>
+    <p class="text-[0.75rem] text-zinc-500 mt-1" id="session_transfer_label">
+      Create a secure one-time transfer link and open it on the target device.
+    </p>
   </header>
 
   <div class="flex items-center gap-2 w-full">
     <div class="flex-1 relative">
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <span class="text-zinc-400 font-mono text-xs">URL:</span>
+        <span class="text-zinc-400 font-mono text-xs">Link:</span>
        </div>
       <input type="text" class="w-full pl-10 pr-3 py-3 text-xs font-mono text-zinc-600 bg-zinc-100 border-[2px] border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:bg-white transition-colors" id="session_transfer_url" value="<%= url %>" aria-labelledby="session_transfer_label" readonly>
     </div>
@@ -18,7 +20,7 @@
     <button type="button" class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none" data-controller="clipboard" data-clipboard-text-value="<%= url %>" data-action="clipboard#copy">
       <i class="icon icon--copy w-5 h-5" data-clipboard-target="icon"></i>
       <i class="icon icon--check w-5 h-5 text-green-600" data-clipboard-target="check" style="display: none;"></i>
-      <span class="sr-only">COPY_LINK</span>
+      <span class="sr-only">Copy sign-in link</span>
     </button>
   </div>
 </div>

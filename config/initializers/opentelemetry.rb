@@ -16,7 +16,7 @@ if ENV["OTEL_EXPORTER_OTLP_ENDPOINT"].present? && ENV["SKIP_TELEMETRY"].blank? &
   default_service_name = [ "fastretro", ENV["KAMAL_DESTINATION"].presence || Rails.env ].join("-")
   sample_ratio = begin
     ratio = Float(ENV.fetch("OTEL_TRACE_SAMPLE_RATIO", "0.2"))
-    [[ ratio, 0.0 ].max, 1.0].min
+    [ [ ratio, 0.0 ].max, 1.0 ].min
   rescue ArgumentError, TypeError
     0.2
   end

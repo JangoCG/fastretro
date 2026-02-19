@@ -104,6 +104,7 @@ Rails.application.routes.draw do
 
   # SEO
   get "sitemap.xml", to: "sitemaps#show", as: :sitemap, defaults: { format: :xml }
+  get "favicon.ico", to: redirect("/icon.png")
 
   # Legal pages
   get "imprint", to: "legal#imprint", as: :imprint
@@ -131,4 +132,7 @@ Rails.application.routes.draw do
 
   # Stripe webhooks
   post "stripe/webhooks", to: "stripe/webhooks#create"
+
+  # Catch-all route for unmatched paths (must be last)
+  match "*unmatched", to: "errors#not_found", via: :all
 end

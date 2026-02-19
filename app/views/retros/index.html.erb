@@ -1,5 +1,5 @@
 <% content_for :title, "Retros" %>
-<div class="max-w-7xl mx-auto p-4" data-controller="filter">
+<div class="max-w-7xl mx-auto p-4 sm:p-6" data-controller="filter">
   <%= render "feedbacks/near_limit_notice" %>
 
   <% if notice.present? %>
@@ -9,42 +9,45 @@
   <% end %>
 
   <%# Industrial Header %>
-  <div class="border-l-4 border-black pl-6 py-4 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-    <div>
-      <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
-        YOUR<br>RETROS
-      </h1>
-    </div>
+  <div class="border-l-2 sm:border-l-4 border-black pl-4 sm:pl-6 py-3 sm:py-4 mb-10 sm:mb-12">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+      YOUR <span class="block sm:inline">RETROS</span>
+    </h1>
 
-    <div class="flex flex-wrap items-center gap-4">
-      <%= link_to new_retro_path, class: "group inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
-        <span>NEW RETRO</span>
-        <span class="font-mono group-hover:translate-x-1 transition-transform">-></span>
-        <%= render KbdComponent.new(key: "C", size: :sm) %>
-      <% end %>
+    <div class="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,28rem)_auto] xl:grid-cols-[minmax(0,1fr)_auto] gap-4 xl:gap-6 items-center">
+      <%# Search %>
+      <div class="relative w-full">
+        <input
+          type="text"
+          placeholder="SEARCH..."
+          class="block w-full pl-4 pr-12 py-3 bg-zinc-100 border-2 border-zinc-300 focus:border-black font-mono text-sm uppercase rounded-none focus:outline-none transition-colors"
+          data-filter-target="input"
+          data-controller="hotkey"
+          data-action="input->filter#filter keydown.f@window->hotkey#focus"
+        >
+        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+          <%= render KbdComponent.new(key: "F", size: :sm) %>
+        </div>
+      </div>
 
-      <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex items-center gap-2 px-4 py-3 bg-violet-600 text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-violet-700 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
-        <%= icon_tag "chat", class: "w-4 h-4" %>
-        Feedback
-      <% end %>
-    </div>
-  </div>
+      <%# Primary Actions %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 xl:flex xl:items-center">
+        <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
+          <span>NEW RETRO</span>
+          <span class="font-mono group-hover:translate-x-1 transition-transform">-></span>
+          <span class="hidden sm:inline">
+            <%= render KbdComponent.new(key: "C", size: :sm) %>
+          </span>
+        <% end %>
 
-  <%# Industrial Search Bar %>
-  <div class="mb-12 border-b-2 border-black pb-8">
-    <div class="relative max-w-md">
-      <input
-        type="text"
-        placeholder="SEARCH..."
-        class="block w-full pl-4 pr-12 py-3 bg-zinc-100 border-2 border-zinc-300 focus:border-black#ffe600] font-mono text-sm uppercase rounded-none focus:outline-none transition-colors"
-        data-filter-target="input"
-        data-controller="hotkey"
-        data-action="input->filter#filter keydown.f@window->hotkey#focus"
-      >
-      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-        <%= render KbdComponent.new(key: "F", size: :sm) %>
+        <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 px-4 sm:px-5 bg-violet-600 text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-violet-700 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+          <%= icon_tag "chat", class: "w-4 h-4" %>
+          Give us feedback
+        <% end %>
       </div>
     </div>
+
+    <div class="mt-8 border-b-2 border-black"></div>
   </div>
 
   <%# Retros List Grid %>

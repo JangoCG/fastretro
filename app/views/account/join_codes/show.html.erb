@@ -1,90 +1,73 @@
-<div class="max-w-xl mx-auto px-4 py-8 font-sans">
-  
-  <%# Industrial Container %>
+<% content_for :title, "Invite people" %>
+
+<div class="px-4 py-4">
+  <%= render BackButtonComponent.new(label: "Settings", href: account_settings_path, hotkeys: ["left", "esc"], variant: :fizzy) %>
+</div>
+
+<div class="max-w-xl mx-auto px-4 py-4 font-sans">
   <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative" style="view-transition-name: <%= dom_id(@join_code) %>">
-    
-    <%# Header Section %>
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
-       <%# Background Grid %>
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
-      
-      <div class="relative z-10 flex items-center justify-between">
+      <div class="relative z-10">
         <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
-           INVITE_USERS
+          Invite People
         </h1>
-        
-        <span class="inline-flex items-center px-2 py-1 border-[2px] border-zinc-900 bg-zinc-100 text-zinc-900 text-[0.6rem] font-bold uppercase tracking-widest">
-           ACCESS_CONTROL
-        </span>
       </div>
     </div>
 
-    <%# Body %>
-    <div class="p-8 relative flex flex-col gap-6">
-       <%# Background Grid %>
-       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-       
-       <div class="relative z-10">
-         <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">ACCESS_LINK_GENERATION</h2>
-         <p class="text-sm font-bold text-zinc-900 max-w-sm">ANY_USER_WITH_TOKEN_CAN_JOIN</p>
-       </div>
+    <div class="p-8 relative">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+      <div class="relative z-10 space-y-6">
+        <p class="text-sm text-zinc-700">
+          Anyone with this link can join your account.
+        </p>
 
-       <% url = join_url(code: @join_code.code) %>
-       <div class="flex items-center gap-2 relative z-10">
-         <div class="flex-1 relative">
-             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span class="text-zinc-400 font-mono text-xs">TOKEN:</span>
-             </div>
-            <input type="text" class="w-full pl-12 pr-4 py-3 text-xs font-mono font-bold text-zinc-900 bg-white border-[2px] border-zinc-900 rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" value="<%= url %>" readonly>
-         </div>
+        <% url = join_url(code: @join_code.code) %>
+        <% remaining_uses = [@join_code.usage_limit - @join_code.usage_count, 0].max %>
+        <div>
+          <label for="join_code_link" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">
+            Invite Link
+          </label>
+          <div class="flex items-center gap-2">
+            <input id="join_code_link" type="text" class="flex-1 px-4 py-3 text-sm font-mono text-zinc-900 bg-white border-[2px] border-zinc-900 rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" value="<%= url %>" readonly>
+            <button type="button"
+                    class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none"
+                    data-controller="clipboard"
+                    data-clipboard-text-value="<%= url %>"
+                    data-action="clipboard#copy">
+              <i class="icon icon--copy w-5 h-5" data-clipboard-target="icon"></i>
+              <i class="icon icon--check w-5 h-5 text-green-600" data-clipboard-target="check" style="display: none;"></i>
+              <span class="sr-only">Copy invite link</span>
+            </button>
+          </div>
+        </div>
 
-         <% if Current.user&.admin? %>
-            <%= button_to account_join_code_path, method: :delete, class: "group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white transition-colors", data: {
-                  turbo_confirm: "CONFIRM_REGENERATION: PREVIOUS_TOKEN_WILL_INVALIDATE." } do %>
-              <%= icon_tag "refresh", class: "text-lg" %>
-              <span class="sr-only">REGENERATE</span>
-            <% end %>
-         <% end %>
-       </div>
-
-       <div class="flex justify-center relative z-10">
-          <%= tag.button type: "button", class: "group relative inline-flex items-center justify-center gap-2 px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all", data: {
-                controller: "clipboard", action: "clipboard#copy",
-                clipboard_text_value: url } do %>
-            <%= icon_tag "copy-paste", class: "text-lg", data: { clipboard_target: "icon" } %>
-            <%= icon_tag "check", class: "text-lg text-green-400", data: { clipboard_target: "check" }, style: "display: none;" %>
-            <span>COPY_ACCESS_TOKEN</span>
-          <% end %>
-       </div>
-
-       <div class="border-t-[2px] border-zinc-200 pt-6 relative z-10">
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col">
-              <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-wider">USAGE_METRICS</span>
-              <p class="text-xs font-mono font-bold text-zinc-900 <%= "text-red-600" unless @join_code.active? %>">
-                USED: <%= @join_code.usage_count %> / <%= @join_code.usage_limit %>
-                <span class="text-zinc-400 ml-1">
-                  (REMAINING: <%= @join_code.active? ? @join_code.usage_limit - @join_code.usage_count : "0" %>)
-                </span>
-              </p>
-            </div>
-    
+        <div class="border-t-[2px] border-zinc-200 pt-6 space-y-2">
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">Link Usage</p>
             <% if Current.user&.admin? %>
-              <%= link_to edit_account_join_code_path, class: "text-[0.6rem] font-bold text-zinc-900 uppercase tracking-wider border-b-[2px] border-zinc-900 hover:bg-zinc-900 hover:text-white transition-colors px-1" do %>
-                MODIFY_LIMITS
-              <% end %>
+              <%= link_to "Edit usage limit", edit_account_join_code_path, class: "inline-flex items-center justify-center px-3 py-2 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[0.65rem] hover:bg-zinc-100 transition-colors" %>
             <% end %>
           </div>
-       </div>
 
-       <%= link_to account_settings_path, class: "inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors relative z-10 group" do %>
-          <%= icon_tag "arrow-left", class: "text-lg group-hover:-translate-x-1 transition-transform" %>
-          <span class="text-xs font-bold uppercase tracking-wide">RETURN_TO_Settings</span>
-       <% end %>
+          <p class="text-sm font-bold <%= @join_code.active? ? 'text-zinc-900' : 'text-red-600' %>">
+            <%= @join_code.usage_count %> of <%= @join_code.usage_limit %> uses consumed.
+          </p>
+          <p class="text-xs text-zinc-600"><%= remaining_uses %> uses remaining.</p>
 
+          <% if Current.user&.admin? %>
+            <%= button_to account_join_code_path,
+                  method: :delete,
+                  class: "w-full inline-flex items-center justify-center px-6 py-3 mt-2 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors",
+                  form: { class: "w-full" },
+                  data: { turbo_confirm: "Regenerate this link? The previous link will stop working." } do %>
+              Regenerate Link
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    
-    <%# Technical Footer %>
+
     <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
   </div>
 </div>

@@ -1,8 +1,9 @@
 <div data-controller="dialog" data-dialog-modal-value="true">
   <%# Trigger Button %>
   <button type="button"
+          id="complete-phase-button"
           data-action="click->dialog#open"
-          class="h-10 sm:h-12 px-4 sm:px-8 font-bold uppercase tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 bg-zinc-900 border-zinc-900 text-white hover:bg-zinc-700">
+          class="w-full md:w-auto h-10 sm:h-12 px-3 sm:px-8 font-bold uppercase whitespace-nowrap tracking-[0.12em] md:tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 bg-violet-600 border-violet-900 text-white hover:bg-violet-700">
     Complete Phase
   </button>
 
@@ -67,6 +68,7 @@
 
         <%= button_to retro_phase_transition_path(@retro),
               method: :post,
+              id: "confirm-phase-continue-button",
               class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-zinc-900 border-zinc-900 text-white hover:bg-zinc-700" do %>
           Yes, Continue
         <% end %>

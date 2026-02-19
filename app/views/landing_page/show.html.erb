@@ -5,6 +5,7 @@
 <% content_for :meta_title, "Free Retrospective Tool | Open Source Agile Sprint Retrospectives" %>
 <% content_for :meta_description, "Free open source retrospective tool for agile teams. Run anonymous sprint retrospectives with brainstorming, grouping, voting, action items, and magic-link login." %>
 <% content_for :meta_keywords, "free retrospective tool, open source retrospective tool, agile retrospective tool, sprint retrospective software, anonymous retrospective tool, retro tool free" %>
+<% paid_price = @paid_price.present? ? number_with_precision(@paid_price, precision: (@paid_price % 1).zero? ? 0 : 2, strip_insignificant_zeros: true) : nil %>
 
 <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
 <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
@@ -66,24 +67,6 @@
              <%# Desktop image %>
              <%= image_tag "retro-image-no-padding.webp", class: "w-full h-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 hidden sm:block", alt: "Fast Retro retrospective interface showing brainstorming phase", width: "3452", height: "2248", loading: "eager", fetchpriority: "high" %>
          </div>
-      </div>
-    </div>
-  </section>
-
-  <%# === ALTERNATIVE PAGES LINKS === %>
-  <section class="mb-20">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="border-2 border-black bg-white p-5 sm:p-6">
-        <p class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-3">Alternative Comparisons</p>
-        <p class="font-mono text-sm text-zinc-700 mb-4">
-          Looking for an alternative to other retro tools? Compare Fast Retro with popular options:
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <%= link_to "EasyRetro alternative", alternative_easyretro_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
-          <%= link_to "Parabol alternative", alternative_parabol_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
-          <%= link_to "Metro Retro alternative", alternative_metroretro_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
-          <%= link_to "TeamRetro alternative", alternative_teamretro_path(script_name: nil), class: "inline-flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider px-3 py-2 border border-black" %>
-        </div>
       </div>
     </div>
   </section>
@@ -340,8 +323,13 @@
     </h2>
     <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
       No credit card required. No time limit.<br>
-      Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for €9.99/month<br class="hidden sm:block">
-      to get unlimited feedback and unlimited users. Cancel anytime.
+      <% if paid_price.present? %>
+        Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for €<%= paid_price %>/month<br class="hidden sm:block">
+        to get unlimited feedback and unlimited users. Cancel anytime.
+      <% else %>
+        Live pricing is currently unavailable.<br class="hidden sm:block">
+        Please try again in a moment.
+      <% end %>
     </p>
 
 
@@ -381,7 +369,12 @@
                 <span class="w-3 h-3 bg-black"></span> UNLIMITED FEEDBACK
               </li>
               <li class="flex items-center gap-2">
-                <span class="w-3 h-3 bg-black"></span> €9.99/MONTH PER ACCOUNT
+                <span class="w-3 h-3 bg-black"></span>
+                <% if paid_price.present? %>
+                  €<%= paid_price %>/MONTH PER ACCOUNT
+                <% else %>
+                  LIVE PRICE IN STRIPE CHECKOUT
+                <% end %>
               </li>
             </ul>
           </div>
@@ -390,7 +383,7 @@
              <div class="font-mono text-xs uppercase tracking-widest text-zinc-500">FLAT RATE</div>
 
              <div class="my-2 sm:my-0">
-               <div class="text-5xl sm:text-6xl font-black mb-1">€9.99</div>
+               <div class="text-5xl sm:text-6xl font-black mb-1"><%= paid_price.present? ? "€#{paid_price}" : "N/A" %></div>
                <div class="font-mono text-xs uppercase">/ MONTH</div>
              </div>
 
@@ -481,7 +474,15 @@
       <div class="space-y-8">
         <div>
           <h4 class="font-bold mb-2">What counts toward the free tier?</h4>
-          <p class="text-zinc-600">Every feedback card created counts toward your <%= number_with_delimiter(@free_limit) %> free items. After that, upgrade to unlimited feedback for €9.99/month per account. Deleted cards still count toward the limit to keep tracking straightforward.</p>
+          <p class="text-zinc-600">
+            Every feedback card created counts toward your <%= number_with_delimiter(@free_limit) %> free items.
+            <% if paid_price.present? %>
+              After that, upgrade to unlimited feedback for €<%= paid_price %>/month per account.
+            <% else %>
+              Live pricing is currently unavailable.
+            <% end %>
+            Deleted cards still count toward the limit to keep tracking straightforward.
+          </p>
         </div>
         <div>
           <h4 class="font-bold mb-2">Do participants need accounts?</h4>

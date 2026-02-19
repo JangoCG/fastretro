@@ -17,4 +17,11 @@ class LegacyRedirectsTest < ActionDispatch::IntegrationTest
       assert_redirected_to "/retros/new"
     end
   end
+
+  test "favicon path redirects to icon image" do
+    untenanted do
+      get "/favicon.ico"
+      assert_redirected_to "/icon.png"
+    end
+  end
 end

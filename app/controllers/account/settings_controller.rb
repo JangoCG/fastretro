@@ -4,6 +4,11 @@ class Account::SettingsController < ApplicationController
 
   def show
     @users = @account.users.active.alphabetically.includes(:identity)
+    @free_limit = Plan.free.feedback_limit
+    @paid_price = Plan.paid.price_for_display
+  rescue Plan::StripePriceUnavailableError => error
+    @paid_price = nil
+    flash.now[:alert] = error.message
   end
 
   def update
