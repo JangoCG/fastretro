@@ -8,7 +8,7 @@ class Plan
     },
     monthly_v1: {
       name: "Paid",
-      price: 20,
+      price: 9.99,
       feedback_limit: Float::INFINITY,
       stripe_price_id: ENV["STRIPE_MONTHLY_V1_PRICE_ID"]
     }

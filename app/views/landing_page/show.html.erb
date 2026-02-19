@@ -18,18 +18,6 @@
 
   <%# === HERO SECTION === %>
   <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-32 relative">
-    <%# Retro Counter - Top Right %>
-    <div class="hidden lg:block absolute top-0 right-4 sm:right-6 z-20">
-      <div class="relative group cursor-help rotate-[6deg] hover:rotate-0 transition-transform">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-600 border border-black shadow-sm z-20"></div>
-        <div class="inline-flex flex-col items-center justify-center border-2 border-black bg-white p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] w-28 h-28">
-          <span class="font-mono text-[0.5rem] font-bold uppercase tracking-widest mb-1 text-zinc-400">TOTAL</span>
-          <span class="font-black text-2xl tabular-nums tracking-tighter leading-none"><%= number_with_delimiter(@retro_count) %></span>
-          <span class="font-bold text-[0.5rem] uppercase leading-tight mt-1 border-t-2 border-black pt-1 w-full text-center">RETROS</span>
-        </div>
-      </div>
-    </div>
-
     <div class="flex flex-col items-center gap-12">
       <div class="text-center max-w-4xl mx-auto">
         <div class="py-4">
@@ -64,14 +52,6 @@
         <p class="mt-2 font-mono text-[10px] text-zinc-500 uppercase tracking-wide">
           <%= link_to "Read shoutouts", shoutouts_path(script_name: nil), class: "underline hover:text-black" %>
         </p>
-
-        <%# Retro Counter - Mobile/Tablet (below CTA) %>
-        <div class="lg:hidden mt-6">
-          <div class="inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <span class="font-black text-xl tabular-nums tracking-tighter"><%= number_with_delimiter(@retro_count) %></span>
-            <span class="font-bold text-[0.6rem] uppercase leading-tight text-zinc-500">RETROS<br>COMPLETED</span>
-          </div>
-        </div>
 
       </div>
 
