@@ -6,14 +6,10 @@ module ApplicationHelper
     tag.title [ @page_title, account_name, "FastRetro" ].compact.join(" | ")
   end
 
-  # Simple Analytics - privacy-first analytics.
-  # Only renders in production (or when SIMPLE_ANALYTICS=true is set).
-  #
-  # @see https://docs.simpleanalytics.com/script
-  def simple_analytics_tag
-    return unless Rails.env.production? || ENV["SIMPLE_ANALYTICS"] == "true"
+  def analytics_tag
+    return unless Rails.env.production? || ENV["ANALYTICS"] == "true"
 
-    tag.script(async: true, src: "https://scripts.simpleanalyticscdn.com/latest.js", "data-collect-dnt": "true", nonce: content_security_policy_nonce)
+    tag.script(defer: true, src: "https://analytics.cengizg.com/script.js", "data-website-id": "610f328e-d047-4aeb-9570-2535bd072670", nonce: content_security_policy_nonce)
   end
 
   def icon_tag(name, **options)
