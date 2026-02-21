@@ -387,9 +387,10 @@ GEM
     sentry-rails (6.3.0)
       railties (>= 5.2.0)
       sentry-ruby (~> 6.3.0)
-    sentry-ruby (6.3.0)
+    sentry-ruby (6.3.1)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+      logger
     sniffer (0.5.0)
       anyway_config (>= 1.0)
       dry-initializer (~> 3)
