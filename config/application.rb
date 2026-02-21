@@ -1,7 +1,6 @@
 require_relative "boot"
 
 require "rails/all"
-require_relative "../lib/middleware/otel_log_tags_middleware"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -19,7 +18,7 @@ module Fastretro
     # rails_ext/ is excluded because it contains patches to Rails internals that
     # don't follow autoload naming conventions. These files are manually required
     # via config/initializers/extensions.rb instead.
-    config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda])
+    config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda middleware])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -28,7 +27,5 @@ module Fastretro
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-    config.middleware.insert_before Rails::Rack::Logger, Middleware::OtelLogTagsMiddleware
   end
 end

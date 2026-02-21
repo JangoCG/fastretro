@@ -2,6 +2,7 @@
 
 return unless FastRetro.saas?
 
+require "gvltools"
 require "yabeda"
 require "yabeda/rails"
 require "yabeda/actioncable"
@@ -31,6 +32,12 @@ Yabeda::SolidQueue.install!
 
 require "yabeda/fast_retro"
 Yabeda::FastRetro.install!
+
+require "yabeda/gvl"
+Yabeda::GVL.install!
+
+require_relative "../../lib/middleware/gvl_instrumentation"
+Rails.application.config.middleware.insert_before(Rack::Runtime, Middleware::GvlInstrumentation)
 
 SolidQueue.on_start do
   Yabeda::Prometheus::Exporter.start_metrics_server!
