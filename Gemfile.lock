@@ -198,7 +198,8 @@ GEM
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
-    minitest (5.27.0)
+    minitest (6.0.1)
+      prism (~> 1.5)
     mocha (3.0.1)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
@@ -531,7 +532,7 @@ DEPENDENCIES
   jbuilder
   kamal
   lexxy (~> 0.7.3.beta)
-  minitest (~> 5.0)
+  minitest (~> 6.0)
   mocha
   openssl
   prometheus-client-mmap (~> 1.4.0)
