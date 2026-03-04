@@ -73,5 +73,4 @@ class LandingPageControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to session_menu_url(script_name: nil)
     end
   end
-
 end
