@@ -64,6 +64,7 @@ class SmokeTest < ApplicationSystemTestCase
       # Participant marks themselves finished; admin should see this status update.
       find("#participant-finished-button").click
       assert_selector "#participant-finished-button", text: /finished/i
+      wait_for_cable_connection
     end
 
     using_session(:admin) do
@@ -83,6 +84,7 @@ class SmokeTest < ApplicationSystemTestCase
     using_session(:participant) do
       assert_current_path retro_grouping_path(retro), ignore_query: true
       assert_all_feedbacks_present(all_feedbacks)
+      wait_for_cable_connection
     end
 
     # Grouping: admin groups two cards; participant sees it in realtime.
@@ -119,11 +121,13 @@ class SmokeTest < ApplicationSystemTestCase
       advance_phase_from_modal
       assert_current_path retro_voting_path(retro), ignore_query: true
       assert_votes_remaining(participant_id: admin_participant.id, count: 3)
+      wait_for_cable_connection
     end
 
     using_session(:participant) do
       assert_current_path retro_voting_path(retro), ignore_query: true
       assert_votes_remaining(participant_id: member_participant.id, count: 3)
+      wait_for_cable_connection
     end
 
     # Voting realtime: vote counts update for both users and remaining votes decrease.
@@ -162,6 +166,7 @@ class SmokeTest < ApplicationSystemTestCase
 
     using_session(:participant) do
       assert_current_path retro_discussion_path(retro), ignore_query: true
+      wait_for_cable_connection
     end
 
     # Discussion realtime: moderator creates actions and participant sees them live.
@@ -257,6 +262,10 @@ class SmokeTest < ApplicationSystemTestCase
 
     def assert_all_feedbacks_present(feedbacks)
       feedbacks.each { |feedback| assert_text feedback }
+    end
+
+    def wait_for_cable_connection
+      assert_selector "turbo-cable-stream-source[connected]", visible: :all
     end
 
     def fill_in_lexxy(selector = "lexxy-editor", with:)
