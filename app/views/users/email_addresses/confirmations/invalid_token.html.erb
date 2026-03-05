@@ -1,4 +1,4 @@
-<% content_for :title, "Link expired" %>
+<% content_for :title, t("users.email_addresses.confirmations.invalid_token.title") %>
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans">
   <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
@@ -6,7 +6,7 @@
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
         <h1 class="text-xl font-black text-zinc-900 uppercase tracking-tighter">
-          Link Expired
+          <%= t("users.email_addresses.confirmations.invalid_token.heading") %>
         </h1>
       </div>
     </div>
@@ -15,18 +15,18 @@
       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       <div class="relative z-10 space-y-6">
         <p class="text-[0.8rem] text-zinc-600 font-bold uppercase tracking-wide">
-          That confirmation link is no longer valid.
+          <%= t("users.email_addresses.confirmations.invalid_token.expired_text") %>
         </p>
         <p class="text-[0.75rem] text-zinc-500 leading-relaxed">
-          Links expire after 30 minutes. Request a new one to continue.
+          <%= t("users.email_addresses.confirmations.invalid_token.expires_hint") %>
         </p>
 
         <%= link_to new_user_email_address_path(user_id: @user), class: "group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" do %>
-          Change Email Address
+          <%= t("users.email_addresses.confirmations.invalid_token.change_email") %>
         <% end %>
 
         <p class="text-[0.7rem] text-zinc-500">
-          Need help? <%= mail_to "cengiz@cengizg.com", "Send us an email", class: "text-zinc-700 underline hover:no-underline" %>
+          <%= t("users.email_addresses.confirmations.invalid_token.need_help") %> <%= mail_to "cengiz@cengizg.com", t("users.email_addresses.confirmations.invalid_token.send_email"), class: "text-zinc-700 underline hover:no-underline" %>
         </p>
       </div>
     </div>

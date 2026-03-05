@@ -49,9 +49,9 @@ class Retros::InvitesController < ApplicationController
     @join_code = Account::JoinCode.find_by(code: params[:code])
 
     if @join_code.nil?
-      redirect_to new_session_path(script_name: nil), alert: "Invalid invite link."
+      redirect_to new_session_path(script_name: nil), alert: t("flash.invalid_invite")
     elsif !@join_code.active?
-      redirect_to new_session_path(script_name: nil), alert: "This invite link has expired."
+      redirect_to new_session_path(script_name: nil), alert: t("flash.invite_expired")
     end
   end
 
@@ -61,7 +61,7 @@ class Retros::InvitesController < ApplicationController
     @retro = @join_code.account.retros.find_by(id: params[:retro_id])
 
     if @retro.nil?
-      redirect_to new_session_path(script_name: nil), alert: "Retro not found."
+      redirect_to new_session_path(script_name: nil), alert: t("flash.invite_retro_not_found")
     end
   end
 

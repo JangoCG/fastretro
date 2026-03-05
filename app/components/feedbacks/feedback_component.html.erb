@@ -27,14 +27,14 @@
         <div class="flex items-center gap-2">
           <% if discussion_enabled? && discussed? %>
             <span class="text-[0.55rem] font-bold text-emerald-700 uppercase tracking-wider px-1.5 py-0.5 border border-emerald-600 rounded bg-emerald-100">
-              Discussed
+              <%= t("feedbacks.component.discussed") %>
             </span>
           <% end %>
           <% if @grouping_enabled && in_group? %>
             <%= button_to remove_feedback_retro_feedback_groups_path(@feedback.retro, feedback_id: @feedback.id, script_name: @feedback.retro.account.slug),
                 method: :delete,
                 class: "text-[0.55rem] font-bold text-zinc-500 hover:text-zinc-900 uppercase tracking-wider transition-colors px-1.5 py-0.5 border border-zinc-300 hover:border-zinc-500 rounded bg-zinc-50 hover:bg-zinc-100 relative z-20" do %>
-              Ungroup
+              <%= t("feedbacks.component.ungroup") %>
             <% end %>
           <% else %>
             <%# Optional Category Dot %>
@@ -86,7 +86,7 @@
                   discussed: !discussed?
                 },
                 class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
-              <%= discussed? ? "Undo" : "Mark discussed" %>
+              <%= discussed? ? t("feedbacks.component.undo") : t("feedbacks.component.mark_discussed") %>
             <% end %>
           <% end %>
         </div>

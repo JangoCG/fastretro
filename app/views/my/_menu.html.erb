@@ -32,7 +32,7 @@
          <%= icon_tag "caret-down", class: "w-4 h-4 text-zinc-900 stroke-[3px]" %>
        </div>
        <span class="text-[0.5rem] sm:text-[0.6rem] font-bold text-stone-500 uppercase tracking-widest leading-none mt-1 pl-1">
-         MENU
+         <%= t("shared.menu") %>
        </span>
     </div>
 
@@ -56,7 +56,7 @@
 
     <%# Dialog Header Bar %>
     <div class="flex justify-between items-center px-4 py-2 bg-zinc-900 text-[#F8F5EC] border-b border-zinc-900 select-none">
-      <span class="font-bold text-xs uppercase tracking-widest">MENU</span>
+      <span class="font-bold text-xs uppercase tracking-widest"><%= t("shared.menu") %></span>
       <div class="flex gap-1.5">
         <div class="w-2 h-2 rounded-full bg-red-500 border border-red-700"></div>
         <div class="w-2 h-2 rounded-full bg-yellow-400 border border-yellow-600"></div>
@@ -68,14 +68,14 @@
     <div class="p-1">
       <%= turbo_frame_tag "my_menu", src: my_menu_path, loading: :lazy, target: "_top" do %>
         <div class="p-8 flex flex-col items-center justify-center opacity-50">
-          <span class="font-mono text-xs uppercase animate-pulse">LOADING...</span>
+          <span class="font-mono text-xs uppercase animate-pulse"><%= t("shared.loading") %></span>
         </div>
         <% if Current.account.present? %>
           <%= render("my/menus/jump") { } %>
         <% else %>
           <div class="p-6 text-center">
-            <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">Open your account menu</p>
-            <%= link_to "Go to account menu", session_menu_path(script_name: nil), class: "inline-flex items-center justify-center px-4 py-2 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-800 transition-colors" %>
+            <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4"><%= t("menus.open_account_menu") %></p>
+            <%= link_to t("menus.go_to_account_menu"), session_menu_path(script_name: nil), class: "inline-flex items-center justify-center px-4 py-2 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-800 transition-colors" %>
           </div>
         <% end %>
       <% end %>

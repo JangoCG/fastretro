@@ -1,4 +1,4 @@
-<% content_for :title, "Change your email" %>
+<% content_for :title, t("users.email_addresses.new.title") %>
 
 <div class="px-4 py-4">
   <%= render BackButtonComponent.new(label: "Profile", href: edit_user_path(@user), variant: :fizzy) %>
@@ -10,7 +10,7 @@
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
         <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
-          Change Email Address
+          <%= t("users.email_addresses.new.heading") %>
         </h1>
       </div>
     </div>
@@ -21,7 +21,7 @@
       <%= form_with url: user_email_addresses_path(user_id: @user.id), method: :post, class: "flex flex-col gap-6 relative z-10", data: { controller: "form", turbo: false } do |form| %>
         <div class="flex flex-col gap-2">
           <label for="email_address" class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
-            New Email Address
+            <%= t("users.email_addresses.new.label") %>
           </label>
           <%= form.email_field :email_address,
               class: "w-full px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 font-bold placeholder-zinc-400 focus:outline-none focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-none",
@@ -32,11 +32,11 @@
         </div>
 
         <p class="text-[0.7rem] text-zinc-500 leading-relaxed">
-          We'll send a confirmation link to your new address before anything changes.
+          <%= t("users.email_addresses.new.hint") %>
         </p>
 
         <button type="submit" class="group relative flex items-center justify-center gap-3 w-full py-4 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" data-form-target="submit">
-          <span>Continue</span>
+          <span><%= t("shared.continue") %></span>
           <i class="icon icon--arrow-right text-lg pt-0.5 group-hover:translate-x-1 transition-transform"></i>
         </button>
       <% end %>

@@ -1,4 +1,4 @@
-<% content_for :title, "Join #{@retro.name}" %>
+<% content_for :title, t("retro_invites.title", name: @retro.name) %>
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans">
 
@@ -11,13 +11,13 @@
 
       <div class="relative z-10">
         <p class="font-mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
-          YOU'VE BEEN INVITED TO
+          <%= t("retro_invites.invited_to") %>
         </p>
         <h1 class="text-2xl font-black uppercase tracking-tight text-zinc-900 leading-tight">
           <%= @retro.name %>
         </h1>
         <p class="font-mono text-xs text-zinc-500 mt-2 uppercase">
-          TEAM: <%= @join_code.account.name %>
+          <%= t("retro_invites.team") %> <%= @join_code.account.name %>
         </p>
       </div>
     </div>
@@ -30,7 +30,7 @@
 
         <div class="flex flex-col gap-2">
           <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
-            ENTER YOUR EMAIL TO JOIN
+            <%= t("retro_invites.enter_email") %>
           </label>
           <%= form.email_field :email_address,
              required: true,
@@ -43,12 +43,12 @@
 
         <div class="p-2 border-l-[3px] border-zinc-300">
           <p class="text-[0.65rem] font-bold text-zinc-400 uppercase tracking-wide leading-relaxed">
-            WE'LL SEND YOU A MAGIC LINK TO VERIFY YOUR EMAIL AND JOIN THE RETRO.
+            <%= t("retro_invites.magic_link_hint") %>
           </p>
         </div>
 
         <button type="submit" class="group relative flex items-center justify-center gap-3 w-full py-4 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
-          <span>JOIN RETRO</span>
+          <span><%= t("retro_invites.join_retro") %></span>
           <i class="icon icon--arrow-right text-lg pt-0.5 group-hover:translate-x-1 transition-transform"></i>
         </button>
 
@@ -59,7 +59,7 @@
     <%# Technical Footer %>
     <div class="p-4 border-t-[3px] border-zinc-900 bg-[#F8F5EC] flex justify-center">
       <span class="text-[0.65rem] font-bold text-zinc-400 uppercase tracking-widest">
-        NEW OR EXISTING USER? JUST ENTER YOUR EMAIL
+        <%= t("retro_invites.footer_hint") %>
       </span>
     </div>
   </div>

@@ -4,7 +4,7 @@
           id="complete-phase-button"
           data-action="click->dialog#open"
           class="w-full md:w-auto h-10 sm:h-12 px-3 sm:px-8 font-bold uppercase whitespace-nowrap tracking-[0.12em] md:tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 bg-violet-600 border-violet-900 text-white hover:bg-violet-700">
-    Complete Phase
+    <%= t("components.confirm_phase_modal.complete_phase") %>
   </button>
 
   <%# Modal Dialog %>
@@ -13,7 +13,7 @@
 
     <%# Header %>
     <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b-[3px] border-zinc-900">
-      <span class="font-black text-sm uppercase tracking-widest">"CONFIRM"</span>
+      <span class="font-black text-sm uppercase tracking-widest">"<%= t("components.confirm_phase_modal.confirm") %>"</span>
       <button type="button" data-action="click->dialog#close" class="text-white hover:text-zinc-300 transition-colors">
         <%= icon_tag "close", class: "text-xl" %>
       </button>
@@ -23,10 +23,10 @@
     <div class="p-6">
       <div class="text-center mb-6">
         <p class="font-black text-lg uppercase tracking-tight text-zinc-900 mb-2">
-          "ARE YOU SURE?"
+          "<%= t("components.confirm_phase_modal.are_you_sure") %>"
         </p>
         <p class="text-sm text-zinc-600">
-          You are about to complete this phase and move to <span class="font-bold text-zinc-900">"<%= next_phase_name %>"</span>
+          <%= t("components.confirm_phase_modal.about_to_complete") %> <span class="font-bold text-zinc-900">"<%= next_phase_name %>"</span>
         </p>
       </div>
 
@@ -37,10 +37,10 @@
             <span class="w-8 h-8 flex items-center justify-center bg-amber-500 text-white font-black text-lg flex-shrink-0 border-2 border-amber-700">!</span>
             <div>
               <p class="font-bold text-sm uppercase tracking-wide text-amber-800 mb-1">
-                Not everyone is finished!
+                <%= t("components.confirm_phase_modal.not_everyone_finished") %>
               </p>
               <p class="text-sm text-amber-700">
-                <span class="font-bold"><%= unfinished_count %></span> participant<%= unfinished_count == 1 ? "" : "s" %> still working on this phase.
+                <%= t("components.confirm_phase_modal.participants_working", count: unfinished_count) %>
               </p>
             </div>
           </div>
@@ -51,7 +51,7 @@
             <%= icon_tag "check", class: "text-2xl text-emerald-600 flex-shrink-0" %>
             <div>
               <p class="font-bold text-sm uppercase tracking-wide text-emerald-800">
-                Everyone is finished!
+                <%= t("components.confirm_phase_modal.everyone_finished") %>
               </p>
             </div>
           </div>
@@ -63,14 +63,14 @@
         <button type="button"
                 data-action="click->dialog#close"
                 class="h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100">
-          Cancel
+          <%= t("shared.cancel") %>
         </button>
 
         <%= button_to retro_phase_transition_path(@retro),
               method: :post,
               id: "confirm-phase-continue-button",
               class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-zinc-900 border-zinc-900 text-white hover:bg-zinc-700" do %>
-          Yes, Continue
+          <%= t("components.confirm_phase_modal.yes_continue") %>
         <% end %>
       </div>
     </div>

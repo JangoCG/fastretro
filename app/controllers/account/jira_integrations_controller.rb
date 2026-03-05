@@ -7,7 +7,7 @@ class Account::JiraIntegrationsController < ApplicationController
 
   def create
     if @jira_integration.update(jira_integration_params)
-      redirect_to account_jira_integration_path, notice: "Jira integration saved."
+      redirect_to account_jira_integration_path, notice: t("flash.jira_saved")
     else
       render :show, status: :unprocessable_entity
     end
@@ -15,7 +15,7 @@ class Account::JiraIntegrationsController < ApplicationController
 
   def update
     if @jira_integration.update(jira_integration_params)
-      redirect_to account_jira_integration_path, notice: "Jira integration updated."
+      redirect_to account_jira_integration_path, notice: t("flash.jira_updated")
     else
       render :show, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class Account::JiraIntegrationsController < ApplicationController
 
   def destroy
     @jira_integration.destroy
-    redirect_to account_settings_path, notice: "Jira integration removed."
+    redirect_to account_settings_path, notice: t("flash.jira_removed")
   end
 
   private

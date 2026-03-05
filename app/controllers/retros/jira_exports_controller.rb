@@ -9,7 +9,7 @@ class Retros::JiraExportsController < ApplicationController
 
     if jira&.persisted?
       @retro.export_actions_to_jira_later
-      redirect_to retro_complete_path(@retro), notice: "Exporting action items to Jira. They will appear in your project shortly."
+      redirect_to retro_complete_path(@retro), notice: t("flash.jira_export_started")
     else
       redirect_to account_jira_integration_path
     end

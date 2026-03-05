@@ -1,6 +1,6 @@
-<% content_for :title, "Edit your profile" %>
+<% content_for :title, t("users.edit.title") %>
 <div class="px-4 py-4">
-  <%= render BackButtonComponent.new(label: "Profile", href: user_path(@user), variant: :fizzy) %>
+  <%= render BackButtonComponent.new(label: t("shared.profile"), href: user_path(@user), variant: :fizzy) %>
 </div>
 
 <div class="max-w-xl mx-auto px-4 pb-8 font-sans">
@@ -15,7 +15,7 @@
       
       <div class="relative z-10 flex items-center">
         <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
-          Edit Profile
+          <%= t("users.edit.heading") %>
         </h1>
       </div>
     </div>
@@ -30,12 +30,12 @@
         <%# Industrial Field %>
         <div>
           <label for="user_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
-            Name
+            <%= t("users.edit.name_label") %>
           </label>
           <%= form.text_field :name,
               class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none",
               autocomplete: "name",
-              placeholder: "Enter your name",
+              placeholder: t("users.edit.name_placeholder"),
               autofocus: true,
               required: true,
               data: { "1p-ignore": true } %>
@@ -44,7 +44,7 @@
         <%# Industrial Field %>
         <div>
           <label for="user_email_address" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
-            Email Address
+            <%= t("users.edit.email_label") %>
           </label>
           <div class="flex items-center gap-3">
             <%= form.email_field :email_address,
@@ -56,16 +56,16 @@
             
             <%= link_to new_user_email_address_path(user_id: @user.id),
                   class: "group relative inline-flex items-center justify-center w-11 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all",
-                  aria: { label: "Edit email address" } do %>
+                  aria: { label: t("users.edit.edit_email") } do %>
               <%= icon_tag "pencil", class: "w-4 h-4" %>
-              <span class="sr-only">Edit email address</span>
+              <span class="sr-only"><%= t("users.edit.edit_email") %></span>
             <% end %>
           </div>
         </div>
 
         <% if @user.errors.any? %>
           <div class="p-4 bg-red-50 border-[2px] border-red-500">
-            <p class="font-bold text-red-700 uppercase tracking-wide text-xs mb-2">Please fix the following:</p>
+            <p class="font-bold text-red-700 uppercase tracking-wide text-xs mb-2"><%= t("users.edit.fix_errors") %></p>
             <ul class="text-xs text-red-600 font-mono list-disc list-inside">
               <% @user.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
@@ -76,7 +76,7 @@
         
         <div class="flex justify-center pt-4">
           <button type="submit" class="group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" data-form-target="submit">
-            Save Changes
+            <%= t("users.edit.save_changes") %>
           </button>
         </div>
       <% end %>

@@ -31,7 +31,7 @@ class ActionsController < ApplicationController
 
   def destroy
     @action.destroy!
-    redirect_to @retro, notice: "Action deleted"
+    redirect_to @retro, notice: t("flash.action_deleted")
   end
 
   private
@@ -45,7 +45,7 @@ class ActionsController < ApplicationController
 
     def authorize_author!
       unless @action.user == Current.user
-        redirect_to @retro, alert: "You can only edit your own actions"
+        redirect_to @retro, alert: t("flash.edit_own_actions")
       end
     end
 

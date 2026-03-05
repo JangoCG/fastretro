@@ -56,9 +56,9 @@ class ParticipantListComponent < ApplicationComponent
 
   def status_text(participant)
     if participant.finished?
-      "#{role_badge(participant)} // FINISHED"
+      "#{role_badge(participant)} // #{I18n.t('participant_status.finished')}"
     else
-      "#{role_badge(participant)} // ONLINE"
+      "#{role_badge(participant)} // #{I18n.t('participant_status.online')}"
     end
   end
 end

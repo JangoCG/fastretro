@@ -41,7 +41,7 @@ class RetrosController < ApplicationController
     respond_to do |format|
       if @retro.save
         @retro.add_participant(Current.user, role: :admin)
-        format.html { redirect_to @retro, notice: "Retro was successfully created." }
+        format.html { redirect_to @retro, notice: t("flash.retro_created") }
         format.json { render :show, status: :created, location: @retro }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class RetrosController < ApplicationController
   def update
     respond_to do |format|
       if @retro.update(retro_params)
-        format.html { redirect_to @retro, notice: "Retro was successfully updated.", status: :see_other }
+        format.html { redirect_to @retro, notice: t("flash.retro_updated"), status: :see_other }
         format.json { render :show, status: :ok, location: @retro }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -68,7 +68,7 @@ class RetrosController < ApplicationController
     @retro.destroy!
 
     respond_to do |format|
-      format.html { redirect_to retros_path, notice: "Retro was successfully destroyed.", status: :see_other }
+      format.html { redirect_to retros_path, notice: t("flash.retro_destroyed"), status: :see_other }
       format.json { head :no_content }
     end
   end

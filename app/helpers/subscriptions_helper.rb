@@ -1,11 +1,11 @@
 module SubscriptionsHelper
   def subscription_period_end_action(subscription)
     if subscription.to_be_canceled?
-      "Your Fast Retro subscription ends on"
+      I18n.t("account.settings.subscription.ends_on")
     elsif subscription.canceled?
-      "Your Fast Retro subscription ended on"
+      I18n.t("account.settings.subscription.ended_on")
     else
-      "Your next payment is <b>#{format_currency(subscription.next_amount_due)}</b> on".html_safe
+      I18n.t("account.settings.subscription.next_payment", amount: format_currency(subscription.next_amount_due)).html_safe
     end
   end
 

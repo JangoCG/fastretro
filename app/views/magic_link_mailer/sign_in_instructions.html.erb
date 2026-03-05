@@ -1,13 +1,13 @@
 <% if @magic_link.for_sign_in? %>
-  <h1 class="title">Fast Retro verification code</h1>
-  <p class="subtitle">Please enter this 6-character verification code on the FastRetro sign-in page:</p>
+  <h1 class="title"><%= t("mailers.magic_link.sign_in_subject") %></h1>
+  <p class="subtitle"><%= t("mailers.magic_link.sign_in_body") %></p>
 <% else %>
-  <h1 class="title">Welcome to Fast Retro!</h1>
-  <p class="subtitle">Please enter this 6-character verification code on the FastRetro sign-up page to create your new account:</p>
+  <h1 class="title"><%= t("mailers.magic_link.sign_up_subject") %></h1>
+  <p class="subtitle"><%= t("mailers.magic_link.sign_up_body") %></p>
 <% end %>
 
 <strong style="font-size: 1.5rem;"><%= @magic_link.code %></strong>
 
-<p>This code will work for <%= distance_of_time_in_words(MagicLink::EXPIRATION_TIME) %>.</p>
+<p><%= t("mailers.magic_link.code_validity", time: distance_of_time_in_words(MagicLink::EXPIRATION_TIME)) %></p>
 
-<p class="footer">Need help? <%= mail_to "cengiz@cengizg.com", "Send us an email" %>.</p>
+<p class="footer"><%= t("mailers.magic_link.need_help") %> <%= mail_to "cengiz@cengizg.com", t("mailers.magic_link.send_email") %>.</p>

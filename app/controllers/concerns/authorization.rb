@@ -28,9 +28,9 @@ module Authorization
 
     def ensure_can_access_account
       if Current.user.blank?
-        redirect_to session_menu_url(script_name: nil), alert: "Retro not found. Either it really does not exist or you are not part of that account"
+        redirect_to session_menu_url(script_name: nil), alert: t("flash.account_not_found")
       elsif !Current.user.active?
-        redirect_to session_menu_url(script_name: nil), alert: "Your account access has been deactivated."
+        redirect_to session_menu_url(script_name: nil), alert: t("flash.account_deactivated")
       end
     end
 
