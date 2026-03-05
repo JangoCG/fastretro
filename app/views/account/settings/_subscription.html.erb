@@ -23,16 +23,18 @@
           </p>
 
           <%= button_to "Upgrade to Unlimited for #{formatted_paid_price}/month", account_subscription_path,
+              id: "stripe-checkout-button",
               class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
-              form: { data: { turbo: false } } %>
+              form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% else %>
           <p class="text-red-700 text-base md:text-xl leading-snug font-bold">
             Live pricing is currently unavailable. Please try again in a moment.
           </p>
 
           <%= button_to "Open Stripe Checkout", account_subscription_path,
+              id: "stripe-checkout-button",
               class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
-              form: { data: { turbo: false } } %>
+              form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% end %>
 
         <p class="text-zinc-700 text-lg md:text-2xl">Cancel anytime, no contracts.</p>

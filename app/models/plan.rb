@@ -1,5 +1,5 @@
 class Plan
-  STRIPE_PRICE_CACHE_TTL = 1.hour
+  STRIPE_PRICE_CACHE_TTL = 12.hours
   StripePriceUnavailableError = Class.new(StandardError)
 
   PLANS = {

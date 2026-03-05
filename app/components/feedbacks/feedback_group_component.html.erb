@@ -82,6 +82,7 @@
         <div class="px-4 py-2 border-t border-zinc-200 bg-zinc-50">
           <%= button_to retro_feedback_group_path(primary_feedback.retro, @group, script_name: primary_feedback.retro.account.slug),
               method: :delete,
+              id: "ungroup-all-feedback-group-#{@group.id}",
               class: "text-[0.6rem] font-bold text-zinc-500 hover:text-zinc-900 uppercase tracking-wider transition-colors" do %>
             Ungroup all
           <% end %>

@@ -15,11 +15,12 @@ Disallow: /checkout
 Disallow: /portal
 Disallow: /up
 
-# Allow public pages
-Allow: /landing_page
-Allow: /blog
-Allow: /blog/*
-Allow: /imprint
-Allow: /privacy_policy
-Allow: /signup
-Allow: /session
+# Disallow auth pages
+Disallow: /session
+Disallow: /signup
+
+# Disallow redirect source URLs
+Disallow: /landing_page
+Disallow: /privacy-policy
+Disallow: /privacy
+Disallow: /retro/create
