@@ -5,6 +5,7 @@
 <% content_for :meta_author, @post.author %>
 <% content_for :published_time, @post.date.iso8601 %>
 <% content_for :og_type, "article" %>
+<% content_for :canonical_url, blog_post_url(@post.slug, script_name: nil) %>
 <% if @post.image %>
 <% content_for :og_image, image_url(@post.image) %>
 <% end %>

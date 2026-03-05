@@ -4,6 +4,7 @@
 <% content_for :meta_title, @alternative.fetch(:meta_title) %>
 <% content_for :meta_description, @alternative.fetch(:meta_description) %>
 <% content_for :meta_keywords, @alternative.fetch(:meta_keywords) %>
+<% content_for :canonical_url, public_send("alternative_#{@alternative.fetch(:slug)}_url", script_name: nil) %>
 
 <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
      style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">

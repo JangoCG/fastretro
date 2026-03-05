@@ -2,6 +2,7 @@
 <% content_for :title, "Fast Retro Blog — Building in Public" %>
 <% content_for :meta_description, "Follow along as we build Fast Retro in public. Technical guides, retrospective tips, and behind-the-scenes updates on building an open source agile tool." %>
 <% content_for :og_type, "website" %>
+<% content_for :canonical_url, blog_url(script_name: nil) %>
 
 <% content_for :structured_data do %>
 <script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">

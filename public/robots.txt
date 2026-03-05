@@ -24,3 +24,4 @@ Disallow: /landing_page
 Disallow: /privacy-policy
 Disallow: /privacy
 Disallow: /retro/create
+Disallow: /favicon.ico
