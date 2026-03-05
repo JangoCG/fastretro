@@ -46,7 +46,7 @@ gem "image_processing", "~> 1.2"
 gem "view_component"
 
 # Modern rich text editor built on Lexical
-gem "lexxy", "~> 0.7.3.beta"
+gem "lexxy", "~> 0.7.4.beta"
 
 # Markdown rendering for legal pages
 gem "redcarpet"
@@ -54,7 +54,7 @@ gem "redcarpet"
 # Syntax highlighting for code blocks
 gem "rouge"
 
-gem "stripe", "~> 18.2"
+gem "stripe", "~> 18.3"
 
 # Error tracking
 gem "sentry-ruby"

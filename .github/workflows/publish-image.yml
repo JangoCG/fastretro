@@ -73,7 +73,7 @@ jobs:
 
       - name: Build and push (${{ matrix.platform }})
         id: build
-        uses: docker/build-push-action@v6.18.0
+        uses: docker/build-push-action@v6.19.2
         with:
           context: .
           file: Dockerfile
@@ -91,7 +91,7 @@ jobs:
 
       - name: Attest image provenance (per-arch)
         if: github.event_name != 'pull_request'
-        uses: actions/attest-build-provenance@v3.2.0
+        uses: actions/attest-build-provenance@v4.1.0
         with:
           subject-name: ${{ steps.vars.outputs.canonical }}
           subject-digest: ${{ steps.build.outputs.digest }}
