@@ -1,0 +1,47 @@
+name: Test
+
+on:
+  workflow_call:
+    inputs:
+      saas:
+        type: boolean
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+      ${{ inputs.saas && 'SAAS' || 'SAAS_DISABLED' }}: ${{ inputs.saas && '1' || '' }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Run tests
+        run: bin/rails db:test:prepare test
+
+      - name: Run system tests
+        env:
+          PARALLEL_WORKERS: 1
+        run: bin/rails test:system
+
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: screenshots-${{ inputs.saas && 'saas' || 'oss' }}
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+      - name: Verify seeds
+        run: bin/rails db:seed:replant

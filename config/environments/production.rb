@@ -1,5 +1,4 @@
 require "active_support/core_ext/integer/time"
-require "json"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -7,9 +6,9 @@ Rails.application.configure do
   # CSP: Allow form submissions to Stripe Checkout and Billing Portal
   config.x.content_security_policy.form_action = "https://checkout.stripe.com https://billing.stripe.com"
 
-  # CSP: Allow analytics scripts (Simple Analytics, Cloudflare)
-  config.x.content_security_policy.script_src = "https://scripts.simpleanalyticscdn.com https://static.cloudflareinsights.com"
-  config.x.content_security_policy.connect_src = "https://scripts.simpleanalyticscdn.com https://queue.simpleanalyticscdn.com https://cloudflareinsights.com"
+  # CSP: Allow analytics scripts (Umami, Cloudflare)
+  config.x.content_security_policy.script_src = "https://analytics.cengizg.com https://static.cloudflareinsights.com"
+  config.x.content_security_policy.connect_src = "https://analytics.cengizg.com https://cloudflareinsights.com"
 
   # Email provider Settings
   #
@@ -59,31 +58,11 @@ Rails.application.configure do
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
-  # Log to STDOUT in JSON format so log shipping can reliably extract level/message.
+  # Log to STDOUT by default
+  config.logger = ActiveSupport::Logger.new(STDOUT)
+                                       .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
+                                       .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
   config.log_tags = [ :request_id ]
-  json_logger = ActiveSupport::Logger.new(STDOUT)
-  json_logger.formatter = proc do |severity, timestamp, progname, msg|
-    message = case msg
-    when ::String
-      msg
-    when ::Exception
-      "#{msg.message} (#{msg.class})\n#{Array(msg.backtrace).join("\n")}"
-    else
-      msg.inspect
-    end
-
-    payload = {
-      time: timestamp.utc.iso8601(6),
-      level: severity.downcase,
-      msg: message
-    }
-    payload[:progname] = progname if progname.present?
-
-    "#{JSON.generate(payload)}\n"
-  end
-  config.logger = ActiveSupport::TaggedLogging.new(json_logger)
-
-  # Change to "debug" to log everything (including potentially personally-identifiable information!).
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Prevent health checks from clogging up the logs.

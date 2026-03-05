@@ -64,6 +64,9 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "blog", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%# === ANALYTICS === %>
+    <%= analytics_tag %>
   </head>
   <body class="<%= content_for(:body_class) || "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden" %> flex flex-col min-h-screen">
     <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
