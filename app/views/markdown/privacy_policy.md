@@ -35,9 +35,9 @@ Data is primarily stored in the EU. I have concluded Data Processing Agreements 
 
 **Email Delivery with AWS.** For sending emails (e.g., login links), I use Amazon Web Services (AWS EMEA SARL, Luxembourg), utilizing the Frankfurt region (eu-central-1). AWS is certified under the EU-US Data Privacy Framework. [AWS Privacy Policy](https://aws.amazon.com/privacy/).
 
-**CDN & Security with Cloudflare.** Used for performance and security (USA). Cloudflare is certified under the EU-US Data Privacy Framework. [Cloudflare Privacy Policy](https://www.cloudflare.com/privacypolicy/).
+**CDN & Security with Cloudflare.** I use the Content Delivery Network (CDN) and security services of Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA ("Cloudflare") to increase the security and delivery speed of the website. This constitutes a legitimate interest within the meaning of Art. 6 (1) (f) GDPR. Cloudflare acts as a "reverse proxy" — all requests to the website are routed through Cloudflare servers. The following data is transmitted to Cloudflare: IP address, requested page(s), timestamp and connection metadata, browser type and version, and operating system. Cloudflare may also set technically necessary cookies ("__cf_bm" or "__cflb") for bot protection and load balancing. For data transfers to the USA, Cloudflare relies on EU Standard Contractual Clauses pursuant to Art. 46 (2) (c) GDPR and the EU-US Data Privacy Framework. Cloudflare is certified under the EU-US Data Privacy Framework. [Cloudflare Privacy Policy](https://www.cloudflare.com/privacypolicy/). [Cloudflare GDPR](https://www.cloudflare.com/trust-hub/gdpr/).
 
-**Analytics with Simple Analytics.** Privacy-friendly analytics from the Netherlands. No personal data collected, no IP addresses stored, no tracking cookies used.
+**Analytics with Umami.** For statistical analysis of the website, I use the self-hosted open-source software Umami. Data is processed exclusively on my own server and is not shared with third parties. Umami does not store IP addresses — IP addresses are only used temporarily for geolocation (country, region, city) and then discarded, making it impossible to trace individual visitors. Umami collects the following technical information from data transmitted by your browser: browser type and version, operating system, device type, screen resolution, pages visited including time spent, referrer URL, country, region and city of the visit (derived from IP address), and browser language. This information is evaluated exclusively for statistical purposes. Legal basis is Art. 6 (1) (f) GDPR. The legitimate interest lies in improving the website. Umami does not use cookies and is GDPR-compliant. More information: [Umami Privacy](https://umami.is/privacy).
 
 **Payment Processing with Stripe.** For payment processing, I use Stripe (Stripe Payments Europe, Ltd., Ireland). Stripe processes your payment data (e.g., credit card information, billing address) to handle subscriptions. Stripe is certified under the EU-US Data Privacy Framework. [Stripe Privacy Policy](https://stripe.com/privacy).
 
@@ -57,7 +57,7 @@ Under GDPR, you have the right to access, rectification, erasure, restriction of
 
 ## 5. Updates
 
-Last updated: December 20, 2025.
+Last updated: March 5, 2026.
 
 ---
 
@@ -98,9 +98,9 @@ Deine Daten werden primär in der EU gespeichert. Ich habe mit allen Dienstleist
 
 **E-Mail-Versand durch AWS.** Für den Versand von E-Mails (z.B. Login-Links) nutze ich Amazon Web Services (AWS EMEA SARL, Luxemburg). Ich nutze ausschließlich den Serverstandort Frankfurt (eu-central-1). AWS ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von AWS](https://aws.amazon.com/de/privacy/).
 
-**CDN und Sicherheit durch Cloudflare.** Zur Optimierung und Absicherung nutze ich Cloudflare (USA). Cloudflare kann IP-Adressen verarbeiten, um Angriffe abzuwehren. Cloudflare ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/privacypolicy/).
+**CDN und Sicherheit durch Cloudflare.** Ich nutze das Content Delivery Network (CDN) und die Sicherheitsdienste von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA („Cloudflare"), um die Sicherheit und die Auslieferungsgeschwindigkeit der Website zu erhöhen. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Cloudflare fungiert dabei als sog. „Reverse Proxy" — sämtliche Anfragen an die Website werden über Server von Cloudflare geleitet. Folgende Daten werden dabei an Cloudflare übermittelt: IP-Adresse, aufgerufene Webseite(n), Zeitstempel und Verbindungsmetadaten, Browsertyp und -version sowie Betriebssystem. Cloudflare setzt zudem ein technisch notwendiges Cookie („__cf_bm" bzw. „__cflb"), um Bot-Schutz und Lastverteilung zu gewährleisten. Für die Datenübermittlung in die USA setzt Cloudflare auf die EU-Standardvertragsklauseln gem. Art. 46 Abs. 2 lit. c DSGVO sowie auf das EU-US Data Privacy Framework. Cloudflare ist unter dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von Cloudflare](https://www.cloudflare.com/de-de/privacypolicy/) und unter [Cloudflare GDPR](https://www.cloudflare.com/de-de/trust-hub/gdpr/).
 
-**Analyse durch Simple Analytics.** Um die Nutzung der Website zu verstehen, verwende ich Simple Analytics (Niederlande). Es werden keine persönlichen Daten gesammelt, keine IP-Adressen gespeichert und keine Tracking-Cookies gesetzt.
+**Analyse durch Umami.** Zur statistischen Auswertung der Website verwende ich die selbst gehostete Open-Source-Software Umami. Die Daten werden ausschließlich auf meinem eigenen Server verarbeitet und nicht an Dritte weitergegeben. Umami speichert keine IP-Adressen. IP-Adressen werden lediglich temporär zur Geolokalisierung (Land, Region, Stadt) verwendet und anschließend verworfen. Damit sind keine Rückschlüsse auf einzelne Besucherinnen und Besucher möglich. Umami erfasst folgende technische Informationen anhand der von deinem Browser übermittelten Daten: Browsertyp und -version, verwendetes Betriebssystem, Gerätetyp, Bildschirmauflösung, besuchte Webseiten inklusive Verweildauer, Referrer-URL, Land, Region und Stadt des Besuchs (abgeleitet aus der IP-Adresse) sowie Browsersprache. Diese Informationen werte ich ausschließlich zu statistischen Zwecken aus. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt in der Verbesserung des Webangebots. Umami verwendet keine Cookies und ist DSGVO-konform. Weitere Informationen unter: [Umami Privacy](https://umami.is/privacy).
 
 **Zahlungsabwicklung durch Stripe.** Für die Zahlungsabwicklung nutze ich Stripe (Stripe Payments Europe, Ltd., Irland). Stripe verarbeitet deine Zahlungsdaten (z.B. Kreditkarteninformationen, Rechnungsadresse) zur Abwicklung von Abonnements. Stripe ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von Stripe](https://stripe.com/de/privacy).
 
@@ -123,4 +123,4 @@ Der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Postfach 31
 
 ## 5. Aktualität
 
-Diese Datenschutzerklärung wurde zuletzt am 20. Dezember 2025 aktualisiert.
+Diese Datenschutzerklärung wurde zuletzt am 5. März 2026 aktualisiert.
