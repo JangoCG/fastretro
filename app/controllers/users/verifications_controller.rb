@@ -6,6 +6,6 @@ class Users::VerificationsController < ApplicationController
 
   def create
     Current.user.verify
-    redirect_to root_path, notice: "Email verified successfully."
+    redirect_to root_path, notice: t("flash.email_verified")
   end
 end

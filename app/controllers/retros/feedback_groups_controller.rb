@@ -75,7 +75,7 @@ class Retros::FeedbackGroupsController < ApplicationController
 
   def ensure_grouping_phase
     unless @retro.grouping?
-      redirect_to @retro, alert: "Grouping is only available during the grouping phase"
+      redirect_to @retro, alert: t("flash.grouping_only")
     end
   end
 

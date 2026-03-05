@@ -1,6 +1,6 @@
-<% content_for :title, "Add action" %>
+<% content_for :title, t("actions.new.title") %>
 <div class="px-4 py-4">
-  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro)) %>
+  <%= render BackButtonComponent.new(label: t("shared.retro"), href: retro_path(@retro)) %>
 </div>
 
 <div class="max-w-3xl mx-auto px-4 py-8 font-sans">
@@ -17,10 +17,10 @@
           <%# Action Badge (Purple) %>
           <span class="inline-flex items-center px-3 py-1 border-[2px] border-zinc-900 text-xs font-bold uppercase tracking-widest bg-violet-100 text-violet-800">
             <span class="mr-2 w-2 h-2 rounded-full border border-black bg-violet-500"></span>
-            ACTION
+            <%= t("actions.new.action_label") %>
           </span>
 
-          <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest">NEW</span>
+          <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest"><%= t("shared.new") %></span>
         </div>
       </div>
 
@@ -31,19 +31,19 @@
 
         <div class="relative z-10" data-controller="lexxy-autofocus">
           <%= form.rich_textarea :content, class: "card__description rich-text-content",
-                placeholder: "What action should we take?" %>
+                placeholder: t("actions.new.placeholder") %>
         </div>
       </div>
 
       <%# Footer Metadata %>
       <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
         <div class="flex items-center gap-2">
-          <span class="font-bold text-zinc-900">AUTHOR:</span>
-          <span><%= Current.user&.name || "UNKNOWN" %></span>
+          <span class="font-bold text-zinc-900"><%= t("shared.author") + ":" %></span>
+          <span><%= Current.user&.name || t("shared.unknown") %></span>
         </div>
         <div class="flex items-center gap-1">
-          <span>STATUS:</span>
-          <span class="text-zinc-900 font-bold">DRAFTING</span>
+          <span><%= t("shared.status") + ":" %></span>
+          <span class="text-zinc-900 font-bold"><%= t("shared.drafting") %></span>
         </div>
       </div>
     </div>
@@ -53,14 +53,14 @@
       <button id="create-action-button" type="submit" name="creation_type" value="add"
         data-controller="hotkey" data-action="keydown.ctrl+enter@document->hotkey#click keydown.meta+enter@document->hotkey#click"
         class="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
-        Create Action
+        <%= t("actions.new.create") %>
         <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
       </button>
 
       <button type="submit" name="creation_type" value="add_another"
         data-controller="hotkey" data-action="keydown.ctrl+shift+enter@document->hotkey#click keydown.meta+shift+enter@document->hotkey#click"
         class="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
-        Create & Add Another
+        <%= t("actions.new.create_another") %>
         <%= render KbdComponent.new(key: "Ctrl+Shift+Enter", size: :sm) %>
       </button>
     </div>

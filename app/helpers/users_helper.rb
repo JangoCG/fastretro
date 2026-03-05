@@ -1,9 +1,5 @@
 module UsersHelper
   def role_display_name(user)
-    case user.role
-    when "owner" then "Owner"
-    when "admin" then "Admin"
-    else "Member"
-    end
+    I18n.t("roles.#{user.role}", default: I18n.t("roles.member"))
   end
 end

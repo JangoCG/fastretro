@@ -28,10 +28,10 @@
         <%= user.admin? ? "bg-zinc-900 border-zinc-900 text-white" : "bg-white border-zinc-300 text-zinc-400" %>
         <%= can_toggle ? "cursor-pointer hover:border-zinc-900 hover:text-zinc-900" : "opacity-50 cursor-not-allowed" %>"
         for="<%= dom_id(user, :role) %>"
-        title="<%= role_display_name(user) %><%= ' (cannot change owner)' if user.owner? %>">
+        title="<%= role_display_name(user) %><%= " #{t('account.settings.users.cannot_change_owner')}" if user.owner? %>">
         
         <%= icon_tag "crown", class: "text-lg" %>
-        <span class="sr-only">Role: <%= role_display_name(user) %></span>
+        <span class="sr-only"><%= t("account.settings.users.role_label", role: role_display_name(user)) %></span>
         
         <%= form.check_box :role,
           { data: { action: "form#submit" },
@@ -50,11 +50,11 @@
       variant: can_remove ? :danger : :secondary,
       size: :lg,
       href: user_path(user),
-      label: "Remove #{user.name}",
+      label: t("account.settings.users.remove_user", name: user.name),
       disabled: !can_remove,
       # Industrial Square Button
       class: "w-10 h-10 rounded-none border-[2px] flex items-center justify-center transition-all " + (can_remove ? "border-transparent text-red-600 hover:bg-red-50 hover:border-red-600" : "opacity-40 cursor-not-allowed border-transparent text-zinc-400"),
-      data: { turbo_method: :delete, turbo_confirm: can_remove ? "Are you sure you want to remove #{user.name} from this account?" : nil }
+      data: { turbo_method: :delete, turbo_confirm: can_remove ? t("account.settings.users.remove_confirm", name: user.name) : nil }
     ) %>
   </div>
 </li>

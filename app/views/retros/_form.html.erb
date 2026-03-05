@@ -22,14 +22,14 @@
   <% end %>
 
   <div>
-    <%= form.label :name, "RETRO NAME", class: "font-mono text-xs font-bold uppercase block mb-1" %>
+    <%= form.label :name, t("retros.form.retro_name"), class: "font-mono text-xs font-bold uppercase block mb-1" %>
     <div class="relative">
       <%= form.text_field :name,
           class: "w-full bg-white border-2 border-zinc-300 focus:border-black#ffe600] px-4 py-3 font-mono text-sm focus:outline-none transition-colors rounded-none placeholder:text-zinc-400",
-          placeholder: "ENTER NAME...",
+          placeholder: t("retros.form.name_placeholder"),
           autofocus: true %>
       <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-         <span class="font-mono text-[10px] text-zinc-400 hidden sm:block">REQUIRED_FIELD</span>
+         <span class="font-mono text-[10px] text-zinc-400 hidden sm:block"><%= t("shared.required_field") %></span>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
     <% initial_columns = retro.column_definitions %>
 
     <div class="space-y-4 pt-2 border-t border-dashed border-zinc-300">
-      <p class="font-mono text-xs font-bold uppercase">LAYOUT MODE</p>
+      <p class="font-mono text-xs font-bold uppercase"><%= t("retros.form.layout_mode") %></p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <label class="cursor-pointer border-2 border-zinc-900 bg-white px-4 py-3 font-mono text-xs uppercase">
@@ -49,8 +49,8 @@
                 checked: !is_custom_layout,
                 data: { action: "change->retro-layout#toggle" } %>
             <div>
-              <p class="font-black text-zinc-900">DEFAULT (3 COLUMNS)</p>
-              <p class="text-zinc-500 mt-1">Good, Bad, Want</p>
+              <p class="font-black text-zinc-900"><%= t("retros.form.default_layout") %></p>
+              <p class="text-zinc-500 mt-1"><%= t("retros.form.default_columns") %></p>
             </div>
           </div>
         </label>
@@ -62,21 +62,21 @@
                 checked: is_custom_layout,
                 data: { action: "change->retro-layout#toggle" } %>
             <div>
-              <p class="font-black text-zinc-900">CUSTOM LAYOUT</p>
-              <p class="text-zinc-500 mt-1">Add, remove, rename columns</p>
+              <p class="font-black text-zinc-900"><%= t("retros.form.custom_layout") %></p>
+              <p class="text-zinc-500 mt-1"><%= t("retros.form.custom_hint") %></p>
             </div>
           </div>
         </label>
       </div>
 
       <div data-retro-layout-target="defaultInfo" class="<%= is_custom_layout ? 'hidden ' : '' %>border-2 border-zinc-900 bg-zinc-50 px-4 py-3 font-mono text-xs uppercase text-zinc-600">
-        This retro will start with 3 columns: <strong>Good</strong>, <strong>Bad</strong>, <strong>Want</strong>.
+        <%= t("retros.form.default_info").html_safe %>
       </div>
 
       <div data-retro-layout-target="customPanel" class="<%= is_custom_layout ? '' : 'hidden ' %>space-y-3 border-2 border-zinc-900 bg-white p-4">
         <div class="space-y-1">
           <label for="retro_votes_per_participant" class="font-mono text-xs font-bold uppercase text-zinc-700">
-            Votes Per Participant
+            <%= t("retros.form.votes_per_participant") %>
           </label>
           <%= form.number_field :votes_per_participant,
               min: 1,
@@ -85,18 +85,18 @@
               value: retro.votes_per_participant || Retro::DEFAULT_VOTES_PER_PARTICIPANT,
               class: "w-full sm:w-40 bg-zinc-50 border-2 border-zinc-300 px-3 py-2 font-mono text-sm focus:outline-none focus:border-zinc-900" %>
           <p class="font-mono text-[10px] uppercase text-zinc-500">
-            Only applied for custom layouts.
+            <%= t("retros.form.votes_hint") %>
           </p>
         </div>
 
         <div class="flex items-center justify-between gap-2">
-          <p class="font-mono text-xs font-bold uppercase text-zinc-700">CUSTOM COLUMNS</p>
+          <p class="font-mono text-xs font-bold uppercase text-zinc-700"><%= t("retros.form.custom_columns") %></p>
           <button
             type="button"
             data-action="click->retro-layout#addColumn"
             class="px-3 py-1.5 bg-zinc-900 text-white text-[11px] font-bold uppercase tracking-wider border-2 border-zinc-900 hover:bg-zinc-800"
           >
-            + ADD COLUMN
+            <%= t("retros.form.add_column") %>
           </button>
         </div>
 
@@ -107,7 +107,7 @@
                 type="text"
                 name="retro[column_names][]"
                 value="<%= column["name"] %>"
-                placeholder="Column name"
+                placeholder="<%= t("retros.form.column_placeholder") %>"
                 class="w-full bg-zinc-50 border-2 border-zinc-300 px-3 py-2 font-mono text-sm focus:outline-none focus:border-zinc-900"
               />
               <button
@@ -115,7 +115,7 @@
                 data-action="click->retro-layout#removeColumn"
                 class="shrink-0 px-3 py-2 bg-white border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-100 text-xs font-bold uppercase"
               >
-                Remove
+                <%= t("shared.remove") %>
               </button>
             </div>
           <% end %>
@@ -126,7 +126,7 @@
             <input
               type="text"
               name="retro[column_names][]"
-              placeholder="Column name"
+              placeholder="<%= t("retros.form.column_placeholder") %>"
               class="w-full bg-zinc-50 border-2 border-zinc-300 px-3 py-2 font-mono text-sm focus:outline-none focus:border-zinc-900"
             />
             <button
@@ -134,7 +134,7 @@
               data-action="click->retro-layout#removeColumn"
               class="shrink-0 px-3 py-2 bg-white border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-100 text-xs font-bold uppercase"
             >
-              Remove
+              <%= t("shared.remove") %>
             </button>
           </div>
         </template>
@@ -145,7 +145,7 @@
   <div class="pt-4 border-t border-dashed border-zinc-300">
      <button id="retro-submit-button" type="submit" class="group w-full bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider flex items-center justify-between border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1">
         <span class="flex items-center gap-2">
-          <%= retro.persisted? ? "UPDATE_RETRO" : "CREATE_RETRO" %>
+          <%= retro.persisted? ? t("retros.form.update_retro") : t("retros.form.create_retro") %>
           <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
         </span>
         <span class="font-mono group-hover:translate-x-2 transition-transform">-></span>

@@ -82,7 +82,7 @@ class Retros::VotesController < ApplicationController
 
   def ensure_voting_phase
     unless @retro.voting?
-      redirect_to retro_path(@retro), alert: "Voting is only available during the voting phase"
+      redirect_to retro_path(@retro), alert: t("flash.voting_only")
     end
   end
 

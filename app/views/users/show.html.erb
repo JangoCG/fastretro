@@ -15,12 +15,12 @@
       
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
-          User Profile
+          <%= t("users.show.heading") %>
         </h1>
         <% if Current.user == @user %>
           <%= link_to edit_user_path(@user), class: "group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 bg-zinc-900 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
             <%= icon_tag "pencil", class: "w-4 h-4" %>
-            <span>Edit profile</span>
+            <span><%= t("users.show.edit_profile") %></span>
           <% end %>
         <% end %>
       </div>
@@ -42,11 +42,11 @@
             
             <div class="text-xs font-mono font-bold uppercase tracking-wider">
               <% if !@user.active? %>
-                <span class="text-red-600">Inactive Member</span>
+                <span class="text-red-600"><%= t("users.show.inactive_member") %></span>
               <% elsif !@user.verified? %>
-                <span class="text-amber-600">Email Verification Pending</span>
+                <span class="text-amber-600"><%= t("users.show.email_pending") %></span>
                 <p class="text-[0.7rem] text-zinc-500 mt-1 max-w-xs normal-case tracking-normal">
-                  Check your inbox and confirm your email address.
+                  <%= t("users.show.check_inbox") %>
                 </p>
               <% else %>
                 <%= mail_to @user.identity.email_address, class: "text-zinc-600 hover:text-zinc-900 transition-colors normal-case tracking-normal" %>
@@ -55,7 +55,7 @@
 
             <% if Current.user == @user %>
               <p class="text-xs text-zinc-500 font-mono uppercase tracking-wide mt-1">
-                Want to update your details? Tap edit profile.
+                <%= t("users.show.update_hint") %>
               </p>
             <% end %>
          </div>
@@ -70,7 +70,7 @@
 
         <div class="w-full flex justify-center pt-6">
            <%= button_to session_url, method: :delete, class: "group relative inline-flex items-center justify-center px-6 py-2 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors", data: { turbo: false } do %>
-             Sign Out
+             <%= t("users.show.sign_out") %>
            <% end %>
         </div>
        <% end %>

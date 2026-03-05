@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.deactivate
-    redirect_to account_settings_path, notice: "#{@user.name} has been removed from this account"
+    redirect_to account_settings_path, notice: t("flash.user_removed", name: @user.name)
   end
 
   private

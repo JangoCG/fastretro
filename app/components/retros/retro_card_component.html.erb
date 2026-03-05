@@ -21,13 +21,13 @@
         size: :sm,
         href: edit_retro_path(@retro),
         class: "text-zinc-900 hover:bg-zinc-200 rounded-none p-1",
-        label: "Edit retro"
+        label: t("retros.retro_card.edit_retro")
       ) %>
 
       <%= button_to @retro,
             method: :delete,
             class: "w-6 h-6 flex items-center justify-center text-zinc-900 hover:bg-red-500 hover:text-white transition-colors border border-transparent hover:border-black rounded-none",
-            data: { turbo_confirm: "Are you sure you want to delete '#{@retro.name}'?" } do %>
+            data: { turbo_confirm: t("retros.retro_card.delete_confirm", name: @retro.name) } do %>
         <%= icon_tag "close", class: "text-sm font-bold" %>
       <% end %>
     </div>
@@ -45,7 +45,7 @@
   <div class="border-t-[2.5px] border-zinc-800 flex divide-x-[2.5px] divide-zinc-800">
     <%# Date Block %>
     <div class="flex-1 px-3 py-2 flex flex-col justify-center">
-      <span class="text-[0.5rem] font-bold text-zinc-400 uppercase">CREATED</span>
+      <span class="text-[0.5rem] font-bold text-zinc-400 uppercase"><%= t("retros.retro_card.created") %></span>
       <div class="flex items-center gap-1">
         <span class="text-xs font-bold text-zinc-900 uppercase tracking-wide">
           <%= @retro.created_at.strftime("%b %d") %>
@@ -55,7 +55,7 @@
 
     <%# Counter Block %>
     <div class="px-4 py-2 flex flex-col justify-center bg-zinc-100">
-      <span class="text-[0.5rem] font-bold text-zinc-400 uppercase">ITEMS</span>
+      <span class="text-[0.5rem] font-bold text-zinc-400 uppercase"><%= t("retros.retro_card.items") %></span>
       <div class="flex items-center gap-1.5">
         <span class="text-sm font-black text-zinc-900"><%= feedback_count %></span>
       </div>

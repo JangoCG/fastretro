@@ -1,6 +1,6 @@
-<% content_for :title, "Edit action" %>
+<% content_for :title, t("actions.edit.title") %>
 <div class="px-4 py-4">
-  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro)) %>
+  <%= render BackButtonComponent.new(label: t("shared.retro"), href: retro_path(@retro)) %>
 </div>
 
 <div class="max-w-3xl mx-auto px-4 py-8 font-sans">
@@ -16,10 +16,10 @@
         <%# Action Badge (Purple) %>
         <span class="inline-flex items-center px-3 py-1 border-[2px] border-zinc-900 text-xs font-bold uppercase tracking-widest bg-violet-100 text-violet-800">
           <span class="mr-2 w-2 h-2 rounded-full border border-black bg-violet-500"></span>
-          ACTION
+          <%= t("actions.new.action_label") %>
         </span>
 
-        <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest">EDITING</span>
+        <span class="font-mono text-[0.6rem] text-zinc-400 uppercase tracking-widest"><%= t("shared.editing") %></span>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
       <div class="relative z-10" data-controller="lexxy-autofocus">
         <%= form_with model: [@retro, @action], scope: :retro_action, id: "action_form", data: { controller: "auto-save" } do |form| %>
           <%= form.rich_textarea :content, class: "card__description rich-text-content",
-                placeholder: "What action should we take?",
+                placeholder: t("actions.edit.placeholder"),
                 data: { action: "lexxy:change->auto-save#change focusout->auto-save#submit" } %>
         <% end %>
       </div>
@@ -40,12 +40,12 @@
     <%# Footer Metadata %>
     <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
       <div class="flex items-center gap-2">
-        <span class="font-bold text-zinc-900">AUTHOR:</span>
-        <span><%= @action.user&.name || "UNKNOWN" %></span>
+        <span class="font-bold text-zinc-900"><%= t("shared.author") + ":" %></span>
+        <span><%= @action.user&.name || t("shared.unknown") %></span>
       </div>
       <div class="flex items-center gap-1">
-         <span>CREATED:</span>
-         <span class="text-zinc-900 font-bold"><%= time_ago_in_words(@action.created_at) %> ago</span>
+         <span><%= t("shared.created") + ":" %></span>
+         <span class="text-zinc-900 font-bold"><%= time_ago_in_words(@action.created_at) %> <%= t("shared.ago").downcase %></span>
       </div>
     </div>
   </div>
@@ -55,7 +55,7 @@
     <%= link_to retro_action_path(@retro, @action),
         class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all",
         data: { controller: "hotkey", action: "keydown.ctrl+enter@document->hotkey#click keydown.meta+enter@document->hotkey#click" } do %>
-      Done
+      <%= t("shared.done") %>
       <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
     <% end %>
   </div>

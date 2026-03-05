@@ -6,14 +6,14 @@
           <span class="font-black text-blue-600 text-sm">J</span>
         </div>
         <div>
-          <div class="font-bold text-zinc-900 text-sm">Jira</div>
+          <div class="font-bold text-zinc-900 text-sm"><%= t("account.settings.integrations.jira") %></div>
           <div class="text-[0.6rem] font-mono text-zinc-500 uppercase">
-            <%= Current.account.jira_integration&.persisted? ? "Connected" : "Not configured" %>
+            <%= Current.account.jira_integration&.persisted? ? t("account.settings.integrations.connected") : t("account.settings.integrations.not_configured") %>
           </div>
         </div>
       </div>
       <span class="text-zinc-400 group-hover:text-zinc-900 transition-colors font-bold text-xs uppercase tracking-wide">
-        <%= Current.account.jira_integration&.persisted? ? "Manage" : "Setup" %> &rarr;
+        <%= Current.account.jira_integration&.persisted? ? t("account.settings.integrations.manage") : t("account.settings.integrations.setup") %> &rarr;
       </span>
     <% end %>
   </div>

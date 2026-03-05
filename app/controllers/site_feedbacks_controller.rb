@@ -1,7 +1,7 @@
 class SiteFeedbacksController < ApplicationController
   disallow_account_scope
   allow_unauthenticated_access
-  rate_limit to: 5, within: 10.minutes, only: :create, with: -> { redirect_to new_site_feedback_path, alert: "Too many submissions. Please try again later." }
+  rate_limit to: 5, within: 10.minutes, only: :create, with: -> { redirect_to new_site_feedback_path, alert: t("flash.too_many_submissions") }
 
   layout "application"
 
@@ -28,6 +28,6 @@ class SiteFeedbacksController < ApplicationController
       from_name: from_name
     ).deliver_later
 
-    redirect_to new_site_feedback_path, notice: "Thanks for your feedback! We'll get back to you soon."
+    redirect_to new_site_feedback_path, notice: t("flash.feedback_thanks")
   end
 end

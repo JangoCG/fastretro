@@ -5,51 +5,47 @@
   <% formatted_paid_price = paid_price.present? ? format_currency(paid_price) : nil %>
   <section id="subscription" class="border-[3px] border-zinc-900 bg-[#efece6] shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)]">
     <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white text-center">
-      <h2 class="text-lg font-black text-zinc-900 uppercase tracking-wider">Subscription</h2>
+      <h2 class="text-lg font-black text-zinc-900 uppercase tracking-wider"><%= t("account.settings.subscription.heading") %></h2>
     </div>
 
     <div class="p-6 md:p-8 space-y-5 text-center">
       <% if Current.account.plan.free? %>
         <h3 class="text-2xl md:text-4xl font-black text-zinc-900 leading-tight tracking-tight">
-          You've used <u><%= number_with_delimiter(Current.account.feedbacks_count) %></u> free feedbacks out of
-          <%= number_with_delimiter(free_limit) %>
+          <%= t("account.settings.subscription.used_feedbacks", used: number_with_delimiter(Current.account.feedbacks_count), limit: number_with_delimiter(free_limit)).html_safe %>
         </h3>
 
         <% if formatted_paid_price.present? %>
           <p class="text-zinc-800 text-lg md:text-2xl leading-snug">
-            To keep using Fast Retro past <%= number_with_delimiter(free_limit) %> feedbacks,
-            it's only <strong><%= formatted_paid_price %>/month</strong> for
-            <strong>unlimited feedbacks, unlimited users</strong>.
+            <%= t("account.settings.subscription.upgrade_prompt", limit: number_with_delimiter(free_limit), price: formatted_paid_price).html_safe %>
           </p>
 
-          <%= button_to "Upgrade to Unlimited for #{formatted_paid_price}/month", account_subscription_path,
+          <%= button_to t("account.settings.subscription.upgrade_button", price: formatted_paid_price), account_subscription_path,
               id: "stripe-checkout-button",
               class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
               form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% else %>
           <p class="text-red-700 text-base md:text-xl leading-snug font-bold">
-            Live pricing is currently unavailable. Please try again in a moment.
+            <%= t("account.settings.subscription.pricing_unavailable") %>
           </p>
 
-          <%= button_to "Open Stripe Checkout", account_subscription_path,
+          <%= button_to t("account.settings.subscription.open_checkout"), account_subscription_path,
               id: "stripe-checkout-button",
               class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
               form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% end %>
 
-        <p class="text-zinc-700 text-lg md:text-2xl">Cancel anytime, no contracts.</p>
+        <p class="text-zinc-700 text-lg md:text-2xl"><%= t("account.settings.subscription.cancel_anytime") %></p>
 
         <p class="text-[#6b39ff] text-lg md:text-2xl leading-snug">
-          Right now you're on the <strong><%= Current.account.plan.name %></strong> plan which includes
-          <%= number_with_delimiter(free_limit) %> feedbacks and unlimited users.
+          <%= t("account.settings.subscription.current_plan_free", plan: Current.account.plan.name, limit: number_with_delimiter(free_limit)).html_safe %>
         </p>
       <% else %>
         <h3 class="text-2xl md:text-4xl font-black text-zinc-900 leading-tight tracking-tight">
-          Thank you for buying Fast Retro!
+          <%= t("account.settings.subscription.thank_you") %>
         </h3>
 
         <p class="text-zinc-800 text-lg md:text-2xl leading-snug">
-          You're currently on the <strong><%= Current.account.plan.name %></strong> plan with unlimited feedbacks and unlimited users.
+          <%= t("account.settings.subscription.current_plan_paid", plan: Current.account.plan.name).html_safe %>
         </p>
 
         <% if subscription&.current_period_end %>
@@ -59,7 +55,7 @@
           </p>
         <% end %>
 
-        <%= link_to "Manage Billing", account_billing_portal_path,
+        <%= link_to t("account.settings.subscription.manage_billing"), account_billing_portal_path,
             class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]" %>
       <% end %>
     </div>
