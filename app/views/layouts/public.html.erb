@@ -45,35 +45,33 @@
     <meta name="twitter:creator" content="@fastretro">
 
     <%# === STRUCTURED DATA (JSON-LD) === %>
-    <script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Fast Retro",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "description": "Open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss in real-time.",
-      "url": "https://fastretro.app",
-      "image": "<%= image_url("retro-image-no-padding.png") %>",
-      "screenshot": "<%= image_url("retro-image-no-padding.png") %>",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR",
-        "description": "Free tier with 500 items"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "ratingCount": "1"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "Fast Retro",
-        "url": "https://fastretro.app"
-      }
-    }
-    </script>
+    <%= structured_data_tag(
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Fast Retro",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description: "Open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss in real-time.",
+          url: "https://fastretro.app",
+          image: image_url("retro-image-no-padding.png"),
+          screenshot: image_url("retro-image-no-padding.png"),
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "EUR",
+            description: "Free tier with 500 items"
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "5",
+            ratingCount: "1"
+          },
+          author: {
+            "@type": "Organization",
+            name: "Fast Retro",
+            url: "https://fastretro.app"
+          }
+        ) %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

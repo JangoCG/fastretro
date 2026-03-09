@@ -11,34 +11,32 @@
 <% end %>
 
 <% content_for :structured_data do %>
-<script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "<%= j @post.title %>",
-  "description": "<%= j @post.description %>",
-  "image": "<%= @post.image ? image_url(@post.image) : image_url("retro-image-no-padding.png") %>",
-  "author": {
-    "@type": "Person",
-    "name": "<%= @post.author %>"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Fast Retro",
-    "url": "https://fastretro.app",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "<%= image_url("icon.png") %>"
-    }
-  },
-  "datePublished": "<%= @post.date.iso8601 %>",
-  "dateModified": "<%= @post.date.iso8601 %>",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "<%= request.original_url %>"
-  }
-}
-</script>
+<%= structured_data_tag(
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: @post.title,
+      description: @post.description,
+      image: @post.image ? image_url(@post.image) : image_url("retro-image-no-padding.png"),
+      author: {
+        "@type": "Person",
+        name: @post.author
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Fast Retro",
+        url: "https://fastretro.app",
+        logo: {
+          "@type": "ImageObject",
+          url: image_url("icon.png")
+        }
+      },
+      datePublished: @post.date.iso8601,
+      dateModified: @post.date.iso8601,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": blog_post_url(@post.slug, script_name: nil)
+      }
+    ) %>
 <% end %>
 
 <article class="max-w-4xl mx-auto px-4 sm:px-6 relative">

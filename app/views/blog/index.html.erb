@@ -5,20 +5,18 @@
 <% content_for :canonical_url, blog_url(script_name: nil) %>
 
 <% content_for :structured_data do %>
-<script type="application/ld+json" nonce="<%= content_security_policy_nonce %>">
-{
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Fast Retro Blog",
-  "description": "Building Fast Retro in public. Technical guides, retrospective tips, and behind-the-scenes updates.",
-  "url": "<%= blog_url %>",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Fast Retro",
-    "url": "https://fastretro.app"
-  }
-}
-</script>
+<%= structured_data_tag(
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      name: "Fast Retro Blog",
+      description: "Building Fast Retro in public. Technical guides, retrospective tips, and behind-the-scenes updates.",
+      url: blog_url(script_name: nil),
+      publisher: {
+        "@type": "Organization",
+        name: "Fast Retro",
+        url: "https://fastretro.app"
+      }
+    ) %>
 <% end %>
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-16 relative">

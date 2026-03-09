@@ -21,4 +21,12 @@ module ApplicationHelper
     return File.read(file_path).html_safe if File.exist?(file_path)
     "(not found)"
   end
+
+  def structured_data_tag(data)
+    tag.script(
+      ERB::Util.json_escape(data.to_json).html_safe,
+      type: "application/ld+json",
+      nonce: content_security_policy_nonce
+    )
+  end
 end
