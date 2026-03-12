@@ -54,7 +54,7 @@ gem "redcarpet"
 # Syntax highlighting for code blocks
 gem "rouge"
 
-gem "stripe", "~> 18.3"
+gem "stripe", "~> 18.4"
 
 # Error tracking
 gem "sentry-ruby"
