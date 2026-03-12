@@ -1,4 +1,4 @@
-<% content_for :title, "#{@retro.name} - Waiting Room" %>
+<% content_for :title, t("waiting_rooms.show.title", name: @retro.name) %>
 <%= turbo_stream_from @retro %>
 <%= turbo_stream_from [@retro, Current.user] if Current.user.present? %>
 <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
@@ -7,8 +7,8 @@
 
   <%# Navigation Header %>
   <div class="flex items-center justify-between mb-12 border-b-2 border-black pb-4">
-    <%= render BackButtonComponent.new(label: "RETROS", href: retros_path) %>
-    <span class="font-mono text-xs text-zinc-400 uppercase hidden sm:inline-block">/ WAITING_ROOM</span>
+    <%= render BackButtonComponent.new(label: t("shared.retros"), href: retros_path) %>
+    <span class="font-mono text-xs text-zinc-400 uppercase hidden sm:inline-block"><%= t("waiting_rooms.show.waiting_room_label") %></span>
   </div>
 
   <%# Main Grid Layout %>
@@ -19,7 +19,7 @@
       <%# Industrial Header %>
       <div class="border-l-4 border-black pl-6 py-4 mb-8">
         <p class="font-mono text-xs text-zinc-500 mb-2 uppercase tracking-widest">
-          RETRO // ID_00<%= @retro.id %>
+          <%= t("waiting_rooms.show.retro_id", id: @retro.id) %>
         </p>
         <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-black leading-[0.9]">
           "<%= @retro.name %>"
@@ -40,9 +40,9 @@
           <div class="flex items-center justify-between border-b border-zinc-700 pb-4 mb-8">
             <div class="flex items-center gap-2">
               <span class="w-3 h-3 bg-amber-400 rounded-[2px] animate-pulse"></span>
-              <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">WAITING FOR TEAM</span>
+              <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400"><%= t("waiting_rooms.show.waiting_for_team") %></span>
             </div>
-            <span class="font-mono text-[10px] text-zinc-500">SESSION_<%= @retro.id %></span>
+            <span class="font-mono text-[10px] text-zinc-500"><%= t("waiting_rooms.show.session_id", id: @retro.id) %></span>
           </div>
 
           <div class="text-center py-6">
@@ -53,7 +53,7 @@
               <span class="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
             </div>
             <p class="text-xl font-black uppercase tracking-tight text-white">
-              "WAITING FOR EVERYONE TO JOIN"
+              "<%= t("waiting_rooms.show.waiting_for_everyone") %>"
             </p>
           </div>
         </div>
@@ -68,13 +68,13 @@
               id: "start-retro-button",
               form: { data: { turbo_frame: "_top" } },
               class: "group w-full bg-[#ffe600] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" do %>
-            <span>START RETRO</span>
+            <span><%= t("waiting_rooms.show.start_retro") %></span>
             <span class="font-mono group-hover:translate-x-2 transition-transform text-lg">-></span>
           <% end %>
         <% end %>
       <% else %>
         <div class="w-full bg-zinc-100 text-zinc-500 font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-center border-[3px] border-zinc-300">
-          <span>WAITING FOR FACILITATOR TO START</span>
+          <span><%= t("waiting_rooms.show.waiting_for_facilitator") %></span>
         </div>
       <% end %>
     </div>
@@ -87,20 +87,20 @@
         <%# Tips Card %>
         <div class="mt-6 border-[3px] border-zinc-900 bg-[#f4f1ea] p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <h3 class="font-black text-sm uppercase tracking-tight text-zinc-900 mb-3">
-            "HOW IT WORKS"
+            "<%= t("waiting_rooms.show.how_it_works") %>"
           </h3>
           <ul class="space-y-2 text-xs text-zinc-600 font-mono uppercase">
             <li class="flex items-start gap-2">
               <span class="text-zinc-400">01.</span>
-              <span>SHARE THE INVITE LINK WITH YOUR TEAM</span>
+              <span><%= t("waiting_rooms.show.step_1") %></span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-zinc-400">02.</span>
-              <span>WAIT FOR EVERYONE TO JOIN</span>
+              <span><%= t("waiting_rooms.show.step_2") %></span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-zinc-400">03.</span>
-              <span>START THE RETRO WHEN READY</span>
+              <span><%= t("waiting_rooms.show.step_3") %></span>
             </li>
           </ul>
         </div>

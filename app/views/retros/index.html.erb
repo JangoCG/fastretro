@@ -1,4 +1,4 @@
-<% content_for :title, "Retros" %>
+<% content_for :title, t("retros.index.title") %>
 <div class="max-w-7xl mx-auto p-4 sm:p-6" data-controller="filter">
   <%= render "feedbacks/near_limit_notice" %>
 
@@ -11,7 +11,7 @@
   <%# Industrial Header %>
   <div class="border-l-2 sm:border-l-4 border-black pl-4 sm:pl-6 py-3 sm:py-4 mb-10 sm:mb-12">
     <h1 class="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
-      YOUR <span class="block sm:inline">RETROS</span>
+      <%= t("retros.index.your_retros") %>
     </h1>
 
     <div class="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,28rem)_auto] xl:grid-cols-[minmax(0,1fr)_auto] gap-4 xl:gap-6 items-center">
@@ -19,7 +19,7 @@
       <div class="relative w-full">
         <input
           type="text"
-          placeholder="SEARCH..."
+          placeholder="<%= t("shared.search") %>"
           class="block w-full pl-4 pr-12 py-3 bg-zinc-100 border-2 border-zinc-300 focus:border-black font-mono text-sm uppercase rounded-none focus:outline-none transition-colors"
           data-filter-target="input"
           data-controller="hotkey"
@@ -33,7 +33,7 @@
       <%# Primary Actions %>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 xl:flex xl:items-center">
         <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
-          <span>NEW RETRO</span>
+          <span><%= t("retros.index.new_retro") %></span>
           <span class="font-mono group-hover:translate-x-1 transition-transform">-></span>
           <span class="hidden sm:inline">
             <%= render KbdComponent.new(key: "C", size: :sm) %>
@@ -42,7 +42,7 @@
 
         <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 px-4 sm:px-5 bg-violet-600 text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-violet-700 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
           <%= icon_tag "chat", class: "w-4 h-4" %>
-          Give us feedback
+          <%= t("retros.index.give_feedback") %>
         <% end %>
       </div>
     </div>
@@ -61,17 +61,17 @@
 
       <%# No Results State %>
       <div data-filter-target="blankSlate" class="hidden col-span-full py-16 text-center border-2 border-dashed border-zinc-300">
-        <p class="font-mono text-zinc-400 uppercase">NO MATCHES FOUND</p>
+        <p class="font-mono text-zinc-400 uppercase"><%= t("retros.index.no_matches_found") %></p>
       </div>
     <% else %>
       <%# Empty State %>
       <div class="col-span-full py-24 text-center border-2 border-dashed border-zinc-300 bg-zinc-50">
         <div class="max-w-md mx-auto">
-          <p class="text-2xl font-black uppercase tracking-tight mb-4">NO RETROS YET</p>
-          <p class="font-mono text-sm text-zinc-500 mb-8">START YOUR FIRST RETROSPECTIVE.</p>
+          <p class="text-2xl font-black uppercase tracking-tight mb-4"><%= t("retros.index.no_retros_yet") %></p>
+          <p class="font-mono text-sm text-zinc-500 mb-8"><%= t("retros.index.start_first_retro") %></p>
           
           <%= link_to new_retro_path, class: "inline-block bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-3 text-sm tracking-wider" do %>
-            CREATE FIRST RETRO
+            <%= t("retros.index.create_first_retro") %>
           <% end %>
         </div>
       </div>

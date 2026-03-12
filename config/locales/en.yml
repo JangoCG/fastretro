@@ -1,31 +1,491 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  # ── Shared / Global ────────────────────────────────────────────
+  shared:
+    app_name: "FastRetro"
+    retros: "Retros"
+    retro: "Retro"
+    profile: "Profile"
+    settings: "Settings"
+    home: "Home"
+    save: "Save"
+    cancel: "Cancel"
+    continue: "Continue"
+    confirm: "Confirm"
+    done: "Done"
+    add: "Add"
+    remove: "Remove"
+    new: "NEW"
+    editing: "EDITING"
+    author: "AUTHOR"
+    status: "STATUS"
+    drafting: "DRAFTING"
+    created: "CREATED"
+    items: "ITEMS"
+    unknown: "UNKNOWN"
+    account: "ACCOUNT"
+    menu: "MENU"
+    loading: "LOADING..."
+    search: "SEARCH..."
+    no_results: "NO RESULTS"
+    no_matches: "NO MATCHES"
+    navigation: "NAVIGATION"
+    quick_links: "QUICK LINKS"
+    close_menu: "Close menu"
+    email_address: "Email address"
+    email_placeholder: "you@example.com"
+    ago: "AGO"
+    error_log: "ERROR_LOG"
+    detected: "DETECTED"
+    required_field: "REQUIRED_FIELD"
+
+  # ── Roles ──────────────────────────────────────────────────────
+  roles:
+    owner: "Owner"
+    admin: "Admin"
+    member: "Member"
+
+  # ── Retro Phases ───────────────────────────────────────────────
+  phases:
+    waiting_room: "Waiting Room"
+    action_review: "Action Review"
+    brainstorming: "Brainstorming"
+    grouping: "Grouping"
+    voting: "Voting"
+    discussion: "Discussion"
+    complete: "Complete"
+
+  phase_instructions:
+    waiting_room: "Invite teammates and wait until everyone joins."
+    action_review: "Review previous action items and mark completed ones."
+    brainstorming: "Add your feedback ideas to the board."
+    grouping: "Group similar feedback items into clusters."
+    voting: "Vote for the feedback that matters most."
+    discussion: "Discuss top-voted items and define clear action items."
+    complete: "Review outcomes and export the retro summary."
+    default: "Collaborate with your team in this phase."
+
+  # ── Participant Status ─────────────────────────────────────────
+  participant_status:
+    finished: "FINISHED"
+    online: "ONLINE"
+
+  # ── Sessions (Sign in) ────────────────────────────────────────
+  sessions:
+    new:
+      title: "Sign in"
+      email_label: "Email address"
+      magic_link_hint: "Enter your email and we'll send you a magic link to sign in."
+      sign_in: "Sign in"
+      new_here: "New here?"
+      sign_up_link: "Sign up"
+      create_account: "to create an account."
+    magic_links:
+      title: "Enter Code"
+      verify: "VERIFY"
+      enter_code: "ENTER THE CODE FROM YOUR EMAIL"
+      expires_in: "EXPIRES IN %{time}"
+      resend_code: "Resend Code"
+      dev_code_hint: "PSST, HERE'S YOUR CODE:"
+      dev_label: "DEV"
+
+  # ── Signups ────────────────────────────────────────────────────
+  signups:
+    new:
+      title: "Sign up"
+      heading: "Sign up"
+      email_label: "Email address"
+      hint: "Enter your email to create an account."
+      sign_up: "Sign up"
+      already_have_account: "Already have an account?"
+      sign_in_link: "Sign in"
+    completions:
+      title: "Complete your sign-up"
+      almost_there: "Almost there!"
+      complete_profile: "Complete your profile"
+      tell_us: "Tell us about yourself"
+      your_name: "Your name"
+      name_placeholder: "Jane Smith"
+      something_went_wrong: "Something went wrong:"
+      continue: "Continue"
+
+  # ── Retros ─────────────────────────────────────────────────────
+  retros:
+    index:
+      title: "Retros"
+      your_retros: "YOUR RETROS"
+      new_retro: "NEW RETRO"
+      give_feedback: "Give us feedback"
+      no_retros_yet: "NO RETROS YET"
+      start_first_retro: "START YOUR FIRST RETROSPECTIVE."
+      create_first_retro: "CREATE FIRST RETRO"
+      no_matches_found: "NO MATCHES FOUND"
+    new:
+      title: "New retro"
+      heading: "NEW RETRO"
+    edit:
+      title: "Edit %{name}"
+      heading: "EDIT RETRO"
+      save_changes: "SAVE CHANGES"
+    form:
+      retro_name: "RETRO NAME"
+      name_placeholder: "ENTER NAME..."
+      layout_mode: "LAYOUT MODE"
+      default_layout: "DEFAULT (3 COLUMNS)"
+      default_columns: "Good, Bad, Want"
+      custom_layout: "CUSTOM LAYOUT"
+      custom_hint: "Add, remove, rename columns"
+      default_info: "This retro will start with 3 columns: <strong>Good</strong>, <strong>Bad</strong>, <strong>Want</strong>."
+      votes_per_participant: "Votes Per Participant"
+      votes_hint: "Only applied for custom layouts."
+      custom_columns: "CUSTOM COLUMNS"
+      add_column: "+ ADD COLUMN"
+      column_placeholder: "Column name"
+      update_retro: "UPDATE_RETRO"
+      create_retro: "CREATE_RETRO"
+    show:
+      what_to_do: "What to do:"
+      click_to_enable_music: "Click to enable music"
+      finished: "Finished"
+      i_am_finished: "I am finished"
+    retro_card:
+      created: "CREATED"
+      items: "ITEMS"
+      edit_retro: "Edit retro"
+      delete_confirm: "Are you sure you want to delete '%{name}'?"
+
+  # ── Waiting Room ───────────────────────────────────────────────
+  waiting_rooms:
+    show:
+      title: "%{name} - Waiting Room"
+      waiting_room_label: "/ WAITING_ROOM"
+      retro_id: "RETRO // ID_00%{id}"
+      waiting_for_team: "WAITING FOR TEAM"
+      session_id: "SESSION_%{id}"
+      waiting_for_everyone: "WAITING FOR EVERYONE TO JOIN"
+      start_retro: "START RETRO"
+      waiting_for_facilitator: "WAITING FOR FACILITATOR TO START"
+      how_it_works: "HOW IT WORKS"
+      step_1: "SHARE THE INVITE LINK WITH YOUR TEAM"
+      step_2: "WAIT FOR EVERYONE TO JOIN"
+      step_3: "START THE RETRO WHEN READY"
+
+  # ── Grouping ───────────────────────────────────────────────────
+  groupings:
+    pro_tip: "Pro Tip"
+    pro_tip_text: "Click on a participant's name to highlight their feedbacks. They can then share a few words about them."
+
+  # ── Action Review ──────────────────────────────────────────────
+  action_reviews:
+    heading: "ACTION ITEM REVIEW"
+    instructions: "Review the action items from your previous retro. Check off items that have been completed. When everyone is ready, the facilitator can advance to brainstorming."
+    carry_forward: "Completed items will be removed. Unchecked items will carry forward to this retro."
+    no_actions: "NO ACTIONS TO REVIEW"
+    selection_modal:
+      heading: "ACTION REVIEW"
+      review_past: "REVIEW PAST ACTION ITEMS?"
+      description: "You have completed retros with action items. Would you like to review them before starting this retro?"
+      select_retro: "SELECT PAST RETRO"
+      actions_count: "%{count} actions"
+      skip_review: "Skip Review"
+      review_actions: "Review Actions"
+
+  # ── Complete ───────────────────────────────────────────────────
+  completes:
+    title: "%{name} - Complete"
+    participants: "Participants"
+    total_feedbacks: "Total Feedbacks"
+    action_items: "Action Items"
+    no_action_items: "No action items were created"
+    added_by: "Added by"
+    retro_complete: "Retro Complete"
+    thank_you: "Thank you for participating!"
+    export_xlsx: "Export Excel (.xlsx)"
+    export_csv: "Export CSV"
+    export_jira: "Export to Jira"
+
+  # ── Feedbacks ──────────────────────────────────────────────────
+  feedbacks:
+    new:
+      title: "Add feedback"
+      placeholder: "Share your thoughts..."
+      create: "Create Feedback"
+      create_another: "Create & Add Another"
+    component:
+      discussed: "Discussed"
+      ungroup: "Ungroup"
+      mark_discussed: "Mark discussed"
+      undo: "Undo"
+    near_limit:
+      feedbacks_remaining: "feedbacks remaining"
+      used_free_owner: "You've used %{used} out of %{limit} free feedbacks."
+      upgrade_link: "Upgrade to unlimited"
+      used_free_member: "This account has used %{used} out of %{limit} free feedbacks."
+      upgrade_soon: "Upgrade soon"
+
+  # ── Actions ────────────────────────────────────────────────────
+  actions:
+    new:
+      title: "Add action"
+      action_label: "ACTION"
+      placeholder: "What action should we take?"
+      create: "Create Action"
+      create_another: "Create & Add Another"
+    edit:
+      title: "Edit action"
+      placeholder: "What action should we take?"
+    review:
+      done: "DONE"
+
+  # ── Account Settings ──────────────────────────────────────────
+  account:
+    settings:
+      title: "Account Settings"
+      account_and_team: "Account And Team"
+      integrations_heading: "Integrations"
+      name:
+        label: "ACCOUNT NAME"
+        placeholder: "ENTER ACCOUNT NAME"
+        error: "ERROR: %{message}"
+      users:
+        heading: "TEAM MEMBERS"
+        invite_member: "INVITE MEMBER"
+        remove_user: "Remove %{name}"
+        remove_confirm: "Are you sure you want to remove %{name} from this account?"
+        cannot_change_owner: "(cannot change owner)"
+        role_label: "Role: %{role}"
+      integrations:
+        jira: "Jira"
+        connected: "Connected"
+        not_configured: "Not configured"
+        setup: "Setup"
+        manage: "Manage"
+      subscription:
+        heading: "Subscription"
+        used_feedbacks: "You've used <u>%{used}</u> free feedbacks out of %{limit}"
+        upgrade_prompt: "To keep using Fast Retro past %{limit} feedbacks, it's only <strong>%{price}/month</strong> for <strong>unlimited feedbacks, unlimited users</strong>."
+        upgrade_button: "Upgrade to Unlimited for %{price}/month"
+        open_checkout: "Open Stripe Checkout"
+        cancel_anytime: "Cancel anytime, no contracts."
+        current_plan_free: "Right now you're on the <strong>%{plan}</strong> plan which includes %{limit} feedbacks and unlimited users."
+        thank_you: "Thank you for buying Fast Retro!"
+        current_plan_paid: "You're currently on the <strong>%{plan}</strong> plan with unlimited feedbacks and unlimited users."
+        manage_billing: "Manage Billing"
+        pricing_unavailable: "Live pricing is currently unavailable. Please try again in a moment."
+        ends_on: "Your Fast Retro subscription ends on"
+        ended_on: "Your Fast Retro subscription ended on"
+        next_payment: "Your next payment is <b>%{amount}</b> on"
+
+  # ── Join Codes & Invites ──────────────────────────────────────
+  join_codes:
+    show:
+      title: "Invite people"
+      heading: "Invite People"
+      description: "Anyone with this link can join your account."
+      invite_link: "Invite Link"
+      copy_link: "Copy invite link"
+      link_usage: "Link Usage"
+      edit_limit: "Edit usage limit"
+      uses_consumed: "%{used} of %{limit} uses consumed."
+      uses_remaining: "%{count} uses remaining."
+      regenerate: "Regenerate Link"
+      regenerate_confirm: "Regenerate this link? The previous link will stop working."
+    new:
+      title: "Join %{name}"
+      heading: "Join %{name}"
+      enter_email: "Enter your email address to join this account. We will send you a magic link to verify your email."
+      email_label: "Email Address"
+      join_account: "Join Account"
+    inactive:
+      title: "Join link expired"
+      heading: "Join Link Expired"
+      reached_limit: "This join link has reached its usage limit."
+      ask_for_new: "Ask someone from <strong>%{name}</strong> to send you a new link or increase the usage limit."
+
+  # ── Retro Invites ─────────────────────────────────────────────
+  retro_invites:
+    title: "Join %{name}"
+    invited_to: "YOU'VE BEEN INVITED TO"
+    team: "TEAM:"
+    enter_email: "ENTER YOUR EMAIL TO JOIN"
+    magic_link_hint: "WE'LL SEND YOU A MAGIC LINK TO VERIFY YOUR EMAIL AND JOIN THE RETRO."
+    join_retro: "JOIN RETRO"
+    footer_hint: "NEW OR EXISTING USER? JUST ENTER YOUR EMAIL"
+
+  # ── Users ──────────────────────────────────────────────────────
+  users:
+    show:
+      title: "User Profile"
+      heading: "User Profile"
+      edit_profile: "Edit profile"
+      inactive_member: "Inactive Member"
+      email_pending: "Email Verification Pending"
+      check_inbox: "Check your inbox and confirm your email address."
+      update_hint: "Want to update your details? Tap edit profile."
+      sign_out: "Sign Out"
+    edit:
+      title: "Edit your profile"
+      heading: "Edit Profile"
+      name_label: "Name"
+      name_placeholder: "Enter your name"
+      email_label: "Email Address"
+      edit_email: "Edit email address"
+      fix_errors: "Please fix the following:"
+      save_changes: "Save Changes"
+    email_addresses:
+      new:
+        title: "Change your email"
+        heading: "Change Email Address"
+        label: "New Email Address"
+        hint: "We'll send a confirmation link to your new address before anything changes."
+      create:
+        title: "Confirm your new email address"
+        heading: "Check Your Inbox"
+        sent_to: "We sent a confirmation email to"
+        open_email: "Open that email and click the confirmation link to finish changing your address."
+        back_to_profile: "Back to Profile"
+      confirmations:
+        title: "Confirm email change"
+        heading: "Confirm Email Change"
+        confirming: "Just a sec while we confirm your new email address."
+        confirm_button: "Confirm"
+        invalid_token:
+          title: "Link expired"
+          heading: "Link Expired"
+          expired_text: "That confirmation link is no longer valid."
+          expires_hint: "Links expire after 30 minutes. Request a new one to continue."
+          change_email: "Change Email Address"
+          need_help: "Need help?"
+          send_email: "Send us an email"
+
+  # ── Site Feedback ─────────────────────────────────────────────
+  site_feedbacks:
+    new:
+      title: "Send Feedback"
+      heading: "Send us Feedback"
+      subheading: "Bug reports, feature requests, or just say hi!"
+      app_feedback: "APP FEEDBACK"
+      your_name: "Your Name"
+      name_placeholder: "Jane Doe"
+      your_email: "Your Email"
+      email_placeholder: "jane@example.com"
+      your_message: "Your Message"
+      message_placeholder: "Tell us what's on your mind..."
+      from: "FROM:"
+      you: "You"
+      to: "TO:"
+      fastretro_team: "FASTRETRO TEAM"
+      send_feedback: "Send Feedback"
+
+  # ── Errors ─────────────────────────────────────────────────────
+  errors:
+    not_found:
+      title: "404"
+      heading: "Page not found"
+      description: "The page you were looking for doesn't exist. You may have mistyped the address or the page may have moved."
+      back_home: "Back to home"
+
+  # ── Components ─────────────────────────────────────────────────
+  components:
+    confirm_phase_modal:
+      confirm: "CONFIRM"
+      are_you_sure: "ARE YOU SURE?"
+      about_to_complete: "You are about to complete this phase and move to"
+      complete_phase: "Complete Phase"
+      not_everyone_finished: "Not everyone is finished!"
+      participants_working:
+        one: "%{count} participant still working on this phase."
+        other: "%{count} participants still working on this phase."
+      everyone_finished: "Everyone is finished!"
+      yes_continue: "Yes, Continue"
+    confirm_back_phase_modal:
+      confirm: "CONFIRM"
+      go_back_question: "GO BACK?"
+      about_to_go_back: "You are about to go back to"
+      go_back: "Go Back"
+      participants_redirected: "Participants will be redirected"
+      all_redirected: "All participants will be taken back to the previous phase."
+      yes_go_back: "Yes, Go Back"
+    votes_remaining:
+      label: "Votes remaining:"
+    participant_list:
+      heading: "PARTICIPANTS"
+    retro_invite_card:
+      heading: "SHARE LINK"
+      description: "Share this link to invite team members:"
+      copy: "Copy"
+    retro_footer:
+      brand: "FASTRETRO // 2026"
+      blog: "BLOG"
+      imprint: "IMPRINT"
+      privacy: "PRIVACY"
+      discord: "Join our Discord"
+
+  # ── Menu ───────────────────────────────────────────────────────
+  menus:
+    settings_section: "Settings"
+    account_settings: "Account Settings"
+    my_profile: "My Profile"
+    send_feedback: "Send Feedback"
+    log_out: "Log out"
+    accounts_section: "Accounts"
+    people_section: "People"
+    invite_people: "Invite people"
+    open_account_menu: "Open your account menu"
+    go_to_account_menu: "Go to account menu"
+    designed_by: "is designed, built, and backed by"
+
+  # ── Mailers ────────────────────────────────────────────────────
+  mailers:
+    magic_link:
+      sign_in_subject: "Fast Retro verification code"
+      sign_in_body: "Please enter this 6-character verification code on the FastRetro sign-in page:"
+      sign_up_subject: "Welcome to Fast Retro!"
+      sign_up_body: "Please enter this 6-character verification code on the FastRetro sign-up page to create your new account:"
+      code_validity: "This code will work for %{time}."
+      need_help: "Need help?"
+      send_email: "Send us an email"
+    email_change:
+      subtitle: "Confirm your email address change"
+      confirm_button: "Yes, use this email address"
+      ignore_notice: "If you didn't request this change, you can ignore this email. Your email address WILL NOT be changed unless you hit the button."
+      need_help: "Need help?"
+      send_email: "Send us an email"
+
+  # ── Flash Messages ─────────────────────────────────────────────
+  flash:
+    retro_created: "Retro was successfully created."
+    retro_updated: "Retro was successfully updated."
+    retro_destroyed: "Retro was successfully destroyed."
+    retro_not_found: "Retro not found"
+    feedback_deleted: "Feedback deleted"
+    action_deleted: "Action deleted"
+    column_not_found: "This column does not exist in the current retro layout."
+    edit_own_feedback: "You can only edit your own feedback"
+    edit_own_actions: "You can only edit your own actions"
+    try_again_later: "Try again later."
+    rate_limit_15min: "Wait 15 minutes, then try again"
+    too_many_resends: "Too many resend attempts. Wait a few minutes."
+    new_code_sent: "New code sent!"
+    enter_email_again: "Please enter your email again."
+    enter_email_to_sign_in: "Enter your email address to sign in."
+    auth_failed: "Authentication failed. Please try again."
+    feedback_limit_reached: "You've reached your plan's feedback limit. Please upgrade to continue."
+    account_not_found: "Retro not found. Either it really does not exist or you are not part of that account"
+    account_deactivated: "Your account access has been deactivated."
+    grouping_only: "Grouping is only available during the grouping phase"
+    voting_only: "Voting is only available during the voting phase"
+    discussion_only: "Items can only be marked discussed during discussion phase"
+    invalid_invite: "Invalid invite link."
+    invite_expired: "This invite link has expired."
+    invite_retro_not_found: "Retro not found."
+    user_removed: "%{name} has been removed from this account"
+    email_already_exists: "You already have a user in this account with that email address"
+    email_verified: "Email verified successfully."
+    no_admin_access: "You don't have access to this area."
+    no_billing_info: "No billing information found"
+    jira_saved: "Jira integration saved."
+    jira_updated: "Jira integration updated."
+    jira_removed: "Jira integration removed."
+    jira_export_started: "Exporting action items to Jira. They will appear in your project shortly."
+    too_many_submissions: "Too many submissions. Please try again later."
+    feedback_thanks: "Thanks for your feedback! We'll get back to you soon."

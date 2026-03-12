@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   private
     def ensure_staff
       unless Current.identity&.staff?
-        redirect_to session_menu_url(script_name: nil), alert: "You don't have access to this area."
+        redirect_to session_menu_url(script_name: nil), alert: t("flash.no_admin_access")
       end
     end
 end

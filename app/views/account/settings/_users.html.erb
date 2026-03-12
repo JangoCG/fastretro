@@ -1,13 +1,13 @@
 <div class="flex flex-col gap-5 min-h-0 flex-1 overflow-x-hidden" data-controller="filter navigable-list" data-action="keydown->navigable-list#navigate filter:changed->navigable-list#reset" data-navigable-list-focus-on-selection-value="true" data-navigable-list-actionable-items-value="true">
   <header class="border-t-[2px] border-zinc-200 pt-5">
-    <h2 class="text-sm font-black text-zinc-900 uppercase tracking-widest">TEAM MEMBERS</h2>
+    <h2 class="text-sm font-black text-zinc-900 uppercase tracking-widest"><%= t("account.settings.users.heading") %></h2>
   </header>
   
   <div class="flex flex-col gap-4 min-h-0 relative z-10">
     <%# Industrial Search Input %>
     <div class="relative">
        <input type="search"
-        placeholder="SEARCH..."
+        placeholder="<%= t("shared.search") %>"
         autocorrect="off"
         autocomplete="off"
         data-1p-ignore="true"
@@ -23,12 +23,12 @@
     </ul>
     
     <div class="hidden text-center text-xs font-mono text-zinc-400 py-6 uppercase tracking-widest border border-zinc-200 border-dashed" data-filter-target="blankSlate">
-      NO MATCHES
+      <%= t("shared.no_matches") %>
     </div>
   </div>
 
   <%= link_to account_join_code_path, class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-zinc-900 transition-colors" do %>
     <%= icon_tag "add", class: "text-lg" %>
-    <span>INVITE MEMBER</span>
+    <span><%= t("account.settings.users.invite_member") %></span>
   <% end %>
 </div>

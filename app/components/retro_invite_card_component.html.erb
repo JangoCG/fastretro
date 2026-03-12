@@ -17,7 +17,7 @@
         <h2 class="font-black text-lg uppercase tracking-tighter text-zinc-900 leading-[0.85] filter drop-shadow-sm">
           <span class="relative px-1 inline-block">
              <span class="absolute inset-0 bg-emerald-300 -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
-             "SHARE LINK"
+             "<%= t("components.retro_invite_card.heading") %>"
           </span>
         </h2>
       </div>
@@ -30,7 +30,7 @@
 
       <div class="relative z-10">
         <p class="text-xs text-zinc-600 mb-3 uppercase tracking-wide font-bold">
-          Share this link to invite team members:
+          <%= t("components.retro_invite_card.description") %>
         </p>
 
         <%# Link Input with Copy Button %>
@@ -50,7 +50,7 @@
             data-clipboard-target="button"
             class="px-4 py-2 bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider border-[2px] border-zinc-900 rounded-[2px] hover:bg-zinc-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]"
           >
-            Copy
+            <%= t("components.retro_invite_card.copy") %>
           </button>
         </div>
       </div>

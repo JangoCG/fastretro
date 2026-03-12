@@ -23,6 +23,6 @@ module RetroAuthorization
   end
 
   def handle_retro_not_found
-    redirect_to retros_path, alert: "Retro not found"
+    redirect_to retros_path, alert: t("flash.retro_not_found")
   end
 end

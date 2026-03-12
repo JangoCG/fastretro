@@ -21,7 +21,7 @@ class Retros::DiscussionItemsController < ApplicationController
   def ensure_discussion_phase
     return if @retro.discussion?
 
-    redirect_to retro_path(@retro), alert: "Items can only be marked discussed during discussion phase"
+    redirect_to retro_path(@retro), alert: t("flash.discussion_only")
   end
 
   def set_item

@@ -3,7 +3,7 @@
 
   <%# Title Block %>
     <div class="flex flex-col">
-      <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono mb-0.5">ACCOUNT</span>
+      <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono mb-0.5"><%= t("shared.account") %></span>
       <strong class="text-xl font-black text-zinc-900 uppercase tracking-tight leading-none">
         <%= Current.account.name %>
       </strong>
@@ -13,7 +13,7 @@
   <button class="absolute right-4 top-5 w-8 h-8 flex sm:hidden! items-center justify-center border-[2px] border-zinc-900 text-zinc-900 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-150 rounded-none"
           data-action="dialog#close">
     <%= icon_tag "close", class: "w-5 h-5 font-bold" %>
-    <span class="sr-only">Close menu</span>
+    <span class="sr-only"><%= t("shared.close_menu") %></span>
   </button>
 </div>
 
@@ -22,7 +22,7 @@
 
   <%# 1. Search Field (Command Prompt Style) %>
   <div class="mb-6 group">
-    <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-1">SEARCH</label>
+    <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-1"><%= t("shared.search").delete(".") %></label>
     <div class="relative">
       <%# Decorative Prompt Symbol %>
       <div class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 font-mono font-bold select-none">></div>
@@ -37,7 +37,7 @@
 
   <%# 2. Quick Links Grid (Function Key Style) %>
   <div class="mb-2">
-    <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-2">QUICK LINKS</label>
+    <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-2"><%= t("shared.quick_links") %></label>
 
     <%# Grid container %>
     <div class="grid grid-cols-3 gap-3 mb-6" role="list" data-filter-target="section">
@@ -45,10 +45,10 @@
          NOTE: Ensure 'filter_hotkey_link' renders a block with these classes for the full effect:
          class="flex flex-col items-center justify-center p-3 border-[2px] border-zinc-900 bg-white shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:bg-zinc-50"
       %>
-      <%= filter_hotkey_link "Retros", root_path, 1, "home" %>
-      <%= filter_hotkey_link "Account", account_settings_path, 2, "settings" %>
+      <%= filter_hotkey_link t("shared.retros"), root_path, 1, "home" %>
+      <%= filter_hotkey_link t("shared.account"), account_settings_path, 2, "settings" %>
       <% if Current.user %>
-        <%= filter_hotkey_link "Profile", user_path(Current.user), 3, "person" %>
+        <%= filter_hotkey_link t("shared.profile"), user_path(Current.user), 3, "person" %>
       <% end %>
     </div>
   </div>
@@ -59,7 +59,7 @@
     <%# Section Divider Label %>
     <div class="flex items-center gap-2 mb-2 opacity-50">
       <div class="w-1 h-1 bg-zinc-900 rounded-full"></div>
-      <span class="text-[0.55rem] font-bold text-zinc-500 uppercase tracking-widest">NAVIGATION</span>
+      <span class="text-[0.55rem] font-bold text-zinc-500 uppercase tracking-widest"><%= t("shared.navigation") %></span>
       <div class="h-[1px] bg-zinc-300 flex-1"></div>
     </div>
 
@@ -67,7 +67,7 @@
 
     <%# Empty State %>
     <div class="hidden py-8 text-center border-2 border-dashed border-zinc-300 bg-zinc-50/50" data-filter-target="blankSlate">
-      <p class="text-zinc-400 font-mono text-xs uppercase">NO RESULTS</p>
+      <p class="text-zinc-400 font-mono text-xs uppercase"><%= t("shared.no_results") %></p>
     </div>
   </div>
 

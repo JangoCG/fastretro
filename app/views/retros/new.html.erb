@@ -1,18 +1,18 @@
-<% content_for :title, "New retro" %>
+<% content_for :title, t("retros.new.title") %>
 
 <div class="max-w-7xl mx-auto px-4 py-12">
   <%= render "feedbacks/near_limit_notice" %>
 
   <%# Navigation Header %>
   <div class="flex items-center justify-between mb-16 border-b-2 border-black pb-4">
-    <%= render BackButtonComponent.new(label: "RETROS", href: retros_path) %>
+    <%= render BackButtonComponent.new(label: t("shared.retros"), href: retros_path) %>
   </div>
 
   <div class="max-w-2xl mx-auto">
     <%# Industrial Header %>
     <div class="border-l-4 border-black pl-6 py-4 mb-8">
       <h1 class="text-5xl font-black uppercase tracking-tighter text-black leading-[0.9]">
-        NEW<br>RETRO
+        <%= t("retros.new.heading") %>
       </h1>
     </div>
 

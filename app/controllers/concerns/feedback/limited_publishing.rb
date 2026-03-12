@@ -8,7 +8,7 @@ module Feedback::LimitedPublishing
   private
     def ensure_can_publish_feedbacks
       if Current.account.exceeding_feedback_limit?
-        redirect_to account_subscription_path, alert: "You've reached your plan's feedback limit. Please upgrade to continue."
+        redirect_to account_subscription_path, alert: t("flash.feedback_limit_reached")
       end
     end
 end

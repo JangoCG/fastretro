@@ -7,6 +7,9 @@ class LandingPageController < ApplicationController
 
   def show
     @free_limit = Plan.free.feedback_limit
+    @paid_price = Plan.paid.price_for_display
+  rescue Plan::StripePriceUnavailableError
+    @paid_price = nil
   end
 
   private

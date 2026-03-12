@@ -1,6 +1,6 @@
 <%= form_with model: @account, url: account_settings_path, method: :patch, class: "flex flex-col gap-2", data: { controller: "form", action: "input->form#markDirty" } do |form| %>
   <label for="account_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
-    ACCOUNT NAME
+    <%= t("account.settings.name.label") %>
   </label>
   
   <div class="flex items-center gap-3">
@@ -8,7 +8,7 @@
       <%= form.text_field :name,
         required: true,
         class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none text-lg",
-        placeholder: "ENTER ACCOUNT NAME" %>
+        placeholder: t("account.settings.name.placeholder") %>
     </div>
     
     <button type="submit"
@@ -16,11 +16,11 @@
       data-form-target="submit"
       disabled>
       <%= icon_tag "arrow-right", class: "text-2xl" %>
-      <span class="sr-only">SAVE</span>
+      <span class="sr-only"><%= t("shared.save") %></span>
     </button>
   </div>
 <% end %>
 
 <% if @account.errors[:name].any? %>
-  <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-2 tracking-wide font-bold">ERROR: <%= @account.errors[:name].first %></p>
+  <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-2 tracking-wide font-bold"><%= t("account.settings.name.error", message: @account.errors[:name].first) %></p>
 <% end %>

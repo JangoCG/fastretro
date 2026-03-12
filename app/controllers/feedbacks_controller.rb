@@ -35,7 +35,7 @@ class FeedbacksController < ApplicationController
 
   def destroy
     @feedback.destroy!
-    redirect_to @retro, notice: "Feedback deleted"
+    redirect_to @retro, notice: t("flash.feedback_deleted")
   end
 
   private
@@ -54,12 +54,12 @@ class FeedbacksController < ApplicationController
     def ensure_valid_category!
       return if @retro.category_exists?(@category)
 
-      redirect_to @retro, alert: "This column does not exist in the current retro layout."
+      redirect_to @retro, alert: t("flash.column_not_found")
     end
 
     def authorize_author!
       unless @feedback.user == Current.user
-        redirect_to @retro, alert: "You can only edit your own feedback"
+        redirect_to @retro, alert: t("flash.edit_own_feedback")
       end
     end
 

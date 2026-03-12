@@ -1,6 +1,6 @@
-<% content_for :title, "Edit #{@retro.name}" %>
+<% content_for :title, t("retros.edit.title", name: @retro.name) %>
 <div class="px-4 py-4">
-  <%= render BackButtonComponent.new(label: "Retro", href: retro_path(@retro), variant: :fizzy) %>
+  <%= render BackButtonComponent.new(label: t("shared.retro"), href: retro_path(@retro), variant: :fizzy) %>
 </div>
 
 <div class="max-w-2xl mx-auto px-4 py-8 font-sans">
@@ -14,7 +14,7 @@
       
       <div class="relative z-10 flex items-center justify-between">
         <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
-           EDIT RETRO
+           <%= t("retros.edit.heading") %>
         </h1>
 
         <span class="inline-flex items-center px-2 py-1 border-[2px] border-zinc-900 bg-blue-100 text-blue-900 text-[0.6rem] font-bold uppercase tracking-widest">
@@ -36,12 +36,12 @@
     <%# Footer Metadata %>
     <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
       <div class="flex items-center gap-2">
-        <span class="font-bold text-zinc-900">CREATED:</span>
-        <span><%= time_ago_in_words(@retro.created_at) %> AGO</span>
+        <span class="font-bold text-zinc-900"><%= t("shared.created") %>:</span>
+        <span><%= time_ago_in_words(@retro.created_at) %> <%= t("shared.ago") %></span>
       </div>
       <div class="flex items-center gap-1">
          <span class="text-zinc-900 font-bold"><%= @retro.feedbacks.published.count %></span>
-         <span>ITEMS</span>
+         <span><%= t("shared.items") %></span>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
   <div class="flex justify-center gap-3 mt-8">
      <button type="submit" form="retro-form"
         class="group relative inline-flex items-center justify-center gap-2 px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
-        SAVE CHANGES
+        <%= t("retros.edit.save_changes") %>
         <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
       </button>
   </div>
