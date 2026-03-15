@@ -195,10 +195,10 @@ class RetroTest < ActiveSupport::TestCase
     assert_not @retro.can_go_back?
   end
 
-  test "default layout exposes three columns" do
+  test "default layout exposes two columns" do
     assert_equal "default", @retro.layout_mode
-    assert_equal %w[went_well could_be_better wants], @retro.column_categories
-    assert_equal [ "Good", "Bad", "Want" ], @retro.column_definitions.map { |column| column["name"] }
+    assert_equal %w[went_well could_be_better], @retro.column_categories
+    assert_equal [ "Good", "Bad" ], @retro.column_definitions.map { |column| column["name"] }
   end
 
   test "configure_column_layout with custom mode normalizes and de-duplicates column ids" do

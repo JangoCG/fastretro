@@ -31,7 +31,7 @@ class RetrosControllerTest < ActionDispatch::IntegrationTest
 
     created_retro = Retro.order(:id).last
     assert_equal "default", created_retro.layout_mode
-    assert_equal %w[went_well could_be_better wants], created_retro.column_categories
+    assert_equal %w[went_well could_be_better], created_retro.column_categories
     assert_equal 3, created_retro.votes_per_participant
   end
 

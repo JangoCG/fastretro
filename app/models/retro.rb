@@ -6,8 +6,7 @@ class Retro < ApplicationRecord
   LAYOUT_MODES = %w[default custom].freeze
   DEFAULT_COLUMN_LAYOUT = [
     { "id" => "went_well", "name" => "Good" },
-    { "id" => "could_be_better", "name" => "Bad" },
-    { "id" => "wants", "name" => "Want" }
+    { "id" => "could_be_better", "name" => "Bad" }
   ].freeze
 
   belongs_to :account
