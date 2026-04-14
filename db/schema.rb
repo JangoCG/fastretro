@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_13_221337) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_222146) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -65,8 +65,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_221337) do
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "external_account_id", null: false
-    t.integer "feedbacks_count", default: 0, null: false
     t.string "name", null: false
+    t.integer "retros_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["external_account_id"], name: "index_accounts_on_external_account_id", unique: true
   end
@@ -147,7 +147,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_221337) do
   create_table "identities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
-    t.integer "lifetime_feedbacks_count", default: 0, null: false
     t.boolean "staff", default: false, null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_identities_on_email_address", unique: true
