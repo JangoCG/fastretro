@@ -44,10 +44,11 @@
       </section>
     <% end %>
 
-    <% if FastRetro.saas? && Current.user.owner? %>
-      <div class="w-full lg:w-1/2">
-        <%= render "subscription" %>
-      </div>
-    <% end %>
   </div>
+
+  <% if FastRetro.saas? && Current.user.owner? %>
+    <div class="mt-6">
+      <%= render "subscription" %>
+    </div>
+  <% end %>
 </div>
