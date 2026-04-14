@@ -225,4 +225,72 @@
       </table>
     </div>
   </div>
+
+  <%# Premium Customers %>
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-8">
+    <%# Paying Customers %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)]">
+      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-violet-600">
+        <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
+          <%= icon_tag "payments", class: "text-2xl opacity-90" %>
+          Paying Customers (<%= @paid_accounts.size %>)
+        </h2>
+      </div>
+      <% if @paid_accounts.any? %>
+        <ul class="divide-y-2 divide-zinc-200">
+          <% @paid_accounts.each do |account| %>
+            <% owner_email = account.owner_identity&.email_address %>
+            <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
+              <div class="flex justify-between items-start gap-4">
+                <div class="min-w-0 flex-1">
+                  <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
+                  <div class="font-mono text-xs text-zinc-500 mt-1">
+                    #<%= account.external_account_id %> &middot;
+                    <%= owner_email || "No owner" %>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-xs px-3 py-1.5 border border-violet-200 bg-violet-50 text-violet-700 font-bold uppercase"><%= account.subscription.plan.name %></span>
+                  <span class="font-mono text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase"><%= account.subscription.status %></span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="px-6 py-8 text-center font-mono text-sm text-zinc-400">No paying customers yet</div>
+      <% end %>
+    </div>
+
+    <%# Comped Accounts %>
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)]">
+      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-amber-500">
+        <h2 class="font-bold text-zinc-900 flex items-center gap-3 uppercase tracking-widest text-sm">
+          <%= icon_tag "card_giftcard", class: "text-2xl opacity-90" %>
+          Comped Accounts (<%= @comped_accounts.size %>)
+        </h2>
+      </div>
+      <% if @comped_accounts.any? %>
+        <ul class="divide-y-2 divide-zinc-200">
+          <% @comped_accounts.each do |account| %>
+            <% owner_email = account.owner_identity&.email_address %>
+            <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
+              <div class="flex justify-between items-start gap-4">
+                <div class="min-w-0 flex-1">
+                  <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
+                  <div class="font-mono text-xs text-zinc-500 mt-1">
+                    #<%= account.external_account_id %> &middot;
+                    <%= owner_email || "No owner" %>
+                  </div>
+                </div>
+                <span class="font-mono text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase">Comped</span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="px-6 py-8 text-center font-mono text-sm text-zinc-400">No comped accounts</div>
+      <% end %>
+    </div>
+  </div>
 </div>

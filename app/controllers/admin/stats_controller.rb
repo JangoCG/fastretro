@@ -33,5 +33,17 @@ class Admin::StatsController < AdminController
       .group("accounts.id")
       .includes(owner_user: :identity)
       .order(Arel.sql("users_count DESC"), :name)
+
+    @paid_accounts = Account
+      .joins(:subscription)
+      .where(account_subscriptions: { status: %w[active trialing past_due], plan_key: "monthly_v1" })
+      .where.not(id: Account::BillingWaiver.select(:account_id))
+      .includes(owner_user: :identity)
+      .order(created_at: :desc)
+
+    @comped_accounts = Account
+      .joins(:billing_waiver)
+      .includes(owner_user: :identity)
+      .order(created_at: :desc)
   end
 end
