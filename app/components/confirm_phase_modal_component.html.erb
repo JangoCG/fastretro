@@ -31,32 +31,9 @@
       </div>
 
       <%# Warning about unfinished participants %>
-      <% unless all_finished? %>
-        <div class="mb-6 p-4 bg-amber-100 border-2 border-amber-500">
-          <div class="flex items-start gap-3">
-            <span class="w-8 h-8 flex items-center justify-center bg-amber-500 text-white font-black text-lg flex-shrink-0 border-2 border-amber-700">!</span>
-            <div>
-              <p class="font-bold text-sm uppercase tracking-wide text-amber-800 mb-1">
-                <%= t("components.confirm_phase_modal.not_everyone_finished") %>
-              </p>
-              <p class="text-sm text-amber-700">
-                <%= t("components.confirm_phase_modal.participants_working", count: unfinished_count) %>
-              </p>
-            </div>
-          </div>
-        </div>
-      <% else %>
-        <div class="mb-6 p-4 bg-emerald-100 border-2 border-emerald-500">
-          <div class="flex items-start gap-3">
-            <%= icon_tag "check", class: "text-2xl text-emerald-600 flex-shrink-0" %>
-            <div>
-              <p class="font-bold text-sm uppercase tracking-wide text-emerald-800">
-                <%= t("components.confirm_phase_modal.everyone_finished") %>
-              </p>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <div id="confirm-phase-status">
+        <%= render "retros/confirm_phase_status", retro: @retro %>
+      </div>
 
       <%# Action Buttons %>
       <div class="flex gap-3 justify-end">
