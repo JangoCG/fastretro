@@ -56,7 +56,8 @@
         <% end %>
 
         <%= link_to t("account.settings.subscription.manage_billing"), account_billing_portal_path,
-            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]" %>
+            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+            data: { turbo: false } %>
       <% end %>
     </div>
   </section>
