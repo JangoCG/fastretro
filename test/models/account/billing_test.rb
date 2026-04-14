@@ -28,4 +28,16 @@ class Account::BillingTest < ActiveSupport::TestCase
     account.comp
     assert_equal 1, Account::BillingWaiver.where(account: account).count
   end
+
+  test "uncomping a comped account restores free plan" do
+    account = accounts(:two)
+
+    account.comp
+    assert account.comped?
+    assert_equal Plan.paid, account.plan
+
+    account.uncomp
+    assert_not account.comped?
+    assert_equal Plan.free, account.plan
+  end
 end
