@@ -50,6 +50,15 @@ class Retro::Participant < ApplicationRecord
             partial: "retros/streams/participant_list",
             locals: { retro:, participants: }
           )
+
+          if participant.admin?
+            Turbo::StreamsChannel.broadcast_replace_to(
+              [ retro, participant.user ],
+              target: "confirm-phase-status",
+              partial: "retros/streams/confirm_phase_status",
+              locals: { retro: }
+            )
+          end
         end
       end
     end
