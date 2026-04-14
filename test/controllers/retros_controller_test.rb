@@ -171,4 +171,93 @@ class RetrosControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to session_menu_url(script_name: nil)
     assert_equal CROSS_ACCOUNT_ALERT, flash[:alert]
   end
+
+  # === RETRO LIMIT TESTS ===
+
+  test "create is blocked when account has reached retro limit in saas mode" do
+    enable_saas_mode
+    @account.update!(retros_count: Plan.free.retro_limit)
+
+    assert_no_difference("Retro.count") do
+      post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Blocked Retro" } }
+    end
+
+    assert_redirected_to account_settings_path(anchor: "subscription")
+    assert_match(/retro limit/i, flash[:alert])
+  end
+
+  test "new is blocked when account has reached retro limit in saas mode" do
+    enable_saas_mode
+    @account.update!(retros_count: Plan.free.retro_limit)
+
+    get "#{account_path_prefix(@account)}/retros/new"
+
+    assert_redirected_to account_settings_path(anchor: "subscription")
+  end
+
+  test "create shows different message for member when limit reached" do
+    enable_saas_mode
+    @account.update!(retros_count: Plan.free.retro_limit)
+    logout_and_sign_in_as identities(:two) # member
+
+    assert_no_difference("Retro.count") do
+      post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Blocked Retro" } }
+    end
+
+    assert_redirected_to retros_path
+    assert_match(/retro limit/i, flash[:alert])
+  end
+
+  test "create is allowed when account has active subscription even over limit" do
+    enable_saas_mode
+    @account.update!(retros_count: Plan.free.retro_limit + 100)
+    @account.create_subscription!(
+      plan_key: :monthly_v1,
+      stripe_customer_id: "cus_test",
+      status: "active"
+    )
+
+    assert_difference("Retro.count") do
+      post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Paid Retro" } }
+    end
+
+    assert_response :redirect
+  end
+
+  test "create is allowed when account is comped even over limit" do
+    enable_saas_mode
+    @account.update!(retros_count: Plan.free.retro_limit + 100)
+    @account.comp
+
+    assert_difference("Retro.count") do
+      post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Comped Retro" } }
+    end
+
+    assert_response :redirect
+  end
+
+  test "create is allowed in non-saas mode regardless of retros count" do
+    disable_saas_mode
+    @account.update!(retros_count: Plan.free.retro_limit + 100)
+
+    assert_difference("Retro.count") do
+      post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Non-SaaS Retro" } }
+    end
+
+    assert_response :redirect
+  end
+
+  private
+
+  def enable_saas_mode
+    FastRetro.saas = true
+  end
+
+  def disable_saas_mode
+    FastRetro.saas = false
+  end
+
+  teardown do
+    FastRetro.reset_saas!
+  end
 end
