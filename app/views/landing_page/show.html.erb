@@ -53,7 +53,7 @@
           <% end %>
         </div>
         <p class="mt-3 font-mono text-[10px] text-zinc-500 uppercase tracking-wide">
-          Start for free (<%= number_with_delimiter(@free_limit) %> feedbacks included). No credit card required.
+          Start for free (<%= number_with_delimiter(@free_limit) %> retros included). No credit card required.
         </p>
 
 
@@ -321,14 +321,14 @@
   <%# === FREE TIER CTA === %>
   <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-24 text-center">
     <h2 class="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight">
-      <span class="bg-[#ffe600] px-2 text-black">DISCUSS <%= number_with_delimiter(@free_limit) %> FEEDBACKS</span><br>
+      <span class="bg-[#ffe600] px-2 text-black">RUN <%= number_with_delimiter(@free_limit) %> RETROS</span><br>
       FOR FREE.
     </h2>
     <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
       No credit card required. No time limit.<br>
       <% if paid_price.present? %>
         Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for €<%= paid_price %>/month<br class="hidden sm:block">
-        to get unlimited feedback and unlimited users. Cancel anytime.
+        to get unlimited retros and unlimited users. Cancel anytime.
       <% else %>
         Live pricing is currently unavailable.<br class="hidden sm:block">
         Please try again in a moment.
@@ -478,9 +478,9 @@
         <div>
           <h4 class="font-bold mb-2">What counts toward the free tier?</h4>
           <p class="text-zinc-600">
-            Every feedback card created counts toward your <%= number_with_delimiter(@free_limit) %> free items.
+            Every retro you create counts toward your <%= number_with_delimiter(@free_limit) %> free retros.
             <% if paid_price.present? %>
-              After that, upgrade to unlimited feedback for €<%= paid_price %>/month per account.
+              After that, upgrade to unlimited retros for €<%= paid_price %>/month per account.
             <% else %>
               Live pricing is currently unavailable.
             <% end %>

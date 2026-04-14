@@ -42,10 +42,10 @@
         <span class="font-mono text-sm font-bold text-zinc-700"><%= @account.plan.name %></span>
       </div>
 
-      <%# Feedbacks Count %>
+      <%# Retros Count %>
       <div class="px-6 py-4 flex justify-between items-center">
-        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Feedbacks</span>
-        <span class="text-2xl font-black text-amber-600"><%= number_with_delimiter(@account.feedbacks_count) %></span>
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Retros</span>
+        <span class="text-2xl font-black text-amber-600"><%= number_with_delimiter(@account.retros_count) %></span>
       </div>
 
       <%# Owner Email %>
