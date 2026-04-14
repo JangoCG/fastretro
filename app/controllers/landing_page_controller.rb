@@ -6,7 +6,7 @@ class LandingPageController < ApplicationController
   before_action :redirect_authenticated_user_to_session_menu
 
   def show
-    @free_limit = Plan.free.feedback_limit
+    @free_limit = Plan.free.retro_limit
     @paid_price = Plan.paid.price_for_display
   rescue Plan::StripePriceUnavailableError
     @paid_price = nil

@@ -129,7 +129,7 @@ class AlternativesController < ApplicationController
 
   private
     def render_alternative(key)
-      @free_limit = Plan.free.feedback_limit
+      @free_limit = Plan.free.retro_limit
       @paid_price = Plan.paid.price_for_display
       @alternative = ALTERNATIVES.fetch(key)
       @comparison_rows = comparison_rows(@alternative.fetch(:competitor_values))
@@ -156,7 +156,7 @@ class AlternativesController < ApplicationController
         { feature: "Authentication", fast_retro: "Passwordless magic link", competitor: competitor_values.fetch(:authentication) },
         { feature: "Real-time collaboration", fast_retro: "Turbo Stream updates", competitor: competitor_values.fetch(:real_time) },
         { feature: "Export support", fast_retro: "CSV and XLSX export", competitor: competitor_values.fetch(:export) },
-        { feature: "Free tier", fast_retro: "#{Plan.free.feedback_limit} feedbacks", competitor: competitor_values.fetch(:free_tier) }
+        { feature: "Free tier", fast_retro: "#{Plan.free.retro_limit} retros", competitor: competitor_values.fetch(:free_tier) }
       ]
     end
 

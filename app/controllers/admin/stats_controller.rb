@@ -19,10 +19,10 @@ class Admin::StatsController < AdminController
     @feedbacks_last_24_hours = Feedback.where(created_at: 24.hours.ago..).count
 
     @top_accounts = Account
-      .where("feedbacks_count > 0")
+      .where("retros_count > 0")
       .select("accounts.*, (SELECT MAX(retros.created_at) FROM retros WHERE retros.account_id = accounts.id) AS last_retro_at")
       .includes(owner_user: :identity)
-      .order(feedbacks_count: :desc)
+      .order(retros_count: :desc)
       .limit(20)
 
     @recent_accounts = Account.includes(owner_user: :identity).order(created_at: :desc).limit(10)
