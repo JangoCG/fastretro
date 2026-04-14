@@ -1,0 +1,74 @@
+<% content_for :title, "Account ##{@account.external_account_id}" %>
+
+<div class="px-8 xl:px-16 py-8">
+  <%# Back Button %>
+  <div class="pb-6">
+    <%= render BackButtonComponent.new(label: "Admin Stats", href: admin_stats_path) %>
+  </div>
+
+  <%# Page Title %>
+  <div class="mb-10">
+    <h1 class="font-black text-3xl sm:text-4xl lg:text-5xl text-zinc-900 uppercase tracking-tighter leading-none">
+      Edit Account
+    </h1>
+    <div class="h-[3px] bg-zinc-900 mt-4"></div>
+  </div>
+
+  <%# Account Details Card %>
+  <div class="max-w-2xl bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.9)]">
+    <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-blue-600">
+      <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
+        <%= icon_tag "group", class: "text-2xl opacity-90" %>
+        Account Details
+      </h2>
+    </div>
+
+    <div class="divide-y-2 divide-zinc-200">
+      <%# Account Name %>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Name</span>
+        <span class="text-base font-bold text-zinc-900"><%= @account.name %></span>
+      </div>
+
+      <%# External Account ID %>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">External ID</span>
+        <span class="font-mono text-sm text-zinc-700">#<%= @account.external_account_id %></span>
+      </div>
+
+      <%# Current Plan %>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Plan</span>
+        <span class="font-mono text-sm font-bold text-zinc-700"><%= @account.plan.name %></span>
+      </div>
+
+      <%# Feedbacks Count %>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Feedbacks</span>
+        <span class="text-2xl font-black text-amber-600"><%= number_with_delimiter(@account.feedbacks_count) %></span>
+      </div>
+
+      <%# Owner Email %>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Owner</span>
+        <span class="font-mono text-sm text-zinc-700"><%= @account.owner_identity&.email_address || "No owner" %></span>
+      </div>
+
+      <%# Comp Status + Toggle %>
+      <div class="px-6 py-4 flex justify-between items-center">
+        <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Comped</span>
+        <div class="flex items-center gap-4">
+          <% if @account.comped? %>
+            <span class="font-mono text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase">Yes</span>
+            <%= button_to "Uncomp account", admin_account_billing_waiver_path(@account.external_account_id), method: :delete,
+              class: "font-mono text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,0.9)] hover:bg-red-700 hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,0.9)] active:shadow-none transition-all cursor-pointer" %>
+          <% else %>
+            <span class="font-mono text-xs px-3 py-1.5 border border-zinc-200 bg-zinc-50 text-zinc-500 font-bold uppercase">No</span>
+            <%= button_to "Comp account", admin_account_billing_waiver_path(@account.external_account_id), method: :post,
+              class: "font-mono text-xs font-bold uppercase tracking-widest px-4 py-2 bg-emerald-600 text-white border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,0.9)] hover:bg-emerald-700 hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,0.9)] active:shadow-none transition-all cursor-pointer" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

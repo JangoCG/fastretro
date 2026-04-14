@@ -114,7 +114,7 @@
           <li class="px-6 py-4 hover:bg-[#f4f1ea] transition-colors">
             <div class="flex justify-between items-start gap-4">
               <div class="min-w-0 flex-1">
-                <div class="text-base font-bold text-zinc-900 truncate"><%= account.name %></div>
+                <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
                 <div class="font-mono text-xs text-zinc-500 mt-1">
                   #<%= account.external_account_id %> &middot;
                   <%= owner_email || "No owner" %>
@@ -153,7 +153,7 @@
                   <%= index + 1 %>
                 </span>
                 <div class="min-w-0 flex-1">
-                  <div class="text-base font-bold text-zinc-900 truncate"><%= account.name %></div>
+                  <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
                   <div class="font-mono text-xs text-zinc-500 mt-1">
                     #<%= account.external_account_id %> &middot;
                     <%= owner_email || "No owner" %>
@@ -214,7 +214,7 @@
             <tr class="hover:bg-[#f4f1ea] transition-colors">
               <td class="px-6 py-3 font-mono text-sm text-zinc-700"><%= company %></td>
               <td class="px-6 py-3 text-sm font-bold text-zinc-900">
-                <%= account.name %>
+                <%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %>
                 <span class="font-mono text-xs text-zinc-500">#<%= account.external_account_id %></span>
               </td>
               <td class="px-6 py-3 font-mono text-sm text-zinc-700"><%= owner_email || "No owner" %></td>

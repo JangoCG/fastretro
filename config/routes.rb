@@ -128,6 +128,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resource :stats, only: :show
     resource :test_exception, only: :create
+    resources :accounts, only: :edit do
+      resource :billing_waiver, only: [ :create, :destroy ]
+    end
   end
 
   # Stripe webhooks
