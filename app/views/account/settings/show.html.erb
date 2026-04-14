@@ -2,13 +2,13 @@
   <%= render BackButtonComponent.new(label: "Retros", href: retros_path, variant: :fizzy) %>
 </div>
 
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 font-sans">
+<div class="max-w-[100ch] mx-auto px-4 sm:px-6 py-8 font-sans">
   <header class="mb-6">
     <h1 class="text-2xl sm:text-3xl font-black text-zinc-900 uppercase tracking-tighter"><%= t("account.settings.title") %></h1>
   </header>
 
-  <div class="grid gap-6 xl:grid-cols-2 items-start">
-    <section class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="flex flex-col lg:flex-row justify-center items-start gap-6">
+    <section class="w-full lg:w-1/2 bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
       <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
         <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
         <h2 class="relative z-10 text-xl font-black text-zinc-900 uppercase tracking-wider"><%= t("account.settings.account_and_team") %></h2>
@@ -27,7 +27,7 @@
     </section>
 
     <% if Current.user.admin? %>
-      <section class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+      <section class="w-full lg:w-1/2 bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
         <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
           <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
           <h2 class="relative z-10 text-xl font-black text-zinc-900 uppercase tracking-wider"><%= t("account.settings.integrations_heading") %></h2>
@@ -45,7 +45,7 @@
     <% end %>
 
     <% if FastRetro.saas? && Current.user.owner? %>
-      <div class="<%= Current.user.admin? ? 'xl:col-span-2' : '' %>">
+      <div class="w-full lg:w-1/2">
         <%= render "subscription" %>
       </div>
     <% end %>
