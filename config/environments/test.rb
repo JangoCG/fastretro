@@ -57,6 +57,10 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
 
+  # Disable Turbo's automatic cable stream connection check after visit.
+  # Tests that need cable connections wait explicitly via wait_for_cable_connection.
+  config.turbo.test_connect_after_actions = []
+
   config.x.multi_tenant.enabled = true
 
   # Active Record Encryption keys for testing (not used in production)
