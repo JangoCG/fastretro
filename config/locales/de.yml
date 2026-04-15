@@ -37,6 +37,25 @@ de:
     error_log: "FEHLER_LOG"
     detected: "ERKANNT"
     required_field: "PFLICHTFELD"
+    back: "Zurück"
+
+  # ── My ─────────────────────────────────────────────────────────
+  my:
+    passkeys:
+      index:
+        title: "Passkeys"
+        description: "Mit Passkeys meldest du dich sicher ohne Passwort oder E-Mail-Code an."
+        register: "Passkey registrieren"
+        hint: "Dein Browser fordert dich auf, einen Passkey mit Biometrie, PIN oder Sicherheitsschlüssel zu erstellen."
+      edit:
+        title: "Passkey bearbeiten"
+        back: "Passkeys"
+        registered: "Dein Passkey wurde registriert. Gib ihm einen Namen, damit du ihn wiedererkennen kannst."
+        name_label: "Passkey benennen"
+        name_placeholder: "z.B. MacBook Pro, iPhone"
+        save: "Speichern"
+        remove: "Passkey entfernen"
+        confirm_delete: "Bist du sicher, dass du diesen Passkey entfernen möchtest?"
 
   # ── Roles ──────────────────────────────────────────────────────
   roles:
@@ -76,6 +95,7 @@ de:
       email_label: "E-Mail-Adresse"
       magic_link_hint: "Gib deine E-Mail ein und wir senden dir einen Magic Link zum Anmelden."
       sign_in: "Anmelden"
+      sign_in_with_passkey: "Mit Passkey anmelden"
       new_here: "Neu hier?"
       sign_up_link: "Registrieren"
       create_account: "um ein Konto zu erstellen."
@@ -464,6 +484,7 @@ de:
     column_not_found: "Diese Spalte existiert nicht im aktuellen Retro-Layout."
     edit_own_feedback: "Du kannst nur dein eigenes Feedback bearbeiten"
     edit_own_actions: "Du kannst nur deine eigenen Maßnahmen bearbeiten"
+    passkey_failed: "Dieser Passkey hat nicht funktioniert. Versuche es erneut."
     try_again_later: "Versuche es später erneut."
     rate_limit_15min: "Warte 15 Minuten und versuche es dann erneut"
     too_many_resends: "Zu viele Versuche. Warte ein paar Minuten."

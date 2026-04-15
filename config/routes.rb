@@ -65,7 +65,7 @@ Rails.application.routes.draw do
     resources :verifications, only: %i[ new create ]
   end
 
-  # Session management with magic links
+  # Session management with magic links and passkeys
   resource :session do
     scope module: :sessions do
       resources :transfers
@@ -73,6 +73,7 @@ Rails.application.routes.draw do
         post :resend, on: :member
       end
       resource :menu
+      resource :passkey, only: :create
     end
   end
 
@@ -94,6 +95,8 @@ Rails.application.routes.draw do
   # My namespace for nav menu and user-specific resources
   namespace :my do
     resource :menu
+    resource :passkey_challenge, only: :create
+    resources :passkeys, except: %i[ show new ]
   end
 
   # Site feedback (app feedback from users)

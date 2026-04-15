@@ -1,0 +1,44 @@
+<% content_for :title, t("my.passkeys.index.title") %>
+
+<div class="max-w-md mx-auto px-4 py-8 font-sans">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+
+    <%# Header %>
+    <div class="p-4 border-b-[3px] border-zinc-900 flex items-center justify-between">
+      <%= link_to session_menu_path(script_name: nil), class: "text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-zinc-900 transition-colors" do %>
+        &larr; <%= t("shared.back") %>
+      <% end %>
+      <h1 class="text-sm font-black text-zinc-900 uppercase tracking-widest"><%= t("my.passkeys.index.title") %></h1>
+    </div>
+
+    <%# Body %>
+    <div class="p-6 bg-white relative">
+      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+
+      <div class="relative z-10">
+        <p class="text-xs font-bold text-zinc-500 uppercase tracking-wide mb-4"><%= t("my.passkeys.index.description") %></p>
+
+        <% if @passkeys.any? %>
+          <ul class="space-y-2 mb-6">
+            <%= render partial: "my/passkeys/passkey", collection: @passkeys %>
+          </ul>
+        <% end %>
+
+        <div class="flex flex-col items-center gap-3">
+          <%= passkey_registration_button my_passkeys_path,
+                options: @registration_options,
+                error: { class: "text-red-600 text-xs font-bold uppercase mt-2" },
+                cancellation: { class: "text-zinc-400 text-xs font-bold uppercase mt-2" },
+                duplicate: { class: "text-red-600 text-xs font-bold uppercase mt-2" },
+                class: "group relative flex items-center justify-center gap-2 w-full py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all cursor-pointer" do %>
+            + <span><%= t("my.passkeys.index.register") %></span>
+          <% end %>
+
+          <p class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-wide text-center">
+            <%= t("my.passkeys.index.hint") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

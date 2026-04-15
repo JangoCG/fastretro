@@ -1,0 +1,6 @@
+<li>
+  <%= link_to edit_my_passkey_path(passkey), class: "flex items-center justify-between p-3 bg-[#F8F5EC] border-[2px] border-zinc-900 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all" do %>
+    <span class="font-bold text-sm text-zinc-900 truncate"><%= passkey.name.presence || "Passkey" %></span>
+    <span class="text-zinc-400 font-black">&rarr;</span>
+  <% end %>
+</li>
