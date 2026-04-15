@@ -37,6 +37,25 @@ en:
     error_log: "ERROR_LOG"
     detected: "DETECTED"
     required_field: "REQUIRED_FIELD"
+    back: "Back"
+
+  # ── My ─────────────────────────────────────────────────────────
+  my:
+    passkeys:
+      index:
+        title: "Passkeys"
+        description: "Passkeys let you sign in securely without a password or email code."
+        register: "Register a passkey"
+        hint: "Your browser will prompt you to create a passkey using your device's biometrics, PIN, or security key."
+      edit:
+        title: "Edit Passkey"
+        back: "Passkeys"
+        registered: "Your passkey has been registered. Give it a name so you can identify it later."
+        name_label: "Name your passkey"
+        name_placeholder: "e.g. MacBook Pro, iPhone"
+        save: "Save"
+        remove: "Remove this passkey"
+        confirm_delete: "Are you sure you want to remove this passkey?"
 
   # ── Roles ──────────────────────────────────────────────────────
   roles:
@@ -76,6 +95,7 @@ en:
       email_label: "Email address"
       magic_link_hint: "Enter your email and we'll send you a magic link to sign in."
       sign_in: "Sign in"
+      sign_in_with_passkey: "Sign in with a passkey"
       new_here: "New here?"
       sign_up_link: "Sign up"
       create_account: "to create an account."
@@ -464,6 +484,7 @@ en:
     column_not_found: "This column does not exist in the current retro layout."
     edit_own_feedback: "You can only edit your own feedback"
     edit_own_actions: "You can only edit your own actions"
+    passkey_failed: "That passkey didn't work. Try again."
     try_again_later: "Try again later."
     rate_limit_15min: "Wait 15 minutes, then try again"
     too_many_resends: "Too many resend attempts. Wait a few minutes."

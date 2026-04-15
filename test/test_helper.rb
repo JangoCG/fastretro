@@ -3,6 +3,7 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "mocha/minitest"
 require_relative "test_helpers/session_test_helper"
+require_relative "test_helpers/webauthn_test_helper"
 
 module ActiveSupport
   class TestCase

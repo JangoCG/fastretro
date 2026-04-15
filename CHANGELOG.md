@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.3.0] - 2026-04-15
+
+### Added
+- Passkey (WebAuthn) authentication as an alternative to magic links
+- Pure-Ruby WebAuthn implementation (CBOR decoder, COSE key parser, attestation/assertion validation)
+- Passkey registration and management UI at /my/passkeys
+- "Sign in with a passkey" button on login page with conditional mediation (autofill)
+- Passkey challenge endpoint for just-in-time challenge generation (no server-side session state)
+- Web components for passkey registration and sign-in ceremonies
+- Controller tests for passkey authentication and management flows
+
 ## [0.0.2.0] - 2026-04-15
 
 ### Changed

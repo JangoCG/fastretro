@@ -5,3 +5,4 @@ import "turbo_stream_actions"
 
 import "lexxy"
 import "@rails/actiontext"
+import "lib/action_pack/passkey"
