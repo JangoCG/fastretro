@@ -3,6 +3,7 @@
 class ShoutoutsController < ApplicationController
   disallow_account_scope
   allow_unauthenticated_access
+  allow_search_engine_indexing
   layout "public"
 
   before_action :redirect_authenticated_user

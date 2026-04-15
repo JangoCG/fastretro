@@ -1,6 +1,7 @@
 class LandingPageController < ApplicationController
   disallow_account_scope
   allow_unauthenticated_access
+  allow_search_engine_indexing
   layout "public"
 
   before_action :redirect_authenticated_user_to_session_menu
