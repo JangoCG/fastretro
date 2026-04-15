@@ -57,6 +57,35 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "create with unknown email and signups closed uses fake magic link flow" do
+    with_multi_tenant_mode(false) do
+      # With multi_tenant off and accounts existing, accepting_signups? returns false
+      untenanted do
+        assert_no_difference -> { MagicLink.count } do
+          assert_no_difference -> { Identity.count } do
+            post session_path, params: { email_address: "unknown-#{SecureRandom.hex(6)}@example.com" }
+          end
+        end
+
+        assert_redirected_to session_magic_link_path
+        assert cookies[:pending_authentication_token].present?,
+          "Fake flow should set pending token cookie (same as real flow)"
+      end
+    end
+  end
+
+  test "create sets pending authentication token cookie" do
+    identity = identities(:admin)
+
+    untenanted do
+      post session_path, params: { email_address: identity.email_address }
+
+      assert_redirected_to session_magic_link_path
+      assert cookies[:pending_authentication_token].present?,
+        "Should set pending authentication token cookie"
+    end
+  end
+
   test "destroy" do
     sign_in_as :admin
 
