@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.2.0] - 2026-04-15
+
+### Changed
+- Magic link authentication now uses signed, expiring cookies instead of Rails session storage for pending email verification (aligned with Fizzy's hardened auth)
+- Action Cable connections now identify by User+Account instead of Identity alone, improving multi-tenant WebSocket isolation
+- Sessions controller restructured with separate sign_in/sign_up flows and rate limit handler methods
+
+### Added
+- Fake magic link flow for unknown email addresses prevents email enumeration attacks
+- `Authentication::ViaMagicLink` concern extracts magic link logic into its own module
+- `session_token` helper method on Authentication concern
+- New tests: fake magic link flow, email mismatch rejection, cookie-based assertions, resend with cookie
+
+### Security
+- Pending authentication tokens are now cryptographically signed with `MessageVerifier` and expire with the magic link
+- Unknown emails get the same visual flow as known emails (no timing side-channel)
+- Leak protection for magic link codes now checks `Rails.env.development?` directly
+
 ## [0.0.1.0] - 2026-04-15
 
 ### Changed
