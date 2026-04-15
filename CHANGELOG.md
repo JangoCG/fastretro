@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.3.1] - 2026-04-15
+
+### Added
+- Block search engine indexing on all app pages via X-Robots-Tag header (deny-by-default)
+- `allow_search_engine_indexing` opt-out for public SEO pages (landing, blog, alternatives, shoutouts, sitemap)
+- Tests for BlockSearchEngineIndexing concern
+
+### Fixed
+- Brakeman XSS warnings: replaced `.html_safe` with `_html` i18n key suffix for auto-escaped interpolations
+- System test flakiness: disabled Turbo auto-connect after visit (tests wait for cable explicitly where needed)
+- Removed unreliable multi-session Action Cable system test (not supported in headless Chrome)
+
 ## [0.0.3.0] - 2026-04-15
 
 ### Added
