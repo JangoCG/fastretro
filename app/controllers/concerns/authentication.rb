@@ -4,13 +4,12 @@ module Authentication
   included do
     before_action :require_account # Checking and setting account must happen first
     before_action :require_authentication
-    after_action :ensure_development_magic_link_not_leaked
     helper_method :authenticated?
     helper_method :email_address_pending_authentication
 
     etag { Current.identity.id if authenticated? }
 
-    include LoginHelper
+    include Authentication::ViaMagicLink, LoginHelper
   end
 
   class_methods do
@@ -99,39 +98,7 @@ module Authentication
       cookies.delete(:session_token)
     end
 
-    def ensure_development_magic_link_not_leaked
-      unless show_magic_link_code?
-        raise "Leaking magic link via flash in #{Rails.env}?" if flash[:magic_link_code].present?
-      end
-    end
-
-    def email_address_pending_authentication_matches?(email_address)
-      if ActiveSupport::SecurityUtils.secure_compare(email_address, email_address_pending_authentication || "")
-        session.delete(:email_address_pending_authentication)
-        true
-      else
-        false
-      end
-    end
-
-    def email_address_pending_authentication
-      session[:email_address_pending_authentication]
-    end
-
-    def redirect_to_session_magic_link(magic_link, return_to: nil)
-      serve_development_magic_link(magic_link)
-      session[:email_address_pending_authentication] = magic_link.identity.email_address if magic_link
-      session[:return_to_after_authenticating] = return_to if return_to
-      redirect_to main_app.session_magic_link_url(script_name: nil)
-    end
-
-    def serve_development_magic_link(magic_link)
-      if show_magic_link_code?
-        flash[:magic_link_code] = magic_link&.code
-      end
-    end
-
-    def show_magic_link_code?
-      Rails.env.development? || ENV["SHOW_MAGIC_LINK_CODE"].present?
+    def session_token
+      cookies[:session_token]
     end
 end
