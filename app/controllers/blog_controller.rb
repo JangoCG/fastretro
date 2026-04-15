@@ -4,6 +4,7 @@ class BlogController < ApplicationController
   layout "blog"
   disallow_account_scope
   allow_unauthenticated_access
+  allow_search_engine_indexing
 
   def index
     @posts = BlogPost.all

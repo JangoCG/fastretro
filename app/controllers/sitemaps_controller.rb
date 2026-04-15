@@ -1,6 +1,7 @@
 class SitemapsController < ApplicationController
   disallow_account_scope
   allow_unauthenticated_access
+  allow_search_engine_indexing
   layout false
 
   def show
