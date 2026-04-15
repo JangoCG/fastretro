@@ -257,4 +257,40 @@ class RetroTest < ActiveSupport::TestCase
 
     retros(:two).destroy!
   end
+
+  # === Retro Limit Tests ===
+
+  test "creating retro increments account retros_count in saas mode" do
+    enable_saas_mode
+    account = accounts(:one)
+    account.update!(retros_count: 0)
+
+    assert_difference -> { account.reload.retros_count }, 1 do
+      Retro.create!(name: "Limit Test", account: account)
+    end
+  end
+
+  test "creating retro does not increment retros_count when not in saas mode" do
+    disable_saas_mode
+    account = accounts(:one)
+    account.update!(retros_count: 0)
+
+    assert_no_difference -> { account.reload.retros_count } do
+      Retro.create!(name: "Limit Test", account: account)
+    end
+  end
+
+  private
+
+  def enable_saas_mode
+    FastRetro.saas = true
+  end
+
+  def disable_saas_mode
+    FastRetro.saas = false
+  end
+
+  teardown do
+    FastRetro.reset_saas!
+  end
 end

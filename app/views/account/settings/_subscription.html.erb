@@ -1,6 +1,6 @@
 <% if FastRetro.saas? && Current.user.owner? %>
   <% subscription = Current.account.subscription %>
-  <% free_limit = @free_limit || Plan.free.feedback_limit %>
+  <% free_limit = @free_limit || Plan.free.retro_limit %>
   <% paid_price = @paid_price %>
   <% formatted_paid_price = paid_price.present? ? format_currency(paid_price) : nil %>
   <section id="subscription" class="border-[3px] border-zinc-900 bg-[#efece6] shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)]">
@@ -11,7 +11,7 @@
     <div class="p-6 md:p-8 space-y-5 text-center">
       <% if Current.account.plan.free? %>
         <h3 class="text-2xl md:text-4xl font-black text-zinc-900 leading-tight tracking-tight">
-          <%= t("account.settings.subscription.used_feedbacks", used: number_with_delimiter(Current.account.feedbacks_count), limit: number_with_delimiter(free_limit)).html_safe %>
+          <%= t("account.settings.subscription.used_retros", used: number_with_delimiter(Current.account.retros_count), limit: number_with_delimiter(free_limit)).html_safe %>
         </h3>
 
         <% if formatted_paid_price.present? %>

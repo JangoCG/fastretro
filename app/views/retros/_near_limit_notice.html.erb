@@ -1,0 +1,20 @@
+<% if FastRetro.saas? && Current.account.nearing_plan_retros_limit? %>
+  <% retros_remaining = [Current.account.plan.retro_limit - Current.account.retros_count, 0].max %>
+  <div class="near-limit-notice mb-6 animate-wiggle-hover border-2 border-black bg-[#ffe600] p-4 font-mono text-xs font-bold uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+    <span class="text-black leading-snug">
+      <span class="fill-highlighter"><%= retros_remaining %></span> <%= t("retros.near_limit.retros_remaining") %>
+    </span>
+
+    <% if Current.user&.owner? %>
+      <span class="text-black leading-snug">
+        <%= t("retros.near_limit.used_free_owner", used: Current.account.retros_count, limit: Current.account.plan.retro_limit) %>
+        <strong><%= link_to t("retros.near_limit.upgrade_link"), account_settings_path(anchor: "subscription"), class: "underline" %></strong>
+      </span>
+    <% else %>
+      <span class="text-black leading-snug">
+        <%= t("retros.near_limit.used_free_member", used: Current.account.retros_count, limit: Current.account.plan.retro_limit) %>
+        <strong><%= t("retros.near_limit.upgrade_soon") %></strong>
+      </span>
+    <% end %>
+  </div>
+<% end %>

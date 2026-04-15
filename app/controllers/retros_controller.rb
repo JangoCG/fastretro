@@ -5,6 +5,7 @@ class RetrosController < ApplicationController
   before_action :set_retro, only: %i[ show edit update destroy ]
   before_action :ensure_retro_participant, only: %i[ show ]
   before_action :ensure_retro_admin, only: %i[ edit update destroy ]
+  before_action :ensure_can_create_retro, only: %i[ new create ]
 
   # GET /retros or /retros.json
   def index
@@ -74,6 +75,23 @@ class RetrosController < ApplicationController
   end
 
   private
+    def ensure_can_create_retro
+      return unless FastRetro.saas? && Current.account.exceeding_retro_limit?
+
+      respond_to do |format|
+        format.html do
+          if Current.user&.owner? || Current.user&.admin?
+            redirect_to account_settings_path(anchor: "subscription"),
+              alert: t("flash.retro_limit_reached")
+          else
+            redirect_to retros_path,
+              alert: t("flash.retro_limit_reached_member")
+          end
+        end
+        format.json { head :forbidden }
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_retro
       @retro = Current.account.retros.find(params.expect(:id))

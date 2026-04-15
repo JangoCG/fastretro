@@ -6,18 +6,18 @@ class Plan
     free_v1: {
       name: "Free",
       price: 0,
-      feedback_limit: ENV.fetch("FREE_FEEDBACK_LIMIT", 10).to_i,
+      retro_limit: ENV.fetch("FREE_RETRO_LIMIT", 5).to_i,
       stripe_price_id: nil
     },
     monthly_v1: {
       name: "Paid",
       price: 9.99,
-      feedback_limit: Float::INFINITY,
+      retro_limit: Float::INFINITY,
       stripe_price_id: ENV["STRIPE_MONTHLY_V1_PRICE_ID"]
     }
   }
 
-  attr_reader :key, :name, :price, :feedback_limit, :stripe_price_id
+  attr_reader :key, :name, :price, :retro_limit, :stripe_price_id
 
   class << self
     def all
@@ -44,11 +44,11 @@ class Plan
     alias [] find
   end
 
-  def initialize(key:, name:, price:, feedback_limit:, stripe_price_id: nil)
+  def initialize(key:, name:, price:, retro_limit:, stripe_price_id: nil)
     @key = key
     @name = name
     @price = price
-    @feedback_limit = feedback_limit
+    @retro_limit = retro_limit
     @stripe_price_id = stripe_price_id
   end
 
@@ -60,8 +60,8 @@ class Plan
     !free?
   end
 
-  def limit_feedbacks?
-    feedback_limit != Float::INFINITY
+  def limit_retros?
+    retro_limit != Float::INFINITY
   end
 
   def price_for_display

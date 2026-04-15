@@ -152,6 +152,12 @@ de:
       items: "EINTRÄGE"
       edit_retro: "Retro bearbeiten"
       delete_confirm: "Bist du sicher, dass du '%{name}' löschen möchtest?"
+    near_limit:
+      retros_remaining: "Retros verbleibend"
+      used_free_owner: "Du hast %{used} von %{limit} kostenlosen Retros verwendet."
+      upgrade_link: "Auf unbegrenzt upgraden"
+      used_free_member: "Dieses Konto hat %{used} von %{limit} kostenlosen Retros verwendet."
+      upgrade_soon: "Bald upgraden"
 
   # ── Waiting Room ───────────────────────────────────────────────
   waiting_rooms:
@@ -215,12 +221,8 @@ de:
       ungroup: "Gruppierung aufheben"
       mark_discussed: "Als besprochen markieren"
       undo: "Rückgängig"
-    near_limit:
-      feedbacks_remaining: "Feedbacks verbleibend"
-      used_free_owner: "Du hast %{used} von %{limit} kostenlosen Feedbacks verwendet."
-      upgrade_link: "Auf unbegrenzt upgraden"
-      used_free_member: "Dieses Konto hat %{used} von %{limit} kostenlosen Feedbacks verwendet."
-      upgrade_soon: "Bald upgraden"
+
+
 
   # ── Actions ────────────────────────────────────────────────────
   actions:
@@ -261,14 +263,14 @@ de:
         manage: "Verwalten"
       subscription:
         heading: "Abonnement"
-        used_feedbacks: "Du hast <u>%{used}</u> kostenlose Feedbacks von %{limit} verbraucht"
-        upgrade_prompt: "Um Fast Retro über %{limit} Feedbacks hinaus zu nutzen, kostet es nur <strong>%{price}/Monat</strong> für <strong>unbegrenzte Feedbacks, unbegrenzte Nutzer</strong>."
+        used_retros: "Du hast <u>%{used}</u> kostenlose Retros von %{limit} verbraucht"
+        upgrade_prompt: "Um Fast Retro über %{limit} Retros hinaus zu nutzen, kostet es nur <strong>%{price}/Monat</strong> für <strong>unbegrenzte Retros, unbegrenzte Nutzer</strong>."
         upgrade_button: "Auf Unbegrenzt upgraden für %{price}/Monat"
         open_checkout: "Stripe Checkout öffnen"
         cancel_anytime: "Jederzeit kündbar, keine Vertragsbindung."
-        current_plan_free: "Du bist aktuell im <strong>%{plan}</strong>-Tarif, der %{limit} Feedbacks und unbegrenzte Nutzer umfasst."
+        current_plan_free: "Du bist aktuell im <strong>%{plan}</strong>-Tarif, der %{limit} Retros und unbegrenzte Nutzer umfasst."
         thank_you: "Danke, dass du Fast Retro gekauft hast!"
-        current_plan_paid: "Du bist aktuell im <strong>%{plan}</strong>-Tarif mit unbegrenzten Feedbacks und unbegrenzten Nutzern."
+        current_plan_paid: "Du bist aktuell im <strong>%{plan}</strong>-Tarif mit unbegrenzten Retros und unbegrenzten Nutzern."
         manage_billing: "Abrechnung verwalten"
         pricing_unavailable: "Live-Preise sind derzeit nicht verfügbar. Bitte versuche es gleich erneut."
         ends_on: "Dein Fast Retro-Abonnement endet am"
@@ -469,7 +471,8 @@ de:
     enter_email_again: "Bitte gib deine E-Mail erneut ein."
     enter_email_to_sign_in: "Gib deine E-Mail-Adresse ein, um dich anzumelden."
     auth_failed: "Authentifizierung fehlgeschlagen. Bitte versuche es erneut."
-    feedback_limit_reached: "Du hast das Feedback-Limit deines Tarifs erreicht. Bitte upgrade, um fortzufahren."
+    retro_limit_reached: "Du hast das Retro-Limit deines Tarifs erreicht. Bitte upgrade, um fortzufahren."
+    retro_limit_reached_member: "Das Konto hat sein Retro-Limit erreicht. Bitte kontaktiere einen Account-Admin."
     account_not_found: "Retro nicht gefunden. Entweder existiert es wirklich nicht oder du bist nicht Teil dieses Kontos"
     account_deactivated: "Dein Kontozugang wurde deaktiviert."
     grouping_only: "Gruppierung ist nur in der Gruppierungsphase verfügbar"

@@ -152,6 +152,12 @@ en:
       items: "ITEMS"
       edit_retro: "Edit retro"
       delete_confirm: "Are you sure you want to delete '%{name}'?"
+    near_limit:
+      retros_remaining: "retros remaining"
+      used_free_owner: "You've used %{used} out of %{limit} free retros."
+      upgrade_link: "Upgrade to unlimited"
+      used_free_member: "This account has used %{used} out of %{limit} free retros."
+      upgrade_soon: "Upgrade soon"
 
   # ── Waiting Room ───────────────────────────────────────────────
   waiting_rooms:
@@ -215,12 +221,8 @@ en:
       ungroup: "Ungroup"
       mark_discussed: "Mark discussed"
       undo: "Undo"
-    near_limit:
-      feedbacks_remaining: "feedbacks remaining"
-      used_free_owner: "You've used %{used} out of %{limit} free feedbacks."
-      upgrade_link: "Upgrade to unlimited"
-      used_free_member: "This account has used %{used} out of %{limit} free feedbacks."
-      upgrade_soon: "Upgrade soon"
+
+
 
   # ── Actions ────────────────────────────────────────────────────
   actions:
@@ -261,14 +263,14 @@ en:
         manage: "Manage"
       subscription:
         heading: "Subscription"
-        used_feedbacks: "You've used <u>%{used}</u> free feedbacks out of %{limit}"
-        upgrade_prompt: "To keep using Fast Retro past %{limit} feedbacks, it's only <strong>%{price}/month</strong> for <strong>unlimited feedbacks, unlimited users</strong>."
+        used_retros: "You've used <u>%{used}</u> free retros out of %{limit}"
+        upgrade_prompt: "To keep using Fast Retro past %{limit} retros, it's only <strong>%{price}/month</strong> for <strong>unlimited retros, unlimited users</strong>."
         upgrade_button: "Upgrade to Unlimited for %{price}/month"
         open_checkout: "Open Stripe Checkout"
         cancel_anytime: "Cancel anytime, no contracts."
-        current_plan_free: "Right now you're on the <strong>%{plan}</strong> plan which includes %{limit} feedbacks and unlimited users."
+        current_plan_free: "Right now you're on the <strong>%{plan}</strong> plan which includes %{limit} retros and unlimited users."
         thank_you: "Thank you for buying Fast Retro!"
-        current_plan_paid: "You're currently on the <strong>%{plan}</strong> plan with unlimited feedbacks and unlimited users."
+        current_plan_paid: "You're currently on the <strong>%{plan}</strong> plan with unlimited retros and unlimited users."
         manage_billing: "Manage Billing"
         pricing_unavailable: "Live pricing is currently unavailable. Please try again in a moment."
         ends_on: "Your Fast Retro subscription ends on"
@@ -469,7 +471,8 @@ en:
     enter_email_again: "Please enter your email again."
     enter_email_to_sign_in: "Enter your email address to sign in."
     auth_failed: "Authentication failed. Please try again."
-    feedback_limit_reached: "You've reached your plan's feedback limit. Please upgrade to continue."
+    retro_limit_reached: "You've reached your plan's retro limit. Please upgrade to continue."
+    retro_limit_reached_member: "The account has reached its retro limit. Please contact an account admin."
     account_not_found: "Retro not found. Either it really does not exist or you are not part of that account"
     account_deactivated: "Your account access has been deactivated."
     grouping_only: "Grouping is only available during the grouping phase"

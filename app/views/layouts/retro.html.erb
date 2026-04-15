@@ -73,7 +73,7 @@
       <%= render BackButtonComponent.new(label: t("shared.retros"), href: retros_path, variant: :fizzy) %>
     </div>
 
-    <%= render "feedbacks/near_limit_notice" %>
+    <%= render "retros/near_limit_notice" %>
 
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
