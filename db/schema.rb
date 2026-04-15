@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_14_222146) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_15_230000) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -69,6 +69,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_222146) do
     t.integer "retros_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["external_account_id"], name: "index_accounts_on_external_account_id", unique: true
+  end
+
+  create_table "action_pack_passkeys", force: :cascade do |t|
+    t.string "aaguid"
+    t.boolean "backed_up"
+    t.datetime "created_at", null: false
+    t.string "credential_id", null: false
+    t.integer "holder_id", null: false
+    t.string "holder_type", null: false
+    t.string "name"
+    t.binary "public_key", null: false
+    t.integer "sign_count", default: 0, null: false
+    t.text "transports"
+    t.datetime "updated_at", null: false
+    t.index ["credential_id"], name: "index_action_pack_passkeys_on_credential_id", unique: true
+    t.index ["holder_type", "holder_id"], name: "index_action_pack_passkeys_on_holder"
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
