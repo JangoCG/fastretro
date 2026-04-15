@@ -11,12 +11,12 @@
     <div class="p-6 md:p-8 space-y-5 text-center">
       <% if Current.account.plan.free? %>
         <h3 class="text-2xl md:text-4xl font-black text-zinc-900 leading-tight tracking-tight">
-          <%= t("account.settings.subscription.used_retros", used: number_with_delimiter(Current.account.retros_count), limit: number_with_delimiter(free_limit)).html_safe %>
+          <%= t("account.settings.subscription.used_retros_html", used: number_with_delimiter(Current.account.retros_count), limit: number_with_delimiter(free_limit)) %>
         </h3>
 
         <% if formatted_paid_price.present? %>
           <p class="text-zinc-800 text-lg md:text-2xl leading-snug">
-            <%= t("account.settings.subscription.upgrade_prompt", limit: number_with_delimiter(free_limit), price: formatted_paid_price).html_safe %>
+            <%= t("account.settings.subscription.upgrade_prompt_html", limit: number_with_delimiter(free_limit), price: formatted_paid_price) %>
           </p>
 
           <%= button_to t("account.settings.subscription.upgrade_button", price: formatted_paid_price), account_subscription_path,
@@ -37,7 +37,7 @@
         <p class="text-zinc-700 text-lg md:text-2xl"><%= t("account.settings.subscription.cancel_anytime") %></p>
 
         <p class="text-[#6b39ff] text-lg md:text-2xl leading-snug">
-          <%= t("account.settings.subscription.current_plan_free", plan: Current.account.plan.name, limit: number_with_delimiter(free_limit)).html_safe %>
+          <%= t("account.settings.subscription.current_plan_free_html", plan: Current.account.plan.name, limit: number_with_delimiter(free_limit)) %>
         </p>
       <% else %>
         <h3 class="text-2xl md:text-4xl font-black text-zinc-900 leading-tight tracking-tight">
@@ -45,7 +45,7 @@
         </h3>
 
         <p class="text-zinc-800 text-lg md:text-2xl leading-snug">
-          <%= t("account.settings.subscription.current_plan_paid", plan: Current.account.plan.name).html_safe %>
+          <%= t("account.settings.subscription.current_plan_paid_html", plan: Current.account.plan.name) %>
         </p>
 
         <% if subscription&.current_period_end %>

@@ -154,7 +154,7 @@ de:
       default_columns: "Gut, Schlecht, Wünsche"
       custom_layout: "BENUTZERDEFINIERT"
       custom_hint: "Spalten hinzufügen, entfernen, umbenennen"
-      default_info: "Dieses Retro startet mit 3 Spalten: <strong>Gut</strong>, <strong>Schlecht</strong>, <strong>Wünsche</strong>."
+      default_info_html: "Dieses Retro startet mit 3 Spalten: <strong>Gut</strong>, <strong>Schlecht</strong>, <strong>Wünsche</strong>."
       votes_per_participant: "Stimmen pro Teilnehmer"
       votes_hint: "Gilt nur für benutzerdefinierte Layouts."
       custom_columns: "BENUTZERDEFINIERTE SPALTEN"
@@ -283,14 +283,14 @@ de:
         manage: "Verwalten"
       subscription:
         heading: "Abonnement"
-        used_retros: "Du hast <u>%{used}</u> kostenlose Retros von %{limit} verbraucht"
-        upgrade_prompt: "Um Fast Retro über %{limit} Retros hinaus zu nutzen, kostet es nur <strong>%{price}/Monat</strong> für <strong>unbegrenzte Retros, unbegrenzte Nutzer</strong>."
+        used_retros_html: "Du hast <u>%{used}</u> kostenlose Retros von %{limit} verbraucht"
+        upgrade_prompt_html: "Um Fast Retro über %{limit} Retros hinaus zu nutzen, kostet es nur <strong>%{price}/Monat</strong> für <strong>unbegrenzte Retros, unbegrenzte Nutzer</strong>."
         upgrade_button: "Auf Unbegrenzt upgraden für %{price}/Monat"
         open_checkout: "Stripe Checkout öffnen"
         cancel_anytime: "Jederzeit kündbar, keine Vertragsbindung."
-        current_plan_free: "Du bist aktuell im <strong>%{plan}</strong>-Tarif, der %{limit} Retros und unbegrenzte Nutzer umfasst."
+        current_plan_free_html: "Du bist aktuell im <strong>%{plan}</strong>-Tarif, der %{limit} Retros und unbegrenzte Nutzer umfasst."
         thank_you: "Danke, dass du Fast Retro gekauft hast!"
-        current_plan_paid: "Du bist aktuell im <strong>%{plan}</strong>-Tarif mit unbegrenzten Retros und unbegrenzten Nutzern."
+        current_plan_paid_html: "Du bist aktuell im <strong>%{plan}</strong>-Tarif mit unbegrenzten Retros und unbegrenzten Nutzern."
         manage_billing: "Abrechnung verwalten"
         pricing_unavailable: "Live-Preise sind derzeit nicht verfügbar. Bitte versuche es gleich erneut."
         ends_on: "Dein Fast Retro-Abonnement endet am"
@@ -321,7 +321,7 @@ de:
       title: "Einladungslink abgelaufen"
       heading: "Einladungslink abgelaufen"
       reached_limit: "Dieser Einladungslink hat sein Nutzungslimit erreicht."
-      ask_for_new: "Bitte jemanden von <strong>%{name}</strong>, dir einen neuen Link zu senden oder das Nutzungslimit zu erhöhen."
+      ask_for_new_html: "Bitte jemanden von <strong>%{name}</strong>, dir einen neuen Link zu senden oder das Nutzungslimit zu erhöhen."
 
   # ── Retro Invites ─────────────────────────────────────────────
   retro_invites:

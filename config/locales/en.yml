@@ -154,7 +154,7 @@ en:
       default_columns: "Good, Bad, Want"
       custom_layout: "CUSTOM LAYOUT"
       custom_hint: "Add, remove, rename columns"
-      default_info: "This retro will start with 3 columns: <strong>Good</strong>, <strong>Bad</strong>, <strong>Want</strong>."
+      default_info_html: "This retro will start with 3 columns: <strong>Good</strong>, <strong>Bad</strong>, <strong>Want</strong>."
       votes_per_participant: "Votes Per Participant"
       votes_hint: "Only applied for custom layouts."
       custom_columns: "CUSTOM COLUMNS"
@@ -283,14 +283,14 @@ en:
         manage: "Manage"
       subscription:
         heading: "Subscription"
-        used_retros: "You've used <u>%{used}</u> free retros out of %{limit}"
-        upgrade_prompt: "To keep using Fast Retro past %{limit} retros, it's only <strong>%{price}/month</strong> for <strong>unlimited retros, unlimited users</strong>."
+        used_retros_html: "You've used <u>%{used}</u> free retros out of %{limit}"
+        upgrade_prompt_html: "To keep using Fast Retro past %{limit} retros, it's only <strong>%{price}/month</strong> for <strong>unlimited retros, unlimited users</strong>."
         upgrade_button: "Upgrade to Unlimited for %{price}/month"
         open_checkout: "Open Stripe Checkout"
         cancel_anytime: "Cancel anytime, no contracts."
-        current_plan_free: "Right now you're on the <strong>%{plan}</strong> plan which includes %{limit} retros and unlimited users."
+        current_plan_free_html: "Right now you're on the <strong>%{plan}</strong> plan which includes %{limit} retros and unlimited users."
         thank_you: "Thank you for buying Fast Retro!"
-        current_plan_paid: "You're currently on the <strong>%{plan}</strong> plan with unlimited retros and unlimited users."
+        current_plan_paid_html: "You're currently on the <strong>%{plan}</strong> plan with unlimited retros and unlimited users."
         manage_billing: "Manage Billing"
         pricing_unavailable: "Live pricing is currently unavailable. Please try again in a moment."
         ends_on: "Your Fast Retro subscription ends on"
@@ -321,7 +321,7 @@ en:
       title: "Join link expired"
       heading: "Join Link Expired"
       reached_limit: "This join link has reached its usage limit."
-      ask_for_new: "Ask someone from <strong>%{name}</strong> to send you a new link or increase the usage limit."
+      ask_for_new_html: "Ask someone from <strong>%{name}</strong> to send you a new link or increase the usage limit."
 
   # ── Retro Invites ─────────────────────────────────────────────
   retro_invites:
