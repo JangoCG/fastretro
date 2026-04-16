@@ -5,8 +5,8 @@
 
     <%# Header %>
     <div class="p-4 border-b-[3px] border-zinc-900 flex items-center justify-between">
-      <%= link_to session_menu_path(script_name: nil), class: "text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-zinc-900 transition-colors" do %>
-        &larr; <%= t("shared.back") %>
+      <%= link_to user_path(Current.user), class: "text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-zinc-900 transition-colors" do %>
+        &larr; <%= t("users.show.heading") %>
       <% end %>
       <h1 class="text-sm font-black text-zinc-900 uppercase tracking-widest"><%= t("my.passkeys.index.title") %></h1>
     </div>
