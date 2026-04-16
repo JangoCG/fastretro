@@ -43,12 +43,7 @@
 
     <main class="flex-1 flex items-center justify-center p-4 relative z-10">
       <div class="bg-white border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] p-8 max-w-md w-full">
-        <% if flash[:alert] %>
-          <div class="mb-4 p-3 border-2 border-red-600 bg-red-50 text-red-800 font-mono text-sm"><%= flash[:alert] %></div>
-        <% end %>
-        <% if flash[:notice] %>
-          <div class="mb-4 p-3 border-2 border-green-600 bg-green-50 text-green-800 font-mono text-sm"><%= flash[:notice] %></div>
-        <% end %>
+        <%= render "layouts/shared/flash" %>
         <%= yield %>
       </div>
     </main>

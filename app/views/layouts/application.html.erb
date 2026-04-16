@@ -41,13 +41,7 @@
 <% end %>
 
 <main id="main" class="flex-1 relative z-10">
-  <% if flash[:alert].present? %>
-    <div class="max-w-7xl mx-auto px-4 pt-6">
-      <div class="border-2 border-red-600 bg-red-50 p-4 font-mono text-sm text-red-800">
-        <%= flash[:alert] %>
-      </div>
-    </div>
-  <% end %>
+  <%= render "layouts/shared/flash" %>
   <%= yield %>
 </main>
 

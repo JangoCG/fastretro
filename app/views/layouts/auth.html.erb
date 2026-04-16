@@ -57,29 +57,7 @@
       </nav>
     </header>
 
-    <% if flash[:alert].present? %>
-      <div class="max-w-md mx-auto px-4 mb-4">
-        <div class="bg-red-50 border-2 border-red-500 p-4 shadow-[4px_4px_0px_0px_rgba(220,38,38,1)]">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-            <span class="font-mono text-xs font-bold uppercase text-red-600">ERROR_LOG</span>
-          </div>
-          <p class="font-bold text-red-700 text-sm uppercase"><%= flash[:alert] %></p>
-        </div>
-      </div>
-    <% end %>
-
-    <% if flash[:notice].present? %>
-      <div class="max-w-md mx-auto px-4 mb-4">
-        <div class="bg-green-50 border-2 border-green-500 p-4 shadow-[4px_4px_0px_0px_rgba(22,163,74,1)]">
-          <div class="flex items-center gap-2 mb-1">
-             <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-             <span class="font-mono text-xs font-bold uppercase text-green-600">SYSTEM_NOTICE</span>
-          </div>
-          <p class="font-bold text-green-700 text-sm uppercase"><%= flash[:notice] %></p>
-        </div>
-      </div>
-    <% end %>
+    <%= render "layouts/shared/flash" %>
 
     <main class="flex-1 flex items-center justify-center px-4">
       <div class="w-full max-w-md">
