@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.4.0] - 2026-04-16
+
+### Added
+- Background jobs now automatically carry the enqueue-time account context through to perform. Previously, async work could run without tenant scope; any future notifications, digests, or broadcasts will stay inside the account that triggered them.
+- Mailer deliveries and Turbo Streams broadcast jobs carry the same account context, so emails render with the correct tenant URLs and async page updates stay scoped to the right workspace.
+- Regression test coverage for the Jira export background job (the suite had no job-level tests before).
+
+### Changed
+- Jobs whose referenced account has been deleted before the job runs are now cleanly discarded instead of retrying.
+
 ## [0.0.3.1] - 2026-04-15
 
 ### Added
