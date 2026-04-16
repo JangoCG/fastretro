@@ -1,7 +1,11 @@
 class My::PasskeysController < ApplicationController
   include ActionPack::Passkey::Request
 
+  disallow_account_scope
+
   before_action :set_passkey, only: %i[ edit update destroy ]
+
+  layout "auth"
 
   def index
     @passkeys = Current.identity.passkeys.order(name: :asc, created_at: :desc)
