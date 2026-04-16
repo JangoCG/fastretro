@@ -1,6 +1,8 @@
 module AccountTenanted
   extend ActiveSupport::Concern
 
+  ACCOUNT_KEY = "account"
+
   prepended do
     attr_reader :account
     around_perform :with_account_context
@@ -12,12 +14,13 @@ module AccountTenanted
   end
 
   def serialize
-    super.merge("account" => @account&.to_gid)
+    super.merge(ACCOUNT_KEY => @account&.to_gid)
   end
 
   def deserialize(job_data)
     super
-    @account_gid = job_data["account"]
+    @account = nil
+    @account_gid = job_data[ACCOUNT_KEY]
   end
 
   private
@@ -32,9 +35,12 @@ module AccountTenanted
     end
 
     def resolve_account!
-      if @account_gid
-        @account = GlobalID::Locator.locate(@account_gid)
-      end
+      return unless @account_gid
+
+      located = GlobalID::Locator.locate(@account_gid)
+      raise ActiveRecord::RecordNotFound, "Account not found for #{@account_gid}" unless located.is_a?(Account)
+
+      @account = located
     rescue ActiveRecord::RecordNotFound
       raise ActiveJob::DeserializationError
     end
