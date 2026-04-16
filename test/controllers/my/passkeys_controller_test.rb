@@ -8,24 +8,20 @@ class My::PasskeysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "index" do
-    untenanted do
-      get my_passkeys_path
-      assert_response :success
-    end
+    get my_passkeys_path
+    assert_response :success
   end
 
   test "register a passkey" do
-    untenanted do
-      challenge = request_webauthn_challenge(purpose: "registration")
+    challenge = request_webauthn_challenge(purpose: "registration")
 
-      assert_difference -> { identities(:one).passkeys.count }, 1 do
-        post my_passkeys_path, params: build_attestation_params(challenge: challenge)
-      end
-
-      passkey = identities(:one).passkeys.order(created_at: :desc).first
-      assert_redirected_to edit_my_passkey_path(passkey, created: true)
-      assert_equal [ "internal" ], passkey.transports
+    assert_difference -> { identities(:one).passkeys.count }, 1 do
+      post my_passkeys_path, params: build_attestation_params(challenge: challenge)
     end
+
+    passkey = identities(:one).passkeys.order(created_at: :desc).first
+    assert_redirected_to edit_my_passkey_path(passkey, created: true)
+    assert_equal [ "internal" ], passkey.transports
   end
 
   test "edit a passkey" do
@@ -36,10 +32,8 @@ class My::PasskeysControllerTest < ActionDispatch::IntegrationTest
       sign_count: 0
     )
 
-    untenanted do
-      get edit_my_passkey_path(passkey)
-      assert_response :success
-    end
+    get edit_my_passkey_path(passkey)
+    assert_response :success
   end
 
   test "update a passkey name" do
@@ -50,11 +44,9 @@ class My::PasskeysControllerTest < ActionDispatch::IntegrationTest
       sign_count: 0
     )
 
-    untenanted do
-      patch my_passkey_path(passkey), params: { passkey: { name: "MacBook Pro" } }
-      assert_redirected_to my_passkeys_path
-      assert_equal "MacBook Pro", passkey.reload.name
-    end
+    patch my_passkey_path(passkey), params: { passkey: { name: "MacBook Pro" } }
+    assert_redirected_to my_passkeys_path
+    assert_equal "MacBook Pro", passkey.reload.name
   end
 
   test "destroy a passkey" do
@@ -65,11 +57,9 @@ class My::PasskeysControllerTest < ActionDispatch::IntegrationTest
       sign_count: 0
     )
 
-    untenanted do
-      assert_difference -> { identities(:one).passkeys.count }, -1 do
-        delete my_passkey_path(passkey)
-      end
-      assert_redirected_to my_passkeys_path
+    assert_difference -> { identities(:one).passkeys.count }, -1 do
+      delete my_passkey_path(passkey)
     end
+    assert_redirected_to my_passkeys_path
   end
 end

@@ -64,6 +64,11 @@
        <% if Current.user == @user %>
         <div class="w-full h-[2px] bg-zinc-200 my-2"></div>
 
+        <%= link_to my_passkeys_path(script_name: nil), class: "w-full flex items-center justify-between p-3 bg-white border-[2px] border-zinc-900 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all" do %>
+          <span class="font-bold text-xs text-zinc-900 uppercase tracking-widest"><%= t("users.show.manage_passkeys") %></span>
+          <span class="text-zinc-400 font-black">&rarr;</span>
+        <% end %>
+
         <div class="w-full space-y-6 relative z-10">
            <%= render "users/transfer", user: @user %>
         </div>

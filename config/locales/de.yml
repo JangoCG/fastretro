@@ -343,6 +343,7 @@ de:
       email_pending: "E-Mail-Verifizierung ausstehend"
       check_inbox: "Prüfe deinen Posteingang und bestätige deine E-Mail-Adresse."
       update_hint: "Möchtest du deine Daten ändern? Tippe auf Profil bearbeiten."
+      manage_passkeys: "Passkeys verwalten"
       sign_out: "Abmelden"
     edit:
       title: "Profil bearbeiten"

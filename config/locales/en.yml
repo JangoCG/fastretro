@@ -343,6 +343,7 @@ en:
       email_pending: "Email Verification Pending"
       check_inbox: "Check your inbox and confirm your email address."
       update_hint: "Want to update your details? Tap edit profile."
+      manage_passkeys: "Manage passkeys"
       sign_out: "Sign Out"
     edit:
       title: "Edit your profile"
