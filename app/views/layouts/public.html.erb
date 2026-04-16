@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <% unless @disable_view_transition %><meta name="view-transition" content="same-origin"><% end %>
     <%# === PRIMARY META TAGS === %>
     <meta charset="UTF-8">
     <title><%= content_for(:title) || "Fast Retro — Run Better Retrospectives" %></title>

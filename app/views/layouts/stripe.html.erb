@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="h-full">
   <head>
+    <% unless @disable_view_transition %><meta name="view-transition" content="same-origin"><% end %>
     <title>FastRetro - Checkout</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>

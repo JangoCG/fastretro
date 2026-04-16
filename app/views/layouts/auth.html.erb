@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
   <head>
+    <% unless @disable_view_transition %><meta name="view-transition" content="same-origin"><% end %>
     <title><%= content_for(:title) || "FastRetro" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="robots" content="<%= content_for(:robots) || "noindex, follow" %>">
