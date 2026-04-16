@@ -146,7 +146,7 @@
      <button id="retro-submit-button" type="submit" class="group w-full bg-black text-white hover:bg-zinc-800 font-bold uppercase px-6 py-4 text-sm tracking-wider flex items-center justify-between border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1">
         <span class="flex items-center gap-2">
           <%= retro.persisted? ? t("retros.form.update_retro") : t("retros.form.create_retro") %>
-          <%= render KbdComponent.new(key: "Ctrl+Enter", size: :sm) %>
+          <%= render KbdComponent.new(key: "Cmd+Enter", size: :sm) %>
         </span>
         <span class="font-mono group-hover:translate-x-2 transition-transform">-></span>
      </button>
