@@ -125,6 +125,9 @@ Rails.application.routes.draw do
   get "alternative/parabol", to: "alternatives#parabol", as: :alternative_parabol
   get "alternative/metroretro", to: "alternatives#metroretro", as: :alternative_metroretro
   get "alternative/teamretro", to: "alternatives#teamretro", as: :alternative_teamretro
+  get "alternative/quickretro", to: "alternatives#quickretro", as: :alternative_quickretro
+  get "alternative/reetro", to: "alternatives#reetro", as: :alternative_reetro
+  get "alternative/funretro", to: "alternatives#funretro", as: :alternative_funretro
   get "retro/create", to: redirect("/retros/new")
 
   # Admin

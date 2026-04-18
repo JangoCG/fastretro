@@ -38,6 +38,33 @@ class AlternativesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "quickretro page renders" do
+    untenanted do
+      get alternative_quickretro_path
+
+      assert_response :success
+      assert_in_body "QuickRetro"
+    end
+  end
+
+  test "reetro page renders" do
+    untenanted do
+      get alternative_reetro_path
+
+      assert_response :success
+      assert_in_body "Reetro"
+    end
+  end
+
+  test "funretro page renders" do
+    untenanted do
+      get alternative_funretro_path
+
+      assert_response :success
+      assert_in_body "FunRetro"
+    end
+  end
+
   test "alternatives redirect authenticated users without account scope" do
     sign_in_as :admin
 

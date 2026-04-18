@@ -8,9 +8,9 @@ class AlternativesController < ApplicationController
     easyretro: {
       name: "EasyRetro",
       slug: "easyretro",
-      meta_title: "Fast Retro vs EasyRetro | Open Source Alternative",
-      meta_description: "Looking for an EasyRetro alternative? Compare Fast Retro's open source code, self-hosting option, flat account pricing, and structured retro workflow.",
-      meta_keywords: "easyretro alternative, fast retro vs easyretro, open source retrospective tool",
+      meta_title: "EasyRetro Alternative: Free Open Source Retro | Fast Retro",
+      meta_description: "Switch from EasyRetro to a free, open-source retrospective tool. Self-host, flat per-account pricing, passwordless magic-link login. Start free.",
+      meta_keywords: "easyretro alternative, free retrospective tool, open source retro tool, self-hosted retrospective",
       competitor_values: {
         pricing_model: "Tiered plans",
         paid_plan: "Board/team based tiers",
@@ -31,9 +31,9 @@ class AlternativesController < ApplicationController
     parabol: {
       name: "Parabol",
       slug: "parabol",
-      meta_title: "Fast Retro vs Parabol | Open Source Alternative",
-      meta_description: "Compare Fast Retro vs Parabol. See how Fast Retro differs with open source code, optional self-hosting, simple pricing, and a focused retrospective workflow.",
-      meta_keywords: "parabol alternative, fast retro vs parabol, retrospective app comparison",
+      meta_title: "Parabol Alternative: Free Open Source Retro | Fast Retro",
+      meta_description: "Looking for a Parabol alternative? Fast Retro is a free, open-source retrospective tool. Flat account pricing, self-host, magic-link login. No seat fees.",
+      meta_keywords: "parabol alternative, free retrospective tool, open source retro tool, self-hosted retrospective",
       competitor_values: {
         pricing_model: "Seat-based plans",
         paid_plan: "Per-active-user pricing",
@@ -54,9 +54,9 @@ class AlternativesController < ApplicationController
     metroretro: {
       name: "Metro Retro",
       slug: "metroretro",
-      meta_title: "Fast Retro vs Metro Retro | Open Source Alternative",
-      meta_description: "Looking for a Metro Retro alternative? Compare Fast Retro's open source foundation, self-hosting option, and guided phase-based retrospective flow.",
-      meta_keywords: "metro retro alternative, fast retro vs metro retro, agile retrospective tool",
+      meta_title: "Metro Retro Alternative: Free & Open Source | Fast Retro",
+      meta_description: "Switch from Metro Retro to a free, open-source retrospective tool. Self-host for free, flat per-account pricing, magic-link login. Start your first retro free.",
+      meta_keywords: "metro retro alternative, metroretro alternative, free retrospective tool, open source retro tool",
       competitor_values: {
         pricing_model: "Tiered plans",
         paid_plan: "Usage-based tiers",
@@ -77,9 +77,9 @@ class AlternativesController < ApplicationController
     teamretro: {
       name: "TeamRetro",
       slug: "teamretro",
-      meta_title: "Fast Retro vs TeamRetro | Open Source Alternative",
-      meta_description: "Compare Fast Retro and TeamRetro for agile retrospectives. Fast Retro offers open source code, optional self-hosting, and a simple phase-driven retro experience.",
-      meta_keywords: "teamretro alternative, fast retro vs teamretro, scrum retrospective software",
+      meta_title: "TeamRetro Alternative: Free Open Source Retro | Fast Retro",
+      meta_description: "TeamRetro feels heavy? Fast Retro is a free, open-source retrospective tool. Self-host, flat account pricing, magic-link login. No per-seat fees.",
+      meta_keywords: "teamretro alternative, free retrospective tool, open source retro tool, scrum retrospective software",
       competitor_values: {
         pricing_model: "Tiered plans",
         paid_plan: "Seat and plan based pricing",
@@ -95,6 +95,75 @@ class AlternativesController < ApplicationController
         "Self-host for free when procurement or compliance requires it.",
         "Run a consistent facilitation pattern every sprint with a fixed phase sequence.",
         "Keep onboarding friction low for teams using magic-link authentication."
+      ]
+    },
+    quickretro: {
+      name: "QuickRetro",
+      slug: "quickretro",
+      meta_title: "QuickRetro Alternative: Free Open Source Retro | Fast Retro",
+      meta_description: "Looking for a QuickRetro alternative? Fast Retro is a free, open-source sprint retrospective tool. Self-host, flat account pricing, magic-link login.",
+      meta_keywords: "quickretro alternative, quick retro alternative, free retrospective tool, open source retro tool",
+      competitor_values: {
+        pricing_model: "Freemium with paid tiers",
+        paid_plan: "Team-size based pricing",
+        open_source: "Not open source",
+        self_hosting: "Not self-hosted",
+        authentication: "Account-based login",
+        real_time: "Real-time collaboration",
+        export: "Plan-dependent exports",
+        free_tier: "Limited free boards"
+      },
+      reasons: [
+        "Keep retros structured with explicit phases instead of a freeform board.",
+        "Own your data and deployment with open source code and self-hosting support.",
+        "Use predictable flat account pricing as your team grows.",
+        "Onboard teammates fast with passwordless magic-link sign-in."
+      ]
+    },
+    reetro: {
+      name: "Reetro",
+      slug: "reetro",
+      meta_title: "Reetro Alternative: Free Open Source Retro | Fast Retro",
+      meta_description: "Looking for a Reetro alternative? Fast Retro is a free, open-source retrospective tool. Self-host, flat per-account pricing, magic-link login. Start free.",
+      meta_keywords: "reetro alternative, reetro app alternative, free retrospective tool, open source retro tool",
+      competitor_values: {
+        pricing_model: "Freemium with paid tiers",
+        paid_plan: "Per-team paid plans",
+        open_source: "Not open source",
+        self_hosting: "Not self-hosted",
+        authentication: "Account-based login",
+        real_time: "Real-time collaboration",
+        export: "Plan-dependent exports",
+        free_tier: "Limited free usage"
+      },
+      reasons: [
+        "Run structured retros with a fixed phase flow instead of a single-board layout.",
+        "Self-host the whole stack when compliance or procurement requires it.",
+        "Keep billing predictable with a flat per-account paid plan.",
+        "Reduce friction for participants using passwordless magic-link login."
+      ]
+    },
+    funretro: {
+      name: "FunRetro",
+      slug: "funretro",
+      meta_title: "FunRetro Alternative: Free Open Source Retro | Fast Retro",
+      meta_description: "Looking for a FunRetro alternative? Fast Retro is a free, open-source sprint retrospective tool. Self-host, flat per-account pricing, magic-link login.",
+      meta_keywords: "funretro alternative, funretro retrospective tool alternative, free retrospective tool, open source retro tool",
+      competitor_values: {
+        pricing_model: "Tiered plans",
+        paid_plan: "Board/team based tiers",
+        open_source: "Not open source",
+        self_hosting: "Not self-hosted",
+        authentication: "Email/password",
+        real_time: "Real-time collaboration",
+        export: "Plan-dependent exports",
+        free_tier: "Limited free usage"
+      },
+      reasons: [
+        "Move from FunRetro's board model to an explicit phase-based facilitation flow.",
+        "Self-host with full code visibility instead of depending on a hosted-only SaaS.",
+        "Use one flat account price instead of scaling plan tiers as retros grow.",
+        "Keep participant onboarding fast with magic-link sign-in."
       ]
     }
   }.freeze
@@ -126,6 +195,18 @@ class AlternativesController < ApplicationController
 
   def teamretro
     render_alternative(:teamretro)
+  end
+
+  def quickretro
+    render_alternative(:quickretro)
+  end
+
+  def reetro
+    render_alternative(:reetro)
+  end
+
+  def funretro
+    render_alternative(:funretro)
   end
 
   private
