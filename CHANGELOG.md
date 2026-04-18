@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.0.4.0] - 2026-04-16
+## [0.0.5.0] - 2026-04-18
+
+### Added
+- Three new alternative comparison pages: `/alternative/quickretro`, `/alternative/reetro`, and `/alternative/funretro` — landing pages targeting teams evaluating those competitors.
+- FAQPage structured data (JSON-LD) on the home page, so the six FAQ entries are eligible for rich-result treatment in search results.
+
+### Changed
+- Rewrote titles and meta descriptions for every alternative comparison page (Parabol, MetroRetro, TeamRetro, EasyRetro, and the three new ones) to lead with intent keywords ("Free", "Open Source", the competitor's name) instead of Fast Retro's brand — aimed at pulling clicks from high-impression-low-CTR queries.
+- Shortened the home page title to fit mobile search result snippets without truncation, and rewrote the meta description to emphasize the top drivers ("free", "open source", "magic-link", "self-host").
+- Refined the home page "How it works" and "Why Fast Retro?" copy to include "sprint retrospective tool" and "free retro tool" phrasing, targeting queries where the site ranks near but not inside the top three.
+- The landing page footer "Compare" list now links to all seven alternative pages (previously only four), giving the new competitor pages internal link equity from the site's most-crawled page.
 
 ### Added
 - Background jobs now automatically carry the enqueue-time account context through to perform. Previously, async work could run without tenant scope; any future notifications, digests, or broadcasts will stay inside the account that triggered them.
