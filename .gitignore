@@ -43,3 +43,9 @@
 config/credentials.yml.enc
 config/deploy.yml
 config/deploy.dev.yml
+
+# Local-only working trees / reference checkouts — never commit as gitlinks
+/.claude/
+/fizzy/
+/kamal/
+/opentelemetry-rails-example/
