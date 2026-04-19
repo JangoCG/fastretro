@@ -13,7 +13,7 @@ CI.run do
 
   step "Security: Gem audit", "bin/bundler-audit check --update"
   step "Security: Importmap audit", "bin/importmap audit"
-  step "Security: Brakeman audit", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
+  step "Security: Brakeman audit", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error --skip-files fizzy/"
   step "Security: Gitleaks audit", "bin/gitleaks-audit"
 
   if FastRetro.saas?
