@@ -10,4 +10,4 @@
 
 <p><%= t("mailers.magic_link.code_validity", time: distance_of_time_in_words(MagicLink::EXPIRATION_TIME)) %></p>
 
-<p class="footer"><%= t("mailers.magic_link.need_help") %> <%= mail_to "cengiz@cengizg.com", t("mailers.magic_link.send_email") %>.</p>
+<p class="footer"><%= t("mailers.magic_link.need_help") %> <%= mail_to "support@fastretro.app", t("mailers.magic_link.send_email") %>.</p>

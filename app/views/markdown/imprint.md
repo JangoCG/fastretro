@@ -13,7 +13,7 @@ Germany
 Cengiz Gürtusgil
 
 **Contact** <br/>
-Email: cengiz@cengizg.com
+Email: support@fastretro.app
 
 ---
 
@@ -46,7 +46,7 @@ Deutschland
 Cengiz Gürtusgil
 
 **Kontakt** <br/>
-E-Mail: cengiz@cengizg.com
+E-Mail: support@fastretro.app
 
 ---
 

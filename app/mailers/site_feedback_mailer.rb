@@ -5,7 +5,7 @@ class SiteFeedbackMailer < ApplicationMailer
     @from_name = from_name
 
     mail(
-      to: ENV.fetch("SITE_FEEDBACK_EMAIL", "cengiz@cengizg.com"),
+      to: ENV.fetch("SITE_FEEDBACK_EMAIL", "support@fastretro.app"),
       subject: "Site Feedback from #{from_name}",
       reply_to: from_email
     )

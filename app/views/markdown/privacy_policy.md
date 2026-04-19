@@ -9,7 +9,7 @@ Angelika-Machinek-Str. 20 <br/>
 60486 Frankfurt am Main <br/>
 Germany
 
-**Contact:** cengiz@cengizg.com
+**Contact:** support@fastretro.app
 
 ## 1. How do I use your data and why?
 
@@ -49,7 +49,7 @@ Data is primarily stored in the EU. I have concluded Data Processing Agreements 
 * **Session Data:** Deleted/invalidated upon logout.
 * **Backups:** Daily server backups are stored on a rolling basis.
 
-You can delete your account by contacting cengiz@cengizg.com.
+You can delete your account by contacting support@fastretro.app.
 
 ## 4. Your Rights
 
@@ -72,7 +72,7 @@ Angelika-Machinek-Str. 20 <br/>
 60486 Frankfurt am Main <br/>
 Deutschland
 
-**Kontakt:** cengiz@cengizg.com
+**Kontakt:** support@fastretro.app
 
 ## 1. Wie nutze ich deine Daten und warum?
 
@@ -112,7 +112,7 @@ Deine Daten werden primär in der EU gespeichert. Ich habe mit allen Dienstleist
 * **Sitzungsdaten (Cookies):** Werden nach dem Ausloggen oder Schließen des Browsers ungültig/gelöscht.
 * **Backups:** Tägliche Server-Backups werden rollierend gespeichert und regelmäßig überschrieben.
 
-Du kannst dein Konto jederzeit löschen, indem du mich unter cengiz@cengizg.com kontaktierst.
+Du kannst dein Konto jederzeit löschen, indem du mich unter support@fastretro.app kontaktierst.
 
 ## 4. Welche Rechte habe ich?
 
