@@ -412,12 +412,12 @@ en:
     confirm_phase_modal:
       confirm: "CONFIRM"
       are_you_sure: "ARE YOU SURE?"
-      about_to_complete: "You are about to complete this phase and move to"
-      complete_phase: "Complete Phase"
+      about_to_complete: "Everyone will move on to"
+      complete_phase: "Next Step"
       not_everyone_finished: "Not everyone is finished!"
       participants_working:
-        one: "%{count} participant still working on this phase."
-        other: "%{count} participants still working on this phase."
+        one: "%{count} participant is still working."
+        other: "%{count} participants are still working."
       everyone_finished: "Everyone is finished!"
       yes_continue: "Yes, Continue"
     confirm_back_phase_modal:

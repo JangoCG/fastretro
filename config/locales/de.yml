@@ -412,12 +412,12 @@ de:
     confirm_phase_modal:
       confirm: "BESTÄTIGUNG"
       are_you_sure: "BIST DU SICHER?"
-      about_to_complete: "Du bist dabei, diese Phase abzuschließen und zu wechseln zu"
-      complete_phase: "Phase abschließen"
+      about_to_complete: "Alle gehen weiter zu"
+      complete_phase: "Nächster Schritt"
       not_everyone_finished: "Nicht alle sind fertig!"
       participants_working:
-        one: "%{count} Teilnehmer arbeitet noch an dieser Phase."
-        other: "%{count} Teilnehmer arbeiten noch an dieser Phase."
+        one: "%{count} Teilnehmer ist noch dabei."
+        other: "%{count} Teilnehmer sind noch dabei."
       everyone_finished: "Alle sind fertig!"
       yes_continue: "Ja, weiter"
     confirm_back_phase_modal:

@@ -6,6 +6,10 @@ class ConfirmPhaseModalComponent < ApplicationComponent
   private
 
   def next_phase_name
-    @retro.next_phase&.to_s&.tr("_", " ")&.upcase || "NEXT PHASE"
+    if next_phase = @retro.next_phase
+      I18n.t("phases.#{next_phase}").upcase
+    else
+      I18n.t("phases.complete").upcase
+    end
   end
 end
