@@ -280,7 +280,7 @@ GEM
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
-    prosopite (2.1.2)
+    prosopite (2.2.0)
     psych (5.3.1)
       date
       stringio
