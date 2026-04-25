@@ -143,5 +143,7 @@ Rails.application.routes.draw do
   post "stripe/webhooks", to: "stripe/webhooks#create"
 
   # Catch-all route for unmatched paths (must be last)
-  match "*unmatched", to: "errors#not_found", via: :all
+  constraints ->(request) { !request.path_info.start_with?("/rails/") } do
+    match "*unmatched", to: "errors#not_found", via: :all
+  end
 end
