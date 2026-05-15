@@ -49,3 +49,4 @@ config/deploy.dev.yml
 /fizzy/
 /kamal/
 /opentelemetry-rails-example/
+.gstack/
