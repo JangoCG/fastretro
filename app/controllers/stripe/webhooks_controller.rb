@@ -15,8 +15,10 @@ class Stripe::WebhooksController < ApplicationController
   private
     def dispatch_stripe_event(event)
       case event.type
-      when "checkout.session.completed"
+      when "checkout.session.completed", "checkout.session.async_payment_succeeded"
         sync_new_subscription(event.data.object.subscription, plan_key: event.data.object.metadata["plan_key"]) if event.data.object.mode == "subscription"
+      when "checkout.session.async_payment_failed"
+        sync_subscription(event.data.object.subscription) if event.data.object.mode == "subscription" && event.data.object.subscription
       when "customer.subscription.updated", "customer.subscription.deleted"
         sync_subscription(event.data.object.id)
       end

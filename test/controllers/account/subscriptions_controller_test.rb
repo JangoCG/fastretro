@@ -31,6 +31,25 @@ class Account::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to "https://checkout.stripe.com/session123"
   end
 
+  test "create enables stripe managed payments" do
+    customer = OpenStruct.new(id: "cus_test_37signals")
+    session = OpenStruct.new(url: "https://checkout.stripe.com/session123")
+
+    Stripe::Customer.stubs(:retrieve).returns(customer)
+    Stripe::Customer.stubs(:create).returns(customer)
+    Stripe::Checkout::Session.expects(:create).with do |params|
+      params[:billing_address_collection] == "required" &&
+        params[:managed_payments] == { enabled: true } &&
+        !params.key?(:customer_update) &&
+        !params.key?(:automatic_tax) &&
+        !params.key?(:tax_id_collection)
+    end.returns(session)
+
+    post account_subscription_path
+
+    assert_redirected_to "https://checkout.stripe.com/session123"
+  end
+
   test "show requires admin" do
     logout_and_sign_in_as users(:two) # member
 

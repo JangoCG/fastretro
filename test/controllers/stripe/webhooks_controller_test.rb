@@ -39,6 +39,28 @@ class Stripe::WebhooksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "active", @subscription.status
   end
 
+  test "async checkout session succeeded activates subscription" do
+    stripe_sub = OpenStruct.new(id: "sub_123", customer: "cus_test123", status: "active", cancel_at: nil, items: stub_items(1.month.from_now.to_i))
+
+    event = stripe_event("checkout.session.async_payment_succeeded",
+      mode: "subscription",
+      customer: "cus_test123",
+      subscription: "sub_123",
+      metadata: { "plan_key" => "monthly_v1" }
+    )
+
+    Stripe::Webhook.stubs(:construct_event).returns(event)
+    Stripe::Subscription.stubs(:retrieve).returns(stripe_sub)
+    Stripe::Invoice.stubs(:create_preview).returns(OpenStruct.new(amount_due: 1999))
+
+    post stripe_webhooks_path, params: "{}", as: :json
+
+    assert_response :ok
+    @subscription.reload
+    assert_equal "sub_123", @subscription.stripe_subscription_id
+    assert_equal "active", @subscription.status
+  end
+
   test "subscription updated changes status and syncs next amount due" do
     @subscription.update!(stripe_subscription_id: "sub_123", status: "active")
 

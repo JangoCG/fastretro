@@ -9,6 +9,13 @@
 
 set -e
 
+if [ -f .env ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source .env
+  set +a
+fi
+
 # Check if Stripe CLI is installed
 if ! command -v stripe &> /dev/null; then
   echo "❌ Error: Stripe CLI not found. Install it with:"
@@ -30,6 +37,11 @@ else
   echo "   STRIPE_MONTHLY_V1_PRICE_ID=price_..."
 fi
 
+if [ -z "$STRIPE_SECRET_KEY" ]; then
+  echo "❌ Error: STRIPE_SECRET_KEY is not set. Add it to .env before starting the listener."
+  exit 1
+fi
+
 echo ""
 echo "🚀 Starting Stripe webhook forwarding..."
 echo "   Forwarding to: http://localhost:3000/stripe/webhooks"
@@ -44,4 +56,4 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 
 # Start stripe listen (this will run in foreground)
-stripe listen --forward-to localhost:3000/stripe/webhooks
+stripe listen --api-key "$STRIPE_SECRET_KEY" --forward-to localhost:3000/stripe/webhooks

@@ -13,10 +13,8 @@ class Account::SubscriptionsController < ApplicationController
       success_url: account_subscription_url + "?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: account_subscription_url,
       metadata: { account_id: Current.account.id, plan_key: plan_param.key },
-      automatic_tax: { enabled: true },
-      tax_id_collection: { enabled: true },
-      billing_address_collection: "required",
-      customer_update: { address: "auto", name: "auto" }
+      managed_payments: { enabled: true },
+      billing_address_collection: "required"
 
     redirect_to session.url, allow_other_host: true
   end
