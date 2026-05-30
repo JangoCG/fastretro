@@ -56,6 +56,17 @@ class Retros::PhaseTransitionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "complete", @retro.reload.phase
   end
 
+  test "advancing to complete schedules retention reminder" do
+    sign_in_as :one
+    @retro.update!(phase: :discussion)
+
+    travel_to Time.current do
+      assert_enqueued_with(job: Retro::RetentionReminderJob, args: [ @retro ], at: 7.days.from_now) do
+        post retro_phase_transition_path(@retro)
+      end
+    end
+  end
+
   test "non-admin participant cannot advance phase" do
     sign_in_as :two
     @retro.update!(phase: :brainstorming)

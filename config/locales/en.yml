@@ -74,13 +74,13 @@ en:
     complete: "Complete"
 
   phase_instructions:
-    waiting_room: "Invite teammates and wait until everyone joins."
+    waiting_room: "Share the invite link, wait for your teammates to join, then start the retro."
     action_review: "Review previous action items and mark completed ones."
-    brainstorming: "Add your feedback ideas to the board. Note: Your feedback is private in this phase. Other participants will be able to see your entries in the next phase."
-    grouping: "Group similar feedback items into clusters."
-    voting: "Vote for the feedback that matters most."
-    discussion: "Discuss top-voted items and define clear action items."
-    complete: "Review outcomes and export the retro summary."
+    brainstorming: "Add your feedback ideas. Cards are private for now; the facilitator moves everyone forward when the team is ready."
+    grouping: "Everyone can now see the cards. Group similar feedback items into clusters before voting."
+    voting: "Use your votes on the items that matter most. The highest-voted topics move to the top for discussion."
+    discussion: "Talk through the top topics and create action items before completing the retro."
+    complete: "Review outcomes and export the summary. Action items will be available to review in your next retro."
     default: "Collaborate with your team in this phase."
 
   # ── Participant Status ─────────────────────────────────────────
@@ -412,14 +412,14 @@ en:
     confirm_phase_modal:
       confirm: "CONFIRM"
       are_you_sure: "ARE YOU SURE?"
-      about_to_complete: "Everyone will move on to"
-      complete_phase: "Next Step"
+      about_to_complete: "Everyone will move to the next phase:"
+      complete_phase: "Move to next phase"
       not_everyone_finished: "Not everyone is finished!"
       participants_working:
         one: "%{count} participant is still working."
         other: "%{count} participants are still working."
       everyone_finished: "Everyone is finished!"
-      yes_continue: "Yes, Continue"
+      yes_continue: "Move everyone"
     confirm_back_phase_modal:
       confirm: "CONFIRM"
       go_back_question: "GO BACK?"

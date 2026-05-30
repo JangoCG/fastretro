@@ -74,13 +74,13 @@ de:
     complete: "Abgeschlossen"
 
   phase_instructions:
-    waiting_room: "Lade Teammitglieder ein und warte, bis alle da sind."
+    waiting_room: "Teile den Einladungslink, warte auf dein Team und starte dann die Retro."
     action_review: "Prüfe vorherige Maßnahmen und markiere erledigte."
-    brainstorming: "Füge deine Feedback-Ideen zum Board hinzu. Hinweis: Deine Feedbacks sind in dieser Phase privat. Erst in der nächsten Phase können die anderen Teilnehmenden deine Einträge sehen."
-    grouping: "Gruppiere ähnliche Feedbacks zu Clustern."
-    voting: "Stimme für das Feedback ab, das am wichtigsten ist."
-    discussion: "Diskutiere Top-Themen und definiere klare Maßnahmen."
-    complete: "Ergebnisse prüfen und Retro-Zusammenfassung exportieren."
+    brainstorming: "Füge deine Feedback-Ideen hinzu. Karten sind jetzt noch privat; die Moderation schickt alle weiter, wenn das Team bereit ist."
+    grouping: "Jetzt sehen alle die Karten. Gruppiere ähnliche Feedbacks zu Clustern, bevor abgestimmt wird."
+    voting: "Vergib deine Stimmen an die wichtigsten Themen. Die meistgewählten Punkte stehen in der Diskussion oben."
+    discussion: "Besprecht die wichtigsten Themen und erstellt Maßnahmen, bevor ihr die Retro abschließt."
+    complete: "Prüfe die Ergebnisse und exportiere die Zusammenfassung. Maßnahmen können in der nächsten Retro wieder geprüft werden."
     default: "Arbeite in dieser Phase mit deinem Team zusammen."
 
   # ── Participant Status ─────────────────────────────────────────
@@ -412,14 +412,14 @@ de:
     confirm_phase_modal:
       confirm: "BESTÄTIGUNG"
       are_you_sure: "BIST DU SICHER?"
-      about_to_complete: "Alle gehen weiter zu"
-      complete_phase: "Nächster Schritt"
+      about_to_complete: "Alle wechseln in die nächste Phase:"
+      complete_phase: "In nächste Phase"
       not_everyone_finished: "Nicht alle sind fertig!"
       participants_working:
         one: "%{count} Teilnehmer ist noch dabei."
         other: "%{count} Teilnehmer sind noch dabei."
       everyone_finished: "Alle sind fertig!"
-      yes_continue: "Ja, weiter"
+      yes_continue: "Alle weiterleiten"
     confirm_back_phase_modal:
       confirm: "BESTÄTIGUNG"
       go_back_question: "ZURÜCK?"

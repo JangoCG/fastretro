@@ -1,0 +1,18 @@
+<h1>Review your action items and run the next retro</h1>
+
+<p>
+  Your retro <strong><%= @retro.name.presence || "Retro" %></strong> ended with
+  <strong><%= pluralize(@action_count, "action item") %></strong>.
+</p>
+
+<p>
+  Start the next retro to review those actions with your team and keep the follow-up loop going.
+</p>
+
+<p>
+  <%= link_to "Start the next retro", @new_retro_url %>
+</p>
+
+<p>
+  Fast Retro will show previous action items when the next retro starts.
+</p>

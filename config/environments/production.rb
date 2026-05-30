@@ -83,7 +83,10 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch("APP_HOST", "fastretro.app"),
+    protocol: "https"
+  }
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

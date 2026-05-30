@@ -30,6 +30,7 @@ class Retro < ApplicationRecord
   validate :column_layout_presence
 
   after_commit :expire_landing_page_retro_count_cache, on: %i[create destroy]
+  after_commit :schedule_retention_reminder, if: :completed_phase_after_update?, on: :update
 
   def self.default_column_layout
     DEFAULT_COLUMN_LAYOUT.map(&:dup)
@@ -190,6 +191,21 @@ class Retro < ApplicationRecord
     participants.admin.order(:created_at).first&.user
   end
 
+  def facilitator
+    owner || account.owner_user
+  end
+
+  def deliver_retention_reminder
+    return unless retention_reminder_due?
+
+    with_lock do
+      return unless retention_reminder_due?
+
+      RetroReminderMailer.next_retro(self).deliver_now
+      update!(retention_reminder_sent_at: Time.current)
+    end
+  end
+
   # Find completed retros with published actions
   def self.completed_with_actions
     where(phase: :complete)
@@ -197,6 +213,16 @@ class Retro < ApplicationRecord
       .where(actions: { status: :published })
       .distinct
       .order(created_at: :desc)
+  end
+
+  def self.due_for_retention_reminder
+    completed_with_actions
+      .where(retention_reminder_sent_at: nil)
+      .where("NOT EXISTS (
+        SELECT 1 FROM retros newer_retros
+        WHERE newer_retros.account_id = retros.account_id
+          AND newer_retros.created_at > retros.created_at
+      )")
   end
 
   # Copy published actions from another retro
@@ -248,6 +274,22 @@ class Retro < ApplicationRecord
 
     def expire_landing_page_retro_count_cache
       Rails.cache.delete(LANDING_PAGE_RETRO_COUNT_CACHE_KEY)
+    end
+
+    def schedule_retention_reminder
+      Retro::RetentionReminderJob.set(wait: 7.days).perform_later(self)
+    end
+
+    def completed_phase_after_update?
+      saved_change_to_phase? && complete?
+    end
+
+    def retention_reminder_due?
+      complete? &&
+        retention_reminder_sent_at.blank? &&
+        facilitator&.identity&.email_address.present? &&
+        actions.published.exists? &&
+        !account.retros.where("created_at > ?", created_at).exists?
     end
 
     def self.column_name_from(column)
