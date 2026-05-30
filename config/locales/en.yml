@@ -76,7 +76,7 @@ en:
   phase_instructions:
     waiting_room: "Invite teammates and wait until everyone joins."
     action_review: "Review previous action items and mark completed ones."
-    brainstorming: "Add your feedback ideas to the board."
+    brainstorming: "Add your feedback ideas to the board. Note: Your feedback is private in this phase. Other participants will be able to see your entries in the next phase."
     grouping: "Group similar feedback items into clusters."
     voting: "Vote for the feedback that matters most."
     discussion: "Discuss top-voted items and define clear action items."

@@ -76,7 +76,7 @@ de:
   phase_instructions:
     waiting_room: "Lade Teammitglieder ein und warte, bis alle da sind."
     action_review: "Prüfe vorherige Maßnahmen und markiere erledigte."
-    brainstorming: "Füge deine Feedback-Ideen zum Board hinzu."
+    brainstorming: "Füge deine Feedback-Ideen zum Board hinzu. Hinweis: Deine Feedbacks sind in dieser Phase privat. Erst in der nächsten Phase können die anderen Teilnehmenden deine Einträge sehen."
     grouping: "Gruppiere ähnliche Feedbacks zu Clustern."
     voting: "Stimme für das Feedback ab, das am wichtigsten ist."
     discussion: "Diskutiere Top-Themen und definiere klare Maßnahmen."
