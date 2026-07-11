@@ -54,7 +54,7 @@ module FastRetro
     def pricing
       @pricing ||= {
         plan_name: ENV.fetch("STRIPE_PLAN_NAME", "Fast Retro License"),
-        price_display: ENV.fetch("STRIPE_PRICE_DISPLAY", "€9.99 / month"),
+        price_display: ENV.fetch("STRIPE_PRICE_DISPLAY", "$29.99 / month"),
         lookup_key: ENV.fetch("STRIPE_LOOKUP_KEY", "standard_monthly")
       }
     end

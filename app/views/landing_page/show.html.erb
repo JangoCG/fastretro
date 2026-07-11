@@ -328,7 +328,7 @@
     <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
       No credit card required. No time limit.<br>
       <% if paid_price.present? %>
-        Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for €<%= paid_price %>/month<br class="hidden sm:block">
+        Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for $<%= paid_price %>/month<br class="hidden sm:block">
         to get unlimited retros and unlimited users. Cancel anytime.
       <% else %>
         Live pricing is currently unavailable.<br class="hidden sm:block">
@@ -375,7 +375,7 @@
               <li class="flex items-center gap-2">
                 <span class="w-3 h-3 bg-black"></span>
                 <% if paid_price.present? %>
-                  €<%= paid_price %>/MONTH PER ACCOUNT
+                  $<%= paid_price %>/MONTH PER ACCOUNT
                 <% else %>
                   LIVE PRICE IN STRIPE CHECKOUT
                 <% end %>
@@ -387,7 +387,7 @@
              <div class="font-mono text-xs uppercase tracking-widest text-zinc-500">FLAT RATE</div>
 
              <div class="my-2 sm:my-0">
-               <div class="text-5xl sm:text-6xl font-black mb-1"><%= paid_price.present? ? "€#{paid_price}" : "N/A" %></div>
+               <div class="text-5xl sm:text-6xl font-black mb-1"><%= paid_price.present? ? "$#{paid_price}" : "N/A" %></div>
                <div class="font-mono text-xs uppercase">/ MONTH</div>
              </div>
 
@@ -481,7 +481,7 @@
           <p class="text-zinc-600">
             Every retro you create counts toward your <%= number_with_delimiter(@free_limit) %> free retros.
             <% if paid_price.present? %>
-              After that, upgrade to unlimited retros for €<%= paid_price %>/month per account.
+              After that, upgrade to unlimited retros for $<%= paid_price %>/month per account.
             <% else %>
               Live pricing is currently unavailable.
             <% end %>
@@ -503,7 +503,7 @@
   <%# === FAQ STRUCTURED DATA (for SERP rich results) === %>
   <%
     free_tier_answer = if paid_price.present?
-      "Every retro you create counts toward your #{number_with_delimiter(@free_limit)} free retros. After that, upgrade to unlimited retros for €#{paid_price}/month per account. Deleted cards still count toward the limit to keep tracking straightforward."
+      "Every retro you create counts toward your #{number_with_delimiter(@free_limit)} free retros. After that, upgrade to unlimited retros for $#{paid_price}/month per account. Deleted cards still count toward the limit to keep tracking straightforward."
     else
       "Every retro you create counts toward your #{number_with_delimiter(@free_limit)} free retros. Deleted cards still count toward the limit to keep tracking straightforward."
     end
