@@ -41,7 +41,7 @@
       <p class="font-mono text-[10px] text-zinc-500 mt-4 uppercase tracking-wide">
         Free tier includes <%= number_with_delimiter(@free_limit) %> feedbacks. Paid plan is
         <% if @paid_price.present? %>
-          <%= number_to_currency(@paid_price, unit: "€", format: "%u%n") %>/month per account.
+          <%= number_to_currency(@paid_price, unit: "$", format: "%u%n") %>/month per account.
         <% else %>
           currently unavailable.
         <% end %>
@@ -135,7 +135,7 @@
     <p class="font-mono text-sm text-zinc-600 mb-8 max-w-xl mx-auto">
       Start free with <%= number_with_delimiter(@free_limit) %> feedbacks.
       <% if @paid_price.present? %>
-        Upgrade to <%= number_to_currency(@paid_price, unit: "€", format: "%u%n") %>/month for unlimited feedback and users.
+        Upgrade to <%= number_to_currency(@paid_price, unit: "$", format: "%u%n") %>/month for unlimited feedback and users.
       <% else %>
         Live pricing is currently unavailable.
       <% end %>

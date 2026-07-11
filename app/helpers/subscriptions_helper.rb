@@ -10,6 +10,6 @@ module SubscriptionsHelper
   end
 
   def format_currency(amount)
-    number_to_currency(amount, unit: "€", format: "%u%n", precision: (amount % 1).zero? ? 0 : 2)
+    number_to_currency(amount, unit: "$", format: "%u%n", precision: (amount % 1).zero? ? 0 : 2)
   end
 end
