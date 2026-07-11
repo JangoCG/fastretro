@@ -70,6 +70,10 @@ RAILS_MASTER_KEY=your-master-key
 # SMTP credentials (e.g., AWS SES)
 SMTP_USERNAME=your-smtp-username
 SMTP_PASSWORD=your-smtp-password
+
+# S3-compatible Active Storage credentials
+S3_ACCESS_KEY=your-s3-access-key
+S3_SECRET_KEY=your-s3-secret-key
 ```
 
 The values you enter here will be specific to you, and you can get or create them as follows:
@@ -77,6 +81,7 @@ The values you enter here will be specific to you, and you can get or create the
 - `SECRET_KEY_BASE`: A long, random secret. Run `bin/rails secret` to create a suitable value.
 - `RAILS_MASTER_KEY`: Found in `config/master.key` (or create one with `bin/rails credentials:edit`).
 - `SMTP_USERNAME` & `SMTP_PASSWORD`: Valid credentials for your SMTP server. For AWS SES, create SMTP credentials in the AWS console under SES > SMTP settings.
+- `S3_ACCESS_KEY` & `S3_SECRET_KEY`: Credentials for the S3-compatible object storage used by Active Storage in production.
 
 ### Deploy Fast Retro!
 
@@ -107,7 +112,7 @@ bin/kamal dbc        # Open a database console
 
 ### Storage and persistence
 
-Fast Retro uses SQLite for its database and stores files locally using Active Storage. The deployment is configured with a persistent Docker volume (`fastretrov2_prod_storage`) mounted at `/rails/storage`.
+Fast Retro uses SQLite for its database and stores production uploads in S3-compatible object storage through Active Storage. The deployment's persistent Docker volume (`fastretrov2_prod_storage`) mounted at `/rails/storage` contains the SQLite databases; development and test uploads continue to use local disk storage.
 
 **Important:** For production use, we recommend backing up this volume regularly or mounting it to a path that is included in your server's backup strategy.
 
