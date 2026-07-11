@@ -54,6 +54,10 @@ class ParticipantListComponent < ApplicationComponent
     participant.admin? ? "MODERATOR" : "MEMBER"
   end
 
+  def role_button(participant)
+    ParticipantRoleButtonComponent.new(participant: participant, manageable: role_management_enabled?, admin_count: admin_count, compact: true)
+  end
+
   def status_text(participant)
     if participant.finished?
       "#{role_badge(participant)} // #{I18n.t('participant_status.finished')}"
@@ -61,4 +65,15 @@ class ParticipantListComponent < ApplicationComponent
       "#{role_badge(participant)} // #{I18n.t('participant_status.online')}"
     end
   end
+
+  private
+    def role_management_enabled?
+      return @role_management_enabled if defined?(@role_management_enabled)
+
+      @role_management_enabled = Current.user.present? && @retro.admin?(Current.user)
+    end
+
+    def admin_count
+      @admin_count ||= participants.count(&:admin?)
+    end
 end

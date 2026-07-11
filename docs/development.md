@@ -53,7 +53,7 @@ The full continuous integration suite can be run with:
 bin/ci
 ```
 
-The CI pipeline runs: rubocop, bundler-audit, importmap audit, brakeman, unit tests, system tests, and seed tests.
+The CI pipeline runs: rubocop, bundler-audit, importmap audit, brakeman, gitleaks, unit tests, system tests, and seed tests.
 
 ### Database configuration
 

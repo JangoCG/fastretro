@@ -30,6 +30,9 @@ Rails.application.routes.draw do
         delete :remove_feedback, on: :collection
       end
       resources :votes, only: %i[create destroy]
+      resources :participants, only: [] do
+        resource :role, only: :update, module: :participants
+      end
       resource :highlight, only: %i[update destroy]
       resource :music, only: :update
       resource :jira_export, only: :create

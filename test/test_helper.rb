@@ -10,6 +10,7 @@ module ActiveSupport
     parallelize workers: :number_of_processors
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    set_fixture_class retro_participants: Retro::Participant
     fixtures :all
 
     include ActiveJob::TestHelper

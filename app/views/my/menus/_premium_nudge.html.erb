@@ -1,0 +1,28 @@
+<% if FastRetro.saas? && Current.account.plan.free? && Current.user&.admin? %>
+  <aside id="premium-upgrade-nudge"
+         class="relative mb-6 overflow-hidden border-[2px] border-zinc-900 bg-[#6b39ff] p-4 text-white shadow-[4px_4px_0px_0px_rgba(24,24,27,1)]"
+         aria-labelledby="premium-upgrade-title">
+    <div class="absolute -right-5 -top-7 rotate-12 text-white/10" aria-hidden="true">
+      <%= icon_tag "crown", class: "text-[7rem]" %>
+    </div>
+
+    <div class="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div class="max-w-[19rem]">
+        <span class="mb-2 inline-flex items-center gap-1.5 border border-zinc-900 bg-[#ffe600] px-2 py-1 text-[0.6rem] font-black uppercase tracking-widest text-zinc-900">
+          <%= icon_tag "crown", class: "text-xs" %>
+          <%= t("menus.premium_nudge.plan") %>
+        </span>
+        <h2 id="premium-upgrade-title" class="text-xl font-black uppercase leading-none tracking-tight">
+          <%= t("menus.premium_nudge.title") %>
+        </h2>
+        <p class="mt-2 text-xs font-semibold leading-snug text-white/85">
+          <%= t("menus.premium_nudge.description") %>
+        </p>
+      </div>
+
+      <%= button_to t("menus.premium_nudge.action"), account_subscription_path,
+          class: "inline-flex w-full items-center justify-center border-[2px] border-zinc-900 bg-white px-4 py-2.5 text-xs font-black uppercase tracking-widest text-zinc-900 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)] transition-all duration-75 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(24,24,27,1)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none sm:w-auto",
+          form: { class: "shrink-0", data: { turbo: false } } %>
+    </div>
+  </aside>
+<% end %>

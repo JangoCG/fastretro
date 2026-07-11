@@ -8,9 +8,11 @@ class WaitingParticipantCardComponent < ApplicationComponent
     bg-cyan-500
   ].freeze
 
-  def initialize(participant:, index: 0)
+  def initialize(participant:, index: 0, manageable: false, admin_count: 1)
     @participant = participant
     @index = index
+    @manageable = manageable
+    @admin_count = admin_count
   end
 
   def avatar_color
@@ -19,5 +21,9 @@ class WaitingParticipantCardComponent < ApplicationComponent
 
   def role_label
     @participant.admin? ? "MODERATOR" : "PARTICIPANT"
+  end
+
+  def role_button
+    ParticipantRoleButtonComponent.new(participant: @participant, manageable: @manageable, admin_count: @admin_count)
   end
 end

@@ -432,6 +432,11 @@ de:
       label: "Verbleibende Stimmen:"
     participant_list:
       heading: "TEILNEHMER"
+    participant_roles:
+      promote: "ZUM MODERATOR MACHEN"
+      demote: "MODERATOR ENTFERNEN"
+      promote_short: "+MOD"
+      demote_short: "-MOD"
     retro_invite_card:
       heading: "LINK TEILEN"
       description: "Teile diesen Link, um Teammitglieder einzuladen:"
@@ -456,6 +461,11 @@ de:
     open_account_menu: "Öffne dein Kontomenü"
     go_to_account_menu: "Zum Kontomenü"
     designed_by: "wurde entworfen, gebaut und betrieben von"
+    premium_nudge:
+      plan: "Kostenloser Tarif"
+      title: "Unbegrenzt Retros durchführen"
+      description: "Wechsle zu Premium und erstelle so viele Retros, wie dein Team braucht."
+      action: "Jetzt upgraden"
 
   # ── Mailers ────────────────────────────────────────────────────
   mailers:
@@ -514,3 +524,10 @@ de:
     jira_export_started: "Maßnahmen werden nach Jira exportiert. Sie erscheinen in Kürze in deinem Projekt."
     too_many_submissions: "Zu viele Einsendungen. Bitte versuche es später erneut."
     feedback_thanks: "Danke für dein Feedback! Wir melden uns bald bei dir."
+
+  # ── Active Record Fehler ───────────────────────────────────────
+  activerecord:
+    errors:
+      models:
+        retro/participant:
+          last_admin: "Eine Retro braucht mindestens einen Moderator."
