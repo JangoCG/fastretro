@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1.0] - 2026-07-12
+
+### Fixed
+- Role changes now re-check the acting moderator's permissions against fresh data inside the lock, so a moderator who was demoted a split second earlier can no longer change someone's role.
+- Participant list updates render once per viewer role instead of once per participant, keeping large retros snappy when someone joins, finishes, or changes role.
+- Fixed a slow memory leak in the participant-highlighting controls that accumulated stale event listeners while navigating between retro phases.
+- Restored the generated database schema files to their canonical Rails formatting (a style autocorrect had reformatted them; the next schema dump would have undone it).
+
 ## [0.1.0.0] - 2026-07-11
 
 ### Added
