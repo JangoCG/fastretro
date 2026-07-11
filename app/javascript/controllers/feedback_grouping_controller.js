@@ -22,6 +22,12 @@ export default class extends Controller {
     this.sortable = Sortable.create(this.listTarget, {
       // No shared group - each column is independent
       animation: 150,
+      scroll: true,
+      // Chromium doesn't auto-scroll the window during native HTML5 drags,
+      // and Sortable's AutoScroll plugin skips window scrolling unless forced
+      forceAutoScrollFallback: true,
+      scrollSensitivity: 80,
+      scrollSpeed: 15,
       ghostClass: "feedback-ghost",
       dragClass: "feedback-drag",
       chosenClass: "feedback-chosen",
