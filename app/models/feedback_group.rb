@@ -29,6 +29,7 @@ class FeedbackGroup < ApplicationRecord
           Turbo::StreamsChannel.broadcast_replace_to(
             [ retro, user ],
             target: "retro-column-#{target_category}",
+            attributes: { method: :morph },
             partial: "retros/streams/column",
             locals: { retro:, category: target_category, participant:, feedbacks_by_category: }
           )

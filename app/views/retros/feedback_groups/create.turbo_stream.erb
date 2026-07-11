@@ -6,7 +6,7 @@
   participant = @retro.participants.includes(:votes).find_by(user: Current.user)
 %>
 <% @retro.column_categories.each do |category| %>
-  <%= turbo_stream.replace "retro-column-#{category}" do %>
+  <%= turbo_stream.replace "retro-column-#{category}", method: :morph do %>
     <%= render "retros/streams/column",
       retro: @retro,
       category: category,

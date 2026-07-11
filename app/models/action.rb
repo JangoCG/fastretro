@@ -25,6 +25,7 @@ class Action < ApplicationRecord
       Turbo::StreamsChannel.broadcast_replace_to(
         retro,
         target: "action-review-grid",
+        attributes: { method: :morph },
         partial: "retros/action_reviews/actions_grid",
         locals: { retro: }
       )
@@ -32,6 +33,7 @@ class Action < ApplicationRecord
       Turbo::StreamsChannel.broadcast_replace_to(
         retro,
         target: "actions-column",
+        attributes: { method: :morph },
         partial: "retros/streams/actions_column",
         locals: { retro: }
       )
