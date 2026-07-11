@@ -16,6 +16,10 @@ export default class extends Controller {
     document.removeEventListener("turbo:highlight-update", this.handleHighlightUpdate.bind(this))
   }
 
+  ignore(event) {
+    event.stopPropagation()
+  }
+
   toggle(event) {
     const userId = event.currentTarget.dataset.userId
     const container = document.getElementById("retro-content-grid")

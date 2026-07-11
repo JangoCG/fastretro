@@ -59,6 +59,17 @@
                 <%= status_text(participant) %>
               </p>
             </div>
+
+            <%# Role Toggle (admins only) %>
+            <% if role_controls?(participant) %>
+              <div data-action="click->participant-highlight#ignore">
+                <%= button_to role_toggle_label(participant), role_path(participant),
+                    method: :patch,
+                    params: { participant: { role: toggled_role(participant) } },
+                    title: role_toggle_title(participant),
+                    class: "bg-white text-zinc-900 text-[0.6rem] font-bold font-mono px-1.5 py-0.5 uppercase tracking-widest border-[1.5px] border-zinc-900 hover:bg-[#ffe600] transition-colors cursor-pointer" %>
+              </div>
+            <% end %>
           </li>
         <% end %>
       </ul>

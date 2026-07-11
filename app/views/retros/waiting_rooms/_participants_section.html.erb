@@ -1,5 +1,7 @@
 <%
   participants = local_assigns.fetch(:participants) { retro.participants.includes(:user).order(:created_at).to_a }
+  can_manage_roles = Current.user.present? && retro.admin?(Current.user)
+  admin_count = participants.count(&:admin?)
 %>
 
 <div id="waiting-room-participants" class="mb-8">
@@ -16,7 +18,11 @@
   <% if participants.any? %>
     <div id="participants-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       <% participants.each_with_index do |participant, index| %>
-        <%= render WaitingParticipantCardComponent.new(participant: participant, index: index) %>
+        <%= render WaitingParticipantCardComponent.new(
+          participant: participant,
+          index: index,
+          role_controls: can_manage_roles && !(participant.admin? && admin_count == 1)
+        ) %>
       <% end %>
     </div>
   <% else %>

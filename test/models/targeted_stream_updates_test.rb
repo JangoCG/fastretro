@@ -55,7 +55,16 @@ class TargetedStreamUpdatesTest < ActiveSupport::TestCase
     @retro.update!(phase: :waiting_room)
 
     Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
-      @retro,
+      [ @retro, users(:one) ],
+      has_entries(
+        target: "waiting-room-participants",
+        partial: "retros/waiting_rooms/participants_section",
+        locals: has_entries(retro: @retro)
+      )
+    )
+
+    Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
+      [ @retro, users(:two) ],
       has_entries(
         target: "waiting-room-participants",
         partial: "retros/waiting_rooms/participants_section",
