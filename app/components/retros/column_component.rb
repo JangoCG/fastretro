@@ -81,6 +81,10 @@ class Retros::ColumnComponent < ApplicationComponent
     end
   end
 
+  def dragging_enabled?
+    @retro.brainstorming? || grouping_enabled?
+  end
+
   def show_vote_results?
     @retro.voting? || @retro.discussion?
   end

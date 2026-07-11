@@ -4,7 +4,10 @@ import Sortable from "sortablejs"
 export default class extends Controller {
   static targets = ["list", "feedback"]
   static values = {
-    groupUrl: String
+    groupUrl: String,
+    moveUrl: String,
+    groupName: String,
+    groupingEnabled: Boolean
   }
 
   connect() {
@@ -16,11 +19,14 @@ export default class extends Controller {
     if (this.sortable) {
       this.sortable.destroy()
     }
+
+    this.clearDropColumnHighlights()
+    this.clearDragOrigin()
   }
 
   initializeSortable() {
     this.sortable = Sortable.create(this.listTarget, {
-      // No shared group - each column is independent
+      group: this.groupNameValue,
       animation: 150,
       scroll: true,
       // Chromium doesn't auto-scroll the window during native HTML5 drags,
@@ -32,7 +38,7 @@ export default class extends Controller {
       dragClass: "feedback-drag",
       chosenClass: "feedback-chosen",
       filter: ".no-drag",
-      draggable: "[data-feedback-id]",
+      draggable: "[data-feedback-id]:not([data-feedback-id^='group-'])",
       onStart: this.handleStart.bind(this),
       onMove: this.handleMove.bind(this),
       onEnd: this.handleDrop.bind(this)
@@ -40,6 +46,9 @@ export default class extends Controller {
   }
 
   handleStart(event) {
+    this.sourceList = event.from
+    this.sourceNextSibling = event.item.nextElementSibling
+
     // Add chosen styling manually since Sortable can't handle multiple classes
     event.item.classList.add("ring-2", "ring-yellow-400")
   }
@@ -59,8 +68,21 @@ export default class extends Controller {
       }
     })
 
-    // Only allow grouping with targets in the same list (same column)
-    const isInSameList = related && this.listTarget.contains(related)
+    if (event.to !== event.from) {
+      this.potentialTarget = null
+      this.highlightDropColumn(event.to)
+      return true
+    }
+
+    this.clearDropColumnHighlights()
+
+    if (!this.groupingEnabledValue) {
+      this.potentialTarget = null
+      return false
+    }
+
+    // Grouping only applies to targets in the source column.
+    const isInSameList = related && event.from.contains(related)
 
     if (isInSameList && related !== draggedEl && related.dataset.feedbackId) {
       // Store the element we're hovering over for grouping
@@ -77,7 +99,7 @@ export default class extends Controller {
     return false
   }
 
-  handleDrop(event) {
+  async handleDrop(event) {
     const draggedEl = event.item
     const draggedId = draggedEl.dataset.feedbackId
 
@@ -88,10 +110,25 @@ export default class extends Controller {
     this.feedbackTargets.forEach(el => {
       el.classList.remove("ring-2", "ring-yellow-400", "scale-105")
     })
+    this.clearDropColumnHighlights()
+
+    if (event.to !== event.from) {
+      this.potentialTarget = null
+      await this.moveFeedback(draggedEl, event.to)
+      this.clearDragOrigin()
+      return
+    }
+
+    if (!this.groupingEnabledValue) {
+      this.potentialTarget = null
+      this.clearDragOrigin()
+      return
+    }
 
     // Don't allow dragging groups (only individual feedbacks can be dragged)
     if (draggedId.startsWith("group-")) {
       this.potentialTarget = null
+      this.clearDragOrigin()
       return
     }
 
@@ -116,6 +153,57 @@ export default class extends Controller {
     }
 
     this.potentialTarget = null
+    this.clearDragOrigin()
+  }
+
+  highlightDropColumn(list) {
+    this.clearDropColumnHighlights()
+    list.closest("[data-feedback-column]")?.classList.add("feedback-column-drop-target")
+  }
+
+  clearDropColumnHighlights() {
+    const board = this.element.closest("[data-feedback-board]") || document
+    board.querySelectorAll("[data-feedback-column]").forEach(column => {
+      column.classList.remove("feedback-column-drop-target")
+    })
+  }
+
+  async moveFeedback(item, targetList) {
+    const targetCategory = targetList.dataset.feedbackCategory
+    const url = this.moveUrlValue.replace("__id__", item.dataset.feedbackId)
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
+
+    try {
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ category: targetCategory })
+      })
+
+      if (!response.ok) throw new Error("Failed to move feedback")
+    } catch (error) {
+      this.restoreDraggedItem(item)
+      console.error("Error moving feedback:", error)
+    }
+  }
+
+  restoreDraggedItem(item) {
+    if (!this.sourceList) return
+
+    if (this.sourceNextSibling?.parentElement === this.sourceList) {
+      this.sourceList.insertBefore(item, this.sourceNextSibling)
+    } else {
+      this.sourceList.append(item)
+    }
+  }
+
+  clearDragOrigin() {
+    this.sourceList = null
+    this.sourceNextSibling = null
   }
 
   groupFeedbacks(sourceId, targetId) {

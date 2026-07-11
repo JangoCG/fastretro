@@ -30,9 +30,11 @@
 
       <div class="relative z-10" data-controller="lexxy-autofocus">
         <%= form_with model: [@retro, @action], scope: :retro_action, id: "action_form", data: { controller: "auto-save" } do |form| %>
-          <%= form.rich_textarea :content, class: "card__description rich-text-content",
+          <%= form.rich_textarea :content, rich_text_editor_options(
+                class: "card__description lexxy-content",
                 placeholder: t("actions.edit.placeholder"),
-                data: { action: "lexxy:change->auto-save#change focusout->auto-save#submit" } %>
+                data: { action: "lexxy:change->auto-save#change focusout->auto-save#submit" }
+              ) %>
         <% end %>
       </div>
     </div>

@@ -45,6 +45,12 @@ class TargetedStreamUpdatesTest < ActiveSupport::TestCase
     )
   end
 
+  test "moving feedback between categories broadcasts every column" do
+    expect_column_replacements
+
+    feedbacks(:one).update!(category: :could_be_better)
+  end
+
   test "feedback group broadcasts targeted column replacements" do
     expect_column_replacements
 

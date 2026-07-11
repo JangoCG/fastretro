@@ -191,7 +191,7 @@
         <% if content_for?(:board_columns) %>
           <%= yield :board_columns %>
         <% else %>
-          <div class="grid gap-6 sm:gap-8" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <div class="grid gap-6 sm:gap-8" data-feedback-board style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
             <% feedbacks_by_category = @feedbacks_by_category %>
             <% @retro.column_definitions.each_with_index do |column, index| %>
               <% column_feedbacks = feedbacks_by_category&.[](column["id"]) %>

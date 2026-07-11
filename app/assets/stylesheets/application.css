@@ -22,6 +22,11 @@
   /* Chosen state - handled by JS for multi-class support */
 }
 
+.feedback-column-drop-target .feedback-column__surface {
+  outline: 4px dashed var(--color-selected-dark);
+  outline-offset: -10px;
+}
+
 /* Participant highlighting - uses CSS attribute selectors to avoid full page refresh */
 [data-highlighted-user-id] [data-user-id] {
   opacity: 0.3;

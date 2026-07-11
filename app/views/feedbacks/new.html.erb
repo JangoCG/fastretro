@@ -41,8 +41,10 @@
         <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
         <div class="relative z-10" data-controller="lexxy-autofocus">
-          <%= form.rich_textarea :content, class: "card__description rich-text-content",
-                placeholder: t("feedbacks.new.placeholder") %>
+          <%= form.rich_textarea :content, rich_text_editor_options(
+                class: "card__description lexxy-content",
+                placeholder: t("feedbacks.new.placeholder")
+              ) %>
         </div>
       </div>
 
@@ -72,7 +74,7 @@
         data-controller="hotkey" data-action="keydown.ctrl+shift+enter@document->hotkey#click keydown.meta+shift+enter@document->hotkey#click"
         class="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
         <%= t("feedbacks.new.create_another") %>
-        <%= render KbdComponent.new(key: "Cmd+Shift+Enter", size: :sm) %>
+        <%= render KbdComponent.new(key: "Cmd+Shift+Enter", size: :sm) %> <%# gitleaks:allow -- keyboard shortcut %>
       </button>
     </div>
   <% end %>
