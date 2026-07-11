@@ -265,8 +265,7 @@ lexxy-link-dropdown .btn:hover {
   padding: 0.5rem;
 }
 
-/* Hide upload button and highlight dropdown from toolbar */
-lexxy-toolbar button[name="upload"],
+/* Hide the highlight dropdown from the toolbar */
 lexxy-toolbar details[name="lexxy-dropdown"]:has(summary[name="highlight"]) {
   display: none;
 }
