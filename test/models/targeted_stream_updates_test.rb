@@ -72,29 +72,17 @@ class TargetedStreamUpdatesTest < ActiveSupport::TestCase
 
     Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
       [ @retro, users(:one) ],
-      has_entries(
-        target: "participant-list",
-        partial: "retros/streams/participant_list",
-        locals: has_entries(retro: @retro)
-      )
+      has_entries(target: "participant-list", html: kind_of(String))
     )
 
     Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
       [ @retro, users(:one) ],
-      has_entries(
-        target: "confirm-phase-status",
-        partial: "retros/streams/confirm_phase_status",
-        locals: has_entries(retro: @retro)
-      )
+      has_entries(target: "confirm-phase-status", html: kind_of(String))
     )
 
     Turbo::StreamsChannel.expects(:broadcast_replace_to).with(
       [ @retro, users(:two) ],
-      has_entries(
-        target: "participant-list",
-        partial: "retros/streams/participant_list",
-        locals: has_entries(retro: @retro)
-      )
+      has_entries(target: "participant-list", html: kind_of(String))
     )
 
     @retro.participants.create!(user: users(:two))

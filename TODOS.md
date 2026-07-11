@@ -2,6 +2,18 @@
 
 ## Retros
 
+### Ghost-moderator lockout when the sole moderator is deactivated
+
+**What:** Decide and implement how a retro stays manageable when its only moderator's user is deactivated — e.g. an account-owner override for role management, or blocking deactivation of sole moderators.
+
+**Why:** `User#deactivate` nulls the identity but leaves the `Retro::Participant` row as `admin`. If the sole moderator of a retro is deactivated, nobody can advance phases or manage roles: only retro admins can promote, account owners have no override, and there is no participant-destroy path. The last-admin validation guarantees "at least one admin row", not "at least one usable moderator".
+
+**Context:** Found by /ship adversarial review on the participant-role-management branch. Pre-existing gap (the retro creator could always be deactivated), now more visible with role management. Needs a product decision before code.
+
+**Effort:** M
+**Priority:** P2
+**Depends on:** None
+
 ### Protect in-progress drafts from role-change page refreshes
 
 **What:** Mark draft form fields (feedback textarea, action composer) with `data-turbo-permanent`, or replace the role-change full-page refresh with targeted stream updates of the admin-dependent regions.
