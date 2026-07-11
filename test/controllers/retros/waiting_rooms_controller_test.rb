@@ -40,6 +40,28 @@ class Retros::WaitingRoomsControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, retro_participant_role_path(@retro, participant)
   end
 
+  test "sole moderator has no demote control on their own card" do
+    admin_participant = retro_participants(:one_admin)
+    @retro.add_participant(users(:two))
+
+    get retro_waiting_room_path(@retro)
+
+    assert_response :success
+    assert_not_includes response.body, "REMOVE MODERATOR"
+    assert_not_includes response.body, retro_participant_role_path(@retro, admin_participant)
+  end
+
+  test "moderators can be demoted once a second moderator exists" do
+    admin_participant = retro_participants(:one_admin)
+    @retro.add_participant(users(:two), role: :admin)
+
+    get retro_waiting_room_path(@retro)
+
+    assert_response :success
+    assert_includes response.body, "REMOVE MODERATOR"
+    assert_includes response.body, retro_participant_role_path(@retro, admin_participant)
+  end
+
   test "non-admin does not see role controls" do
     @retro.add_participant(users(:two))
     logout_and_sign_in_as :two

@@ -54,24 +54,8 @@ class ParticipantListComponent < ApplicationComponent
     participant.admin? ? "MODERATOR" : "MEMBER"
   end
 
-  def role_controls?(participant)
-    role_management_enabled? && !(participant.admin? && admin_count == 1)
-  end
-
-  def role_toggle_label(participant)
-    participant.admin? ? t("components.participant_roles.demote_short") : t("components.participant_roles.promote_short")
-  end
-
-  def role_toggle_title(participant)
-    participant.admin? ? t("components.participant_roles.demote") : t("components.participant_roles.promote")
-  end
-
-  def toggled_role(participant)
-    participant.admin? ? "participant" : "admin"
-  end
-
-  def role_path(participant)
-    retro_participant_role_path(@retro, participant, script_name: @retro.account.slug)
+  def role_button(participant)
+    ParticipantRoleButtonComponent.new(participant: participant, manageable: role_management_enabled?, admin_count: admin_count, compact: true)
   end
 
   def status_text(participant)
@@ -84,7 +68,9 @@ class ParticipantListComponent < ApplicationComponent
 
   private
     def role_management_enabled?
-      Current.user.present? && @retro.admin?(Current.user)
+      return @role_management_enabled if defined?(@role_management_enabled)
+
+      @role_management_enabled = Current.user.present? && @retro.admin?(Current.user)
     end
 
     def admin_count

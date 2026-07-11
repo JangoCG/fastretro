@@ -1,0 +1,7 @@
+<div data-action="click->participant-highlight#ignore">
+  <%= button_to label, role_path,
+      method: :patch,
+      params: { participant: { role: toggled_role } },
+      title: title,
+      class: button_classes %>
+</div>

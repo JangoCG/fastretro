@@ -21,7 +21,8 @@
         <%= render WaitingParticipantCardComponent.new(
           participant: participant,
           index: index,
-          role_controls: can_manage_roles && !(participant.admin? && admin_count == 1)
+          manageable: can_manage_roles,
+          admin_count: admin_count
         ) %>
       <% end %>
     </div>

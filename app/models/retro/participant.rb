@@ -40,16 +40,24 @@ class Retro::Participant < ApplicationRecord
 
     participants = retro.participants.includes(:user).order(:created_at).to_a
 
+    # The waiting room section only differs by whether the viewer is an admin,
+    # so render each variant once and fan the cached HTML out to every stream.
+    section_html_by_admin = {}
+
     participants.each do |participant|
       next unless participant.user.present?
 
       Current.set(account: retro.account, user: participant.user) do
         if retro.waiting_room?
+          html = section_html_by_admin[participant.admin?] ||= ApplicationController.render(
+            partial: "retros/waiting_rooms/participants_section",
+            locals: { retro:, participants: }
+          )
+
           Turbo::StreamsChannel.broadcast_replace_to(
             [ retro, participant.user ],
             target: "waiting-room-participants",
-            partial: "retros/waiting_rooms/participants_section",
-            locals: { retro:, participants: }
+            html: html
           )
         else
           Turbo::StreamsChannel.broadcast_replace_to(

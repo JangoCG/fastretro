@@ -36,14 +36,14 @@ class Retros::Participants::RolesControllerTest < ActionDispatch::IntegrationTes
     assert @admin_participant.reload.admin?
   end
 
-  test "invalid role values are treated as participant" do
+  test "invalid role values are rejected" do
     @member_participant.update!(role: :admin)
-    @retro.participants.create!(user: users(:admin), role: :admin)
     sign_in_as :one
 
     patch retro_participant_role_path(@retro, @member_participant), params: { participant: { role: "owner" } }
 
-    assert @member_participant.reload.participant?
+    assert_response :unprocessable_entity
+    assert @member_participant.reload.admin?
   end
 
   test "admin sees role controls in the participant sidebar during the retro" do
@@ -72,6 +72,36 @@ class Retros::Participants::RolesControllerTest < ActionDispatch::IntegrationTes
     patch retro_participant_role_path(@retro, @member_participant), params: { participant: { role: "admin" } }
 
     assert_redirected_to retros_path
+    assert @member_participant.reload.participant?
+  end
+
+  test "participant from another retro is not found" do
+    other_retro_participant = retro_participants(:two_admin)
+    sign_in_as :one
+
+    patch retro_participant_role_path(@retro, other_retro_participant), params: { participant: { role: "participant" } }
+
+    assert_response :not_found
+    assert other_retro_participant.reload.admin?
+  end
+
+  test "retro from another account is not found" do
+    other_retro = retros(:other_account_retro)
+    other_participant = other_retro.add_participant(users(:other_account_owner), role: :admin)
+    sign_in_as :one
+
+    patch retro_participant_role_path(other_retro, other_participant), params: { participant: { role: "participant" } }
+
+    assert_response :not_found
+    assert other_participant.reload.admin?
+  end
+
+  test "missing participant params are rejected" do
+    sign_in_as :one
+
+    patch retro_participant_role_path(@retro, @member_participant)
+
+    assert_response :bad_request
     assert @member_participant.reload.participant?
   end
 

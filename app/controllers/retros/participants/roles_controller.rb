@@ -7,10 +7,12 @@ class Retros::Participants::RolesController < ApplicationController
   before_action :set_participant
 
   def update
-    if @participant.update(role_params)
-      redirect_back fallback_location: phase_path_for(@retro)
+    if role_param.nil?
+      head :unprocessable_entity
+    elsif @retro.with_lock { @participant.update(role: role_param) }
+      redirect_back fallback_location: phase_path_for(@retro), status: :see_other
     else
-      redirect_back fallback_location: phase_path_for(@retro), alert: @participant.errors.full_messages.to_sentence
+      redirect_back fallback_location: phase_path_for(@retro), status: :see_other, alert: @participant.errors.full_messages.to_sentence
     end
   end
 
@@ -23,7 +25,7 @@ class Retros::Participants::RolesController < ApplicationController
       @participant = @retro.participants.find(params[:participant_id])
     end
 
-    def role_params
-      { role: params.require(:participant)[:role].presence_in(%w[ admin participant ]) || "participant" }
+    def role_param
+      params.require(:participant)[:role].presence_in(Retro::Participant.roles.keys)
     end
 end

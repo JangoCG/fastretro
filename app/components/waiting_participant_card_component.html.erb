@@ -30,12 +30,7 @@
       </span>
 
       <%# Role Toggle (admins only) %>
-      <% if role_controls? %>
-        <%= button_to role_toggle_label, role_path,
-            method: :patch,
-            params: { participant: { role: toggled_role } },
-            class: "mt-2 inline-block bg-white text-zinc-900 text-[0.5rem] font-bold px-2 py-0.5 uppercase tracking-widest border-[1.5px] border-zinc-900 hover:bg-[#ffe600] transition-colors cursor-pointer" %>
-      <% end %>
+      <%= render role_button %>
     </div>
   </div>
 </div>

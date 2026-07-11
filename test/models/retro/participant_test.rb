@@ -19,6 +19,12 @@ class Retro::ParticipantTest < ActiveSupport::TestCase
     assert @admin_participant.reload.participant?
   end
 
+  test "the sole admin can still update other attributes" do
+    @admin_participant.finish!
+
+    assert @admin_participant.reload.finished?
+  end
+
   test "role change broadcasts a page refresh to the affected user" do
     participant = @retro.participants.create!(user: users(:two), role: :participant)
 

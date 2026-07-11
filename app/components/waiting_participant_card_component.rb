@@ -8,10 +8,11 @@ class WaitingParticipantCardComponent < ApplicationComponent
     bg-cyan-500
   ].freeze
 
-  def initialize(participant:, index: 0, role_controls: false)
+  def initialize(participant:, index: 0, manageable: false, admin_count: 1)
     @participant = participant
     @index = index
-    @role_controls = role_controls
+    @manageable = manageable
+    @admin_count = admin_count
   end
 
   def avatar_color
@@ -22,19 +23,7 @@ class WaitingParticipantCardComponent < ApplicationComponent
     @participant.admin? ? "MODERATOR" : "PARTICIPANT"
   end
 
-  def role_controls?
-    @role_controls
-  end
-
-  def role_toggle_label
-    @participant.admin? ? t("components.participant_roles.demote") : t("components.participant_roles.promote")
-  end
-
-  def toggled_role
-    @participant.admin? ? "participant" : "admin"
-  end
-
-  def role_path
-    retro_participant_role_path(@participant.retro, @participant, script_name: @participant.retro.account.slug)
+  def role_button
+    ParticipantRoleButtonComponent.new(participant: @participant, manageable: @manageable, admin_count: @admin_count)
   end
 end
