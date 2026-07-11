@@ -86,9 +86,9 @@ Fast Retro uses **URL path-based multi-tenancy**:
 - Has role (owner/admin/member)
 
 **Retro** → A retrospective session
-- Has phases: waiting_room → brainstorming → grouping → voting → discussion → complete
+- Has phases: waiting_room → action_review → brainstorming → grouping → voting → discussion → complete
 - Has participants with roles (admin/participant)
-- Retro admins can promote/demote other participants (`PATCH /{account_id}/retros/:retro_id/participants/:id/role`); a retro always keeps at least one admin
+- Retro admins can promote/demote other participants (`PATCH /{account_id}/retros/:retro_id/participants/:participant_id/role` with `participant[role]` set to `admin` or `participant`); the last admin cannot be demoted
 - Real-time updates via Turbo Streams
 
 **Feedback** → Items created during brainstorming
