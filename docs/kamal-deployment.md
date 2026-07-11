@@ -50,6 +50,9 @@ Clear (non-secret) variables to configure:
 - `MAILER_FROM_ADDRESS`: The email address that Fast Retro will send emails from. Should be a verified address in your email provider.
 - `MULTI_TENANT`: Set to `true` to allow multiple accounts to sign up (default allows single account only).
 - `SOLID_QUEUE_IN_PUMA`: Set to `true` to run background jobs in the app container.
+- `S3_REGION`: The region used by your S3-compatible storage provider.
+- `S3_BUCKET`: The bucket where Active Storage uploads are stored.
+- `S3_ENDPOINT`: The endpoint URL for your S3-compatible storage provider.
 
 ### Setting up secrets
 
