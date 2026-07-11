@@ -55,6 +55,7 @@ class Retro::Participant < ApplicationRecord
           Turbo::StreamsChannel.broadcast_replace_to(
             [ retro, participant.user ],
             target: "participant-list",
+            attributes: { method: :morph },
             partial: "retros/streams/participant_list",
             locals: { retro:, participants: }
           )

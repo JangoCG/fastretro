@@ -121,6 +121,7 @@ class Retros::FeedbackGroupsController < ApplicationController
         Turbo::StreamsChannel.broadcast_replace_to(
           [ @retro, participant.user ],
           target: "retro-column-#{category}",
+          attributes: { method: :morph },
           html: column_html_by_category[category]
         )
       end
