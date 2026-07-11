@@ -15,7 +15,7 @@ bin/dev                # Start development server (runs on port 3000)
 ```
 
 Development URL: http://localhost:3000
-Login with: david@example.com (development fixtures)
+Login with: one@example.com (development fixtures)
 
 ### Testing
 ```bash
@@ -88,6 +88,7 @@ Fast Retro uses **URL path-based multi-tenancy**:
 **Retro** → A retrospective session
 - Has phases: waiting_room → brainstorming → grouping → voting → discussion → complete
 - Has participants with roles (admin/participant)
+- Retro admins can promote/demote other participants (`PATCH /{account_id}/retros/:retro_id/participants/:id/role`); a retro always keeps at least one admin
 - Real-time updates via Turbo Streams
 
 **Feedback** → Items created during brainstorming
@@ -129,7 +130,7 @@ SaaS mode enables:
 ### Chrome MCP (Local Dev)
 
 URL: `http://localhost:3000`
-Login: david@example.com (passwordless magic link auth)
+Login: one@example.com (passwordless magic link auth)
 
 Use Chrome MCP tools to interact with the running dev app for UI testing and debugging.
 
