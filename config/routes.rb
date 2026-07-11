@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     end
     resources :feedbacks, only: %i[ new create show edit update destroy ] do
       resource :publish, only: :create, module: :feedbacks
+      resource :category, only: :update, module: :feedbacks
     end
     resources :actions, only: %i[ new create show edit update destroy ] do
       resource :publish, only: :create, module: :actions
@@ -141,6 +142,9 @@ Rails.application.routes.draw do
 
   # Stripe webhooks
   post "stripe/webhooks", to: "stripe/webhooks#create"
+
+  # Authenticate and validate blobs before Active Storage issues a direct-upload URL.
+  post "rails/active_storage/direct_uploads", to: "rich_text_uploads#create"
 
   # Catch-all route for unmatched paths (must be last)
   constraints ->(request) { !request.path_info.start_with?("/rails/") } do

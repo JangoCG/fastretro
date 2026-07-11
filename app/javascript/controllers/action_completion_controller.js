@@ -42,7 +42,7 @@ export default class extends Controller {
   updateVisuals() {
     const card = this.element.querySelector("div[class*='bg-']")
     const checkbox = this.element.querySelector("button")
-    const content = this.element.querySelector(".rich-text-content").parentElement
+    const content = this.element.querySelector(".lexxy-content").parentElement
     const indicator = this.element.querySelector(".w-1\\.5")
     const footer = this.element.querySelector("div.px-4.py-3")
 
