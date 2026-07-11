@@ -59,6 +59,9 @@
                 <%= status_text(participant) %>
               </p>
             </div>
+
+            <%# Role Toggle (admins only) %>
+            <%= render role_button(participant) %>
           </li>
         <% end %>
       </ul>
