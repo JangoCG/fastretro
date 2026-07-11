@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.0.0] - 2026-07-11
+
+### Added
+- Retro moderators can now promote other participants to moderator (and demote them), so facilitation duties — advancing phases, grouping cards, marking items discussed, exporting to Jira — can be shared instead of resting on the retro creator alone. Promote/demote buttons appear on the waiting-room participant cards and in the in-retro participant sidebar, and role changes update everyone's screen live.
+- A retro always keeps at least one moderator: the last moderator cannot be demoted, and simultaneous demotions are handled safely.
+
+### Fixed
+- Error messages (such as "A retro needs at least one moderator") are now visible on retro phase pages, which previously only displayed success notices.
+
 ## [0.0.5.0] - 2026-04-18
 
 ### Added
