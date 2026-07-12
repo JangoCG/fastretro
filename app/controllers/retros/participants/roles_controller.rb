@@ -9,7 +9,7 @@ class Retros::Participants::RolesController < ApplicationController
   def update
     if role_param.nil?
       head :unprocessable_entity
-    elsif @retro.with_lock { @participant.update(role: role_param) }
+    elsif update_role
       redirect_back fallback_location: phase_path_for(@retro), status: :see_other
     else
       redirect_back fallback_location: phase_path_for(@retro), status: :see_other, alert: @participant.errors.full_messages.to_sentence
@@ -27,5 +27,16 @@ class Retros::Participants::RolesController < ApplicationController
 
     def role_param
       params.require(:participant)[:role].presence_in(Retro::Participant.roles.keys)
+    end
+
+    # Serializes role changes per retro and re-checks against fresh data, so a
+    # concurrently demoted admin cannot slip a change through with stale state.
+    def update_role
+      @retro.with_lock do
+        @participant.reload
+        raise RetroNotFoundError unless @retro.participants.admin.exists?(user: Current.user)
+
+        @participant.update(role: role_param)
+      end
     end
 end

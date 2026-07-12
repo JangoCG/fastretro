@@ -40,9 +40,11 @@ class Retro::Participant < ApplicationRecord
 
     participants = retro.participants.includes(:user).order(:created_at).to_a
 
-    # The waiting room section only differs by whether the viewer is an admin,
-    # so render each variant once and fan the cached HTML out to every stream.
+    # Each payload only differs by whether the viewer is an admin, so render
+    # each variant once and fan the cached HTML out to every stream.
     section_html_by_admin = {}
+    list_html_by_admin = {}
+    confirm_phase_html = nil
 
     participants.each do |participant|
       next unless participant.user.present?
@@ -60,20 +62,28 @@ class Retro::Participant < ApplicationRecord
             html: html
           )
         else
-          Turbo::StreamsChannel.broadcast_replace_to(
-            [ retro, participant.user ],
-            target: "participant-list",
-            attributes: { method: :morph },
+          html = list_html_by_admin[participant.admin?] ||= ApplicationController.render(
             partial: "retros/streams/participant_list",
             locals: { retro:, participants: }
           )
 
+          Turbo::StreamsChannel.broadcast_replace_to(
+            [ retro, participant.user ],
+            target: "participant-list",
+            attributes: { method: :morph },
+            html: html
+          )
+
           if participant.admin?
+            confirm_phase_html ||= ApplicationController.render(
+              partial: "retros/streams/confirm_phase_status",
+              locals: { retro: }
+            )
+
             Turbo::StreamsChannel.broadcast_replace_to(
               [ retro, participant.user ],
               target: "confirm-phase-status",
-              partial: "retros/streams/confirm_phase_status",
-              locals: { retro: }
+              html: confirm_phase_html
             )
           end
         end

@@ -8,12 +8,14 @@ export default class extends Controller {
   static targets = ["container"]
 
   connect() {
-    // Set up listener for Turbo Stream custom events
-    document.addEventListener("turbo:highlight-update", this.handleHighlightUpdate.bind(this))
+    // Set up listener for Turbo Stream custom events. Keep the bound reference
+    // so disconnect removes the same function instead of leaking a listener.
+    this.boundHandleHighlightUpdate = this.handleHighlightUpdate.bind(this)
+    document.addEventListener("turbo:highlight-update", this.boundHandleHighlightUpdate)
   }
 
   disconnect() {
-    document.removeEventListener("turbo:highlight-update", this.handleHighlightUpdate.bind(this))
+    document.removeEventListener("turbo:highlight-update", this.boundHandleHighlightUpdate)
   }
 
   ignore(event) {
