@@ -46,9 +46,10 @@ For fast feedback loops, unit tests can be run with:
 bin/rails test
 ```
 
-JavaScript unit tests (Vitest, located in `test/javascript`) can be run with:
+JavaScript unit tests (Vitest, located in `test/javascript`) require Node.js and a one-time `npm install`, then run with:
 
 ```sh
+npm install
 npm test
 ```
 

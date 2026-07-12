@@ -38,6 +38,7 @@ CI pipeline (`bin/ci`) runs:
 6. Application tests (SaaS + OSS modes)
 7. System tests
 8. Seed tests
+9. JavaScript unit tests (Vitest)
 
 ### Database
 ```bash
