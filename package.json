@@ -1,0 +1,14 @@
+{
+  "name": "fastretro",
+  "private": true,
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "happy-dom": "^20.0.2",
+    "sortablejs": "^1.15.6",
+    "vitest": "^3.2.4"
+  },
+  "version": "0.1.2.0"
+}

@@ -28,6 +28,8 @@ CI.run do
 
   step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"
 
+  step "Tests: JS", "npm install --silent --no-audit --no-fund && npm test"
+
   # Optional: set a green GitHub commit status to unblock PR merge.
   # Requires the `gh` CLI and `gh extension install basecamp/gh-signoff`.
   # if success?
