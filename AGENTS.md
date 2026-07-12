@@ -22,6 +22,7 @@ Login with: one@example.com (development fixtures)
 bin/rails test                    # Run unit tests (fast)
 bin/rails test test/path/file_test.rb  # Run single test file
 bin/rails test:system             # Run system tests (Capybara + Selenium)
+npm test                          # Run JavaScript unit tests (Vitest, test/javascript)
 bin/ci                            # Run full CI suite (style, security, tests)
 
 # For parallel test execution issues, use:
@@ -37,6 +38,7 @@ CI pipeline (`bin/ci`) runs:
 6. Application tests (SaaS + OSS modes)
 7. System tests
 8. Seed tests
+9. JavaScript unit tests (Vitest)
 
 ### Database
 ```bash

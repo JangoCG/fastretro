@@ -14,7 +14,7 @@ class FeedbackDragAndDropTest < ApplicationSystemTestCase
     source.drag_to(target)
 
     assert_selector "#feedback-list-could_be_better #feedback_#{feedback.id}"
-    assert_equal "could_be_better", feedback.reload.category
+    assert_category_eventually "could_be_better", feedback
   end
 
   test "participant moves their own feedback between columns during brainstorming" do
@@ -30,7 +30,24 @@ class FeedbackDragAndDropTest < ApplicationSystemTestCase
     source.drag_to(target)
 
     assert_selector "#feedback-list-went_well #feedback_#{feedback.id}"
-    assert_equal "went_well", feedback.reload.category
+    assert_category_eventually "went_well", feedback
+  end
+
+  test "admin moves feedback into an empty column" do
+    retro = retros(:one)
+    feedback = feedbacks(:one)
+    feedbacks(:two).update!(category: :went_well)
+    retro.update!(phase: :grouping)
+    sign_in_as users(:one)
+
+    visit retro_grouping_path(retro)
+
+    source = find("#feedback_#{feedback.id}")
+    target = find("#feedback-list-could_be_better")
+    source.drag_to(target)
+
+    assert_selector "#feedback-list-could_be_better #feedback_#{feedback.id}"
+    assert_category_eventually "could_be_better", feedback
   end
 
   test "admin still groups feedback within a column" do
@@ -60,5 +77,15 @@ class FeedbackDragAndDropTest < ApplicationSystemTestCase
     def sign_in_as(user)
       visit session_transfer_url(user.identity.transfer_id, script_name: nil)
       assert_selector "h1", text: "YOUR RETROS"
+    end
+
+    # The category update is sent asynchronously after the drop, so give the
+    # request a moment to land before asserting on the database.
+    def assert_category_eventually(category, feedback)
+      deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + Capybara.default_max_wait_time
+      until feedback.reload.category == category || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+        sleep 0.1
+      end
+      assert_equal category, feedback.category
     end
 end

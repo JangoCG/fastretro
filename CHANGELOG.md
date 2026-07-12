@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2.0] - 2026-07-12
+
+### Added
+- Paste a GIF link (Giphy, Tenor, or any https URL ending in .gif) into a card and it now renders as the animated GIF instead of a bare link. Only safe https links are embedded — anything else stays a regular link.
+- A JavaScript unit test suite (Vitest, `npm test`) now covers the drag-and-drop error handling, and runs as part of `bin/ci` and the PR checks.
+
+### Fixed
+- Dragging a card to another column now works when you drop it anywhere in the target column — previously the drop only registered in the narrow strip already occupied by cards, so drops into the empty area silently snapped back.
+- When moving a card fails (network error or expired session), the card now returns to its original column and an error banner appears, instead of the board silently drifting out of sync. A pasted link that merely looks like a GIF URL can also no longer break card rendering.
+
 ## [0.1.1.0] - 2026-07-12
 
 ### Fixed

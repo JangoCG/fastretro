@@ -10,4 +10,5 @@ paths = [
   '''test/''',
   '''\.env''',
   '''\.gstack/''',
+  '''\.claude/worktrees/''',
 ]

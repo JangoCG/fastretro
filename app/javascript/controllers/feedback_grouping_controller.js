@@ -184,21 +184,47 @@ export default class extends Controller {
         body: JSON.stringify({ category: targetCategory })
       })
 
-      if (!response.ok) throw new Error("Failed to move feedback")
+      // A redirect means the session expired and fetch followed it to the
+      // login page — a 200 that did not actually move the feedback.
+      if (!response.ok || response.redirected) throw new Error("Failed to move feedback")
     } catch (error) {
       this.restoreDraggedItem(item)
+      this.showMoveError()
       console.error("Error moving feedback:", error)
     }
   }
 
   restoreDraggedItem(item) {
-    if (!this.sourceList) return
+    // A broadcast may have re-rendered the columns mid-flight; then the
+    // server state is already on screen and this node must not come back.
+    if (!item.isConnected) return
 
-    if (this.sourceNextSibling?.parentElement === this.sourceList) {
-      this.sourceList.insertBefore(item, this.sourceNextSibling)
+    const sourceList = this.liveSourceList()
+    if (!sourceList) return
+
+    if (this.sourceNextSibling?.parentElement === sourceList) {
+      sourceList.insertBefore(item, this.sourceNextSibling)
     } else {
-      this.sourceList.append(item)
+      sourceList.append(item)
     }
+  }
+
+  liveSourceList() {
+    if (!this.sourceList) return null
+    if (this.sourceList.isConnected) return this.sourceList
+
+    return this.sourceList.id ? document.getElementById(this.sourceList.id) : null
+  }
+
+  showMoveError() {
+    document.getElementById("feedback-move-error")?.remove()
+
+    const banner = document.createElement("div")
+    banner.id = "feedback-move-error"
+    banner.className = "feedback-move-error"
+    banner.textContent = "Couldn't move the card — please try again"
+    document.body.append(banner)
+    setTimeout(() => banner.remove(), 4000)
   }
 
   clearDragOrigin() {

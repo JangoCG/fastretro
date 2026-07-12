@@ -46,6 +46,12 @@ For fast feedback loops, unit tests can be run with:
 bin/rails test
 ```
 
+JavaScript unit tests (Vitest, located in `test/javascript`) require Node.js and a one-time `npm install`, then run with:
+
+```sh
+npm install
+npm test
+```
 
 The full continuous integration suite can be run with:
 
@@ -53,7 +59,7 @@ The full continuous integration suite can be run with:
 bin/ci
 ```
 
-The CI pipeline runs: rubocop, bundler-audit, importmap audit, brakeman, gitleaks, unit tests, system tests, and seed tests.
+The CI pipeline runs: rubocop, bundler-audit, importmap audit, brakeman, gitleaks, unit tests, system tests, seed tests, and JavaScript tests.
 
 ### Database configuration
 

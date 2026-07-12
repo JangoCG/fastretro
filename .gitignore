@@ -52,3 +52,5 @@ config/deploy.dev.yml
 .gstack/
 .mise.toml
 .mise.local.toml
+
+/node_modules

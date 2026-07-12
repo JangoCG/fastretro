@@ -27,6 +27,31 @@
   outline-offset: -10px;
 }
 
+/* Transient error banner when a drag-and-drop move fails */
+.feedback-move-error {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: #fef2f2;
+  border: 2px solid #ef4444;
+  box-shadow: 4px 4px 0px 0px rgba(220, 38, 38, 1);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #b91c1c;
+}
+
+/* GIF links pasted into rich text render as inline images */
+.lexxy-content .gif-embed {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
 /* Participant highlighting - uses CSS attribute selectors to avoid full page refresh */
 [data-highlighted-user-id] [data-user-id] {
   opacity: 0.3;
