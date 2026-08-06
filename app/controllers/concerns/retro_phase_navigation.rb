@@ -9,7 +9,6 @@ module RetroPhaseNavigation
     when :action_review then retro_action_review_path(retro)
     when :brainstorming then retro_brainstorming_path(retro)
     when :grouping then retro_grouping_path(retro)
-    when :voting then retro_voting_path(retro)
     when :discussion then retro_discussion_path(retro)
     when :complete then retro_complete_path(retro)
     else retro_path(retro)

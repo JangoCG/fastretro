@@ -36,21 +36,17 @@
           data-feedback-grouping-grouping-enabled-value="<%= grouping_enabled? %>"
           data-feedback-grouping-target="list"
           data-feedback-category="<%= @category %>"
-        <% elsif voting_enabled? %>
-          data-controller="vote-sorting"
         <% end %>
       >
         <% if has_feedbacks? %>
-          <% if show_vote_results? %>
-            <%# During voting/discussion: render all items sorted by votes %>
-            <% all_items_sorted_by_votes.each do |item| %>
+          <% if discussion_ordering? %>
+            <%# Discussion: groups and cards interleaved, undiscussed items first %>
+            <% all_items_in_discussion_order.each do |item| %>
               <% if item[:type] == :group %>
                 <%= render Feedbacks::FeedbackGroupComponent.new(
                   group: item[:group],
                   feedbacks: item[:feedbacks],
                   grouping_enabled: grouping_enabled?,
-                  voting_enabled: voting_enabled?,
-                  show_votes: @retro.discussion?,
                   participant: current_participant,
                   retro: @retro
                 ) %>
@@ -59,8 +55,6 @@
                   feedback: item[:feedback],
                   draggable: dragging_enabled?,
                   grouping_enabled: grouping_enabled?,
-                  voting_enabled: voting_enabled?,
-                  show_votes: @retro.discussion?,
                   participant: current_participant,
                   retro: @retro
                 ) %>
@@ -73,7 +67,6 @@
                 group: group,
                 feedbacks: group_feedbacks,
                 grouping_enabled: grouping_enabled?,
-                voting_enabled: voting_enabled?,
                 participant: current_participant,
                 retro: @retro
               ) %>
@@ -84,7 +77,6 @@
                 feedback: feedback,
                 draggable: dragging_enabled?,
                 grouping_enabled: grouping_enabled?,
-                voting_enabled: voting_enabled?,
                 participant: current_participant,
                 retro: @retro
               ) %>

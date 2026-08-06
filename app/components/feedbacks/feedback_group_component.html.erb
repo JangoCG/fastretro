@@ -6,9 +6,6 @@
     data-feedback-id="group-<%= @group.id %>"
     data-feedback-grouping-target="feedback"
   <% end %>
-  <% if @voting_enabled %>
-    data-vote-sorting-target="item"
-  <% end %>
 >
   <%# Grouped feedbacks container with dashed border %>
   <div class="relative">
@@ -89,29 +86,17 @@
         </div>
       <% end %>
 
-      <%# Voting controls %>
-      <% if show_voting? %>
-        <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end">
-          <%= render VoteButtonComponent.new(voteable: @group, participant: @participant, retro: @retro) %>
-        </div>
-      <% elsif show_vote_count? || can_mark_discussed? %>
+      <% if can_mark_discussed? %>
         <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end gap-2">
-          <% if show_vote_count? %>
-            <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-tint-peach border-2 border-flame text-zinc-900 font-black text-sm">
-              <%= @group.votes.size %>
-            </div>
-          <% end %>
-          <% if can_mark_discussed? %>
-            <%= button_to retro_discussion_item_path(@retro, script_name: @retro.account.slug),
-                method: :patch,
-                params: {
-                  item_type: "FeedbackGroup",
-                  item_id: @group.id,
-                  discussed: !discussed?
-                },
-                class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
-              <%= discussed? ? "Undo" : "Mark discussed" %>
-            <% end %>
+          <%= button_to retro_discussion_item_path(@retro, script_name: @retro.account.slug),
+              method: :patch,
+              params: {
+                item_type: "FeedbackGroup",
+                item_id: @group.id,
+                discussed: !discussed?
+              },
+              class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
+            <%= discussed? ? "Undo" : "Mark discussed" %>
           <% end %>
         </div>
       <% end %>

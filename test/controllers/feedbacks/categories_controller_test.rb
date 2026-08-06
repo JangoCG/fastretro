@@ -67,7 +67,7 @@ class Feedbacks::CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "feedback cannot move outside the grouping phase" do
     sign_in_as users(:one)
-    @retro.update!(phase: :voting)
+    @retro.update!(phase: :discussion)
 
     patch retro_feedback_category_path(@retro, @feedback), params: { category: "could_be_better" }, as: :json
 

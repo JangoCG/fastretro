@@ -21,7 +21,7 @@ class RetrosController < ApplicationController
   # GET /retros/new
   def new
     @retro = Retro.new
-    @retro.configure_column_layout(layout_mode: "default", column_names: [], votes_per_participant: Retro::DEFAULT_VOTES_PER_PARTICIPANT)
+    @retro.configure_column_layout(layout_mode: "default", column_names: [])
   end
 
 
@@ -35,8 +35,7 @@ class RetrosController < ApplicationController
     @retro = Current.account.retros.new(name: create_params[:name])
     @retro.configure_column_layout(
       layout_mode: create_params[:layout_mode],
-      column_names: create_params[:column_names],
-      votes_per_participant: create_params[:votes_per_participant]
+      column_names: create_params[:column_names]
     )
 
     respond_to do |format|
@@ -103,6 +102,6 @@ class RetrosController < ApplicationController
     end
 
     def retro_create_params
-      params.require(:retro).permit(:name, :layout_mode, :votes_per_participant, column_names: [])
+      params.require(:retro).permit(:name, :layout_mode, column_names: [])
     end
 end

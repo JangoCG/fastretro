@@ -20,7 +20,6 @@ class Retros::ColumnComponent < ApplicationComponent
         @preloaded_feedbacks
       else
         relation = @retro.feedbacks.published.in_category(@category).includes(:user, :rich_text_content, :feedback_group)
-        relation = relation.includes(:votes, feedback_group: :votes) if show_vote_results?
         if @retro.brainstorming?
           relation.where(user: Current.user)
         else
@@ -42,34 +41,22 @@ class Retros::ColumnComponent < ApplicationComponent
   end
 
   def grouped_feedbacks_by_group
-    groups = split_feedbacks[:grouped].group_by(&:feedback_group)
-
-    if show_vote_results?
-      groups.sort_by { |group, _| -group.votes.size }.to_h
-    else
-      groups
-    end
+    split_feedbacks[:grouped].group_by(&:feedback_group)
   end
 
-  # Returns all items (groups and ungrouped feedbacks) sorted by discussion state and votes.
-  def all_items_sorted_by_votes
+  # Groups and ungrouped feedbacks interleaved, with whatever still needs discussing on top.
+  def all_items_in_discussion_order
     items = []
 
-    # Add groups with their vote counts
     grouped_feedbacks_by_group.each do |group, group_feedbacks|
-      items << { type: :group, group: group, feedbacks: group_feedbacks, votes: group.votes.size, discussed: group.discussed? }
+      items << { type: :group, group: group, feedbacks: group_feedbacks, discussed: group.discussed?, created_at: group.created_at }
     end
 
-    # Add ungrouped feedbacks with their vote counts
     ungrouped_feedbacks.each do |feedback|
-      items << { type: :feedback, feedback: feedback, votes: feedback.votes.size, discussed: feedback.discussed? }
+      items << { type: :feedback, feedback: feedback, discussed: feedback.discussed?, created_at: feedback.created_at }
     end
 
-    # In discussion phase keep undiscussed items at the top, then sort by votes.
-    items.sort_by do |item|
-      discussion_sort_weight = @retro.discussion? && item[:discussed] ? 1 : 0
-      [ discussion_sort_weight, -item[:votes] ]
-    end
+    items.sort_by { |item| [ item[:discussed] ? 1 : 0, item[:created_at] ] }
   end
 
   def grouping_enabled?
@@ -86,16 +73,12 @@ class Retros::ColumnComponent < ApplicationComponent
     @retro.brainstorming? || grouping_enabled?
   end
 
-  def show_vote_results?
-    @retro.voting? || @retro.discussion?
-  end
-
-  def voting_enabled?
-    @retro.voting?
+  def discussion_ordering?
+    @retro.discussion?
   end
 
   def current_participant
-    @current_participant ||= @participant || @retro.participants.includes(:votes).find_by(user: Current.user)
+    @current_participant ||= @participant || @retro.participants.find_by(user: Current.user)
   end
 
   def has_feedbacks?

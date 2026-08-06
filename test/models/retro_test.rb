@@ -15,20 +15,12 @@ class RetroTest < ActiveSupport::TestCase
     assert_equal "brainstorming", @retro.phase
   end
 
-  test "back_phase! transitions from voting to grouping" do
-    @retro.update!(phase: :voting)
-
-    @retro.back_phase!
-
-    assert_equal "grouping", @retro.phase
-  end
-
-  test "back_phase! transitions from discussion to voting" do
+  test "back_phase! transitions from discussion to grouping" do
     @retro.update!(phase: :discussion)
 
     @retro.back_phase!
 
-    assert_equal "voting", @retro.phase
+    assert_equal "grouping", @retro.phase
   end
 
   test "back_phase! transitions from complete to discussion" do
@@ -64,7 +56,7 @@ class RetroTest < ActiveSupport::TestCase
   end
 
   test "back_phase! resets highlighted_user_id" do
-    @retro.update!(phase: :voting, highlighted_user_id: 123)
+    @retro.update!(phase: :discussion, highlighted_user_id: 123)
 
     @retro.back_phase!
 
@@ -72,39 +64,13 @@ class RetroTest < ActiveSupport::TestCase
   end
 
   test "back_phase! resets participant finished flags" do
-    @retro.update!(phase: :voting)
+    @retro.update!(phase: :discussion)
     participant = @retro.add_participant(users(:one), role: :admin)
     participant.update!(finished: true)
 
     @retro.back_phase!
 
     assert_not participant.reload.finished?
-  end
-
-  test "back_phase! clears votes when leaving voting phase" do
-    @retro.update!(phase: :voting)
-    participant = @retro.add_participant(users(:one), role: :admin)
-    feedback = feedbacks(:one)
-    Vote.create!(retro_participant: participant, voteable: feedback)
-
-    assert_equal 1, Vote.where(retro_participant: participant).count
-
-    @retro.back_phase!
-
-    assert_equal 0, Vote.where(retro_participant: participant).count
-    assert_equal "grouping", @retro.phase
-  end
-
-  test "back_phase! does not clear votes when leaving discussion phase" do
-    @retro.update!(phase: :discussion)
-    participant = @retro.add_participant(users(:one), role: :admin)
-    feedback = feedbacks(:one)
-    Vote.create!(retro_participant: participant, voteable: feedback)
-
-    @retro.back_phase!
-
-    assert_equal 1, Vote.where(retro_participant: participant).count
-    assert_equal "voting", @retro.phase
   end
 
   # === previous_phase tests ===
@@ -115,16 +81,10 @@ class RetroTest < ActiveSupport::TestCase
     assert_equal :brainstorming, @retro.previous_phase
   end
 
-  test "previous_phase returns grouping when on voting" do
-    @retro.update!(phase: :voting)
-
-    assert_equal :grouping, @retro.previous_phase
-  end
-
-  test "previous_phase returns voting when on discussion" do
+  test "previous_phase returns grouping when on discussion" do
     @retro.update!(phase: :discussion)
 
-    assert_equal :voting, @retro.previous_phase
+    assert_equal :grouping, @retro.previous_phase
   end
 
   test "previous_phase returns discussion when on complete" do
@@ -155,12 +115,6 @@ class RetroTest < ActiveSupport::TestCase
 
   test "can_go_back? returns true for grouping" do
     @retro.update!(phase: :grouping)
-
-    assert @retro.can_go_back?
-  end
-
-  test "can_go_back? returns true for voting" do
-    @retro.update!(phase: :voting)
 
     assert @retro.can_go_back?
   end
@@ -211,29 +165,14 @@ class RetroTest < ActiveSupport::TestCase
     assert_equal "custom", @retro.layout_mode
     assert_equal %w[start start_2 stop], @retro.column_categories
     assert_equal [ "Start", "Start", "Stop" ], @retro.column_definitions.map { |column| column["name"] }
-    assert_equal 3, @retro.votes_per_participant
   end
 
-  test "configure_column_layout with custom mode keeps custom vote limit" do
-    @retro.configure_column_layout(
-      layout_mode: "custom",
-      column_names: [ "Start", "Stop" ],
-      votes_per_participant: 7
-    )
+  test "configure_column_layout with default mode ignores supplied column names" do
+    @retro.configure_column_layout(layout_mode: "default", column_names: [ "Anything" ])
     @retro.save!
 
-    assert_equal 7, @retro.votes_per_participant
-  end
-
-  test "default layout always resets votes per participant to 3" do
-    @retro.configure_column_layout(
-      layout_mode: "default",
-      column_names: [ "Anything" ],
-      votes_per_participant: 9
-    )
-    @retro.save!
-
-    assert_equal 3, @retro.votes_per_participant
+    assert_equal "default", @retro.layout_mode
+    assert_equal %w[went_well could_be_better], @retro.column_categories
   end
 
   test "cached_global_count fetches retro count from cache using shared key" do

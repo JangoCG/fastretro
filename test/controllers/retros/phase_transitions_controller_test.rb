@@ -18,19 +18,9 @@ class Retros::PhaseTransitionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "grouping", @retro.reload.phase
   end
 
-  test "admin can advance from grouping to voting" do
+  test "admin can advance from grouping to discussion" do
     sign_in_as :one
     @retro.update!(phase: :grouping)
-
-    post retro_phase_transition_path(@retro)
-
-    assert_redirected_to retro_voting_path(@retro)
-    assert_equal "voting", @retro.reload.phase
-  end
-
-  test "admin can advance from voting to discussion" do
-    sign_in_as :one
-    @retro.update!(phase: :voting)
 
     post retro_phase_transition_path(@retro)
 

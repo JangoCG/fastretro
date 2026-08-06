@@ -3,7 +3,6 @@ class Retro < ApplicationRecord
   include Retro::Limited
 
   LANDING_PAGE_RETRO_COUNT_CACHE_KEY = "landing_page:retro_count".freeze
-  DEFAULT_VOTES_PER_PARTICIPANT = 3
   LAYOUT_MODES = %w[default custom].freeze
   DEFAULT_COLUMN_LAYOUT = [
     { "id" => "went_well", "name" => "Good" },
@@ -18,15 +17,13 @@ class Retro < ApplicationRecord
   has_many :participants, class_name: "Retro::Participant", dependent: :destroy
   has_many :users, through: :participants
 
-  enum :phase, { waiting_room: "waiting_room", action_review: "action_review", brainstorming: "brainstorming", grouping: "grouping", voting: "voting", discussion: "discussion", complete: "complete" }
+  enum :phase, { waiting_room: "waiting_room", action_review: "action_review", brainstorming: "brainstorming", grouping: "grouping", discussion: "discussion", complete: "complete" }
 
-  PHASE_ORDER = %i[waiting_room action_review brainstorming grouping voting discussion complete].freeze
+  PHASE_ORDER = %i[waiting_room action_review brainstorming grouping discussion complete].freeze
 
   before_validation :normalize_layout_fields
 
   validates :layout_mode, inclusion: { in: LAYOUT_MODES }
-  validates :votes_per_participant,
-    numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 20 }
   validate :column_layout_presence
 
   after_commit :expire_landing_page_retro_count_cache, on: %i[create destroy]
@@ -74,17 +71,12 @@ class Retro < ApplicationRecord
     update!(phase: :grouping)
   end
 
-  def configure_column_layout(layout_mode:, column_names:, votes_per_participant: nil)
+  def configure_column_layout(layout_mode:, column_names:)
     self.layout_mode = layout_mode.to_s == "custom" ? "custom" : "default"
     self.column_layout = if self.layout_mode == "custom"
       self.class.build_column_layout_from_names(column_names)
     else
       self.class.default_column_layout
-    end
-    self.votes_per_participant = if self.layout_mode == "custom"
-      votes_per_participant.presence || DEFAULT_VOTES_PER_PARTICIPANT
-    else
-      DEFAULT_VOTES_PER_PARTICIPANT
     end
   end
 
@@ -116,10 +108,6 @@ class Retro < ApplicationRecord
     column_categories.include?(category.to_s)
   end
 
-  def max_votes_per_participant
-    votes_per_participant
-  end
-
   def advance_phase!
     current_index = PHASE_ORDER.index(phase.to_sym)
     return if current_index.nil? || current_index >= PHASE_ORDER.length - 1
@@ -145,8 +133,6 @@ class Retro < ApplicationRecord
   def back_phase!
     current_index = PHASE_ORDER.index(phase.to_sym)
     return if current_index.nil? || current_index <= PHASE_ORDER.index(:brainstorming)
-
-    cleanup_votes if voting?
 
     prev_phase = PHASE_ORDER[current_index - 1]
     update!(phase: prev_phase, highlighted_user_id: nil)
@@ -242,11 +228,6 @@ class Retro < ApplicationRecord
     actions.completed_actions.destroy_all
   end
 
-  # Remove all votes (called when going back from voting phase)
-  def cleanup_votes
-    Vote.where(retro_participant: participants).delete_all
-  end
-
   private
     def normalize_layout_fields
       self.layout_mode = layout_mode.presence
@@ -257,12 +238,6 @@ class Retro < ApplicationRecord
         normalized_columns
       else
         normalized_columns.presence || self.class.default_column_layout
-      end
-
-      if custom_layout?
-        self.votes_per_participant = votes_per_participant.presence || DEFAULT_VOTES_PER_PARTICIPANT
-      else
-        self.votes_per_participant = DEFAULT_VOTES_PER_PARTICIPANT
       end
     end
 

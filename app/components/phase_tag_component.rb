@@ -27,18 +27,9 @@ class PhaseTagComponent < ApplicationComponent
       stripe_hex: "#0284c7",
       accent_color: "text-sky-700"
     },
-    voting: {
-      title: "VOTING",
-      instruction: "Vote on the most important topics.",
-      footer: "CHOOSE WISELY.",
-      bg_color: "bg-tint-peach",
-      border_color: "border-flame",
-      stripe_hex: "#394763",
-      accent_color: "text-zinc-900"
-    },
     discussion: {
       title: "DISCUSSION",
-      instruction: "Discuss top-voted items and create actions.",
+      instruction: "Discuss the grouped topics and create actions.",
       footer: "TAKE ACTION.",
       bg_color: "bg-emerald-50",
       border_color: "border-emerald-300",

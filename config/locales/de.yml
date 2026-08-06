@@ -69,7 +69,6 @@ de:
     action_review: "Maßnahmen-Review"
     brainstorming: "Brainstorming"
     grouping: "Gruppierung"
-    voting: "Abstimmung"
     discussion: "Diskussion"
     complete: "Abgeschlossen"
 
@@ -78,7 +77,6 @@ de:
     action_review: "Prüfe vorherige Maßnahmen und markiere erledigte."
     brainstorming: "Füge deine Feedback-Ideen hinzu. Karten sind jetzt noch privat; die Moderation schickt alle weiter, wenn das Team bereit ist."
     grouping: "Jetzt sehen alle die Karten. Gruppiere ähnliche Feedbacks zu Clustern, bevor abgestimmt wird."
-    voting: "Vergib deine Stimmen an die wichtigsten Themen. Die meistgewählten Punkte stehen in der Diskussion oben."
     discussion: "Besprecht die wichtigsten Themen und erstellt Maßnahmen, bevor ihr die Retro abschließt."
     complete: "Prüfe die Ergebnisse und exportiere die Zusammenfassung. Maßnahmen können in der nächsten Retro wieder geprüft werden."
     default: "Arbeite in dieser Phase mit deinem Team zusammen."
@@ -155,8 +153,6 @@ de:
       custom_layout: "BENUTZERDEFINIERT"
       custom_hint: "Spalten hinzufügen, entfernen, umbenennen"
       default_info_html: "Dieses Retro startet mit 2 Spalten: <strong>Gut</strong>, <strong>Schlecht</strong>."
-      votes_per_participant: "Stimmen pro Teilnehmer"
-      votes_hint: "Gilt nur für benutzerdefinierte Layouts."
       custom_columns: "BENUTZERDEFINIERTE SPALTEN"
       add_column: "+ SPALTE HINZUFÜGEN"
       column_placeholder: "Spaltenname"
@@ -428,8 +424,6 @@ de:
       participants_redirected: "Teilnehmer werden weitergeleitet"
       all_redirected: "Alle Teilnehmer werden zur vorherigen Phase zurückgebracht."
       yes_go_back: "Ja, zurück"
-    votes_remaining:
-      label: "Verbleibende Stimmen:"
     participant_list:
       heading: "TEILNEHMER"
     participant_roles:
@@ -507,7 +501,6 @@ de:
     account_not_found: "Retro nicht gefunden. Entweder existiert es wirklich nicht oder du bist nicht Teil dieses Kontos"
     account_deactivated: "Dein Kontozugang wurde deaktiviert."
     grouping_only: "Gruppierung ist nur in der Gruppierungsphase verfügbar"
-    voting_only: "Abstimmung ist nur in der Abstimmungsphase verfügbar"
     discussion_only: "Punkte können nur in der Diskussionsphase als besprochen markiert werden"
     invalid_invite: "Ungültiger Einladungslink."
     invite_expired: "Dieser Einladungslink ist abgelaufen."

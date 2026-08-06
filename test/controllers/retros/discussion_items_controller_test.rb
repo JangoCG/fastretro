@@ -61,7 +61,7 @@ class Retros::DiscussionItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "cannot mark items outside discussion phase" do
     sign_in_as :one
-    @retro.update!(phase: :voting)
+    @retro.update!(phase: :grouping)
 
     patch retro_discussion_item_path(@retro),
       params: {

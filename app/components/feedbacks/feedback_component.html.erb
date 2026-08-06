@@ -7,16 +7,11 @@
     data-feedback-id="<%= @feedback.id %>"
     data-feedback-grouping-target="feedback"
   <% end %>
-  <% if @voting_enabled %>
-    data-vote-sorting-target="item"
-  <% end %>
 >
   <%# Card Body: Clean  (White, heavy border, sharp shadow) %>
   <div class="<%= discussed? ? 'bg-emerald-50/80 border-emerald-700' : 'bg-white border-zinc-900' %> relative border-[2px] shadow-soft overflow-hidden flex flex-col h-full min-h-[100px] group-hover:shadow-lift transition-all rounded-card">
 
-    <% unless show_voting? %>
-      <%= link_to retro_feedback_path(@feedback.retro, @feedback, script_name: @feedback.retro.account.slug), class: "absolute inset-0 z-10" do %><% end %>
-    <% end %>
+    <%= link_to retro_feedback_path(@feedback.retro, @feedback, script_name: @feedback.retro.account.slug), class: "absolute inset-0 z-10" do %><% end %>
 
     <%# Internal Content Area %>
     <div class="flex-1 p-4 flex flex-col gap-2">
@@ -67,27 +62,17 @@
         </span>
       </div>
 
-      <%# Voting UI %>
-      <% if show_voting? %>
-        <div class="relative z-20">
-          <%= render VoteButtonComponent.new(voteable: @feedback, participant: @participant, retro: @retro) %>
-        </div>
-      <% elsif show_vote_count? %>
+      <% if can_mark_discussed? %>
         <div class="relative z-20 flex items-center gap-2">
-          <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-tint-peach border-2 border-flame text-zinc-900 font-black text-sm">
-            <%= @feedback.votes.size %>
-          </div>
-          <% if can_mark_discussed? %>
-            <%= button_to retro_discussion_item_path(@feedback.retro, script_name: @feedback.retro.account.slug),
-                method: :patch,
-                params: {
-                  item_type: "Feedback",
-                  item_id: @feedback.id,
-                  discussed: !discussed?
-                },
-                class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
-              <%= discussed? ? t("feedbacks.component.undo") : t("feedbacks.component.mark_discussed") %>
-            <% end %>
+          <%= button_to retro_discussion_item_path(@feedback.retro, script_name: @feedback.retro.account.slug),
+              method: :patch,
+              params: {
+                item_type: "Feedback",
+                item_id: @feedback.id,
+                discussed: !discussed?
+              },
+              class: "text-[0.55rem] font-bold uppercase tracking-wider transition-colors px-2 py-1 border rounded #{discussed? ? 'text-emerald-700 border-emerald-600 bg-emerald-100 hover:bg-emerald-200' : 'text-zinc-600 border-zinc-300 bg-zinc-100 hover:bg-zinc-200'}" do %>
+            <%= discussed? ? t("feedbacks.component.undo") : t("feedbacks.component.mark_discussed") %>
           <% end %>
         </div>
       <% end %>

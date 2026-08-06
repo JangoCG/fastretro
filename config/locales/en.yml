@@ -69,7 +69,6 @@ en:
     action_review: "Action Review"
     brainstorming: "Brainstorming"
     grouping: "Grouping"
-    voting: "Voting"
     discussion: "Discussion"
     complete: "Complete"
 
@@ -77,8 +76,7 @@ en:
     waiting_room: "Share the invite link, wait for your teammates to join, then start the retro."
     action_review: "Review previous action items and mark completed ones."
     brainstorming: "Add your feedback ideas. Cards are private for now; the facilitator moves everyone forward when the team is ready."
-    grouping: "Everyone can now see the cards. Group similar feedback items into clusters before voting."
-    voting: "Use your votes on the items that matter most. The highest-voted topics move to the top for discussion."
+    grouping: "Everyone can now see the cards. Group similar feedback items into clusters."
     discussion: "Talk through the top topics and create action items before completing the retro."
     complete: "Review outcomes and export the summary. Action items will be available to review in your next retro."
     default: "Collaborate with your team in this phase."
@@ -155,8 +153,6 @@ en:
       custom_layout: "CUSTOM LAYOUT"
       custom_hint: "Add, remove, rename columns"
       default_info_html: "This retro will start with 2 columns: <strong>Good</strong>, <strong>Bad</strong>."
-      votes_per_participant: "Votes Per Participant"
-      votes_hint: "Only applied for custom layouts."
       custom_columns: "CUSTOM COLUMNS"
       add_column: "+ ADD COLUMN"
       column_placeholder: "Column name"
@@ -428,8 +424,6 @@ en:
       participants_redirected: "Participants will be redirected"
       all_redirected: "All participants will be taken back to the previous phase."
       yes_go_back: "Yes, Go Back"
-    votes_remaining:
-      label: "Votes remaining:"
     participant_list:
       heading: "PARTICIPANTS"
     participant_roles:
@@ -507,7 +501,6 @@ en:
     account_not_found: "Retro not found. Either it really does not exist or you are not part of that account"
     account_deactivated: "Your account access has been deactivated."
     grouping_only: "Grouping is only available during the grouping phase"
-    voting_only: "Voting is only available during the voting phase"
     discussion_only: "Items can only be marked discussed during discussion phase"
     invalid_invite: "Invalid invite link."
     invite_expired: "This invite link has expired."

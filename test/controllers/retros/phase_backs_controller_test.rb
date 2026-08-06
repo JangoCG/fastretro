@@ -19,24 +19,14 @@ class Retros::PhaseBacksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "brainstorming", @retro.reload.phase
   end
 
-  test "admin can go back from voting to grouping" do
-    sign_in_as :one
-    @retro.update!(phase: :voting)
-
-    post retro_phase_back_path(@retro)
-
-    assert_redirected_to retro_grouping_path(@retro)
-    assert_equal "grouping", @retro.reload.phase
-  end
-
-  test "admin can go back from discussion to voting" do
+  test "admin can go back from discussion to grouping" do
     sign_in_as :one
     @retro.update!(phase: :discussion)
 
     post retro_phase_back_path(@retro)
 
-    assert_redirected_to retro_voting_path(@retro)
-    assert_equal "voting", @retro.reload.phase
+    assert_redirected_to retro_grouping_path(@retro)
+    assert_equal "grouping", @retro.reload.phase
   end
 
   test "admin can go back from complete to discussion" do

@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       resource :action_review, only: :show
       resource :brainstorming, only: :show
       resource :grouping, only: :show
-      resource :voting, only: :show
       resource :discussion, only: :show
       resource :discussion_item, only: :update
       resource :complete, only: :show
@@ -29,7 +28,6 @@ Rails.application.routes.draw do
       resources :feedback_groups, only: %i[create destroy] do
         delete :remove_feedback, on: :collection
       end
-      resources :votes, only: %i[create destroy]
       resources :participants, only: [] do
         resource :role, only: :update, module: :participants
       end

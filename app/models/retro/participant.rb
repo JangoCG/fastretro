@@ -3,7 +3,6 @@ class Retro::Participant < ApplicationRecord
 
   belongs_to :retro
   belongs_to :user
-  has_many :votes, class_name: "Vote", foreign_key: :retro_participant_id, inverse_of: :retro_participant, dependent: :destroy
 
   after_commit :broadcast_targeted_participant_updates
   after_update_commit :broadcast_role_change_refresh, if: :saved_change_to_role?

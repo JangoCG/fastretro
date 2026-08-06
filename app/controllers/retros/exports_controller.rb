@@ -29,8 +29,8 @@ module Retros
       data = []
 
       @retro.column_definitions.each do |column|
-        @retro.feedbacks.published.in_category(column["id"]).includes(:user, :votes).each do |feedback|
-          data << [ column["name"], strip_html(feedback.content.to_plain_text), feedback.user.name, feedback.votes.size ]
+        @retro.feedbacks.published.in_category(column["id"]).includes(:user).each do |feedback|
+          data << [ column["name"], strip_html(feedback.content.to_plain_text), feedback.user.name ]
         end
       end
 
@@ -45,7 +45,7 @@ module Retros
 
     def generate_csv
       CSV.generate(headers: true) do |csv|
-        csv << [ "Category", "Feedback", "Author", "Votes" ]
+        csv << [ "Category", "Feedback", "Author" ]
         feedbacks_data.each { |row| csv << row }
 
         csv << []
@@ -65,7 +65,7 @@ module Retros
 
       # Feedbacks sheet
       workbook.add_worksheet(name: "Feedbacks") do |sheet|
-        sheet.add_row [ "Category", "Feedback", "Author", "Votes" ], style: header_style
+        sheet.add_row [ "Category", "Feedback", "Author" ], style: header_style
 
         feedbacks_data.each do |row|
           sheet.add_row row, style: feedback_style

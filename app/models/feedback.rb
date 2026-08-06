@@ -4,7 +4,6 @@ class Feedback < ApplicationRecord
   belongs_to :retro
   belongs_to :user, default: -> { Current.user }
   belongs_to :feedback_group, optional: true
-  has_many :votes, as: :voteable, dependent: :destroy
 
   after_commit :broadcast_targeted_columns
 
@@ -79,11 +78,6 @@ class Feedback < ApplicationRecord
     scope = retro.feedbacks.published
     scope = scope.where(user:) if retro.brainstorming? && user.present?
 
-    associations = [ :user, :rich_text_content, :feedback_group ]
-    if retro.voting? || retro.discussion?
-      associations += [ :votes, { feedback_group: :votes } ]
-    end
-
-    scope.includes(*associations).to_a.group_by(&:category)
+    scope.includes(:user, :rich_text_content, :feedback_group).to_a.group_by(&:category)
   end
 end

@@ -127,15 +127,15 @@ alex = users.find { |u| u.name == "Alex Thompson" }
 priya = users.find { |u| u.name == "Priya Patel" }
 
 # =============================================================================
-# RETRO 1: Active retro in voting phase (main demo retro)
+# RETRO 1: Active retro mid-grouping with clusters already formed (main demo retro)
 # =============================================================================
 
-puts "  Creating Sprint 47 retro (voting phase)..."
+puts "  Creating Sprint 47 retro (grouping phase, grouped)..."
 
 retro1 = Retro.create!(
   account: account,
   name: "Sprint 47 Retrospective",
-  phase: :voting
+  phase: :grouping
 )
 
 # Add all participants
@@ -178,37 +178,8 @@ group2 = FeedbackGroup.create!(retro: retro1, name: "Testing & Quality")
 could_be_better_feedbacks[0].update!(feedback_group: group2)
 could_be_better_feedbacks[1].update!(feedback_group: group2)
 
-# Add votes (max 3 per participant)
-participants = retro1.participants.to_a
-
-# Sarah votes
-Vote.create!(retro_participant: participants.find { |p| p.user == sarah }, voteable: went_well_feedbacks[1])
-Vote.create!(retro_participant: participants.find { |p| p.user == sarah }, voteable: could_be_better_feedbacks[0])
-Vote.create!(retro_participant: participants.find { |p| p.user == sarah }, voteable: could_be_better_feedbacks[3])
-
-# Marcus votes
-Vote.create!(retro_participant: participants.find { |p| p.user == marcus }, voteable: went_well_feedbacks[0])
-Vote.create!(retro_participant: participants.find { |p| p.user == marcus }, voteable: went_well_feedbacks[2])
-Vote.create!(retro_participant: participants.find { |p| p.user == marcus }, voteable: could_be_better_feedbacks[1])
-
-# Emily votes
-Vote.create!(retro_participant: participants.find { |p| p.user == emily }, voteable: could_be_better_feedbacks[0])
-Vote.create!(retro_participant: participants.find { |p| p.user == emily }, voteable: could_be_better_feedbacks[4])
-
-# David votes
-Vote.create!(retro_participant: participants.find { |p| p.user == david }, voteable: went_well_feedbacks[3])
-Vote.create!(retro_participant: participants.find { |p| p.user == david }, voteable: could_be_better_feedbacks[2])
-Vote.create!(retro_participant: participants.find { |p| p.user == david }, voteable: could_be_better_feedbacks[5])
-
-# Alex votes
-Vote.create!(retro_participant: participants.find { |p| p.user == alex }, voteable: went_well_feedbacks[4])
-Vote.create!(retro_participant: participants.find { |p| p.user == alex }, voteable: could_be_better_feedbacks[0])
-
-# Priya votes - finished voting
-priya_participant = participants.find { |p| p.user == priya }
-Vote.create!(retro_participant: priya_participant, voteable: went_well_feedbacks[5])
-Vote.create!(retro_participant: priya_participant, voteable: could_be_better_feedbacks[1])
-Vote.create!(retro_participant: priya_participant, voteable: could_be_better_feedbacks[6])
+# Priya has already wrapped up her grouping pass
+priya_participant = retro1.participants.find { |p| p.user == priya }
 priya_participant.finish!
 
 # =============================================================================
@@ -422,7 +393,7 @@ grouping_could_be_better_feedbacks[0].update!(feedback_group: scope_group)
 grouping_could_be_better_feedbacks[1].update!(feedback_group: scope_group)
 
 # =============================================================================
-# RETRO 7: Discussion Phase (reviewing top-voted items)
+# RETRO 7: Discussion Phase (working through the grouped themes)
 # =============================================================================
 
 puts "  Creating Platform Migration retro (discussion phase)..."
@@ -439,7 +410,7 @@ retro7 = Retro.create!(
   participant.finish!
 end
 
-# Create feedbacks with votes already cast
+# Create feedbacks for the discussion board
 discussion_went_well = [
   "The phased migration approach minimized customer impact.",
   "Rollback procedures were tested and worked flawlessly.",
@@ -476,30 +447,6 @@ discussion_went_well_feedbacks[2].update!(feedback_group: team_group)
 discussion_went_well_feedbacks[3].update!(feedback_group: team_group)
 discussion_could_be_better_feedbacks[2].update!(feedback_group: team_group)
 
-# Add votes (voting already completed)
-discussion_participants = retro7.participants.to_a
-
-# High-voted items (these will be discussed first)
-[ sarah, marcus, emily, david, alex ].each do |voter|
-  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_could_be_better_feedbacks[0])
-end
-
-[ sarah, marcus, emily, priya ].each do |voter|
-  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_went_well_feedbacks[0])
-end
-
-[ marcus, david, alex, priya ].each do |voter|
-  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_could_be_better_feedbacks[1])
-end
-
-[ emily, david, alex ].each do |voter|
-  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_could_be_better_feedbacks[2])
-end
-
-[ sarah, priya ].each do |voter|
-  Vote.create!(retro_participant: discussion_participants.find { |p| p.user == voter }, voteable: discussion_went_well_feedbacks[4])
-end
-
 # Some action items already created during discussion
 create_action(retro: retro7, user: sarah, content: "Create comprehensive dependency map before next migration", status: :published)
 create_action(retro: retro7, user: marcus, content: "Schedule migration script development 2 sprints earlier", status: :published)
@@ -515,12 +462,12 @@ puts ""
 puts "Account: #{account.name} (#{account.slug})"
 puts "Users: #{users.map(&:name).join(', ')}"
 puts ""
-puts "Retros (one for each phase):"
+puts "Retros (covering every phase):"
 puts "  1. #{retro4.name} - #{retro4.phase} (#{retro4.participants.count} participants waiting)"
 puts "  2. #{retro3.name} - #{retro3.phase} (#{retro3.actions.count} actions: #{retro3.actions.completed_actions.count} completed, #{retro3.actions.incomplete.count} pending)"
 puts "  3. #{retro5.name} - #{retro5.phase} (#{retro5.feedbacks.count} feedbacks, #{retro5.feedbacks.drafted.count} drafts)"
 puts "  4. #{retro6.name} - #{retro6.phase} (#{retro6.feedbacks.count} feedbacks, #{retro6.feedback_groups.count} groups)"
-puts "  5. #{retro1.name} - #{retro1.phase} (#{retro1.feedbacks.count} feedbacks, #{Vote.where(voteable: retro1.feedbacks).count} votes)"
+puts "  5. #{retro1.name} - #{retro1.phase} (#{retro1.feedbacks.count} feedbacks)"
 puts "  6. #{retro7.name} - #{retro7.phase} (#{retro7.feedbacks.count} feedbacks, #{retro7.actions.count} actions)"
 puts "  7. #{retro2.name} - #{retro2.phase} (#{retro2.feedbacks.count} feedbacks, #{retro2.actions.published.count} actions)"
 puts ""
