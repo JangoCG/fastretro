@@ -1,11 +1,14 @@
-## Deploying Fast Retro with Kamal
+## Deploying Faster Retro with Kamal
 
-If you'd like to run Fast Retro on your own server while having the freedom to easily make changes to its code, we recommend deploying it with [Kamal](https://kamal-deploy.org/).
+> Part of Faster Retro, an unofficial fork of
+> [JangoCG/fastretro](https://github.com/JangoCG/fastretro).
+
+If you'd like to run Faster Retro on your own server while having the freedom to easily make changes to its code, we recommend deploying it with [Kamal](https://kamal-deploy.org/).
 Kamal makes it easy to set up a bare server, copy the application to it, and manage the configuration settings that it uses.
 
 This repo contains a starter deployment file that you can modify for your own specific use. That file lives at [config/deploy.yml](../config/deploy.yml), which is the default place where Kamal will look for it.
 
-The steps to configure your very own Fast Retro are:
+The steps to configure your very own Faster Retro are:
 
 1. Fork the repo
 2. Initialize Kamal by running `kamal init`. This command generates the `.kamal` directory along with the required configuration files, including `.kamal/secrets`.
@@ -16,7 +19,7 @@ We'll go through each of these in turn.
 
 ### Fork the repo
 
-To make it easy to customise Fast Retro's settings for your own instance, you should start by creating your own GitHub fork of the repo.
+To make it easy to customise Faster Retro's settings for your own instance, you should start by creating your own GitHub fork of the repo.
 That allows you to commit your changes, and track them over time.
 You can always re-sync your fork to pick up new changes from the main repo over time.
 
@@ -47,7 +50,7 @@ Clear (non-secret) variables to configure:
 
 - `SMTP_ADDRESS`: The address of your SMTP server. For AWS SES, use `email-smtp.<region>.amazonaws.com`.
 - `SMTP_AUTHENTICATION`: Authentication method for SMTP (typically `login` or `plain`).
-- `MAILER_FROM_ADDRESS`: The email address that Fast Retro will send emails from. Should be a verified address in your email provider.
+- `MAILER_FROM_ADDRESS`: The email address that Faster Retro will send emails from. Should be a verified address in your email provider.
 - `MULTI_TENANT`: Set to `true` to allow multiple accounts to sign up (default allows single account only).
 - `SOLID_QUEUE_IN_PUMA`: Set to `true` to run background jobs in the app container.
 - `S3_REGION`: The region used by your S3-compatible storage provider.
@@ -56,7 +59,7 @@ Clear (non-secret) variables to configure:
 
 ### Setting up secrets
 
-Fast Retro requires several environment variables containing secrets.
+Faster Retro requires several environment variables containing secrets.
 The simplest way to manage these is to put them in a file called `.kamal/secrets`.
 Because this file contains secret credentials, it's important that you **DON'T CHECK THIS FILE INTO YOUR REPO!** You can add the filename to `.gitignore` to ensure you don't commit this file accidentally.
 
@@ -86,7 +89,7 @@ The values you enter here will be specific to you, and you can get or create the
 - `SMTP_USERNAME` & `SMTP_PASSWORD`: Valid credentials for your SMTP server. For AWS SES, create SMTP credentials in the AWS console under SES > SMTP settings.
 - `S3_ACCESS_KEY` & `S3_SECRET_KEY`: Credentials for the S3-compatible object storage used by Active Storage in production.
 
-### Deploy Fast Retro!
+### Deploy Faster Retro!
 
 You can now do your first deploy by running:
 
@@ -94,7 +97,7 @@ You can now do your first deploy by running:
 bin/kamal setup
 ```
 
-This will set up Docker (if needed), build your Fast Retro app container, configure it, and start it running.
+This will set up Docker (if needed), build your Faster Retro app container, configure it, and start it running.
 
 After the first deploy is done, any subsequent deploys won't need that initial setup. For future deploys, run:
 
@@ -115,7 +118,7 @@ bin/kamal dbc        # Open a database console
 
 ### Storage and persistence
 
-Fast Retro uses SQLite for its database and stores production uploads in S3-compatible object storage through Active Storage. The deployment's persistent Docker volume (`fastretrov2_prod_storage`) mounted at `/rails/storage` contains the SQLite databases; development and test uploads continue to use local disk storage.
+Faster Retro uses SQLite for its database and stores production uploads in S3-compatible object storage through Active Storage. The deployment's persistent Docker volume (`fastretrov2_prod_storage`) mounted at `/rails/storage` contains the SQLite databases; development and test uploads continue to use local disk storage.
 
 **Important:** For production use, we recommend backing up this volume regularly or mounting it to a path that is included in your server's backup strategy.
 

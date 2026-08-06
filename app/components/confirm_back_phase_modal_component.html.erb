@@ -2,17 +2,17 @@
   <%# Trigger Button %>
   <button type="button"
           data-action="click->dialog#open"
-          class="w-full md:w-auto h-10 sm:h-12 px-3 sm:px-8 font-bold uppercase whitespace-nowrap tracking-[0.12em] md:tracking-widest text-xs sm:text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 bg-zinc-100 border-zinc-700 text-zinc-900 hover:bg-zinc-200">
+          class="w-full md:w-auto h-10 sm:h-12 px-3 sm:px-8 font-bold uppercase whitespace-nowrap tracking-[0.12em] md:tracking-widest text-xs sm:text-sm border-[2px] rounded-pill transition-all duration-200 shadow-soft sm:shadow-soft hover:shadow-none hover:-translate-y-0.5 active:translate-y-0 bg-zinc-100 border-zinc-700 text-zinc-900 hover:bg-zinc-200">
     <%= t("components.confirm_back_phase_modal.go_back") %>
   </button>
 
   <%# Modal Dialog %>
   <dialog data-dialog-target="dialog"
-          class="fixed m-auto inset-0 z-50 w-[90vw] sm:w-[480px] max-w-[480px] p-0 bg-[#F8F5EC] text-zinc-900 shadow-[8px_8px_0px_0px_rgba(24,24,27,1)] border-[3px] border-zinc-900 outline-none backdrop:bg-zinc-900/50 backdrop:backdrop-blur-sm">
+          class="fixed m-auto inset-0 z-50 w-[90vw] sm:w-[480px] max-w-[480px] p-0 bg-[#ffffff] text-zinc-900 shadow-lift border border-zinc-900/10 outline-none backdrop:bg-zinc-900/50 backdrop:backdrop-blur-sm rounded-card overflow-hidden">
 
     <%# Header %>
-    <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b-[3px] border-zinc-900">
-      <span class="font-black text-sm uppercase tracking-widest">"<%= t("components.confirm_back_phase_modal.confirm") %>"</span>
+    <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b border-zinc-900/10">
+      <span class="font-black text-sm uppercase tracking-widest"><%= t("components.confirm_back_phase_modal.confirm") %></span>
       <button type="button" data-action="click->dialog#close" class="text-white hover:text-zinc-300 transition-colors">
         <%= icon_tag "close", class: "text-xl" %>
       </button>
@@ -22,10 +22,10 @@
     <div class="p-6">
       <div class="text-center mb-6">
         <p class="font-black text-lg uppercase tracking-tight text-zinc-900 mb-2">
-          "<%= t("components.confirm_back_phase_modal.go_back_question") %>"
+          <%= t("components.confirm_back_phase_modal.go_back_question") %>
         </p>
         <p class="text-sm text-zinc-600">
-          <%= t("components.confirm_back_phase_modal.about_to_go_back") %> <span class="font-bold text-zinc-900">"<%= previous_phase_name %>"</span>
+          <%= t("components.confirm_back_phase_modal.about_to_go_back") %> <span class="font-bold text-zinc-900"><%= previous_phase_name %></span>
         </p>
       </div>
 
@@ -48,19 +48,18 @@
       <div class="flex gap-3 justify-end">
         <button type="button"
                 data-action="click->dialog#close"
-                class="h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100">
+                class="h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-pill transition-all duration-200 shadow-soft hover:shadow-none bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100">
           <%= t("shared.cancel") %>
         </button>
 
         <%= button_to retro_phase_back_path(@retro),
               method: :post,
-              class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none bg-zinc-900 border-zinc-900 text-white hover:bg-zinc-700" do %>
+              class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-pill transition-all duration-200 shadow-soft hover:shadow-none bg-zinc-900 border-zinc-900 text-white hover:bg-zinc-700" do %>
           <%= t("components.confirm_back_phase_modal.yes_go_back") %>
         <% end %>
       </div>
     </div>
 
     <%# Footer Decoration %>
-    <div class="h-2 w-full bg-[repeating-linear-gradient(-45deg,#000,#000_2px,transparent_2px,transparent_4px)] opacity-10"></div>
   </dialog>
 </div>

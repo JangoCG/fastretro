@@ -1,39 +1,39 @@
-<footer class="w-full pb-12 border-t-4 border-black pt-8">
+<footer class="w-full pb-12 border-t border-zinc-900/10 pt-12 mt-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-start gap-8">
     <div>
-      <h3 class="font-black text-xl italic tracking-tighter uppercase mb-4">FASTRETRO</h3>
-      <p class="font-mono text-xs text-zinc-500 max-w-xs uppercase">
-        MANUFACTURED IN THE DARK.
+      <h3 class="font-display font-black text-xl uppercase mb-4 text-zinc-900">FASTER RETRO</h3>
+      <p class="font-ui text-xs text-zinc-500 max-w-xs">
+        Fast and simple retrospectives for your team.
       </p>
     </div>
 
-    <div class="flex gap-12 font-mono text-xs uppercase">
+    <div class="flex gap-12 font-ui text-xs uppercase">
       <ul class="space-y-2">
-        <li class="font-bold mb-2 text-black">INDEX</li>
-        <li><%= link_to "HOME", root_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><%= link_to "FEATURES", root_path(anchor: "features", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><%= link_to "PRICING", root_path(anchor: "pricing", script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><%= link_to "SHOUTOUTS", shoutouts_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li class="font-bold mb-2 text-zinc-900">INDEX</li>
+        <li><%= link_to "HOME", root_path(script_name: nil), class: "hover:text-flame transition-colors" %></li>
+        <li><%= link_to "FEATURES", root_path(anchor: "features", script_name: nil), class: "hover:text-flame transition-colors" %></li>
+        <li><%= link_to "PRICING", root_path(anchor: "pricing", script_name: nil), class: "hover:text-flame transition-colors" %></li>
+        <li><%= link_to "SHOUTOUTS", shoutouts_path(script_name: nil), class: "hover:text-flame transition-colors" %></li>
       </ul>
       <ul class="space-y-2">
-        <li class="font-bold mb-2 text-black">FOLLOW</li>
-        <li><%= link_to "BLOG", blog_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><a href="https://x.com/JangoCG" target="_blank" class="hover:bg-black hover:text-white px-1">X</a></li>
+        <li class="font-bold mb-2 text-zinc-900">FOLLOW</li>
+        <li><%= link_to "BLOG", blog_path(script_name: nil), class: "hover:text-flame transition-colors" %></li>
+        <li><a href="https://x.com/JangoCG" target="_blank" class="hover:text-flame transition-colors">X</a></li>
         <li>
-          <a href="https://discord.gg/TrcBXfMC" target="_blank" class="hover:bg-black hover:text-white px-1 inline-flex items-center gap-1">
+          <a href="https://discord.gg/TrcBXfMC" target="_blank" class="hover:text-flame transition-colors inline-flex items-center gap-1">
             <svg class="w-3.5 h-3.5" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z" fill="currentColor"/></svg>
             DISCORD
           </a>
         </li>
       </ul>
       <ul class="space-y-2">
-        <li class="font-bold mb-2 text-black">LEGAL</li>
-        <li><%= link_to "IMPRINT", imprint_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
-        <li><%= link_to "PRIVACY POLICY", privacy_policy_path(script_name: nil), class: "hover:bg-black hover:text-white px-1" %></li>
+        <li class="font-bold mb-2 text-zinc-900">LEGAL</li>
+        <li><%= link_to "IMPRINT", imprint_path(script_name: nil), class: "hover:text-flame transition-colors" %></li>
+        <li><%= link_to "PRIVACY POLICY", privacy_policy_path(script_name: nil), class: "hover:text-flame transition-colors" %></li>
       </ul>
       <ul class="space-y-2">
-        <li class="font-bold mb-2 text-black">CONTACT</li>
-        <li><a href="mailto:support@fastretro.app" class="hover:bg-black hover:text-white px-1">EMAIL</a></li>
+        <li class="font-bold mb-2 text-zinc-900">CONTACT</li>
+        <li><a href="mailto:support@fastretro.app" class="hover:text-flame transition-colors">EMAIL</a></li>
       </ul>
     </div>
 
@@ -41,6 +41,10 @@
     </div>
   </div>
 
-  <%# Warning Stripe %>
-  <div class="w-full h-4 mt-8 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#ffe600_10px,#ffe600_20px)]"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-10 pt-6 border-t border-zinc-900/10">
+    <a href="https://github.com/JangoCG/fastretro" rel="noopener"
+       class="font-ui text-[10px] uppercase tracking-[.053rem] text-zinc-400 hover:text-flame transition-colors">
+      Fork of Fast Retro
+    </a>
+  </div>
 </footer>

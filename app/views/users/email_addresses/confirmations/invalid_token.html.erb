@@ -1,11 +1,11 @@
 <% content_for :title, t("users.email_addresses.confirmations.invalid_token.title") %>
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans">
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
-    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
+    <div class="p-6 border-b border-zinc-900/10 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
-        <h1 class="text-xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-xl font-black text-zinc-900 uppercase">
           <%= t("users.email_addresses.confirmations.invalid_token.heading") %>
         </h1>
       </div>
@@ -21,7 +21,7 @@
           <%= t("users.email_addresses.confirmations.invalid_token.expires_hint") %>
         </p>
 
-        <%= link_to new_user_email_address_path(user_id: @user), class: "group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" do %>
+        <%= link_to new_user_email_address_path(user_id: @user), class: "group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all rounded-pill" do %>
           <%= t("users.email_addresses.confirmations.invalid_token.change_email") %>
         <% end %>
 
@@ -31,6 +31,6 @@
       </div>
     </div>
 
-    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+    <div class="h-2 border-t border-zinc-900/10 bg-zinc-900 w-full"></div>
   </div>
 </div>

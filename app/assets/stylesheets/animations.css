@@ -52,7 +52,7 @@
 }
 
 .fill-highlighter::before {
-  background-color: #ffe600;
+  background-color: #fff2d2;
   border-radius: 0.2em;
   content: "";
   inset-block: 0;

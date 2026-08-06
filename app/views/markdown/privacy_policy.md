@@ -2,7 +2,7 @@
 
 *[German version below (Deutsche Version weiter unten)](#datenschutzerklaerung)*
 
-I am Cengiz Gürtusgil and I operate Fast Retro.
+I am Cengiz Gürtusgil and I operate Faster Retro.
 
 **Address:** <br/>
 Angelika-Machinek-Str. 20 <br/>
@@ -65,7 +65,7 @@ Last updated: March 5, 2026.
 
 # Datenschutzerklärung
 
-Ich bin Cengiz Gürtusgil und betreibe Fast Retro.
+Ich bin Cengiz Gürtusgil und betreibe Faster Retro.
 
 **Adresse:** <br/>
 Angelika-Machinek-Str. 20 <br/>
@@ -76,7 +76,7 @@ Deutschland
 
 ## 1. Wie nutze ich deine Daten und warum?
 
-**Wenn du dich registrierst und Fast Retro nutzt.** Bei der Anmeldung erfasse ich deinen Namen und deine E-Mail-Adresse. Diese Daten benötige ich, um den Nutzungsvertrag zu erfüllen und dir den Zugang zur Plattform zu ermöglichen. Da ich passwortlose Authentifizierung per Magic Link verwende, speichere ich keine Passwörter. Auch die Inhalte deiner Retrospektiven speichere ich, damit der Dienst funktioniert.
+**Wenn du dich registrierst und Faster Retro nutzt.** Bei der Anmeldung erfasse ich deinen Namen und deine E-Mail-Adresse. Diese Daten benötige ich, um den Nutzungsvertrag zu erfüllen und dir den Zugang zur Plattform zu ermöglichen. Da ich passwortlose Authentifizierung per Magic Link verwende, speichere ich keine Passwörter. Auch die Inhalte deiner Retrospektiven speichere ich, damit der Dienst funktioniert.
 
 **(Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO – Vertragserfüllung)**
 
@@ -94,7 +94,7 @@ Ich nutze keine personenbezogenen Daten zur Entwicklung oder zum Training von KI
 
 Deine Daten werden primär in der EU gespeichert. Ich habe mit allen Dienstleistern Verträge zur Auftragsverarbeitung (AV-Verträge) bzw. entsprechende Klauseln (DPA) vereinbart.
 
-**Hosting bei Hetzner.** Fast Retro wird bei der Hetzner Online GmbH (Deutschland) gehostet. Die Rechenzentren befinden sich in Deutschland und Finnland. Mehr Infos in der [Datenschutzerklärung von Hetzner](https://www.hetzner.com/de/legal/privacy-policy).
+**Hosting bei Hetzner.** Faster Retro wird bei der Hetzner Online GmbH (Deutschland) gehostet. Die Rechenzentren befinden sich in Deutschland und Finnland. Mehr Infos in der [Datenschutzerklärung von Hetzner](https://www.hetzner.com/de/legal/privacy-policy).
 
 **E-Mail-Versand durch AWS.** Für den Versand von E-Mails (z.B. Login-Links) nutze ich Amazon Web Services (AWS EMEA SARL, Luxemburg). Ich nutze ausschließlich den Serverstandort Frankfurt (eu-central-1). AWS ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr Infos in der [Datenschutzerklärung von AWS](https://aws.amazon.com/de/privacy/).
 

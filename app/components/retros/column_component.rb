@@ -1,5 +1,6 @@
 class Retros::ColumnComponent < ApplicationComponent
-  HIGHLIGHT_COLORS = %w[#22c55e #fb923c #38bdf8 #a78bfa #eab308 #f43f5e].freeze
+  # Brand tints, rotated by column position so configurable columns stay distinguishable.
+  HIGHLIGHT_COLORS = %w[#dff7fb #ffeedf #dcddff #fff2d2 #e7ecf6 #ffe4e0].freeze
 
   def initialize(retro:, category:, title: nil, position: 0, participant: nil, feedbacks: nil, has_feedbacks: nil)
     @retro = retro

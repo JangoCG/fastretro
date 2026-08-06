@@ -3,11 +3,11 @@
 <% content_for :board_columns do %>
   <div class="space-y-6">
     <%# Header Instructions %>
-    <div class="bg-violet-50 border-[3px] border-zinc-900 p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+    <div class="bg-tint-peach border border-zinc-900/10 p-6 shadow-lift rounded-card overflow-hidden">
       <h2 class="font-black text-xl uppercase tracking-tight text-zinc-900 mb-2">
-        "<%= t("action_reviews.heading") %>"
+        <%= t("action_reviews.heading") %>
       </h2>
-      <p class="text-sm text-zinc-600 font-mono mb-3">
+      <p class="text-sm text-zinc-600 font-ui mb-3">
         <%= t("action_reviews.instructions") %>
       </p>
       <div class="flex items-start gap-2 mt-4 p-3 bg-amber-50 border-2 border-amber-400">

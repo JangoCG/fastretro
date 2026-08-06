@@ -2,13 +2,13 @@
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:alert] || flash[:shake] %>">
   
-  <%# Industrial Container %>
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <%# Card container %>
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
     
     <%# Header Section %>
-    <div class="p-6 border-b-[3px] border-zinc-900 bg-zinc-900 relative">
+    <div class="p-6 border-b border-zinc-900/10 bg-zinc-900 relative">
       <div class="relative z-10 flex items-center justify-between">
-        <h1 class="text-xl font-black text-white uppercase tracking-tighter">
+        <h1 class="text-xl font-black text-white uppercase">
            <%= t("sessions.magic_links.verify") %>
         </h1>
         <div class="w-3 h-3 bg-yellow-500 animate-pulse"></div>
@@ -17,8 +17,6 @@
 
     <%# Body %>
     <div class="p-8 relative bg-white flex flex-col items-center gap-6">
-       <%# Background Grid %>
-       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:10px_10px]"></div>
        
        <div class="relative z-10 text-center w-full">
          <% if flash[:notice] %>
@@ -34,7 +32,7 @@
             </div>
             <%= form.text_field :code,
                 required: true,
-                class: "w-full pl-10 pr-4 py-4 font-mono text-3xl font-black tracking-[0.5em] text-center uppercase border-[3px] border-zinc-900 rounded-none bg-white text-zinc-900 focus:outline-none focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-200",
+                class: "w-full pl-10 pr-4 py-4 font-ui text-3xl font-display font-black tracking-[0.5em] text-center border border-zinc-900/10 rounded-[.875rem] bg-white text-zinc-900 focus:outline-none focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-200",
                 autofocus: true,
                 autocorrect: "off",
                 autocapitalize: "off",
@@ -57,15 +55,13 @@
 
     </div>
     
-    <%# Technical Footer %>
-    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
   </div>
 
   <% if flash[:magic_link_code].present? %>
-    <div class="flex items-center justify-center gap-4 bg-zinc-900 border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(251,191,36,1)] p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden">
+    <div class="flex items-center justify-center gap-4 bg-zinc-900 border border-zinc-900/10 shadow-soft p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden rounded-[1.1rem]">
       <span class="absolute top-0 bottom-0 left-0 bg-yellow-400 px-2 flex items-center justify-center text-[0.55rem] uppercase font-black text-center rotate-180 [writing-mode:vertical-rl] text-zinc-900"><%= t("sessions.magic_links.dev_label") %></span>
-      <span class="text-xs font-mono font-bold text-white uppercase ml-6"><%= t("sessions.magic_links.dev_code_hint") %></span>
-      <code class="text-2xl font-black font-mono text-yellow-400 tracking-widest"><%= flash[:magic_link_code] %></code>
+      <span class="text-xs font-ui font-bold text-white uppercase ml-6"><%= t("sessions.magic_links.dev_code_hint") %></span>
+      <code class="text-2xl font-display font-black font-ui text-yellow-400 tracking-widest"><%= flash[:magic_link_code] %></code>
     </div>
   <% end %>
 </div>

@@ -1,5 +1,8 @@
 ## Development
 
+> Part of Faster Retro, an unofficial fork of
+> [JangoCG/fastretro](https://github.com/JangoCG/fastretro).
+
 ### Setting up
 
 First, get everything installed and configured with:
@@ -19,7 +22,7 @@ You'll be able to access the app in development at http://localhost:3000.
 
 ### Seeding the Database
 
-Fast Retro includes demo data for development and screenshots.
+Faster Retro includes demo data for development and screenshots.
 
 ```sh
 bin/rails runner db/seeds/demo.rb
@@ -63,7 +66,7 @@ The CI pipeline runs: rubocop, bundler-audit, importmap audit, brakeman, gitleak
 
 ### Database configuration
 
-Fast Retro uses SQLite by default.
+Faster Retro uses SQLite by default.
 
 ### Outbound Emails
 

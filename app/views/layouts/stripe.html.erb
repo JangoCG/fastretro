@@ -2,34 +2,27 @@
 <html class="h-full">
   <head>
     <% unless @disable_view_transition %><meta name="view-transition" content="same-origin"><% end %>
-    <title>FastRetro - Checkout</title>
+    <title>Faster Retro - Checkout</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= tag.link rel: "preload", href: asset_path("cabin-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
+    <%= tag.link rel: "preload", href: asset_path("inter-700-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
     <%# Analytics %>
     <%= analytics_tag %>
   </head>
-  <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
-    <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
-    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-         style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
-    </div>
-
+  <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black">
     <%# === HEADER === %>
     <header class="relative flex justify-center z-50">
-      <div class="relative inline-flex items-center gap-3 px-8 py-5 mt-4 bg-[#F8F5EC] border-[2px] border-stone-300 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden min-w-[280px]">
-        <%# Decorative Hazard Strip %>
-        <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
-
-        <%# Main Label %>
-        <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
+      <div class="relative inline-flex items-center gap-3 px-8 py-5 mt-4 bg-[#ffffff] border-[2px] border-zinc-200 shadow-soft overflow-hidden min-w-[280px] rounded-[1.1rem]">
+        <div class="flex flex-col items-start py-1 w-full relative z-10">
           <div class="flex items-center gap-2">
-            <span class="font-black text-xl sm:text-2xl uppercase tracking-tighter text-black leading-none select-none relative px-1">
-              <span class="absolute inset-0 bg-[#FFFF00] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
-              "FAST RETRO"
+            <span class="font-display font-black text-xl sm:text-2xl uppercase text-black leading-none select-none relative px-1">
+              <span class="absolute inset-0 bg-[#fff2d2] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+              FASTER RETRO
             </span>
           </div>
         </div>
@@ -42,7 +35,7 @@
     </div>
 
     <main class="flex-1 flex items-center justify-center p-4 relative z-10">
-      <div class="bg-white border-2 border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] p-8 max-w-md w-full">
+      <div class="bg-white border-2 border-zinc-900 shadow-soft p-8 max-w-md w-full rounded-[1.1rem]">
         <%= render "layouts/shared/flash" %>
         <%= yield %>
       </div>

@@ -4,10 +4,10 @@ class PhaseTagComponent < ApplicationComponent
       title: "ACTION\nREVIEW",
       instruction: "Review action items from your previous retro.",
       footer: "CHECK PROGRESS.",
-      bg_color: "bg-violet-50",
-      border_color: "border-violet-300",
-      stripe_hex: "#7c3aed",
-      accent_color: "text-violet-700"
+      bg_color: "bg-tint-peach",
+      border_color: "border-flame",
+      stripe_hex: "#ff5d03",
+      accent_color: "text-zinc-900"
     },
     brainstorming: {
       title: "BRAIN\nSTORMING",
@@ -31,10 +31,10 @@ class PhaseTagComponent < ApplicationComponent
       title: "VOTING",
       instruction: "Vote on the most important topics.",
       footer: "CHOOSE WISELY.",
-      bg_color: "bg-violet-50",
-      border_color: "border-violet-300",
-      stripe_hex: "#7c3aed",
-      accent_color: "text-violet-700"
+      bg_color: "bg-tint-peach",
+      border_color: "border-flame",
+      stripe_hex: "#394763",
+      accent_color: "text-zinc-900"
     },
     discussion: {
       title: "DISCUSSION",
@@ -51,8 +51,8 @@ class PhaseTagComponent < ApplicationComponent
       footer: "WELL DONE!",
       bg_color: "bg-zinc-50",
       border_color: "border-zinc-400",
-      stripe_hex: "#18181b",
-      accent_color: "text-zinc-700"
+      stripe_hex: "#011232",
+      accent_color: "text-stone-700"
     }
   }.freeze
 
@@ -81,7 +81,7 @@ class PhaseTagComponent < ApplicationComponent
   end
 
   def bg_color
-    config[:bg_color] || "bg-[#F8F5EC]"
+    config[:bg_color] || "bg-[#ffffff]"
   end
 
   def border_color

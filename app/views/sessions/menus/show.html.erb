@@ -1,13 +1,13 @@
 <% content_for :title, "Choose an account" %>
-<div class="bg-[#FAF9F6] border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] max-w-full p-6 w-full sm:p-8 sm:w-[42ch] sm:mx-auto">
+<div class="bg-[#f4f7fb] border-[2px] border-zinc-900 shadow-soft max-w-full p-6 w-full sm:p-8 sm:w-[42ch] sm:mx-auto rounded-[1.1rem]">
   <% if @accounts.any? %>
     <h1 class="text-xl font-black mb-6 text-zinc-900 uppercase tracking-tight">
-      Your FastRetro Accounts
+      Your Faster Retro Accounts
     </h1>
 
-<div class="mb-6 bg-[#F5F1E8] border-[2px] border-zinc-400 p-5 relative">
-  <div class="absolute top-2 right-2 text-[0.5rem] font-mono font-bold text-zinc-400 uppercase tracking-widest">
-    "INFO"
+<div class="mb-6 bg-[#f4f7fb] border-[2px] border-zinc-400 p-5 relative">
+  <div class="absolute top-2 right-2 text-[0.5rem] font-ui font-bold text-zinc-400 uppercase tracking-widest">
+    INFO
   </div>
 
   <div class="flex items-start gap-4">
@@ -17,7 +17,7 @@
 
     <div class="text-sm text-zinc-800">
       <h3 class="font-bold mb-2 text-base text-zinc-900">
-        "<%= pluralize(@accounts.count, 'ACCOUNT').upcase %>"
+        <%= pluralize(@accounts.count, 'ACCOUNT').upcase %>
       </h3>
       <p class="text-zinc-600 leading-relaxed font-medium">
         You can work in multiple accounts and switch between them anytime.
@@ -34,7 +34,7 @@
     <menu class="flex flex-col gap-2 list-none p-0 mt-4 mb-0">
       <% @accounts.each do |account| %>
         <li class="m-0">
-          <%= link_to root_url(script_name: account.slug), class: "inline-flex items-center w-full justify-start gap-3 bg-white border-[2px] border-zinc-900 px-4 py-3 text-zinc-900 hover:bg-zinc-100 hover:shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] transition-all font-bold uppercase tracking-wide text-sm" do %>
+          <%= link_to root_url(script_name: account.slug), class: "inline-flex items-center w-full justify-start gap-3 bg-white border-[2px] border-zinc-900 px-4 py-3 text-zinc-900 hover:bg-zinc-100 hover:shadow-soft transition-all font-bold uppercase tracking-wide text-sm rounded-pill" do %>
             <%= icon_tag "marker", class: "text-xl" %>
             <span><%= account.name %></span>
           <% end %>
@@ -43,14 +43,14 @@
     </menu>
   <% else %>
     <h1 class="text-xl font-black mb-4 text-zinc-900 uppercase tracking-tight">Hmm...</h1>
-    <p class="text-zinc-600 text-sm">You don't have any Fast Retro accounts.</p>
+    <p class="text-zinc-600 text-sm">You don't have any Faster Retro accounts.</p>
   <% end %>
   <div class="mt-6 pt-4 border-t-[2px] border-zinc-200 space-y-2">
-    <%= link_to new_signup_path, class: "inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-zinc-900 text-white font-bold uppercase tracking-widest text-xs border-[2px] border-zinc-900 hover:bg-zinc-700 transition-all shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] hover:shadow-none" do %>
+    <%= link_to new_signup_path, class: "inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-zinc-900 text-white font-bold uppercase tracking-widest text-xs border-[2px] border-zinc-900 hover:bg-zinc-700 transition-all shadow-soft hover:shadow-none rounded-pill" do %>
       <%= icon_tag "add", class: "text-base" %>
       <span>Create New Account</span>
     <% end %>
-    <%= button_to session_url(script_name: nil), method: :delete, class: "inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-white text-zinc-900 font-bold uppercase tracking-widest text-xs border-[2px] border-zinc-900 hover:bg-red-50 hover:text-red-700 hover:border-red-700 transition-all shadow-[2px_2px_0px_0px_rgba(24,24,27,1)] hover:shadow-none", data: { turbo: false } do %>
+    <%= button_to session_url(script_name: nil), method: :delete, class: "inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-white text-zinc-900 font-bold uppercase tracking-widest text-xs border-[2px] border-zinc-900 hover:bg-red-50 hover:text-red-700 hover:border-red-700 transition-all shadow-soft hover:shadow-none rounded-pill", data: { turbo: false } do %>
       <%= icon_tag "logout", class: "text-base" %>
       <span>Log out</span>
     <% end %>

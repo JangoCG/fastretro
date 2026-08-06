@@ -1,10 +1,15 @@
-# Fast Retro
+# Faster Retro
+
+> Unofficial fork of [JangoCG/fastretro](https://github.com/JangoCG/fastretro).
+> The user-facing product is "Faster Retro"; the `FastRetro` Ruby module,
+> `fastretro` file paths, and `ghcr.io/jangocg/fastretro` image references are
+> deliberately unchanged.
 
 This file provides guidance to AI coding agents working with this repository.
 
-## What is Fast Retro?
+## What is Faster Retro?
 
-Fast Retro is a retrospective management tool for agile teams built with Ruby on Rails 8.1. It helps teams run structured retrospective sessions with real-time collaboration, featuring phases for brainstorming, grouping, voting, and discussion.
+Faster Retro is a retrospective management tool for agile teams built with Ruby on Rails 8.1. It helps teams run structured retrospective sessions with real-time collaboration, featuring phases for brainstorming, grouping, voting, and discussion.
 
 ## Development Commands
 
@@ -57,7 +62,7 @@ bin/kamal deploy             # Deploy (requires secrets setup)
 
 ### Multi-Tenancy (URL-Based)
 
-Fast Retro uses **URL path-based multi-tenancy**:
+Faster Retro uses **URL path-based multi-tenancy**:
 - Each Account (tenant) has a unique `external_account_id`
 - URLs are prefixed: `/{account_id}/retros/...`
 - All models include `account_id` for data isolation

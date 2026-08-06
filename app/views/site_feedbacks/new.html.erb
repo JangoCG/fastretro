@@ -9,26 +9,26 @@
   <div class="max-w-2xl mx-auto">
     <%# Page Title %>
     <div class="mb-8 text-center">
-      <h1 class="font-black text-3xl sm:text-4xl text-zinc-900 uppercase tracking-tighter leading-none">
+      <h1 class="font-display font-black text-3xl sm:text-4xl text-zinc-900 leading-none">
         <%= t("site_feedbacks.new.heading") %>
       </h1>
-      <p class="mt-3 text-zinc-600 font-mono text-sm">
+      <p class="mt-3 text-zinc-600 font-ui text-sm">
         <%= t("site_feedbacks.new.subheading") %>
       </p>
     </div>
 
     <%= form_with url: site_feedback_path, method: :post, local: true, class: "font-sans" do |form| %>
-      <%# Industrial Container %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+      <%# Card container %>
+      <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
 
         <%# Header Section %>
-        <div class="p-6 border-b-[3px] border-zinc-900 bg-gradient-to-r from-violet-500 to-violet-600 relative">
+        <div class="p-6 border-b border-zinc-900/10 bg-flame relative">
           <div class="flex items-center justify-between">
             <span class="inline-flex items-center px-3 py-1 border-[2px] border-white/30 text-xs font-bold uppercase tracking-widest bg-white/20 text-white">
               <span class="mr-2 w-2 h-2 rounded-full bg-white animate-pulse"></span>
               <%= t("site_feedbacks.new.app_feedback") %>
             </span>
-            <span class="font-mono text-[0.6rem] text-white/70 uppercase tracking-widest">
+            <span class="font-ui text-[0.6rem] text-white/70 uppercase tracking-widest">
               <%= t("shared.app_name") %>
             </span>
           </div>
@@ -36,40 +36,40 @@
 
         <%# Contact Info (only for unauthenticated users) %>
         <% unless authenticated? %>
-          <div class="p-6 border-b-[3px] border-zinc-900 bg-zinc-50 space-y-4">
+          <div class="p-6 border-b border-zinc-900/10 bg-zinc-50 space-y-4">
             <div>
-              <label class="block font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
+              <label class="block font-ui text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
                 <%= t("site_feedbacks.new.your_name") %>
               </label>
               <input type="text" name="name" placeholder="<%= t("site_feedbacks.new.name_placeholder") %>"
-                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500">
+                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-ui text-sm focus:outline-none focus:ring-2 focus:ring-flame focus:border-flame">
             </div>
             <div>
-              <label class="block font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
+              <label class="block font-ui text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
                 <%= t("site_feedbacks.new.your_email") %> <span class="text-red-500">*</span>
               </label>
               <input type="email" name="email" placeholder="<%= t("site_feedbacks.new.email_placeholder") %>" required
-                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500">
+                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-ui text-sm focus:outline-none focus:ring-2 focus:ring-flame focus:border-flame">
             </div>
           </div>
         <% end %>
 
         <%# Message Area %>
-        <div class="p-6 min-h-[200px] relative bg-[#F8F5EC]">
+        <div class="p-6 min-h-[200px] relative bg-[#ffffff]">
           <%# Background Grid %>
           <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
           <div class="relative z-10">
-            <label class="block font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
+            <label class="block font-ui text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
               <%= t("site_feedbacks.new.your_message") %> <span class="text-red-500">*</span>
             </label>
             <textarea name="message" rows="6" required placeholder="<%= t("site_feedbacks.new.message_placeholder") %>"
-              class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-sans text-base resize-none focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500"></textarea>
+              class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-sans text-base resize-none focus:outline-none focus:ring-2 focus:ring-flame focus:border-flame"></textarea>
           </div>
         </div>
 
         <%# Footer %>
-        <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
+        <div class="px-6 py-4 border-t border-zinc-900/10 bg-zinc-50 flex items-center justify-between text-xs font-ui uppercase text-zinc-500">
           <div class="flex items-center gap-2">
             <span class="font-bold text-zinc-900"><%= t("site_feedbacks.new.from") %></span>
             <span><%= Current.identity&.email_address || t("site_feedbacks.new.you") %></span>
@@ -84,7 +84,7 @@
       <%# Submit Button %>
       <div class="flex justify-center mt-8">
         <button type="submit"
-          class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-violet-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+          class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-flame text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all rounded-pill">
           <%= t("site_feedbacks.new.send_feedback") %>
           <%= icon_tag "arrow-right", class: "text-xl" %>
         </button>

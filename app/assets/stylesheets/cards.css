@@ -2,7 +2,7 @@
 
 /* CSS Variables needed for cards */
 :root {
-  --card-color: var(--color-ink-medium, #6b7280);
+  --card-color: var(--color-ink-medium, #7b8397);
   --text-xx-large: 1.5rem;
   --block-space: 1rem;
   --block-space-half: 0.5rem;
@@ -18,6 +18,7 @@
   --lines: 3;
 
   color: var(--card-content-color, var(--color-ink));
+  font-family: var(--font-display);
   font-size: var(--text-xx-large);
   font-weight: 900;
   line-height: 1.15;

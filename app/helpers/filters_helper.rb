@@ -37,22 +37,22 @@ module FiltersHelper
   end
 
   def filter_hotkey_link(title, path, key, icon)
-    # Industrial "Function Key" styling
+    #  "Function Key" styling
     # - Base: White with thick zinc border and hard shadow
     # - Hover/Active: Physically moves down-right to simulate a mechanical press
     # - Aria-Selected: Inverts to Black/White for high-contrast focus state
-    button_classes = "group relative flex flex-col items-center justify-center gap-1 sm:gap-2 p-3 sm:p-4 rounded-[2px] border-[2px] border-zinc-900 bg-white text-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] hover:shadow-[1px_1px_0px_0px_rgba(24,24,27,1)] hover:translate-x-[3px] hover:translate-y-[3px] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none aria-selected:bg-zinc-900 aria-selected:text-[#F8F5EC] aria-selected:shadow-none aria-selected:translate-x-[4px] aria-selected:translate-y-[4px] transition-all duration-75 outline-none"
+    button_classes = "group relative flex flex-col items-center justify-center gap-1 sm:gap-2 p-3 sm:p-4 rounded-[1.1rem] border-[2px] border-zinc-900 bg-white text-zinc-900 shadow-soft hover:shadow-soft active:shadow-none aria-selected:bg-zinc-900 aria-selected:text-[#ffffff] aria-selected:shadow-none transition-all duration-75 outline-none"
 
     link_to path, class: button_classes, id: "filter-hotkey-#{key}", role: "listitem", data: { filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.#{key}@document->hotkey#click keydown.shift+#{key}@document->hotkey#click" } do
       # KBD: Styled as a small technical label in the corner
       # Inverts colors when the parent is selected
-      concat tag.kbd(key, class: "hidden sm:flex items-center justify-center absolute top-1.5 right-1.5 w-5 h-5 text-[10px] font-mono font-bold text-zinc-500 group-hover:text-zinc-900 group-aria-selected:text-zinc-900 bg-zinc-100 group-aria-selected:bg-white border border-zinc-300 rounded-[1px] transition-colors")
+      concat tag.kbd(key, class: "hidden sm:flex items-center justify-center absolute top-1.5 right-1.5 w-5 h-5 text-[10px] font-mono font-bold text-zinc-500 group-hover:text-zinc-900 group-aria-selected:text-zinc-900 bg-zinc-100 group-aria-selected:bg-white border border-zinc-300 rounded-[.375rem] transition-colors")
 
       # Icon: Bold and sharp
-      concat icon_tag(icon, class: "text-zinc-900 group-aria-selected:text-[#F8F5EC] text-xl sm:text-2xl transition-colors")
+      concat icon_tag(icon, class: "text-zinc-900 group-aria-selected:text-[#ffffff] text-xl sm:text-2xl transition-colors")
 
       # Title: Uppercase and heavy
-      concat tag.span(title.html_safe, class: "text-[0.6rem] sm:text-xs font-black uppercase tracking-tight text-zinc-900 group-aria-selected:text-[#F8F5EC] text-center leading-none transition-colors")
+      concat tag.span(title.html_safe, class: "text-[0.6rem] sm:text-xs font-black uppercase tracking-tight text-zinc-900 group-aria-selected:text-[#ffffff] text-center leading-none transition-colors")
     end
   end
 end

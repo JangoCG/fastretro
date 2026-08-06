@@ -5,7 +5,7 @@
   <%= page_title_tag %>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="FastRetro">
+  <meta name="application-name" content="Faster Retro">
   <meta name="mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -16,6 +16,8 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icon.png">
 
+  <%= tag.link rel: "preload", href: asset_path("cabin-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
+  <%= tag.link rel: "preload", href: asset_path("inter-700-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
   <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 
@@ -23,12 +25,7 @@
   <%= analytics_tag %>
 </head>
 
-<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
-
-<%# === BACKGROUND TEXTURE (The Dot Grid) === %>
-<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
-</div>
+<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black">
 
 <main id="main" class="flex-1 relative z-10">
   <%= render "layouts/shared/flash" %>

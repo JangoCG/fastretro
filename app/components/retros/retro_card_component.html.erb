@@ -1,6 +1,6 @@
 <div
   id="<%= dom_id(@retro) %>"
-  class="group relative border-[2.5px] border-zinc-800 bg-[#F8F5EC] shadow-[5px_5px_0px_0px_rgba(39,39,42,1)] hover:shadow-[2px_2px_0px_0px_rgba(39,39,42,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 overflow-hidden rounded-sm"
+  class="group relative border-[2.5px] border-zinc-800 bg-[#ffffff] shadow-soft hover:shadow-soft transition-all duration-200 overflow-hidden rounded-[1.1rem]"
 >
   <%# Stretched link - covers entire card %>
   <%= link_to retro_path(@retro), class: "absolute inset-0 z-10", "aria-label": @retro.name do %><% end %>
@@ -20,13 +20,13 @@
         variant: :ghost,
         size: :sm,
         href: edit_retro_path(@retro),
-        class: "text-zinc-900 hover:bg-zinc-200 rounded-none p-1",
+        class: "text-zinc-900 hover:bg-zinc-200 rounded-[1.1rem] p-1",
         label: t("retros.retro_card.edit_retro")
       ) %>
 
       <%= button_to @retro,
             method: :delete,
-            class: "w-6 h-6 flex items-center justify-center text-zinc-900 hover:bg-red-500 hover:text-white transition-colors border border-transparent hover:border-black rounded-none",
+            class: "w-6 h-6 flex items-center justify-center text-zinc-900 hover:bg-red-500 hover:text-white transition-colors border border-transparent hover:border-black rounded-[1.1rem]",
             data: { turbo_confirm: t("retros.retro_card.delete_confirm", name: @retro.name) } do %>
         <%= icon_tag "close", class: "text-sm font-bold" %>
       <% end %>
@@ -36,8 +36,8 @@
   <%# Main Content Area %>
   <div class="px-4 py-6">
     <%# Title in Quotes %>
-    <h2 class="font-black text-2xl text-zinc-900 uppercase leading-[0.9] tracking-tight">
-      "<%= @retro.name %>"
+    <h2 class="font-display font-black text-2xl text-zinc-900 uppercase leading-[0.9] tracking-tight">
+      <%= @retro.name %>
     </h2>
   </div>
 
@@ -63,5 +63,4 @@
   </div>
 
   <%# Decorative Stripe Corner %>
-  <div class="absolute bottom-0 right-0 w-3 h-3 bg-[repeating-linear-gradient(-45deg,#000,#000_2px,transparent_2px,transparent_4px)] opacity-20 pointer-events-none"></div>
 </div>

@@ -1,6 +1,6 @@
 <%= link_to new_retro_feedback_path(@retro, category: @category, script_name: @retro.account.slug),
       id: "add-feedback-button-#{@category}",
-      class: "group inline-flex items-center gap-2 px-4 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-[#F8F5EC] border-2 border-transparent hover:border-zinc-900 transition-all shadow-sm rounded-sm",
+      class: "group inline-flex items-center gap-2 px-4 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-[#ffffff] border-2 border-transparent hover:border-zinc-900 transition-all shadow-sm rounded-[1.1rem]",
       data: hotkey_data do %>
   
   <%# Icon: slightly larger and bolder %>
@@ -11,7 +11,7 @@
   
   <%# Hotkey: Styled like a technical spec [W] %>
   <% if hotkey %>
-    <span class="hidden sm:inline-flex ml-1 items-center justify-center text-[0.6rem] font-mono text-zinc-400 border border-zinc-600 px-1 rounded-[1px]">
+    <span class="hidden sm:inline-flex ml-1 items-center justify-center text-[0.6rem] font-ui text-zinc-400 border border-zinc-600 px-1 rounded-[.375rem]">
       <%= hotkey %>
     </span>
   <% end %>

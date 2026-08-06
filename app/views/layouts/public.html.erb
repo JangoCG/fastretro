@@ -4,11 +4,11 @@
     <% unless @disable_view_transition %><meta name="view-transition" content="same-origin"><% end %>
     <%# === PRIMARY META TAGS === %>
     <meta charset="UTF-8">
-    <title><%= content_for(:title) || "Fast Retro — Run Better Retrospectives" %></title>
-    <meta name="title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro — Run Better Retrospectives" %>">
-    <meta name="description" content="<%= content_for(:meta_description) || "Fast Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
+    <title><%= content_for(:title) || "Faster Retro — Run Better Retrospectives" %></title>
+    <meta name="title" content="<%= content_for(:meta_title) || content_for(:title) || "Faster Retro — Run Better Retrospectives" %>">
+    <meta name="description" content="<%= content_for(:meta_description) || "Faster Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
     <meta name="keywords" content="<%= content_for(:meta_keywords) || "retrospective, retro, agile, scrum, sprint retrospective, team retrospective, remote retrospective, online retrospective, retrospective tool, agile retrospective, scrum master, sprint review" %>">
-    <meta name="author" content="Fast Retro">
+    <meta name="author" content="Faster Retro">
     <meta name="robots" content="<%= content_for(:robots) || "index, follow" %>">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
@@ -17,11 +17,11 @@
     <%# === MOBILE & APP META === %>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Fast Retro">
-    <meta name="application-name" content="Fast Retro">
+    <meta name="apple-mobile-web-app-title" content="Faster Retro">
+    <meta name="application-name" content="Faster Retro">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#18181b">
-    <meta name="msapplication-TileColor" content="#18181b">
+    <meta name="theme-color" content="#011232">
+    <meta name="msapplication-TileColor" content="#011232">
 
     <%# === CANONICAL URL === %>
     <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
@@ -29,19 +29,19 @@
     <%# === OPEN GRAPH / FACEBOOK === %>
     <meta property="og:type" content="<%= content_for(:og_type) || "website" %>">
     <meta property="og:url" content="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
-    <meta property="og:title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro — Run Better Retrospectives" %>">
-    <meta property="og:description" content="<%= content_for(:meta_description) || "Fast Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
+    <meta property="og:title" content="<%= content_for(:meta_title) || content_for(:title) || "Faster Retro — Run Better Retrospectives" %>">
+    <meta property="og:description" content="<%= content_for(:meta_description) || "Faster Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
     <meta property="og:image" content="<%= content_for(:og_image) || image_url("retro-image-no-padding.png") %>">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Fast Retro">
+    <meta property="og:site_name" content="Faster Retro">
     <meta property="og:locale" content="en_US">
 
     <%# === TWITTER CARD === %>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
-    <meta name="twitter:title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro — Run Better Retrospectives" %>">
-    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Fast Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
+    <meta name="twitter:title" content="<%= content_for(:meta_title) || content_for(:title) || "Faster Retro — Run Better Retrospectives" %>">
+    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Faster Retro is an open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss. Real-time collaboration, no per-user fees." %>">
     <meta name="twitter:image" content="<%= content_for(:og_image) || image_url("retro-image-no-padding.png") %>">
     <meta name="twitter:creator" content="@fastretro">
 
@@ -49,7 +49,7 @@
     <%= structured_data_tag(
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "Fast Retro",
+          name: "Faster Retro",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           description: "Open source retrospective tool for agile teams. Brainstorm, group, vote, and discuss in real-time.",
@@ -69,7 +69,7 @@
           },
           author: {
             "@type": "Organization",
-            name: "Fast Retro",
+            name: "Faster Retro",
             url: "https://fastretro.app"
           }
         ) %>
@@ -86,6 +86,8 @@
     <link rel="manifest" href="/manifest.json">
 
     <%# === STYLESHEETS & SCRIPTS === %>
+    <%= tag.link rel: "preload", href: asset_path("cabin-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
+    <%= tag.link rel: "preload", href: asset_path("inter-700-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <% unless content_for?(:skip_javascript) %>
       <%= javascript_importmap_tags %>

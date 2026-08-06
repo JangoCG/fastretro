@@ -2,22 +2,22 @@
 @import url("lexxy-content.css") layer(base);
 @import url("lexxy-editor.css") layer(base);
 
-/* Fast Retro's industrial theme mapped onto Lexxy's public variables. */
+/* Faster Retro's brand theme mapped onto Lexxy's public variables. */
 :root {
-  --color-canvas: #f8f5ec;
-  --color-ink: #18181b;
-  --color-ink-darkest: #000000;
-  --color-ink-darker: #27272a;
-  --color-ink-dark: #3f3f46;
-  --color-ink-medium: #71717a;
-  --color-ink-light: #a1a1aa;
-  --color-ink-lighter: #e4e4e7;
-  --color-ink-lightest: #f4f4f5;
+  --color-canvas: #ffffff;
+  --color-ink: var(--color-navy);
+  --color-ink-darkest: #000717;
+  --color-ink-darker: #011232;
+  --color-ink-dark: var(--color-slate);
+  --color-ink-medium: var(--color-mute);
+  --color-ink-light: #aeb5c4;
+  --color-ink-lighter: var(--color-tint-mist);
+  --color-ink-lightest: #f4f7fb;
   --color-ink-inverted: #ffffff;
-  --color-selected: #fef08a;
-  --color-selected-light: #fef9c3;
-  --color-selected-dark: #fde047;
-  --color-link: #18181b;
+  --color-selected: var(--color-tint-butter);
+  --color-selected-light: #fff9ea;
+  --color-selected-dark: var(--color-flame);
+  --color-link: var(--color-flame);
   --shadow: none;
 
   --lexxy-color-ink: var(--color-ink);
@@ -63,7 +63,7 @@ lexxy-toolbar {
   color: currentColor;
 }
 
-/* Fast Retro exposes image uploads, but not arbitrary files or text highlighting. */
+/* Faster Retro exposes image uploads, but not arbitrary files or text highlighting. */
 lexxy-toolbar button[name="file"],
 lexxy-toolbar lexxy-highlight-dropdown {
   display: none;

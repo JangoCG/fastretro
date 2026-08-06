@@ -5,11 +5,11 @@
 </div>
 
 <div class="max-w-xl mx-auto px-4 py-8 font-sans">
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative" style="view-transition-name: <%= dom_id(@join_code) %>">
-    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden" style="view-transition-name: <%= dom_id(@join_code) %>">
+    <div class="p-6 border-b border-zinc-900/10 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
-        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
           Edit Usage Limit
         </h1>
       </div>
@@ -24,7 +24,7 @@
 
         <%= form_with model: @join_code, url: account_join_code_path, method: :patch, html: { class: "space-y-6 w-full" } do |form| %>
           <div>
-            <label for="account_join_code_usage_limit" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">
+            <label for="account_join_code_usage_limit" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui mb-2">
               Maximum Uses
             </label>
             <div class="flex justify-center">
@@ -32,7 +32,7 @@
                     required: true,
                     autofocus: true,
                     in: 0..Account::JoinCode::USAGE_LIMIT_MAX,
-                    class: "w-full max-w-[12ch] px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-black text-center rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" %>
+                    class: "w-full max-w-[12ch] px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-display font-black text-center rounded-[.875rem] focus:outline-none focus:bg-tint-butter transition-colors" %>
             </div>
           </div>
 
@@ -49,7 +49,7 @@
           </div>
 
           <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-center">
-            <%= form.button type: :submit, class: "w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" do %>
+            <%= form.button type: :submit, class: "w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all rounded-pill" do %>
               Save Changes
             <% end %>
 
@@ -59,6 +59,6 @@
       </div>
     </div>
 
-    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+    <div class="h-2 border-t border-zinc-900/10 bg-zinc-900 w-full"></div>
   </div>
 </div>

@@ -48,13 +48,13 @@ export default class extends Controller {
 
     if (this.completedValue) {
       // Mark as completed
-      card.classList.remove("bg-violet-50")
+      card.classList.remove("bg-tint-peach")
       card.classList.add("bg-emerald-50", "opacity-75")
       checkbox.classList.remove("bg-white")
       checkbox.classList.add("bg-emerald-500")
       checkbox.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>'
       content.classList.add("line-through", "opacity-60")
-      indicator?.classList.remove("bg-violet-400")
+      indicator?.classList.remove("bg-flame")
       indicator?.classList.add("bg-emerald-400")
 
       // Add DONE badge if it doesn't exist
@@ -67,13 +67,13 @@ export default class extends Controller {
     } else {
       // Mark as incomplete
       card.classList.remove("bg-emerald-50", "opacity-75")
-      card.classList.add("bg-violet-50")
+      card.classList.add("bg-tint-peach")
       checkbox.classList.remove("bg-emerald-500")
       checkbox.classList.add("bg-white")
       checkbox.innerHTML = ""
       content.classList.remove("line-through", "opacity-60")
       indicator?.classList.remove("bg-emerald-400")
-      indicator?.classList.add("bg-violet-400")
+      indicator?.classList.add("bg-flame")
 
       // Remove DONE badge if it exists
       const badge = footer.querySelector(".text-emerald-700")

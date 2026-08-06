@@ -1,13 +1,13 @@
 <div id="integrations">
   <div class="flex flex-col gap-3">
-    <%= link_to account_jira_integration_path, class: "flex items-center justify-between p-4 bg-white border-[2px] border-zinc-900 hover:bg-yellow-50 transition-colors group shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+    <%= link_to account_jira_integration_path, class: "flex items-center justify-between p-4 bg-white border-[2px] border-zinc-900 hover:bg-yellow-50 transition-colors group shadow-soft hover:shadow-none rounded-[1.1rem]" do %>
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 bg-blue-100 border-[2px] border-zinc-900 flex items-center justify-center">
           <span class="font-black text-blue-600 text-sm">J</span>
         </div>
         <div>
           <div class="font-bold text-zinc-900 text-sm"><%= t("account.settings.integrations.jira") %></div>
-          <div class="text-[0.6rem] font-mono text-zinc-500 uppercase">
+          <div class="text-[0.6rem] font-ui text-zinc-500 uppercase">
             <%= Current.account.jira_integration&.persisted? ? t("account.settings.integrations.connected") : t("account.settings.integrations.not_configured") %>
           </div>
         </div>

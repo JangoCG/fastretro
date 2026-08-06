@@ -3,7 +3,7 @@ module ApplicationHelper
     account_name = if Current.account && Current.session&.identity&.users&.many?
       Current.account&.name
     end
-    tag.title [ @page_title, account_name, "FastRetro" ].compact.join(" | ")
+    tag.title [ @page_title, account_name, "Faster Retro" ].compact.join(" | ")
   end
 
   def analytics_tag

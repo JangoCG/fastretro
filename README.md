@@ -1,32 +1,54 @@
-# Fast Retro
+# Faster Retro
 
-This is the source code of [Fast Retro](https://fastretro.app/), a tool which helps remote teams to carry out their [retrospectives](https://www.scrum.org/resources/what-is-a-sprint-retrospective) fast.
+> **This is an unofficial fork.** Faster Retro is a fork of
+> [JangoCG/fastretro](https://github.com/JangoCG/fastretro), the source of
+> [Fast Retro](https://fastretro.app/). It is not affiliated with or endorsed by
+> the original project or its maintainers. For the original, go upstream.
 
+Faster Retro is a retrospective tool for remote teams — a way to run a
+[sprint retrospective](https://www.scrum.org/resources/what-is-a-sprint-retrospective)
+without the session sprawling across an afternoon.
 
-## Running your own Fast Retro instance
+## How this fork differs
 
-If you want to run your own Fast Retro instance, you can use Docker or deploy with Kamal.
+- **Visual design.** A new design language: navy ink, a single hot-orange accent,
+  pastel section tints, generous corner radii, and a Cabin/Inter type pairing.
+- **Name.** The product is called Faster Retro. Internal module names, container
+  image references, and file paths still read `fastretro` — renaming them would
+  break deploys and buy nothing.
+
+Everything else — the retrospective phases, real-time collaboration, multi-tenancy,
+authentication — comes from upstream and is documented there.
+
+## Running your own instance
 
 ### Docker
 
-We provide pre-built Docker images at `ghcr.io/jangocg/fastretro`. See the [Docker deployment guide](docs/docker-deployment.md) for detailed instructions.
+Upstream publishes pre-built images at `ghcr.io/jangocg/fastretro`. This fork does
+not publish its own images; build from source or point your own registry at this
+repository. See the [Docker deployment guide](docs/docker-deployment.md).
 
 ### Kamal
 
-For more flexibility to customize your Fast Retro installation and deploy changes to your server, we recommend deploying with [Kamal](https://kamal-deploy.org/). See the [Kamal deployment guide](docs/kamal-deployment.md) for step-by-step instructions.
-
+For more control over deployment, use [Kamal](https://kamal-deploy.org/). See the
+[Kamal deployment guide](docs/kamal-deployment.md).
 
 ## Development
 
-Please see our [Development guide](docs/development.md) for how to get Fast Retro set up for local development.
-
+See the [Development guide](docs/development.md).
 
 ## Contributing
 
-We welcome contributions!
+Contributions to this fork are welcome. Note that changes of general interest are
+often better sent upstream to
+[JangoCG/fastretro](https://github.com/JangoCG/fastretro) so the whole community
+benefits.
 
+## Credits
+
+Fast Retro was created by [JangoCG](https://github.com/JangoCG) and its
+contributors. This fork stands entirely on that work.
 
 ## License
 
-Fast Retro is released under the [O'Saasy License](LICENSE.md).
-
+Released under the [O'Saasy License](LICENSE.md), unchanged from upstream.

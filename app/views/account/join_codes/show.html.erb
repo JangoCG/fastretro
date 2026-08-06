@@ -5,11 +5,11 @@
 </div>
 
 <div class="max-w-xl mx-auto px-4 py-4 font-sans">
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative" style="view-transition-name: <%= dom_id(@join_code) %>">
-    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden" style="view-transition-name: <%= dom_id(@join_code) %>">
+    <div class="p-6 border-b border-zinc-900/10 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
-        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
           <%= t("join_codes.show.heading") %>
         </h1>
       </div>
@@ -25,13 +25,13 @@
         <% url = join_url(code: @join_code.code) %>
         <% remaining_uses = [@join_code.usage_limit - @join_code.usage_count, 0].max %>
         <div>
-          <label for="join_code_link" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">
+          <label for="join_code_link" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui mb-2">
             <%= t("join_codes.show.invite_link") %>
           </label>
           <div class="flex items-center gap-2">
-            <input id="join_code_link" type="text" class="flex-1 px-4 py-3 text-sm font-mono text-zinc-900 bg-white border-[2px] border-zinc-900 rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" value="<%= url %>" readonly>
+            <input id="join_code_link" type="text" class="flex-1 px-4 py-3 text-sm font-ui text-zinc-900 bg-white border-[2px] border-zinc-900 rounded-[.875rem] focus:outline-none focus:bg-tint-butter transition-colors" value="<%= url %>" readonly>
             <button type="button"
-                    class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none"
+                    class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-soft hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none rounded-[1.1rem]"
                     data-controller="clipboard"
                     data-clipboard-text-value="<%= url %>"
                     data-action="clipboard#copy">
@@ -44,7 +44,7 @@
 
         <div class="border-t-[2px] border-zinc-200 pt-6 space-y-2">
           <div class="flex items-center justify-between gap-3">
-            <p class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono"><%= t("join_codes.show.link_usage") %></p>
+            <p class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui"><%= t("join_codes.show.link_usage") %></p>
             <% if Current.user&.admin? %>
               <%= link_to t("join_codes.show.edit_limit"), edit_account_join_code_path, class: "inline-flex items-center justify-center px-3 py-2 bg-white text-zinc-900 border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-[0.65rem] hover:bg-zinc-100 transition-colors" %>
             <% end %>
@@ -68,6 +68,6 @@
       </div>
     </div>
 
-    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+    <div class="h-2 border-t border-zinc-900/10 bg-zinc-900 w-full"></div>
   </div>
 </div>

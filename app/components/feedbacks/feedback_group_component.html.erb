@@ -14,14 +14,14 @@
   <div class="relative">
     <%# Background stacked cards effect %>
     <% if other_feedbacks.any? %>
-      <div class="absolute -bottom-1 left-1 right-1 h-full bg-zinc-200 border-[2px] border-zinc-900 rounded-sm"></div>
+      <div class="absolute -bottom-1 left-1 right-1 h-full bg-zinc-200 border-[2px] border-zinc-900 rounded-[1.1rem]"></div>
       <% if other_feedbacks.size > 1 %>
-        <div class="absolute -bottom-2 left-2 right-2 h-full bg-zinc-300 border-[2px] border-zinc-900 rounded-sm"></div>
+        <div class="absolute -bottom-2 left-2 right-2 h-full bg-zinc-300 border-[2px] border-zinc-900 rounded-[1.1rem]"></div>
       <% end %>
     <% end %>
 
     <%# Primary card %>
-    <div class="relative bg-white border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] overflow-hidden">
+    <div class="relative bg-white border-[2px] border-zinc-900 shadow-soft overflow-hidden rounded-[1.1rem]">
       <%# Group badge %>
       <div class="absolute top-2 right-2 z-10 flex items-center gap-1 <%= discussed? ? 'bg-emerald-300' : 'bg-yellow-400' %> px-2 py-0.5 border border-zinc-900">
         <span class="text-[0.6rem] font-black text-zinc-900 uppercase tracking-wider">
@@ -33,7 +33,7 @@
       <div class="p-4">
         <%# Technical Header %>
         <div class="flex justify-between items-center border-b-[2px] border-zinc-100 pb-2 mb-3">
-          <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono">
+          <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-ui">
             GROUP_<%= @group.id %>
           </span>
           <% if discussion_enabled? && discussed? %>
@@ -97,7 +97,7 @@
       <% elsif show_vote_count? || can_mark_discussed? %>
         <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end gap-2">
           <% if show_vote_count? %>
-            <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
+            <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-tint-peach border-2 border-flame text-zinc-900 font-black text-sm">
               <%= @group.votes.size %>
             </div>
           <% end %>

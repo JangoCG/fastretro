@@ -1,10 +1,10 @@
 <% content_for :title, t("my.passkeys.index.title") %>
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans">
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
 
     <%# Header %>
-    <div class="p-4 border-b-[3px] border-zinc-900 flex items-center justify-between">
+    <div class="p-4 border-b border-zinc-900/10 flex items-center justify-between">
       <%= link_to user_path(Current.user), class: "text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-zinc-900 transition-colors" do %>
         &larr; <%= t("users.show.heading") %>
       <% end %>
@@ -30,7 +30,7 @@
                 error: { class: "text-red-600 text-xs font-bold uppercase mt-2" },
                 cancellation: { class: "text-zinc-400 text-xs font-bold uppercase mt-2" },
                 duplicate: { class: "text-red-600 text-xs font-bold uppercase mt-2" },
-                class: "group relative flex items-center justify-center gap-2 w-full px-4 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all cursor-pointer" do %>
+                class: "group relative flex items-center justify-center gap-2 w-full px-4 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all cursor-pointer rounded-pill" do %>
             <span>+</span> <span><%= t("my.passkeys.index.register") %></span>
           <% end %>
 
