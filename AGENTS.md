@@ -9,7 +9,7 @@ This file provides guidance to AI coding agents working with this repository.
 
 ## What is Faster Retro?
 
-Faster Retro is a retrospective management tool for agile teams built with Ruby on Rails 8.1. It helps teams run structured retrospective sessions with real-time collaboration, featuring phases for brainstorming, grouping, voting, and discussion.
+Faster Retro is a retrospective management tool for agile teams built with Ruby on Rails 8.1. It helps teams run structured retrospective sessions with real-time collaboration, featuring phases for brainstorming, grouping, and discussion.
 
 ## Development Commands
 
@@ -93,7 +93,7 @@ Faster Retro uses **URL path-based multi-tenancy**:
 - Has role (owner/admin/member)
 
 **Retro** → A retrospective session
-- Has phases: waiting_room → action_review → brainstorming → grouping → voting → discussion → complete
+- Has phases: waiting_room → action_review → brainstorming → grouping → discussion → complete
 - Has participants with roles (admin/participant)
 - Retro admins can promote/demote other participants (`PATCH /{account_id}/retros/:retro_id/participants/:participant_id/role` with `participant[role]` set to `admin` or `participant`); the last admin cannot be demoted
 - Real-time updates via Turbo Streams
@@ -101,19 +101,15 @@ Faster Retro uses **URL path-based multi-tenancy**:
 **Feedback** → Items created during brainstorming
 - Categories: went_well, could_be_better
 - Can be grouped into FeedbackGroups
-- Can receive votes
+- Can be marked discussed during the discussion phase
 
 **FeedbackGroup** → Groups related feedbacks
 - Created during grouping phase
-- Aggregates votes from contained feedbacks
+- Discussed as a single unit during the discussion phase
 
 **Action** → Action items from discussions
 - Created during discussion phase
 - Tracks follow-up tasks
-
-**Vote** → Voting on feedbacks/groups
-- Used during voting phase
-- Configurable vote limit per participant
 
 ### Background Jobs (Solid Queue)
 
