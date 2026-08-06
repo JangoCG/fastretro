@@ -1,30 +1,19 @@
-<%# Invite Card: Industrial Shipping Crate Aesthetic %>
+<%# Invite card %>
 <div class="flex flex-col relative group">
-  <%# Structural outline with "flange" effect %>
-  <div class="absolute -left-1 -top-1 -right-1 -bottom-1 border-[1px] border-zinc-400 rounded-[1.1rem]"></div>
-
   <div class="relative flex flex-col bg-[#f4f7fb] border border-zinc-900/10 shadow-lift overflow-hidden rounded-card">
 
-    <%# Hazard Strip Header %>
-
-    <%# Technical Header %>
     <div class="px-5 py-4 border-b border-zinc-900/10 bg-white relative overflow-hidden">
-      <%# Background Grid for Header %>
-
       <div class="relative z-10">
         <h2 class="font-black text-lg uppercase text-zinc-900 leading-[0.85] filter drop-shadow-sm">
           <span class="relative px-1 inline-block">
              <span class="absolute inset-0 bg-emerald-300 -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
-             "<%= t("components.retro_invite_card.heading") %>"
+             <%= t("components.retro_invite_card.heading") %>
           </span>
         </h2>
       </div>
     </div>
 
-    <%# Content Area %>
     <div class="p-4 bg-[#ffffff] relative">
-      <%# Background Grid %>
-
       <div class="relative z-10">
         <p class="text-xs text-zinc-600 mb-3 uppercase tracking-wide font-bold">
           <%= t("components.retro_invite_card.description") %>

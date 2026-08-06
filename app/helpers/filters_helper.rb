@@ -37,7 +37,7 @@ module FiltersHelper
   end
 
   def filter_hotkey_link(title, path, key, icon)
-    # Industrial "Function Key" styling
+    #  "Function Key" styling
     # - Base: White with thick zinc border and hard shadow
     # - Hover/Active: Physically moves down-right to simulate a mechanical press
     # - Aria-Selected: Inverts to Black/White for high-contrast focus state

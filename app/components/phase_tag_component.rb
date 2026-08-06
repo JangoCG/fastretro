@@ -52,7 +52,7 @@ class PhaseTagComponent < ApplicationComponent
       bg_color: "bg-zinc-50",
       border_color: "border-zinc-400",
       stripe_hex: "#011232",
-      accent_color: "text-zinc-700"
+      accent_color: "text-stone-700"
     }
   }.freeze
 

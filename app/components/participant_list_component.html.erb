@@ -1,22 +1,12 @@
-<%# Outer Container: Industrial Shipping Crate Aesthetic for Roster %>
+<%# Participant roster %>
 <div class="h-full flex flex-col relative group">
-  <%# Structural outline with "flange" effect %>
-  <div class="absolute -left-1 -top-1 -right-1 -bottom-1 border-[1px] border-zinc-400 rounded-[1.1rem]"></div>
-
   <div class="relative flex flex-col h-full bg-[#f4f7fb] border border-zinc-900/10 shadow-lift overflow-hidden rounded-card">
-    
-    <%# Hazard Strip Header %>
-
-    <%# Technical Header %>
     <div class="px-5 py-5 border-b border-zinc-900/10 bg-white relative overflow-hidden">
-      <%# Background Grid for Header %>
-
       <div class="relative z-10">
-        <%# Main Title %>
         <h2 class="font-black text-xl uppercase text-zinc-900 leading-[0.85] filter drop-shadow-sm transform -ml-0.5">
           <span class="relative px-1 inline-block">
              <span class="absolute inset-0 bg-[#fff2d2] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
-             "<%= t("components.participant_list.heading") %>"
+             <%= t("components.participant_list.heading") %>
           </span>
         </h2>
       </div>
@@ -24,8 +14,6 @@
 
     <%# List Area %>
     <div class="flex-1 overflow-y-auto p-0 scrollbar-thin scrollbar-thumb-zinc-400 scrollbar-track-transparent bg-[#ffffff] relative">
-      <%# Background Grid %>
-
       <ul class="divide-y divide-zinc-300 border-t border-zinc-300 relative z-10">
         <% participants.each_with_index do |participant, index| %>
           <li class="group flex items-center gap-3 px-4 py-3 hover:bg-zinc-200/50 transition-all relative aria-selected:bg-yellow-100 <%= highlight_enabled? ? 'cursor-pointer' : 'cursor-default' %>"

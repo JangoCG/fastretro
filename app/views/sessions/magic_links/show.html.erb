@@ -2,7 +2,7 @@
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:alert] || flash[:shake] %>">
   
-  <%# Industrial Container %>
+  <%# Card container %>
   <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
     
     <%# Header Section %>
@@ -32,7 +32,7 @@
             </div>
             <%= form.text_field :code,
                 required: true,
-                class: "w-full pl-10 pr-4 py-4 font-ui text-3xl font-display font-black tracking-[0.5em] text-center border-[3px] border-zinc-900 rounded-[.875rem] bg-white text-zinc-900 focus:outline-none focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-200",
+                class: "w-full pl-10 pr-4 py-4 font-ui text-3xl font-display font-black tracking-[0.5em] text-center border border-zinc-900/10 rounded-[.875rem] bg-white text-zinc-900 focus:outline-none focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-200",
                 autofocus: true,
                 autocorrect: "off",
                 autocapitalize: "off",
@@ -58,7 +58,7 @@
   </div>
 
   <% if flash[:magic_link_code].present? %>
-    <div class="flex items-center justify-center gap-4 bg-zinc-900 border-[3px] border-zinc-900 shadow-soft p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden rounded-[1.1rem]">
+    <div class="flex items-center justify-center gap-4 bg-zinc-900 border border-zinc-900/10 shadow-soft p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden rounded-[1.1rem]">
       <span class="absolute top-0 bottom-0 left-0 bg-yellow-400 px-2 flex items-center justify-center text-[0.55rem] uppercase font-black text-center rotate-180 [writing-mode:vertical-rl] text-zinc-900"><%= t("sessions.magic_links.dev_label") %></span>
       <span class="text-xs font-ui font-bold text-white uppercase ml-6"><%= t("sessions.magic_links.dev_code_hint") %></span>
       <code class="text-2xl font-display font-black font-ui text-yellow-400 tracking-widest"><%= flash[:magic_link_code] %></code>

@@ -16,7 +16,7 @@
     </div>
   <% end %>
 
-  <%# Industrial Connector %>
+  <%# Connector %>
   <div class="w-6 sm:w-10 lg:w-16 xl:w-24 shrink-0 border-t-[2px] border-dashed border-zinc-300 mx-2 sm:mx-3"></div>
 
   <div class="flex items-center gap-3 shrink-0">
@@ -52,7 +52,7 @@
       href: user_path(user),
       label: t("account.settings.users.remove_user", name: user.name),
       disabled: !can_remove,
-      # Industrial Square Button
+      #  Square Button
       class: "w-10 h-10 rounded-[1.1rem] border-[2px] flex items-center justify-center transition-all" + (can_remove ? "border-transparent text-red-600 hover:bg-red-50 hover:border-red-600" : "opacity-40 cursor-not-allowed border-transparent text-zinc-400"),
       data: { turbo_method: :delete, turbo_confirm: can_remove ? t("account.settings.users.remove_confirm", name: user.name) : nil }
     ) %>

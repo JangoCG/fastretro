@@ -10,27 +10,23 @@
     <span class="block w-5 h-0.5 bg-zinc-900"></span>
   <% end %>
 
-  <%# === DESKTOP TRIGGER BUTTON (Tactile Switch Style - Industrial Redesign) === %>
-  <%= tag.button class:"hidden sm:inline-flex group relative items-center gap-3 px-8 py-5 mt-4 bg-[#ffffff] border-[2px] border-stone-300 shadow-soft hover:shadow-soft active:shadow-none transition-all duration-75 cursor-pointer outline-none focus:ring-4 focus:ring-zinc-900/10 overflow-hidden min-w-[280px] rounded-[1.1rem]",
+  <%# === DESKTOP TRIGGER BUTTON (Tactile Switch Style - Redesign) === %>
+  <%= tag.button class:"hidden sm:inline-flex group relative items-center gap-3 px-8 py-5 mt-4 bg-[#ffffff] border-[2px] border-zinc-200 shadow-soft hover:shadow-soft active:shadow-none transition-all duration-75 cursor-pointer outline-none focus:ring-4 focus:ring-zinc-900/10 overflow-hidden min-w-[280px] rounded-[1.1rem]",
                  data: {
                    action: "click->dialog#open keydown.j@document->hotkey#click keydown.meta+j@document->hotkey#click keydown.ctrl+j@document->hotkey#click",
                    controller: "hotkey"
                  } do %>
 
-    <%# Decorative Hazard Strip %>
-
-
-    <%# Main Label %>
-    <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
+    <div class="flex flex-col items-start py-1 w-full relative z-10">
        <div class="flex items-center gap-2">
          <span class="font-display font-black text-xl sm:text-2xl uppercase text-black leading-none select-none relative px-1">
            <span class="absolute inset-0 bg-[#fff2d2] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
-           "FASTER RETRO"
+           FASTER RETRO
          </span>
          <%# Caret (Re-styled) %>
          <%= icon_tag "caret-down", class: "w-4 h-4 text-zinc-900 stroke-[3px]" %>
        </div>
-       <span class="text-[0.5rem] sm:text-[0.6rem] font-bold text-stone-500 uppercase tracking-widest leading-none mt-1 pl-1">
+       <span class="text-[0.5rem] sm:text-[0.6rem] font-bold text-zinc-500 uppercase tracking-widest leading-none mt-1 pl-1">
          <%= t("shared.menu") %>
        </span>
     </div>
@@ -43,7 +39,7 @@
   <% end %>
 
   <%# === THE DIALOG === %>
-  <%= tag.dialog class: "fixed left-1/2 -translate-x-1/2 top-1 z-50 w-[96vw] sm:w-[520px] max-w-[520px] max-h-[calc(100vh-8px)] overflow-y-auto p-0 bg-[#ffffff] text-zinc-900 rounded-card shadow-lift border-[3px] border-zinc-900 outline-none backdrop:bg-zinc-900/20 backdrop:backdrop-blur-sm",
+  <%= tag.dialog class: "fixed left-1/2 -translate-x-1/2 top-1 z-50 w-[96vw] sm:w-[520px] max-w-[520px] max-h-[calc(100vh-8px)] overflow-y-auto p-0 bg-[#ffffff] text-zinc-900 rounded-card shadow-lift border border-zinc-900/10 outline-none backdrop:bg-zinc-900/20 backdrop:backdrop-blur-sm",
                  data: {
                    action: "turbo:before-cache@document->dialog#close turbo:frame-render->navigable-list#reset keydown->navigable-list#navigate filter:changed->navigable-list#reset filter:changed->nav-section-expander#showWhileFiltering toggle->filter#filter",
                    controller: "filter navigable-list nav-section-expander",
@@ -79,8 +75,5 @@
         <% end %>
       <% end %>
     </div>
-
-    <%# Footer Deco Strip %>
-
   <% end %>
 </nav>

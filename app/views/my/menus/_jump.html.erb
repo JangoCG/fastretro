@@ -9,7 +9,7 @@
       </strong>
     </div>
 
-  <%# Mobile Close Button (Industrial Square Style) %>
+  <%# Mobile Close Button ( Square Style) %>
   <button class="absolute right-4 top-5 w-8 h-8 flex sm:hidden! items-center justify-center border-[2px] border-zinc-900 text-zinc-900 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-150 rounded-[1.1rem]"
           data-action="dialog#close">
     <%= icon_tag "close", class: "w-5 h-5 font-bold" %>
@@ -43,8 +43,7 @@
 
     <%# Grid container %>
     <div class="grid grid-cols-3 gap-3 mb-6" role="list" data-filter-target="section">
-      <%# 
-         NOTE: Ensure 'filter_hotkey_link' renders a block with these classes for the full effect:
+      <%# NOTE: Ensure 'filter_hotkey_link' renders a block with these classes for the full effect:
          class="flex flex-col items-center justify-center p-3 border-[2px] border-zinc-900 bg-white shadow-soft hover:shadow-none transition-all active:bg-zinc-50 rounded-[1.1rem]"
       %>
       <%= filter_hotkey_link t("shared.retros"), root_path, 1, "home" %>

@@ -4,13 +4,11 @@
 </div>
 
 <div class="max-w-3xl mx-auto px-4 py-8 font-sans">
-  <%# Industrial Container: Clean, heavy border, no rounded corners %>
+  <%# Card container %>
   <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
 
     <%# Header Section %>
     <div class="p-6 border-b border-zinc-900/10 bg-white relative">
-       <%# Background Grid %>
-
       <div class="relative z-10 flex items-center justify-between">
         <%# Category Badge (Technical Rectangular) %>
         <%
@@ -35,8 +33,6 @@
 
     <%# Content Area %>
     <div class="p-6 min-h-[200px] relative bg-[#ffffff]">
-      <%# Background Grid %>
-
       <div class="relative z-10" data-controller="lexxy-autofocus">
         <%= form_with model: [@retro, @feedback], id: "feedback_form", data: { controller: "auto-save" } do |form| %>
           <%= form.rich_textarea :content, rich_text_editor_options(

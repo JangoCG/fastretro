@@ -12,7 +12,7 @@
 
     <%# Header %>
     <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b border-zinc-900/10">
-      <span class="font-black text-sm uppercase tracking-widest">"<%= t("components.confirm_back_phase_modal.confirm") %>"</span>
+      <span class="font-black text-sm uppercase tracking-widest"><%= t("components.confirm_back_phase_modal.confirm") %></span>
       <button type="button" data-action="click->dialog#close" class="text-white hover:text-zinc-300 transition-colors">
         <%= icon_tag "close", class: "text-xl" %>
       </button>
@@ -22,10 +22,10 @@
     <div class="p-6">
       <div class="text-center mb-6">
         <p class="font-black text-lg uppercase tracking-tight text-zinc-900 mb-2">
-          "<%= t("components.confirm_back_phase_modal.go_back_question") %>"
+          <%= t("components.confirm_back_phase_modal.go_back_question") %>
         </p>
         <p class="text-sm text-zinc-600">
-          <%= t("components.confirm_back_phase_modal.about_to_go_back") %> <span class="font-bold text-zinc-900">"<%= previous_phase_name %>"</span>
+          <%= t("components.confirm_back_phase_modal.about_to_go_back") %> <span class="font-bold text-zinc-900"><%= previous_phase_name %></span>
         </p>
       </div>
 

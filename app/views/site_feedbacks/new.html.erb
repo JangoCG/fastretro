@@ -18,11 +18,11 @@
     </div>
 
     <%= form_with url: site_feedback_path, method: :post, local: true, class: "font-sans" do |form| %>
-      <%# Industrial Container %>
-      <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
+      <%# Card container %>
+      <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
 
         <%# Header Section %>
-        <div class="p-6 border-b-[3px] border-zinc-900 bg-flame relative">
+        <div class="p-6 border-b border-zinc-900/10 bg-flame relative">
           <div class="flex items-center justify-between">
             <span class="inline-flex items-center px-3 py-1 border-[2px] border-white/30 text-xs font-bold uppercase tracking-widest bg-white/20 text-white">
               <span class="mr-2 w-2 h-2 rounded-full bg-white animate-pulse"></span>
@@ -36,7 +36,7 @@
 
         <%# Contact Info (only for unauthenticated users) %>
         <% unless authenticated? %>
-          <div class="p-6 border-b-[3px] border-zinc-900 bg-zinc-50 space-y-4">
+          <div class="p-6 border-b border-zinc-900/10 bg-zinc-50 space-y-4">
             <div>
               <label class="block font-ui text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
                 <%= t("site_feedbacks.new.your_name") %>
@@ -69,7 +69,7 @@
         </div>
 
         <%# Footer %>
-        <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-ui uppercase text-zinc-500">
+        <div class="px-6 py-4 border-t border-zinc-900/10 bg-zinc-50 flex items-center justify-between text-xs font-ui uppercase text-zinc-500">
           <div class="flex items-center gap-2">
             <span class="font-bold text-zinc-900"><%= t("site_feedbacks.new.from") %></span>
             <span><%= Current.identity&.email_address || t("site_feedbacks.new.you") %></span>

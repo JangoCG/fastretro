@@ -4,13 +4,11 @@
 </div>
 
 <div class="max-w-2xl mx-auto px-4 py-8 font-sans">
-  <%# Industrial Container %>
+  <%# Card container %>
   <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
     
     <%# Header Section %>
     <div class="p-6 border-b border-zinc-900/10 bg-white relative">
-       <%# Background Grid %>
-      
       <div class="relative z-10 flex items-center justify-between">
         <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
            <%= t("retros.edit.heading") %>
@@ -24,8 +22,6 @@
 
     <%# Content area %>
     <div class="p-6 relative">
-       <%# Background Grid %>
-       
        <div class="relative z-10">
         <%= render "form", retro: @retro %>
        </div>

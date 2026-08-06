@@ -3,8 +3,8 @@
   <% free_limit = @free_limit || Plan.free.retro_limit %>
   <% paid_price = @paid_price %>
   <% formatted_paid_price = paid_price.present? ? format_currency(paid_price) : nil %>
-  <section id="subscription" class="border-[3px] border-zinc-900 bg-[#f4f7fb] shadow-lift rounded-card overflow-hidden">
-    <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white text-center">
+  <section id="subscription" class="border border-zinc-900/10 bg-[#f4f7fb] shadow-lift rounded-card overflow-hidden">
+    <div class="px-6 py-4 border-b border-zinc-900/10 bg-white text-center">
       <h2 class="text-lg font-black text-zinc-900 uppercase tracking-wider"><%= t("account.settings.subscription.heading") %></h2>
     </div>
 
@@ -21,7 +21,7 @@
 
           <%= button_to t("account.settings.subscription.upgrade_button", price: formatted_paid_price), account_subscription_path,
               id: "stripe-checkout-button",
-              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#ff5d03] to-[#ff5d03] text-white hover:from-[#ff5d03] hover:to-[#ff5d03] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-soft hover:shadow-soft rounded-[1.1rem]",
+              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#ff5d03] to-[#ff5d03] text-white hover:from-[#ff5d03] hover:to-[#ff5d03] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border border-zinc-900/10 shadow-soft hover:shadow-soft rounded-[1.1rem]",
               form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% else %>
           <p class="text-red-700 text-base md:text-xl leading-snug font-bold">
@@ -30,7 +30,7 @@
 
           <%= button_to t("account.settings.subscription.open_checkout"), account_subscription_path,
               id: "stripe-checkout-button",
-              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#ff5d03] to-[#ff5d03] text-white hover:from-[#ff5d03] hover:to-[#ff5d03] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-soft hover:shadow-soft rounded-[1.1rem]",
+              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#ff5d03] to-[#ff5d03] text-white hover:from-[#ff5d03] hover:to-[#ff5d03] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border border-zinc-900/10 shadow-soft hover:shadow-soft rounded-[1.1rem]",
               form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% end %>
 
@@ -56,7 +56,7 @@
         <% end %>
 
         <%= link_to t("account.settings.subscription.manage_billing"), account_billing_portal_path,
-            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-soft hover:shadow-soft rounded-[1.1rem]",
+            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border border-zinc-900/10 shadow-soft hover:shadow-soft rounded-[1.1rem]",
             data: { turbo: false } %>
       <% end %>
     </div>

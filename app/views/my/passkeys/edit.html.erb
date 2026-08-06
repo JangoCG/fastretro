@@ -1,10 +1,10 @@
 <% content_for :title, t("my.passkeys.edit.title") %>
 
 <div class="max-w-md mx-auto px-4 py-8 font-sans">
-  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
 
     <%# Header %>
-    <div class="p-4 border-b-[3px] border-zinc-900 flex items-center justify-between">
+    <div class="p-4 border-b border-zinc-900/10 flex items-center justify-between">
       <%= link_to my_passkeys_path, class: "text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-zinc-900 transition-colors" do %>
         &larr; <%= t("my.passkeys.edit.back") %>
       <% end %>

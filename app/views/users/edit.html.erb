@@ -5,11 +5,11 @@
 
 <div class="max-w-xl mx-auto px-4 pb-8 font-sans">
   
-  <%# Industrial Container %>
-  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
+  <%# Card container %>
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
     
     <%# Header Section %>
-    <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+    <div class="p-6 border-b border-zinc-900/10 bg-white relative">
        <%# Background Grid %>
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       
@@ -27,7 +27,7 @@
 
       <%= form_with model: @user, method: :patch, class: "flex flex-col gap-6 relative z-10", data: { controller: "form" } do |form| %>
         
-        <%# Industrial Field %>
+        <%# Form field %>
         <div>
           <label for="user_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-ui">
             <%= t("users.edit.name_label") %>
@@ -41,7 +41,7 @@
               data: { "1p-ignore": true } %>
         </div>
 
-        <%# Industrial Field %>
+        <%# Form field %>
         <div>
           <label for="user_email_address" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-ui">
             <%= t("users.edit.email_label") %>
