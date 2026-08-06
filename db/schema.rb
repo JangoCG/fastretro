@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_30_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_180000) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -203,7 +203,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_30_090000) do
     t.string "phase", default: "waiting_room", null: false
     t.datetime "retention_reminder_sent_at"
     t.datetime "updated_at", null: false
-    t.integer "votes_per_participant", default: 3, null: false
     t.index ["account_id"], name: "index_retros_on_account_id"
   end
 
@@ -231,16 +230,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_30_090000) do
     t.index ["identity_id"], name: "index_users_on_identity_id"
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "retro_participant_id", null: false
-    t.datetime "updated_at", null: false
-    t.integer "voteable_id", null: false
-    t.string "voteable_type", null: false
-    t.index ["retro_participant_id"], name: "index_votes_on_retro_participant_id"
-    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable"
-  end
-
   add_foreign_key "account_billing_waivers", "accounts"
   add_foreign_key "account_jira_integrations", "accounts"
   add_foreign_key "account_join_codes", "accounts"
@@ -260,5 +249,4 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_30_090000) do
   add_foreign_key "sessions", "identities"
   add_foreign_key "users", "accounts"
   add_foreign_key "users", "identities"
-  add_foreign_key "votes", "retro_participants"
 end
