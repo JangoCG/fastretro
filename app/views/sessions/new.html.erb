@@ -2,7 +2,7 @@
 <div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:shake] %>">
 
   <%# Industrial Container %>
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift relative">
 
     <%# Body %>
     <div class="p-8 relative bg-white">
@@ -15,7 +15,7 @@
            <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono"><%= t("sessions.new.email_label") %></label>
            <%= form.email_field :email_address,
               required: true,
-              class: "w-full px-4 py-3 bg-[#F8F5EC] border-[2px] border-zinc-900 text-zinc-900 font-bold placeholder-zinc-400 focus:outline-none focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-none",
+              class: "w-full px-4 py-3 bg-[#F8F5EC] border-[2px] border-zinc-900 text-zinc-900 font-bold placeholder-zinc-400 focus:outline-none focus:bg-white focus:shadow-soft transition-all rounded-none",
               autofocus: true,
               autocomplete: "username webauthn",
               placeholder: t("shared.email_placeholder") %>
@@ -27,7 +27,7 @@
              </p>
         </div>
 
-        <button type="submit" class="group relative flex items-center justify-center gap-3 w-full py-4 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all">
+        <button type="submit" class="group relative flex items-center justify-center gap-3 w-full py-4 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all">
           <span><%= t("sessions.new.sign_in") %></span>
           <i class="icon icon--arrow-right text-lg pt-0.5 group-hover:translate-x-1 transition-transform"></i>
         </button>

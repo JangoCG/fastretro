@@ -5,7 +5,7 @@
 </div>
 
 <div class="max-w-xl mx-auto px-4 py-4 font-sans">
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative" style="view-transition-name: <%= dom_id(@join_code) %>">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift relative" style="view-transition-name: <%= dom_id(@join_code) %>">
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
@@ -31,7 +31,7 @@
           <div class="flex items-center gap-2">
             <input id="join_code_link" type="text" class="flex-1 px-4 py-3 text-sm font-mono text-zinc-900 bg-white border-[2px] border-zinc-900 rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" value="<%= url %>" readonly>
             <button type="button"
-                    class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none"
+                    class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-soft hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none"
                     data-controller="clipboard"
                     data-clipboard-text-value="<%= url %>"
                     data-action="clipboard#copy">

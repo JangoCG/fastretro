@@ -3,7 +3,7 @@
   <%= render "retros/near_limit_notice" %>
 
   <% if notice.present? %>
-    <div class="border-2 border-black bg-[#ffe600] p-4 mb-8 font-mono text-xs font-bold uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] inline-block" id="notice">
+    <div class="border-2 border-black bg-[#ffe600] p-4 mb-8 font-mono text-xs font-bold uppercase shadow-soft inline-block" id="notice">
       <%= notice %>
     </div>
   <% end %>
@@ -32,7 +32,7 @@
 
       <%# Primary Actions %>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 xl:flex xl:items-center">
-        <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
+        <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-soft hover:shadow-soft hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
           <span><%= t("retros.index.new_retro") %></span>
           <span class="font-mono group-hover:translate-x-1 transition-transform">-></span>
           <span class="hidden sm:inline">
@@ -40,7 +40,7 @@
           </span>
         <% end %>
 
-        <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 px-4 sm:px-5 bg-violet-600 text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-violet-700 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none" do %>
+        <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 px-4 sm:px-5 bg-violet-600 text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-violet-700 transition-colors shadow-soft hover:shadow-none" do %>
           <%= icon_tag "chat", class: "w-4 h-4" %>
           <%= t("retros.index.give_feedback") %>
         <% end %>

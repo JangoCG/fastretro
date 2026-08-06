@@ -26,6 +26,7 @@
   --radius-pill: 2.125rem;
 
   --shadow-lift: 0 .5rem 5rem rgb(1 18 50 / .15);
+  --shadow-soft: 0 .25rem 1.5rem rgb(1 18 50 / .10);
 
   /* Remap Tailwind's own scale so the ~1000 zinc/black utilities already
      written across the templates render the brand palette with no template

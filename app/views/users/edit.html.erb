@@ -6,7 +6,7 @@
 <div class="max-w-xl mx-auto px-4 pb-8 font-sans">
   
   <%# Industrial Container %>
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift relative">
     
     <%# Header Section %>
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
@@ -33,7 +33,7 @@
             <%= t("users.edit.name_label") %>
           </label>
           <%= form.text_field :name,
-              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-300 rounded-none",
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-300 rounded-none",
               autocomplete: "name",
               placeholder: t("users.edit.name_placeholder"),
               autofocus: true,
@@ -55,7 +55,7 @@
                 value: @user.identity.email_address %>
             
             <%= link_to new_user_email_address_path(user_id: @user.id),
-                  class: "group relative inline-flex items-center justify-center w-11 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all",
+                  class: "group relative inline-flex items-center justify-center w-11 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-soft hover:translate-y-0.5 hover:shadow-none transition-all",
                   aria: { label: t("users.edit.edit_email") } do %>
               <%= icon_tag "pencil", class: "w-4 h-4" %>
               <span class="sr-only"><%= t("users.edit.edit_email") %></span>
@@ -75,7 +75,7 @@
         <% end %>
         
         <div class="flex justify-center pt-4">
-          <button type="submit" class="group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" data-form-target="submit">
+          <button type="submit" class="group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all" data-form-target="submit">
             <%= t("users.edit.save_changes") %>
           </button>
         </div>

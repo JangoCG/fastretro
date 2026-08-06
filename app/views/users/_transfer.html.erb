@@ -17,7 +17,7 @@
     </div>
 
     <%# Squared Copy Button %>
-    <button type="button" class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none" data-controller="clipboard" data-clipboard-text-value="<%= url %>" data-action="clipboard#copy">
+    <button type="button" class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-soft hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none" data-controller="clipboard" data-clipboard-text-value="<%= url %>" data-action="clipboard#copy">
       <i class="icon icon--copy w-5 h-5" data-clipboard-target="icon"></i>
       <i class="icon icon--check w-5 h-5 text-green-600" data-clipboard-target="check" style="display: none;"></i>
       <span class="sr-only">Copy sign-in link</span>

@@ -3,7 +3,7 @@
   <%# Structural outline with "flange" effect %>
   <div class="absolute -left-1 -top-1 -right-1 -bottom-1 border-[1px] border-zinc-400 rounded-sm"></div>
 
-  <div class="relative flex flex-col bg-[#f4f1ea] border-[4px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] overflow-hidden">
+  <div class="relative flex flex-col bg-[#f4f1ea] border-[4px] border-zinc-900 shadow-lift overflow-hidden">
 
     <%# Hazard Strip Header %>
     <div class="h-3 w-full border-b-[3px] border-zinc-900 bg-[repeating-linear-gradient(45deg,#18181b,#18181b_10px,#22c55e_10px,#22c55e_20px)]"></div>
@@ -48,7 +48,7 @@
             type="button"
             data-action="clipboard#copy"
             data-clipboard-target="button"
-            class="px-4 py-2 bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider border-[2px] border-zinc-900 rounded-[2px] hover:bg-zinc-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] active:shadow-none active:translate-x-[3px] active:translate-y-[3px]"
+            class="px-4 py-2 bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider border-[2px] border-zinc-900 rounded-[2px] hover:bg-zinc-700 transition-colors shadow-soft active:shadow-none"
           >
             <%= t("components.retro_invite_card.copy") %>
           </button>

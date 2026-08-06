@@ -1,6 +1,6 @@
 <div
   id="<%= dom_id(@retro) %>"
-  class="group relative border-[2.5px] border-zinc-800 bg-[#F8F5EC] shadow-[5px_5px_0px_0px_rgba(39,39,42,1)] hover:shadow-[2px_2px_0px_0px_rgba(39,39,42,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 overflow-hidden rounded-sm"
+  class="group relative border-[2.5px] border-zinc-800 bg-[#F8F5EC] shadow-soft hover:shadow-soft transition-all duration-200 overflow-hidden rounded-sm"
 >
   <%# Stretched link - covers entire card %>
   <%= link_to retro_path(@retro), class: "absolute inset-0 z-10", "aria-label": @retro.name do %><% end %>

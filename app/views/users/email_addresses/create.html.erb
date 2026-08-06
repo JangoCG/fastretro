@@ -5,7 +5,7 @@
 </div>
 
 <div class="max-w-md mx-auto px-4 pb-8 font-sans">
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift relative">
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
@@ -28,7 +28,7 @@
           <%= t("users.email_addresses.create.open_email") %>
         </p>
 
-        <%= link_to edit_user_path(@user), class: "group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all" do %>
+        <%= link_to edit_user_path(@user), class: "group relative inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all" do %>
           <%= t("users.email_addresses.create.back_to_profile") %>
         <% end %>
       </div>

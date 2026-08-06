@@ -41,7 +41,7 @@ module FiltersHelper
     # - Base: White with thick zinc border and hard shadow
     # - Hover/Active: Physically moves down-right to simulate a mechanical press
     # - Aria-Selected: Inverts to Black/White for high-contrast focus state
-    button_classes = "group relative flex flex-col items-center justify-center gap-1 sm:gap-2 p-3 sm:p-4 rounded-[2px] border-[2px] border-zinc-900 bg-white text-zinc-900 shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] hover:shadow-[1px_1px_0px_0px_rgba(24,24,27,1)] hover:translate-x-[3px] hover:translate-y-[3px] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none aria-selected:bg-zinc-900 aria-selected:text-[#F8F5EC] aria-selected:shadow-none aria-selected:translate-x-[4px] aria-selected:translate-y-[4px] transition-all duration-75 outline-none"
+    button_classes = "group relative flex flex-col items-center justify-center gap-1 sm:gap-2 p-3 sm:p-4 rounded-[2px] border-[2px] border-zinc-900 bg-white text-zinc-900 shadow-soft hover:shadow-soft active:shadow-none aria-selected:bg-zinc-900 aria-selected:text-[#F8F5EC] aria-selected:shadow-none transition-all duration-75 outline-none"
 
     link_to path, class: button_classes, id: "filter-hotkey-#{key}", role: "listitem", data: { filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.#{key}@document->hotkey#click keydown.shift+#{key}@document->hotkey#click" } do
       # KBD: Styled as a small technical label in the corner

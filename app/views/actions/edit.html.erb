@@ -5,7 +5,7 @@
 
 <div class="max-w-3xl mx-auto px-4 py-8 font-sans">
   <%# Industrial Container: Clean, heavy border, no rounded corners %>
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift relative">
 
     <%# Header Section %>
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
@@ -55,7 +55,7 @@
   <%# Action Buttons %>
   <div class="flex justify-center gap-4 mt-8">
     <%= link_to retro_action_path(@retro, @action),
-        class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all",
+        class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#F8F5EC] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all",
         data: { controller: "hotkey", action: "keydown.ctrl+enter@document->hotkey#click keydown.meta+enter@document->hotkey#click" } do %>
       <%= t("shared.done") %>
       <%= render KbdComponent.new(key: "Cmd+Enter", size: :sm) %>

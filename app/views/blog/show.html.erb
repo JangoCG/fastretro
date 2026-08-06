@@ -65,7 +65,7 @@
     </div>
 
     <% if @post.image %>
-      <div class="w-full border-2 border-black p-2 bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div class="w-full border-2 border-black p-2 bg-white shadow-lift">
         <div class="aspect-[21/9] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
            <%= image_tag @post.image, alt: @post.title, class: "w-full h-full object-cover" %>
            
@@ -84,7 +84,7 @@
               prose-p:font-sans prose-p:text-zinc-700
               prose-a:text-black prose-a:font-bold prose-a:decoration-[#ffe600] prose-a:decoration-2 prose-a:underline-offset-2
               prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:not-italic prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:bg-zinc-100 prose-blockquote:py-2 prose-blockquote:px-4
-              prose-img:border-2 prose-img:border-black prose-img:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+              prose-img:border-2 prose-img:border-black prose-img:shadow-soft
               prose-li:text-zinc-700 prose-li:marker:text-zinc-400
               prose-strong:text-black prose-strong:font-bold
               prose-ol:list-decimal prose-ul:list-disc

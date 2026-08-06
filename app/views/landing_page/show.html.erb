@@ -66,9 +66,9 @@
              <div class="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-black z-10 hidden sm:block"></div>
              <div class="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-black z-10 hidden sm:block"></div>
              <%# Mobile image %>
-             <%= image_tag "retro-mobile.webp", class: "w-full h-auto shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 sm:hidden", alt: "Faster Retro retrospective interface on mobile", width: "752", height: "1626", loading: "eager", fetchpriority: "high" %>
+             <%= image_tag "retro-mobile.webp", class: "w-full h-auto shadow-lift border-2 border-black relative z-0 sm:hidden", alt: "Faster Retro retrospective interface on mobile", width: "752", height: "1626", loading: "eager", fetchpriority: "high" %>
              <%# Desktop image %>
-             <%= image_tag "retro-image-no-padding.webp", class: "w-full h-auto shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] border-2 border-black relative z-0 hidden sm:block", alt: "Faster Retro retrospective interface showing brainstorming phase", width: "3452", height: "2248", loading: "eager", fetchpriority: "high" %>
+             <%= image_tag "retro-image-no-padding.webp", class: "w-full h-auto shadow-lift border-2 border-black relative z-0 hidden sm:block", alt: "Faster Retro retrospective interface showing brainstorming phase", width: "3452", height: "2248", loading: "eager", fetchpriority: "high" %>
          </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
         <div class="marquee-track marquee-left">
           <% 2.times do %>
             <% top_row.each do |item| %>
-              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-white px-4 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-white px-4 py-3 shadow-soft min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
                 <div class="flex items-center gap-3">
                   <div class="inline-flex w-8 h-8 flex-shrink-0">
                     <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover", loading: "lazy" %>
@@ -122,7 +122,7 @@
         <div class="marquee-track marquee-right">
           <% 2.times do %>
             <% bottom_row.each do |item| %>
-              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-[#ffe600] px-4 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-[#ffe600] px-4 py-3 shadow-soft min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
                 <div class="flex items-center gap-3">
                   <div class="inline-flex w-8 h-8 flex-shrink-0">
                     <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover bg-white", loading: "lazy" %>
@@ -245,7 +245,7 @@
 
       <%# Export Feature %>
       <div class="mt-16 sm:mt-20 text-center">
-        <div class="inline-flex items-center gap-3 border-2 border-black bg-white px-6 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="inline-flex items-center gap-3 border-2 border-black bg-white px-6 py-4 shadow-soft">
           <div class="text-3xl">📊</div>
           <div class="text-left">
             <div class="font-bold text-sm uppercase tracking-wide">Export to Excel</div>
@@ -273,7 +273,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <%# Scrum Optimized %>
-      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
         <div class="w-12 h-12 bg-amber-100 border-2 border-black flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -288,7 +288,7 @@
       </div>
 
       <%# No Lock-In %>
-      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
         <div class="w-12 h-12 bg-emerald-100 border-2 border-black flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
@@ -303,7 +303,7 @@
       </div>
 
       <%# Zero Friction %>
-      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+      <div class="border-2 border-black bg-white p-6 sm:p-8 shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
         <div class="w-12 h-12 bg-violet-100 border-2 border-black flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -418,7 +418,7 @@
 
     <%# Hosted in Germany Card %>
     <div class="flex justify-center">
-      <div class="inline-flex items-center gap-3 border-2 border-black bg-white p-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] rotate-[-3deg] hover:rotate-0 transition-transform cursor-help">
+      <div class="inline-flex items-center gap-3 border-2 border-black bg-white p-3 shadow-lift rotate-[-3deg] hover:rotate-0 transition-transform cursor-help">
         <div class="flex flex-col gap-[1px]">
           <div class="w-8 h-2 bg-black"></div>
           <div class="w-8 h-2 bg-[#DD0000]"></div>
@@ -533,7 +533,7 @@
       Ready to run<br>
       <span class="text-zinc-400">better retros?</span>
     </h2>
-    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
       <span>SIGN UP FREE</span>
       <span class="font-mono">-></span>
     <% end %>

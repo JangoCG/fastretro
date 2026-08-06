@@ -5,7 +5,7 @@
     <%# Summary Stats %>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <%# Participants Card %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift p-6">
         <div class="text-center">
           <div class="text-6xl font-black text-zinc-900"><%= @retro.participants.count %></div>
           <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500"><%= t("completes.participants") %></div>
@@ -13,7 +13,7 @@
       </div>
 
       <%# Feedbacks Card %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift p-6">
         <% feedback_counts = @retro.feedbacks.published.group(:category).count %>
         <div class="text-center">
           <div class="text-6xl font-black text-zinc-900"><%= @retro.feedbacks.published.count %></div>
@@ -27,7 +27,7 @@
       </div>
 
       <%# Actions Card %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)] p-6">
+      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift p-6">
         <div class="text-center">
           <div class="text-6xl font-black text-violet-600"><%= @retro.actions.published.count %></div>
           <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500"><%= t("completes.action_items") %></div>
@@ -36,7 +36,7 @@
     </div>
 
     <%# Action Items List %>
-    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)]">
+    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift">
       <%# Header %>
       <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white">
         <div class="flex items-center gap-3">
@@ -50,7 +50,7 @@
         <% if @actions.any? %>
           <div class="space-y-4">
             <% @actions.each_with_index do |action, index| %>
-              <div class="flex gap-4 items-start p-4 bg-white border-[2px] border-zinc-900 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)]">
+              <div class="flex gap-4 items-start p-4 bg-white border-[2px] border-zinc-900 shadow-soft">
                 <div class="flex-shrink-0 w-8 h-8 bg-violet-100 border-[2px] border-zinc-900 flex items-center justify-center">
                   <span class="font-black text-sm text-violet-700"><%= index + 1 %></span>
                 </div>
@@ -75,7 +75,7 @@
 
     <%# Completion Message %>
     <div class="text-center py-8">
-      <div class="inline-block bg-zinc-900 text-white px-8 py-4 border-[2px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,0.5)]">
+      <div class="inline-block bg-zinc-900 text-white px-8 py-4 border-[2px] border-zinc-900 shadow-soft">
         <span class="font-black text-lg uppercase tracking-widest"><%= t("completes.retro_complete") %></span>
       </div>
       <p class="mt-4 text-sm text-zinc-500 font-mono uppercase">
@@ -86,17 +86,17 @@
       <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
         <%= link_to retro_export_path(@retro, format: :xlsx),
               id: "export-xlsx-button",
-              class: "inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-emerald-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+              class: "inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-emerald-700 transition-colors shadow-soft hover:shadow-none" do %>
           <span><%= t("completes.export_xlsx") %></span>
         <% end %>
         <%= link_to retro_export_path(@retro, format: :csv),
               id: "export-csv-button",
-              class: "inline-flex items-center gap-2 px-6 py-3 bg-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+              class: "inline-flex items-center gap-2 px-6 py-3 bg-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-100 transition-colors shadow-soft hover:shadow-none" do %>
           <span><%= t("completes.export_csv") %></span>
         <% end %>
         <% if @retro.admin?(Current.user) %>
           <%= button_to retro_jira_export_path(@retro),
-                class: "inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]" do %>
+                class: "inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-colors shadow-soft hover:shadow-none" do %>
             <span><%= t("completes.export_jira") %></span>
           <% end %>
         <% end %>

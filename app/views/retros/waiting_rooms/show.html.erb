@@ -30,7 +30,7 @@
       </div>
 
       <%# Waiting Status Card %>
-      <div class="bg-zinc-900 text-white border-[3px] border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden mb-8">
+      <div class="bg-zinc-900 text-white border-[3px] border-black p-8 shadow-lift relative overflow-hidden mb-8">
         <%# Background Grid Overlay %>
         <div class="absolute inset-0 opacity-10 pointer-events-none"
              style="background-image: linear-gradient(0deg, transparent 24%, #ffffff 25%, #ffffff 26%, transparent 27%, transparent 74%, #ffffff 75%, #ffffff 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, #ffffff 25%, #ffffff 26%, transparent 27%, transparent 74%, #ffffff 75%, #ffffff 76%, transparent 77%, transparent); background-size: 30px 30px;">
@@ -67,7 +67,7 @@
           <%= button_to retro_start_path(@retro), method: :post,
               id: "start-retro-button",
               form: { data: { turbo_frame: "_top" } },
-              class: "group w-full bg-[#ffe600] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" do %>
+              class: "group w-full bg-[#ffe600] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-lift hover:shadow-lift" do %>
             <span><%= t("waiting_rooms.show.start_retro") %></span>
             <span class="font-mono group-hover:translate-x-2 transition-transform text-lg">-></span>
           <% end %>
@@ -85,7 +85,7 @@
         <%= render RetroInviteCardComponent.new(retro: @retro) %>
 
         <%# Tips Card %>
-        <div class="mt-6 border-[3px] border-zinc-900 bg-[#f4f1ea] p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div class="mt-6 border-[3px] border-zinc-900 bg-[#f4f1ea] p-5 shadow-soft">
           <h3 class="font-black text-sm uppercase tracking-tight text-zinc-900 mb-3">
             "<%= t("waiting_rooms.show.how_it_works") %>"
           </h3>

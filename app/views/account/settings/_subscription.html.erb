@@ -3,7 +3,7 @@
   <% free_limit = @free_limit || Plan.free.retro_limit %>
   <% paid_price = @paid_price %>
   <% formatted_paid_price = paid_price.present? ? format_currency(paid_price) : nil %>
-  <section id="subscription" class="border-[3px] border-zinc-900 bg-[#efece6] shadow-[6px_6px_0px_0px_rgba(20,20,23,0.8)]">
+  <section id="subscription" class="border-[3px] border-zinc-900 bg-[#efece6] shadow-lift">
     <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white text-center">
       <h2 class="text-lg font-black text-zinc-900 uppercase tracking-wider"><%= t("account.settings.subscription.heading") %></h2>
     </div>
@@ -21,7 +21,7 @@
 
           <%= button_to t("account.settings.subscription.upgrade_button", price: formatted_paid_price), account_subscription_path,
               id: "stripe-checkout-button",
-              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-soft hover:shadow-soft",
               form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% else %>
           <p class="text-red-700 text-base md:text-xl leading-snug font-bold">
@@ -30,7 +30,7 @@
 
           <%= button_to t("account.settings.subscription.open_checkout"), account_subscription_path,
               id: "stripe-checkout-button",
-              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+              class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-gradient-to-r from-[#8f67ff] to-[#6b39ff] text-white hover:from-[#8259fb] hover:to-[#5d2ff5] px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-soft hover:shadow-soft",
               form: { id: "stripe-checkout-form", data: { turbo: false } } %>
         <% end %>
 
@@ -56,7 +56,7 @@
         <% end %>
 
         <%= link_to t("account.settings.subscription.manage_billing"), account_billing_portal_path,
-            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(20,20,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(20,20,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]",
+            class: "w-full md:w-fit mx-auto flex items-center justify-center text-center bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 text-base md:text-xl font-black tracking-wide transition-all border-[3px] border-zinc-900 shadow-soft hover:shadow-soft",
             data: { turbo: false } %>
       <% end %>
     </div>

@@ -3,7 +3,7 @@
 <div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:alert] || flash[:shake] %>">
   
   <%# Industrial Container %>
-  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-[8px_8px_0px_0px_rgba(20,20,23,0.8)] relative">
+  <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift relative">
     
     <%# Header Section %>
     <div class="p-6 border-b-[3px] border-zinc-900 bg-zinc-900 relative">
@@ -34,7 +34,7 @@
             </div>
             <%= form.text_field :code,
                 required: true,
-                class: "w-full pl-10 pr-4 py-4 font-mono text-3xl font-black tracking-[0.5em] text-center uppercase border-[3px] border-zinc-900 rounded-none bg-white text-zinc-900 focus:outline-none focus:bg-yellow-50 focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder-zinc-200",
+                class: "w-full pl-10 pr-4 py-4 font-mono text-3xl font-black tracking-[0.5em] text-center uppercase border-[3px] border-zinc-900 rounded-none bg-white text-zinc-900 focus:outline-none focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-200",
                 autofocus: true,
                 autocorrect: "off",
                 autocapitalize: "off",
@@ -62,7 +62,7 @@
   </div>
 
   <% if flash[:magic_link_code].present? %>
-    <div class="flex items-center justify-center gap-4 bg-zinc-900 border-[3px] border-zinc-900 shadow-[4px_4px_0px_0px_rgba(251,191,36,1)] p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden">
+    <div class="flex items-center justify-center gap-4 bg-zinc-900 border-[3px] border-zinc-900 shadow-soft p-4 mt-6 w-full relative animate-[slide-up-fade-in_400ms_ease-out_both] overflow-hidden">
       <span class="absolute top-0 bottom-0 left-0 bg-yellow-400 px-2 flex items-center justify-center text-[0.55rem] uppercase font-black text-center rotate-180 [writing-mode:vertical-rl] text-zinc-900"><%= t("sessions.magic_links.dev_label") %></span>
       <span class="text-xs font-mono font-bold text-white uppercase ml-6"><%= t("sessions.magic_links.dev_code_hint") %></span>
       <code class="text-2xl font-black font-mono text-yellow-400 tracking-widest"><%= flash[:magic_link_code] %></code>
