@@ -22,7 +22,7 @@
 
         <%= form_with model: @passkey, scope: :passkey, url: my_passkey_path(@passkey), class: "flex flex-col gap-4" do |form| %>
           <div class="flex flex-col gap-2">
-            <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono"><%= t("my.passkeys.edit.name_label") %></label>
+            <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui"><%= t("my.passkeys.edit.name_label") %></label>
             <%= form.text_field :name,
                 autofocus: true,
                 class: "w-full px-4 py-3 bg-[#ffffff] border-[2px] border-zinc-900 text-zinc-900 font-bold placeholder-zinc-400 focus:outline-none focus:bg-white focus:shadow-soft transition-all rounded-none",

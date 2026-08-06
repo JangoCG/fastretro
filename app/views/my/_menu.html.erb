@@ -24,7 +24,7 @@
     <%# Main Label %>
     <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
        <div class="flex items-center gap-2">
-         <span class="font-black text-xl sm:text-2xl uppercase tracking-tighter text-black leading-none select-none relative px-1">
+         <span class="font-display font-black text-xl sm:text-2xl uppercase text-black leading-none select-none relative px-1">
            <span class="absolute inset-0 bg-[#fff2d2] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
            "FASTER RETRO"
          </span>
@@ -38,7 +38,7 @@
 
     <%# Hotkey Indicator (Re-styled) %>
     <div class="absolute bottom-2 right-2 hidden sm:flex items-center justify-center border border-zinc-900 bg-zinc-900 text-[#ffffff] px-1.5 py-0.5">
-      <kbd class="font-mono text-[9px] font-bold uppercase tracking-widest">J</kbd>
+      <kbd class="font-ui text-[9px] font-bold uppercase tracking-widest">J</kbd>
     </div>
 
   <% end %>
@@ -68,7 +68,7 @@
     <div class="p-1">
       <%= turbo_frame_tag "my_menu", src: my_menu_path, loading: :lazy, target: "_top" do %>
         <div class="p-8 flex flex-col items-center justify-center opacity-50">
-          <span class="font-mono text-xs uppercase animate-pulse"><%= t("shared.loading") %></span>
+          <span class="font-ui text-xs uppercase animate-pulse"><%= t("shared.loading") %></span>
         </div>
         <% if Current.account.present? %>
           <%= render("my/menus/jump") { } %>

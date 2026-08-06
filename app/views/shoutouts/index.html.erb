@@ -6,21 +6,17 @@
 <% content_for :meta_description, "Shoutouts for Faster Retro from builders and teams." %>
 <% content_for :canonical_url, shoutouts_url(script_name: nil) %>
 
-<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
-</div>
-
 <%= render LandingPageHeaderComponent.new %>
 
 <main class="pt-24 pb-16 overflow-x-hidden">
   <section class="max-w-4xl mx-auto px-4 sm:px-6">
-    <p class="font-mono text-[10px] text-zinc-500 mb-3 uppercase tracking-widest">
+    <p class="font-ui text-[10px] text-zinc-500 mb-3 uppercase tracking-widest">
       SOCIAL PROOF
     </p>
-    <h1 class="text-[1.75rem] sm:text-[2.5rem] md:text-[3rem] leading-[0.95] font-black uppercase tracking-tighter text-black mb-4">
+    <h1 class="text-[1.75rem] sm:text-[2.5rem] md:text-[3rem] leading-[0.95] font-black uppercase text-black mb-4">
       SHOUTOUTS
     </h1>
-    <p class="font-mono text-sm text-zinc-600 max-w-2xl mb-10">
+    <p class="font-ui text-sm text-zinc-600 max-w-2xl mb-10">
       Notes from people we respect.
     </p>
 
@@ -85,14 +81,14 @@
               </div>
               <div>
                 <h2 class="font-black text-lg uppercase tracking-tight"><%= shoutout[:name] %></h2>
-                <p class="font-mono text-xs uppercase tracking-wide text-zinc-600 underline">
+                <p class="font-ui text-xs uppercase tracking-wide text-zinc-600 underline">
                   View post on X
                 </p>
               </div>
             </div>
 
             <blockquote class="border-l-4 border-[#ff5d03] pl-4 sm:pl-6">
-              <p class="font-mono text-sm sm:text-base text-zinc-700 leading-relaxed">
+              <p class="font-ui text-sm sm:text-base text-zinc-700 leading-relaxed">
                 "<%= shoutout[:quote] %>"
               </p>
             </blockquote>

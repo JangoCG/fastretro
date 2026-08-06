@@ -8,7 +8,7 @@
   <%# Header with centered title and decorative lines %>
   <div class="flex items-center gap-4 mb-8">
     <div class="flex-1 border-t border-dashed border-gray-300"></div>
-    <h1 class="font-black text-2xl text-gray-900 px-4"><%= @retro.name %></h1>
+    <h1 class="font-display font-black text-2xl text-gray-900 px-4"><%= @retro.name %></h1>
     <div class="flex-1 border-t border-dashed border-gray-300"></div>
     <%= render IconButtonComponent.new(icon: "pencil", variant: :secondary, size: :lg, href: edit_retro_path(@retro), label: "Edit retro") %>
   </div>

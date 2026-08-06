@@ -1,12 +1,12 @@
 <%# Compact Retro Footer - 40px max height %>
 <footer class="w-full h-10 bg-zinc-900 border-t-[2px] border-zinc-800 flex items-center justify-between px-4 sm:px-6 mt-auto">
   <%# Left: Brand %>
-  <span class="font-mono text-[0.6rem] text-zinc-100 uppercase tracking-widest">
+  <span class="font-ui text-[0.6rem] text-zinc-100 uppercase tracking-widest">
     <%= t("components.retro_footer.brand") %>
   </span>
 
   <%# Center: Legal Links %>
-  <div class="flex items-center gap-4 font-mono text-xs uppercase tracking-wider">
+  <div class="flex items-center gap-4 font-ui text-xs uppercase tracking-wider">
     <%= link_to t("components.retro_footer.blog"), blog_path(script_name: nil), class: "text-zinc-100 hover:text-white transition-colors" %>
     <span class="text-zinc-300">|</span>
     <%= link_to t("components.retro_footer.imprint"), imprint_path(script_name: nil), class: "text-zinc-100 hover:text-white transition-colors" %>

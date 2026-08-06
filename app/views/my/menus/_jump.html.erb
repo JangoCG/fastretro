@@ -3,7 +3,7 @@
 
   <%# Title Block %>
     <div class="flex flex-col">
-      <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-mono mb-0.5"><%= t("shared.account") %></span>
+      <span class="text-[0.6rem] font-bold text-zinc-400 uppercase tracking-widest font-ui mb-0.5"><%= t("shared.account") %></span>
       <strong class="text-xl font-black text-zinc-900 uppercase tracking-tight leading-none">
         <%= Current.account.name %>
       </strong>
@@ -27,11 +27,11 @@
     <label class="block text-[0.6rem] font-bold text-zinc-500 uppercase tracking-wider mb-1"><%= t("shared.search").delete(".") %></label>
     <div class="relative">
       <%# Decorative Prompt Symbol %>
-      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 font-mono font-bold select-none">></div>
+      <div class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 font-ui font-bold select-none">></div>
 
       <%# Note: Ensure your jump_field_tag accepts these classes. 
           If it renders an input, it should look like a raw terminal input. %>
-      <div class="[&>input]:w-full [&>input]:pl-8 [&>input]:pr-4 [&>input]:py-2.5 [&>input]:bg-white [&>input]:border-[2px] [&>input]:border-zinc-300 [&>input]:focus:border-zinc-900 [&>input]:text-zinc-900 [&>input]:placeholder-zinc-300 [&>input]:outline-none [&>input]:font-mono [&>input]:text-sm [&>input]:rounded-[1px] [&>input]:shadow-inner [&>input]:transition-colors">
+      <div class="[&>input]:w-full [&>input]:pl-8 [&>input]:pr-4 [&>input]:py-2.5 [&>input]:bg-white [&>input]:border-[2px] [&>input]:border-zinc-300 [&>input]:focus:border-zinc-900 [&>input]:text-zinc-900 [&>input]:placeholder-zinc-300 [&>input]:outline-none [&>input]:font-ui [&>input]:text-sm [&>input]:rounded-[1px] [&>input]:shadow-inner [&>input]:transition-colors">
         <%= jump_field_tag %>
       </div>
     </div>
@@ -69,7 +69,7 @@
 
     <%# Empty State %>
     <div class="hidden py-8 text-center border-2 border-dashed border-zinc-300 bg-zinc-50/50" data-filter-target="blankSlate">
-      <p class="text-zinc-400 font-mono text-xs uppercase"><%= t("shared.no_results") %></p>
+      <p class="text-zinc-400 font-ui text-xs uppercase"><%= t("shared.no_results") %></p>
     </div>
   </div>
 

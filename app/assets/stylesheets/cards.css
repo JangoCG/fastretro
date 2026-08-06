@@ -18,6 +18,7 @@
   --lines: 3;
 
   color: var(--card-content-color, var(--color-ink));
+  font-family: var(--font-display);
   font-size: var(--text-xx-large);
   font-weight: 900;
   line-height: 1.15;

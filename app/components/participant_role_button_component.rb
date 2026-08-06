@@ -1,6 +1,6 @@
 class ParticipantRoleButtonComponent < ApplicationComponent
   BASE_CLASSES = "bg-white text-zinc-900 font-bold uppercase tracking-widest border-[1.5px] border-zinc-900 hover:bg-[#fff2d2] transition-colors cursor-pointer".freeze
-  COMPACT_CLASSES = "text-[0.6rem] font-mono px-2 py-1.5".freeze
+  COMPACT_CLASSES = "text-[0.6rem] font-ui px-2 py-1.5".freeze
   CARD_CLASSES = "mt-2 inline-block text-[0.5rem] px-2.5 py-1.5".freeze
 
   def initialize(participant:, manageable:, admin_count:, compact: false)

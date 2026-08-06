@@ -11,7 +11,7 @@
     <div class="min-w-0 flex flex-col">
       <strong class="block truncate text-sm font-bold uppercase tracking-wide"><%= user.name %></strong>
       <% if user.identity&.email_address.present? %>
-        <span class="block truncate text-xs font-mono text-zinc-500 uppercase"><%= user.identity.email_address %></span>
+        <span class="block truncate text-xs font-ui text-zinc-500 uppercase"><%= user.identity.email_address %></span>
       <% end %>
     </div>
   <% end %>

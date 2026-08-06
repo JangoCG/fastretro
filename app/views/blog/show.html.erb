@@ -43,23 +43,23 @@
   
   <%# Navigation %>
   <div class="mb-12 border-b-2 border-black pb-4 flex justify-between items-center">
-    <%= link_to blog_path, class: "group inline-flex items-center gap-2 font-mono text-sm font-bold uppercase hover:bg-black hover:text-white px-3 py-2 transition-colors border border-transparent hover:border-black" do %>
+    <%= link_to blog_path, class: "group inline-flex items-center gap-2 font-ui text-sm font-bold uppercase hover:bg-black hover:text-white px-3 py-2 transition-colors border border-transparent hover:border-black" do %>
       <span><-</span> RETURN_TO_ARCHIVE
     <% end %>
     
-    <span class="font-mono text-xs text-zinc-400 uppercase hidden sm:inline-block">/ VIEWING_FILE: <%= @post.slug.upcase rescue "ID_UNKNOWN" %></span>
+    <span class="font-ui text-xs text-zinc-400 uppercase hidden sm:inline-block">/ VIEWING_FILE: <%= @post.slug.upcase rescue "ID_UNKNOWN" %></span>
   </div>
 
   <%# Header Block %>
   <header class="mb-12">
     <div class="border-l-4 border-[#ff5d03] pl-6 py-2 mb-8">
-      <div class="flex flex-wrap gap-4 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">
+      <div class="flex flex-wrap gap-4 font-ui text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">
         <span class="bg-zinc-100 px-2 py-1">AUTH: <%= @post.author.upcase rescue "SYSTEM" %></span>
         <span class="bg-zinc-100 px-2 py-1">DATE: <%= @post.formatted_date.upcase rescue "UNKNOWN" %></span>
         <span class="bg-zinc-100 px-2 py-1">TIME: <%= @post.read_time.upcase rescue "N/A" %></span>
       </div>
       
-      <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
+      <h1 class="text-4xl md:text-6xl font-display font-black text-black leading-[0.9]">
         "<%= @post.title rescue "UNTITLED" %>"
       </h1>
     </div>
@@ -70,7 +70,7 @@
            <%= image_tag @post.image, alt: @post.title, class: "w-full h-full object-cover" %>
            
            <%# Watermark %>
-           <div class="absolute bottom-4 right-4 bg-black text-white px-2 py-1 font-mono text-[10px] uppercase font-bold opacity-50">
+           <div class="absolute bottom-4 right-4 bg-black text-white px-2 py-1 font-ui text-[10px] uppercase font-bold opacity-50">
              IMG_REF: <%= SecureRandom.hex(4).upcase %>
            </div>
         </div>
@@ -80,10 +80,10 @@
 
   <%# Content %>
   <div class="prose prose-lg max-w-none
-              prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter
+              prose-headings:font-black prose-headings:uppercase prose-headings:
               prose-p:font-sans prose-p:text-zinc-700
               prose-a:text-black prose-a:font-bold prose-a:decoration-[#ff5d03] prose-a:decoration-2 prose-a:underline-offset-2
-              prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:not-italic prose-blockquote:font-mono prose-blockquote:text-sm prose-blockquote:bg-zinc-100 prose-blockquote:py-2 prose-blockquote:px-4
+              prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:not-italic prose-blockquote:font-ui prose-blockquote:text-sm prose-blockquote:bg-zinc-100 prose-blockquote:py-2 prose-blockquote:px-4
               prose-img:border-2 prose-img:border-black prose-img:shadow-soft
               prose-li:text-zinc-700 prose-li:marker:text-zinc-400
               prose-strong:text-black prose-strong:font-bold
@@ -94,7 +94,7 @@
 
   <%# Footer Block %>
   <div class="border-t-4 border-dashed border-zinc-300 pt-8 mb-16">
-    <span class="font-mono text-xs font-bold uppercase text-zinc-400">END_OF_FILE</span>
+    <span class="font-ui text-xs font-bold uppercase text-zinc-400">END_OF_FILE</span>
   </div>
 
 </article>

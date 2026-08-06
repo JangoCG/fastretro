@@ -10,13 +10,13 @@
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
 
       <div class="relative z-10">
-        <p class="font-mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
+        <p class="font-ui text-[10px] text-zinc-400 uppercase tracking-widest mb-1">
           <%= t("retro_invites.invited_to") %>
         </p>
-        <h1 class="text-2xl font-black uppercase tracking-tight text-zinc-900 leading-tight">
+        <h1 class="text-2xl font-display font-black uppercase tracking-tight text-zinc-900 leading-tight">
           <%= @retro.name %>
         </h1>
-        <p class="font-mono text-xs text-zinc-500 mt-2 uppercase">
+        <p class="font-ui text-xs text-zinc-500 mt-2 uppercase">
           <%= t("retro_invites.team") %> <%= @join_code.account.name %>
         </p>
       </div>
@@ -29,7 +29,7 @@
       <%= form_with url: retro_invite_path(code: @join_code.code, retro_id: @retro.id), method: :post, class: "flex flex-col gap-6 relative z-10" do |form| %>
 
         <div class="flex flex-col gap-2">
-          <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+          <label class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui">
             <%= t("retro_invites.enter_email") %>
           </label>
           <%= form.email_field :email_address,

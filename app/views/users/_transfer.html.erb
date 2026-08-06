@@ -2,7 +2,7 @@
   <% url = session_transfer_url(user.identity.transfer_id, script_name: nil) %>
 
   <header class="w-full">
-    <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">Sign In On Another Device</h2>
+    <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui">Sign In On Another Device</h2>
     <p class="text-[0.75rem] text-zinc-500 mt-1" id="session_transfer_label">
       Create a secure one-time transfer link and open it on the target device.
     </p>
@@ -11,9 +11,9 @@
   <div class="flex items-center gap-2 w-full">
     <div class="flex-1 relative">
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <span class="text-zinc-400 font-mono text-xs">Link:</span>
+        <span class="text-zinc-400 font-ui text-xs">Link:</span>
        </div>
-      <input type="text" class="w-full pl-10 pr-3 py-3 text-xs font-mono text-zinc-600 bg-zinc-100 border-[2px] border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:bg-white transition-colors" id="session_transfer_url" value="<%= url %>" aria-labelledby="session_transfer_label" readonly>
+      <input type="text" class="w-full pl-10 pr-3 py-3 text-xs font-ui text-zinc-600 bg-zinc-100 border-[2px] border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:bg-white transition-colors" id="session_transfer_url" value="<%= url %>" aria-labelledby="session_transfer_label" readonly>
     </div>
 
     <%# Squared Copy Button %>

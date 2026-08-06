@@ -46,14 +46,8 @@
 <%= turbo_stream_from @retro %>
 <%= turbo_stream_from [@retro, Current.user] if Current.user.present? %>
 
-<%# === BACKGROUND TEXTURE (The Dot Grid) === %>
-<%# This creates a technical 'cutting mat' feel behind your content %>
-<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
-</div>
-
 <%# === HEADER === %>
-<%# Kept transparent so your new "Floating System Menu" sits on top of the grid %>
+<%# Kept transparent so the floating system menu sits on top of the page %>
 <% if authenticated? %>
   <header class="z-40 relative flex justify-start sm:justify-center px-4 sm:px-6 md:px-8 xl:px-16">
     <%= render "my/menu" %>
@@ -92,7 +86,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 md:items-start">
         <div class="text-center sm:text-left">
           <% retro_display_name = @retro.name.presence || "Retro" %>
-          <h1 class="font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-900 uppercase tracking-tighter leading-none">
+          <h1 class="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-900 leading-none">
             "<%= retro_display_name %>"
           </h1>
           <%

@@ -8,11 +8,6 @@
 <% content_for :canonical_url, root_url(script_name: nil) %>
 <% paid_price = @paid_price.present? ? number_with_precision(@paid_price, precision: (@paid_price % 1).zero? ? 0 : 2, strip_insignificant_zeros: true) : nil %>
 
-<%# === BACKGROUND TEXTURE (The Dot Grid) === %>
-<div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
-</div>
-
 <%# === HEADER === %>
 <%= render LandingPageHeaderComponent.new %>
 
@@ -28,31 +23,31 @@
               <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current flex-shrink-0" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               <span>100% OPEN SOURCE</span>
             </a>
-            <span class="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">FAST. STRAIGHTFORWARD.</span>
+            <span class="font-ui text-[10px] text-zinc-400 uppercase tracking-widest">FAST. STRAIGHTFORWARD.</span>
           </div>
-          <h1 class="text-[1.5rem] sm:text-[2.5rem] md:text-[4rem] leading-[0.9] font-black uppercase tracking-tighter text-black mb-4 sm:mb-6">
+          <h1 class="text-[1.5rem] sm:text-[2.5rem] md:text-[4rem] leading-[0.9] font-black uppercase text-black mb-4 sm:mb-6">
             FREE AGILE<br>
             RETROSPECTIVE TOOL<br>
             FOR REMOTE TEAMS
           </h1>
-          <p class="max-w-xl mx-auto text-xs sm:text-sm font-bold font-mono text-zinc-600 bg-zinc-200/50 p-2 inline-block">
+          <p class="max-w-xl mx-auto text-xs sm:text-sm font-bold font-ui text-zinc-600 bg-zinc-200/50 p-2 inline-block">
             BRAINSTORM. GROUP. VOTE. DISCUSS.<br>
             <span class="bg-black text-white px-1">THE MODERN SPIN</span> ON TEAM RETROSPECTIVES.<br>
             <span class="text-zinc-500">STREAMLINED AND PASSWORDLESS. SELF-HOST OR USE OUR CLOUD.</span>
           </p>
         </div>
 
-      <p class="mt-6 font-mono text-[10px] sm:text-[11px] text-zinc-500 uppercase tracking-widest">
+      <p class="mt-6 font-ui text-[10px] sm:text-[11px] text-zinc-500 uppercase tracking-widest">
             Trusted by more than <span class="font-bold text-black">314 companies</span> with a combined enterprise value of over <span class="font-bold text-black">1 trillion USD</span>
           </p>
 
       <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
           <%= link_to new_signup_path(script_name: nil), aria: { label: "Create your free Faster Retro account - no credit card required" }, class: "inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-6 py-3 border-2 border-transparent" do %>
             <span>CREATE FREE ACCOUNT</span>
-            <span class="font-mono">-></span>
+            <span class="font-ui">-></span>
           <% end %>
         </div>
-        <p class="mt-3 font-mono text-[10px] text-zinc-500 uppercase tracking-wide">
+        <p class="mt-3 font-ui text-[10px] text-zinc-500 uppercase tracking-wide">
           Start for free (<%= number_with_delimiter(@free_limit) %> retros included). No credit card required.
         </p>
 
@@ -78,7 +73,7 @@
   <section class="mb-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-6 sm:mb-8 text-center">
-        <h2 class="font-black text-3xl sm:text-4xl uppercase tracking-tighter">
+        <h2 class="font-display font-black text-3xl sm:text-4xl">
           WHAT PEOPLE SAY
         </h2>
       </div>
@@ -108,7 +103,7 @@
                     <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover", loading: "lazy" %>
                   </div>
                   <div>
-                    <p class="font-mono text-xs text-zinc-700 leading-snug">"<%= item[:quote] %>"</p>
+                    <p class="font-ui text-xs text-zinc-700 leading-snug">"<%= item[:quote] %>"</p>
                     <p class="font-black text-[10px] uppercase tracking-widest mt-1"><%= item[:author] %></p>
                   </div>
                 </div>
@@ -128,7 +123,7 @@
                     <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover bg-white", loading: "lazy" %>
                   </div>
                   <div>
-                    <p class="font-mono text-xs text-zinc-800 leading-snug">"<%= item[:quote] %>"</p>
+                    <p class="font-ui text-xs text-zinc-800 leading-snug">"<%= item[:quote] %>"</p>
                     <p class="font-black text-[10px] uppercase tracking-widest mt-1"><%= item[:author] %></p>
                   </div>
                 </div>
@@ -147,10 +142,10 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-8 sm:mb-16">
-        <h2 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block">
+        <h2 class="font-ui text-xs sm:text-sm font-bold uppercase tracking-widest bg-black text-white px-2 py-1 inline-block">
           HOW IT WORKS: UP TO 5 PHASES
         </h2>
-        <p class="mt-3 font-mono text-sm sm:text-base text-zinc-600 max-w-2xl leading-relaxed">
+        <p class="mt-3 font-ui text-sm sm:text-base text-zinc-600 max-w-2xl leading-relaxed">
           Faster Retro is a free sprint retrospective tool for Scrum teams.
           Create a retro, share the link with your team, and guide everyone through structured phases.
           Optionally review past action items first, then work through the four core phases.
@@ -205,7 +200,7 @@
       </div>
 
       <%# Phase descriptions %>
-      <div class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 font-mono text-sm">
+      <div class="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 font-ui text-sm">
         <div class="border-l-4 border-flame pl-4 sm:pl-6">
           <h3 class="font-bold text-base mb-2">01. Review Scrum Action Items (Optional)</h3>
           <p class="text-zinc-600 leading-relaxed">
@@ -249,10 +244,10 @@
           <div class="text-3xl">📊</div>
           <div class="text-left">
             <div class="font-bold text-sm uppercase tracking-wide">Export to Excel</div>
-            <div class="text-xs text-zinc-500 font-mono">Download feedbacks & action items as .xlsx</div>
+            <div class="text-xs text-zinc-500 font-ui">Download feedbacks & action items as .xlsx</div>
           </div>
         </div>
-        <p class="mt-4 font-mono text-sm text-zinc-600 max-w-md mx-auto">
+        <p class="mt-4 font-ui text-sm text-zinc-600 max-w-md mx-auto">
           When the retro is complete, export everything to Excel.
           Review action items before your next retro and track what got done.
         </p>
@@ -263,10 +258,10 @@
   <%# === WHY FAST RETRO? === %>
   <section id="why-fastretro" class="max-w-7xl mx-auto px-4 sm:px-6 mb-32">
     <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tighter mb-4">
+      <h2 class="text-3xl sm:text-4xl font-display font-black mb-4">
         WHY <span class="bg-[#fff2d2] px-2">FASTER RETRO</span>?
       </h2>
-      <p class="font-mono text-sm text-zinc-600 max-w-2xl mx-auto">
+      <p class="font-ui text-sm text-zinc-600 max-w-2xl mx-auto">
         A free retro tool for Scrum teams who want effective retrospectives without enterprise complexity.
       </p>
     </div>
@@ -280,7 +275,7 @@
           </svg>
         </div>
         <h3 class="font-bold text-lg uppercase tracking-tight mb-3">Scrum Optimized</h3>
-        <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+        <p class="font-ui text-sm text-zinc-600 leading-relaxed">
           Built specifically for <strong class="text-black">Scrum methodology</strong> and the "Inspect and Adapt" cycle.
           Our structured 4-phase process guides your team from anonymous reflection to concrete action items—ensuring
           your agile ceremonies result in actionable change, not just complaints.
@@ -295,7 +290,7 @@
           </svg>
         </div>
         <h3 class="font-bold text-lg uppercase tracking-tight mb-3">No Lock-In</h3>
-        <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+        <p class="font-ui text-sm text-zinc-600 leading-relaxed">
           <strong class="text-black">Cloud Version:</strong> Free to start, fair flat-rate pricing for power users.
           <br><br>
           <strong class="text-black">Self-Hosted:</strong> 100% free forever. It's open source. Run it on your own infrastructure with no license fees and  <a href="https://github.com/JangoCG/fastretro/blob/main/LICENSE.md" target="_blank" class="underline hover:text-black">minimal restrictions</a>.
@@ -310,7 +305,7 @@
           </svg>
         </div>
         <h3 class="font-bold text-lg uppercase tracking-tight mb-3">Zero Friction</h3>
-        <p class="font-mono text-sm text-zinc-600 leading-relaxed">
+        <p class="font-ui text-sm text-zinc-600 leading-relaxed">
           No enterprise bloat or feature overload. Magic link login means <strong class="text-black">no passwords to remember</strong>.
           Keyboard accessible for power users. Real-time updates keep everyone in sync.
           <strong class="text-black">Hosted in Germany</strong>.
@@ -321,11 +316,11 @@
 
   <%# === FREE TIER CTA === %>
   <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-24 text-center">
-    <h2 class="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight">
+    <h2 class="text-3xl sm:text-4xl md:text-6xl font-display font-black leading-tight">
       <span class="bg-[#fff2d2] px-2 text-black">RUN <%= number_with_delimiter(@free_limit) %> RETROS</span><br>
       FOR FREE.
     </h2>
-    <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
+    <p class="mt-6 text-base sm:text-xl md:text-2xl font-ui text-zinc-600 max-w-2xl mx-auto leading-relaxed">
       No credit card required. No time limit.<br>
       <% if paid_price.present? %>
         Want to keep going past <%= number_with_delimiter(@free_limit) %>? Upgrade for $<%= paid_price %>/month<br class="hidden sm:block">
@@ -360,12 +355,12 @@
 
         <div class="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-8 relative z-10">
           <div>
-            <span class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 block mb-2">PER ACCOUNT</span>
-            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-4">
+            <span class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500 block mb-2">PER ACCOUNT</span>
+            <h2 class="text-4xl sm:text-5xl font-display font-black mb-4">
               "PAID"<br>
               <span class="text-zinc-400">PLAN</span>
             </h2>
-            <ul class="font-mono text-sm space-y-2 mt-6">
+            <ul class="font-ui text-sm space-y-2 mt-6">
               <li class="flex items-center gap-2">
                 <span class="w-3 h-3 bg-black"></span> UNLIMITED USERS
               </li>
@@ -384,14 +379,14 @@
           </div>
 
           <div class="text-left sm:text-right flex flex-col justify-between">
-             <div class="font-mono text-xs uppercase tracking-widest text-zinc-500">FLAT RATE</div>
+             <div class="font-ui text-xs uppercase tracking-widest text-zinc-500">FLAT RATE</div>
 
              <div class="my-2 sm:my-0">
-               <div class="text-5xl sm:text-6xl font-black mb-1"><%= paid_price.present? ? "$#{paid_price}" : "N/A" %></div>
-               <div class="font-mono text-xs uppercase">/ MONTH</div>
+               <div class="text-5xl sm:text-6xl font-display font-black mb-1"><%= paid_price.present? ? "$#{paid_price}" : "N/A" %></div>
+               <div class="font-ui text-xs uppercase">/ MONTH</div>
              </div>
 
-             <div class="font-mono text-[10px] text-zinc-500 mt-4 uppercase">
+             <div class="font-ui text-[10px] text-zinc-500 mt-4 uppercase">
                NO PER-USER FEES.<br>
                CANCEL ANYTIME.
              </div>
@@ -403,14 +398,14 @@
 
   <%# === DATA & TRUST === %>
   <section id="trust" class="max-w-4xl mx-auto px-4 sm:px-6 mb-32 text-center">
-    <div class="inline-block bg-black text-white px-2 py-1 font-mono text-xs font-bold uppercase tracking-widest mb-4">
+    <div class="inline-block bg-black text-white px-2 py-1 font-ui text-xs font-bold uppercase tracking-widest mb-4">
       DATA SOVEREIGNTY
     </div>
-    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
+    <h2 class="text-3xl md:text-5xl font-display font-black leading-[0.9] mb-6">
       YOUR DATA.<br>
       <span class="text-zinc-400">YOUR RULES.</span>
     </h2>
-    <p class="font-mono text-sm md:text-base text-zinc-600 leading-relaxed mb-8 max-w-2xl mx-auto">
+    <p class="font-ui text-sm md:text-base text-zinc-600 leading-relaxed mb-8 max-w-2xl mx-auto">
       <span class="font-bold text-black">HOSTED IN GERMANY.</span>
       Your retrospective data stays in the EU.
       We treat your data with the respect it deserves.
@@ -440,9 +435,9 @@
        <div class="absolute bottom-0 left-0 w-4 h-4 bg-black"></div>
        <div class="absolute bottom-0 right-0 w-4 h-4 bg-black"></div>
 
-       <h3 class="font-bold text-2xl md:text-3xl mb-6 uppercase tracking-tight">Don't want to pay or trust us?</h3>
+       <h3 class="font-bold text-2xl md:text-3xl mb-6 tracking-tight">Don't want to pay or trust us?</h3>
 
-       <p class="text-zinc-600 mb-8 max-w-2xl mx-auto font-mono leading-relaxed">
+       <p class="text-zinc-600 mb-8 max-w-2xl mx-auto font-ui leading-relaxed">
         You don't have to. Faster Retro is <span class="font-bold text-black">100% open source</span>. Spin up your own instance. Fork it,
          tweak it, make it yours. Got a feature idea? PRs are always welcome.
          The software is provided under a <a href="https://github.com/JangoCG/fastretro/blob/main/LICENSE.md" target="_blank" class="underline hover:text-black">permissive license with minimal limitations on use</a>.
@@ -457,9 +452,9 @@
 
   <%# === FAQ === %>
   <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 mb-32">
-    <h2 class="text-3xl font-black uppercase tracking-tighter mb-12 text-center">Common questions.</h2>
+    <h2 class="text-3xl font-display font-black mb-12 text-center">Common questions.</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 font-mono text-sm">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 font-ui text-sm">
       <div class="space-y-8">
         <div>
           <h4 class="font-bold mb-2">How does it work?</h4>
@@ -529,13 +524,13 @@
 
   <%# === FINAL CTA === %>
   <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-32 text-center">
-    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter leading-tight mb-8">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-tight mb-8">
       Ready to run<br>
       <span class="text-zinc-400">better retros?</span>
     </h2>
     <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#fff2d2] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
       <span>SIGN UP FREE</span>
-      <span class="font-mono">-></span>
+      <span class="font-ui">-></span>
     <% end %>
   </section>
 

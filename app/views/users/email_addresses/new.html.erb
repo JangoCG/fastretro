@@ -9,7 +9,7 @@
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
-        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
           <%= t("users.email_addresses.new.heading") %>
         </h1>
       </div>
@@ -20,7 +20,7 @@
 
       <%= form_with url: user_email_addresses_path(user_id: @user.id), method: :post, class: "flex flex-col gap-6 relative z-10", data: { controller: "form", turbo: false } do |form| %>
         <div class="flex flex-col gap-2">
-          <label for="email_address" class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">
+          <label for="email_address" class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui">
             <%= t("users.email_addresses.new.label") %>
           </label>
           <%= form.email_field :email_address,

@@ -13,7 +13,7 @@
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       
       <div class="relative z-10 flex items-center justify-between">
-        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
            <%= t("retros.edit.heading") %>
         </h1>
 
@@ -34,7 +34,7 @@
     </div>
 
     <%# Footer Metadata %>
-    <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
+    <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-ui uppercase text-zinc-500">
       <div class="flex items-center gap-2">
         <span class="font-bold text-zinc-900"><%= t("shared.created") %>:</span>
         <span><%= time_ago_in_words(@retro.created_at) %> <%= t("shared.ago") %></span>

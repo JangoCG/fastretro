@@ -9,7 +9,7 @@
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
-        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
           Edit Usage Limit
         </h1>
       </div>
@@ -24,7 +24,7 @@
 
         <%= form_with model: @join_code, url: account_join_code_path, method: :patch, html: { class: "space-y-6 w-full" } do |form| %>
           <div>
-            <label for="account_join_code_usage_limit" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono mb-2">
+            <label for="account_join_code_usage_limit" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest font-ui mb-2">
               Maximum Uses
             </label>
             <div class="flex justify-center">
@@ -32,7 +32,7 @@
                     required: true,
                     autofocus: true,
                     in: 0..Account::JoinCode::USAGE_LIMIT_MAX,
-                    class: "w-full max-w-[12ch] px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-black text-center rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" %>
+                    class: "w-full max-w-[12ch] px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-display font-black text-center rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" %>
             </div>
           </div>
 

@@ -7,7 +7,7 @@
         </div>
         <div>
           <div class="font-bold text-zinc-900 text-sm"><%= t("account.settings.integrations.jira") %></div>
-          <div class="text-[0.6rem] font-mono text-zinc-500 uppercase">
+          <div class="text-[0.6rem] font-ui text-zinc-500 uppercase">
             <%= Current.account.jira_integration&.persisted? ? t("account.settings.integrations.connected") : t("account.settings.integrations.not_configured") %>
           </div>
         </div>

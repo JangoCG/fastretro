@@ -9,11 +9,11 @@
   <%# Page Title %>
   <div class="mb-10">
     <div class="flex items-center justify-between gap-4">
-      <h1 class="font-black text-3xl sm:text-4xl lg:text-5xl text-zinc-900 uppercase tracking-tighter leading-none">
+      <h1 class="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-zinc-900 leading-none">
         Admin Stats
       </h1>
       <%= button_to "Trigger Test Exception", admin_test_exception_path, method: :post,
-        class: "flex-shrink-0 font-mono text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-red-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer",
+        class: "flex-shrink-0 font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-red-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer",
         data: { confirm: "This will raise an exception in the backend. Continue?" } %>
     </div>
     <div class="h-[3px] bg-zinc-900 mt-4"></div>
@@ -25,10 +25,10 @@
     <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "group", class: "text-3xl text-blue-600" %>
-        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Accounts</h2>
+        <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Accounts</h2>
       </div>
-      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@accounts_total) %></div>
-      <div class="flex gap-6 font-mono text-sm">
+      <div class="text-5xl font-display font-black text-zinc-900 mb-4"><%= number_with_delimiter(@accounts_total) %></div>
+      <div class="flex gap-6 font-ui text-sm">
         <div>
           <span class="text-zinc-400">7d:</span>
           <span class="font-bold text-zinc-700"><%= number_with_delimiter(@accounts_last_7_days) %></span>
@@ -44,10 +44,10 @@
     <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "person", class: "text-3xl text-emerald-600" %>
-        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Identities</h2>
+        <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Identities</h2>
       </div>
-      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@identities_total) %></div>
-      <div class="flex gap-6 font-mono text-sm">
+      <div class="text-5xl font-display font-black text-zinc-900 mb-4"><%= number_with_delimiter(@identities_total) %></div>
+      <div class="flex gap-6 font-ui text-sm">
         <div>
           <span class="text-zinc-400">7d:</span>
           <span class="font-bold text-zinc-700"><%= number_with_delimiter(@identities_last_7_days) %></span>
@@ -63,10 +63,10 @@
     <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "history", class: "text-3xl text-flame" %>
-        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Retros</h2>
+        <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Retros</h2>
       </div>
-      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@retros_total) %></div>
-      <div class="flex gap-6 font-mono text-sm">
+      <div class="text-5xl font-display font-black text-zinc-900 mb-4"><%= number_with_delimiter(@retros_total) %></div>
+      <div class="flex gap-6 font-ui text-sm">
         <div>
           <span class="text-zinc-400">7d:</span>
           <span class="font-bold text-zinc-700"><%= number_with_delimiter(@retros_last_7_days) %></span>
@@ -82,10 +82,10 @@
     <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "chat", class: "text-3xl text-amber-600" %>
-        <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Feedbacks</h2>
+        <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Feedbacks</h2>
       </div>
-      <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@feedbacks_total) %></div>
-      <div class="flex gap-6 font-mono text-sm">
+      <div class="text-5xl font-display font-black text-zinc-900 mb-4"><%= number_with_delimiter(@feedbacks_total) %></div>
+      <div class="flex gap-6 font-ui text-sm">
         <div>
           <span class="text-zinc-400">7d:</span>
           <span class="font-bold text-zinc-700"><%= number_with_delimiter(@feedbacks_last_7_days) %></span>
@@ -115,12 +115,12 @@
             <div class="flex justify-between items-start gap-4">
               <div class="min-w-0 flex-1">
                 <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
-                <div class="font-mono text-xs text-zinc-500 mt-1">
+                <div class="font-ui text-xs text-zinc-500 mt-1">
                   #<%= account.external_account_id %> &middot;
                   <%= owner_email || "No owner" %>
                 </div>
               </div>
-              <div class="font-mono text-xs text-zinc-500 whitespace-nowrap bg-zinc-200 px-3 py-1.5 border border-zinc-300">
+              <div class="font-ui text-xs text-zinc-500 whitespace-nowrap bg-zinc-200 px-3 py-1.5 border border-zinc-300">
                 <%= time_ago_in_words(account.created_at) %>
               </div>
             </div>
@@ -143,7 +143,7 @@
           <li class="px-6 py-4 hover:bg-[#f4f7fb] transition-colors">
             <div class="flex justify-between items-start gap-4">
               <div class="flex items-center gap-4 min-w-0 flex-1">
-                <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono text-sm font-bold border-2 border-zinc-900
+                <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-ui text-sm font-bold border-2 border-zinc-900
                   <%= case index
                       when 0 then 'bg-[#FFD700] text-zinc-900'
                       when 1 then 'bg-[#C0C0C0] text-zinc-900'
@@ -154,18 +154,18 @@
                 </span>
                 <div class="min-w-0 flex-1">
                   <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
-                  <div class="font-mono text-xs text-zinc-500 mt-1">
+                  <div class="font-ui text-xs text-zinc-500 mt-1">
                     #<%= account.external_account_id %> &middot;
                     <%= owner_email || "No owner" %>
                   </div>
                 </div>
               </div>
               <div class="flex-shrink-0 text-right">
-                <div class="text-2xl font-black text-amber-600"><%= number_with_delimiter(account.retros_count) %></div>
-                <div class="font-mono text-xs text-zinc-500 uppercase">retros</div>
+                <div class="text-2xl font-display font-black text-amber-600"><%= number_with_delimiter(account.retros_count) %></div>
+                <div class="font-ui text-xs text-zinc-500 uppercase">retros</div>
                 <% if account.last_retro_at.present? %>
                   <% days_ago = (Time.current - account.last_retro_at.to_time).to_i / 1.day %>
-                  <div class="font-mono text-xs mt-1.5 px-2 py-0.5 inline-block border
+                  <div class="font-ui text-xs mt-1.5 px-2 py-0.5 inline-block border
                     <%= if days_ago <= 7
                           'text-emerald-700 bg-emerald-50 border-emerald-200'
                         elsif days_ago <= 30
@@ -176,7 +176,7 @@
                     <%= time_ago_in_words(account.last_retro_at) %> ago
                   </div>
                 <% else %>
-                  <div class="font-mono text-xs mt-1.5 px-2 py-0.5 inline-block border text-zinc-400 bg-zinc-50 border-zinc-200">
+                  <div class="font-ui text-xs mt-1.5 px-2 py-0.5 inline-block border text-zinc-400 bg-zinc-50 border-zinc-200">
                     no retros
                   </div>
                 <% end %>
@@ -201,10 +201,10 @@
       <table class="w-full min-w-[720px]">
         <thead>
           <tr class="border-b-2 border-zinc-300 bg-[#f4f7fb]">
-            <th class="text-left px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Company (from owner email)</th>
-            <th class="text-left px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Account</th>
-            <th class="text-left px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Owner Email</th>
-            <th class="text-right px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Users</th>
+            <th class="text-left px-6 py-3 font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Company (from owner email)</th>
+            <th class="text-left px-6 py-3 font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Account</th>
+            <th class="text-left px-6 py-3 font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Owner Email</th>
+            <th class="text-right px-6 py-3 font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Users</th>
           </tr>
         </thead>
         <tbody class="divide-y-2 divide-zinc-200">
@@ -212,12 +212,12 @@
             <% owner_email = account.owner_identity&.email_address %>
             <% company = owner_email.to_s.split("@", 2).last.presence || "Unknown company" %>
             <tr class="hover:bg-[#f4f7fb] transition-colors">
-              <td class="px-6 py-3 font-mono text-sm text-zinc-700"><%= company %></td>
+              <td class="px-6 py-3 font-ui text-sm text-zinc-700"><%= company %></td>
               <td class="px-6 py-3 text-sm font-bold text-zinc-900">
                 <%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %>
-                <span class="font-mono text-xs text-zinc-500">#<%= account.external_account_id %></span>
+                <span class="font-ui text-xs text-zinc-500">#<%= account.external_account_id %></span>
               </td>
-              <td class="px-6 py-3 font-mono text-sm text-zinc-700"><%= owner_email || "No owner" %></td>
+              <td class="px-6 py-3 font-ui text-sm text-zinc-700"><%= owner_email || "No owner" %></td>
               <td class="px-6 py-3 text-right text-sm font-black text-emerald-700"><%= number_with_delimiter(account[:users_count].to_i) %></td>
             </tr>
           <% end %>
@@ -244,21 +244,21 @@
               <div class="flex justify-between items-start gap-4">
                 <div class="min-w-0 flex-1">
                   <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
-                  <div class="font-mono text-xs text-zinc-500 mt-1">
+                  <div class="font-ui text-xs text-zinc-500 mt-1">
                     #<%= account.external_account_id %> &middot;
                     <%= owner_email || "No owner" %>
                   </div>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="font-mono text-xs px-3 py-1.5 border border-flame bg-tint-peach text-zinc-900 font-bold uppercase"><%= account.subscription.plan.name %></span>
-                  <span class="font-mono text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase"><%= account.subscription.status %></span>
+                  <span class="font-ui text-xs px-3 py-1.5 border border-flame bg-tint-peach text-zinc-900 font-bold uppercase"><%= account.subscription.plan.name %></span>
+                  <span class="font-ui text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase"><%= account.subscription.status %></span>
                 </div>
               </div>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <div class="px-6 py-8 text-center font-mono text-sm text-zinc-400">No paying customers yet</div>
+        <div class="px-6 py-8 text-center font-ui text-sm text-zinc-400">No paying customers yet</div>
       <% end %>
     </div>
 
@@ -278,18 +278,18 @@
               <div class="flex justify-between items-start gap-4">
                 <div class="min-w-0 flex-1">
                   <div class="text-base font-bold text-zinc-900 truncate"><%= link_to account.name, edit_admin_account_path(account.external_account_id), class: "hover:underline" %></div>
-                  <div class="font-mono text-xs text-zinc-500 mt-1">
+                  <div class="font-ui text-xs text-zinc-500 mt-1">
                     #<%= account.external_account_id %> &middot;
                     <%= owner_email || "No owner" %>
                   </div>
                 </div>
-                <span class="font-mono text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase">Comped</span>
+                <span class="font-ui text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase">Comped</span>
               </div>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <div class="px-6 py-8 text-center font-mono text-sm text-zinc-400">No comped accounts</div>
+        <div class="px-6 py-8 text-center font-ui text-sm text-zinc-400">No comped accounts</div>
       <% end %>
     </div>
   </div>

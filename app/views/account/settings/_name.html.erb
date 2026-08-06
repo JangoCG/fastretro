@@ -1,5 +1,5 @@
 <%= form_with model: @account, url: account_settings_path, method: :patch, class: "flex flex-col gap-2", data: { controller: "form", action: "input->form#markDirty" } do |form| %>
-  <label for="account_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+  <label for="account_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-ui">
     <%= t("account.settings.name.label") %>
   </label>
   
@@ -22,5 +22,5 @@
 <% end %>
 
 <% if @account.errors[:name].any? %>
-  <p class="text-[0.6rem] font-mono text-red-600 uppercase mt-2 tracking-wide font-bold"><%= t("account.settings.name.error", message: @account.errors[:name].first) %></p>
+  <p class="text-[0.6rem] font-ui text-red-600 uppercase mt-2 tracking-wide font-bold"><%= t("account.settings.name.error", message: @account.errors[:name].first) %></p>
 <% end %>

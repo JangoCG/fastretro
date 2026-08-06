@@ -72,11 +72,6 @@
     <%= analytics_tag %>
   </head>
   <body class="<%= content_for(:body_class) || "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden" %> flex flex-col min-h-screen">
-    <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
-    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-         style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
-    </div>
-
     <%= render LandingPageHeaderComponent.new %>
 
     <main class="flex-1 pt-24 pb-20 overflow-x-hidden">

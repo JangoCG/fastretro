@@ -14,7 +14,7 @@
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       
       <div class="relative z-10 flex items-center">
-        <h1 class="text-2xl font-black text-zinc-900 uppercase tracking-tighter">
+        <h1 class="text-2xl font-display font-black text-zinc-900 uppercase">
           <%= t("users.edit.heading") %>
         </h1>
       </div>
@@ -29,7 +29,7 @@
         
         <%# Industrial Field %>
         <div>
-          <label for="user_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+          <label for="user_name" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-ui">
             <%= t("users.edit.name_label") %>
           </label>
           <%= form.text_field :name,
@@ -43,12 +43,12 @@
 
         <%# Industrial Field %>
         <div>
-          <label for="user_email_address" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-mono">
+          <label for="user_email_address" class="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1.5 font-ui">
             <%= t("users.edit.email_label") %>
           </label>
           <div class="flex items-center gap-3">
             <%= form.email_field :email_address,
-                class: "flex-1 px-4 py-3 bg-zinc-100 border-[2px] border-zinc-300 text-zinc-500 font-mono text-sm cursor-not-allowed rounded-none",
+                class: "flex-1 px-4 py-3 bg-zinc-100 border-[2px] border-zinc-300 text-zinc-500 font-ui text-sm cursor-not-allowed rounded-none",
                 autocomplete: "username",
                 required: true,
                 readonly: true,
@@ -66,7 +66,7 @@
         <% if @user.errors.any? %>
           <div class="p-4 bg-red-50 border-[2px] border-red-500">
             <p class="font-bold text-red-700 uppercase tracking-wide text-xs mb-2"><%= t("users.edit.fix_errors") %></p>
-            <ul class="text-xs text-red-600 font-mono list-disc list-inside">
+            <ul class="text-xs text-red-600 font-ui list-disc list-inside">
               <% @user.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
               <% end %>
