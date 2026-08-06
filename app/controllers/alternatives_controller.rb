@@ -172,7 +172,6 @@ class AlternativesController < ApplicationController
     "Optional action-item review before starting a new retro",
     "Anonymous brainstorming across \"went well\" and \"could be better\"",
     "Drag-and-drop grouping of related feedback",
-    "Dot voting with per-participant vote limits",
     "Discussion phase with action-item creation",
     "Real-time updates via Turbo Streams",
     "Export retro results (CSV/XLSX)",

@@ -3,7 +3,7 @@
 <% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black" %>
 <% content_for :title, "Free Retro Tool — Open Source & Self-Hosted | Faster Retro" %>
 <% content_for :meta_title, "Free Retro Tool — Open Source & Self-Hosted | Faster Retro" %>
-<% content_for :meta_description, "Free open-source retrospective tool for agile teams. Anonymous brainstorming, voting, action items. Magic-link login. Self-host or use our cloud." %>
+<% content_for :meta_description, "Free open-source retrospective tool for agile teams. Anonymous brainstorming, grouping, action items. Magic-link login. Self-host or use our cloud." %>
 <% content_for :meta_keywords, "free retro tool, free retrospective tool, open source retrospective tool, sprint retrospective tool, agile retro tool, self-hosted retrospective" %>
 <% content_for :canonical_url, root_url(script_name: nil) %>
 <% paid_price = @paid_price.present? ? number_with_precision(@paid_price, precision: (@paid_price % 1).zero? ? 0 : 2, strip_insignificant_zeros: true) : nil %>
@@ -31,7 +31,7 @@
             FOR REMOTE TEAMS
           </h1>
           <p class="max-w-xl mx-auto text-xs sm:text-sm font-bold font-ui text-zinc-600 bg-zinc-200/50 p-2 inline-block">
-            BRAINSTORM. GROUP. VOTE. DISCUSS.<br>
+            BRAINSTORM. GROUP. DISCUSS.<br>
             <span class="bg-black text-white px-1">THE MODERN SPIN</span> ON TEAM RETROSPECTIVES.<br>
             <span class="text-zinc-500">STREAMLINED AND PASSWORDLESS. SELF-HOST OR USE OUR CLOUD.</span>
           </p>
@@ -180,20 +180,11 @@
               rotation: 4
             ) %>
 
-        <%# Phase 4: Voting %>
-        <%= render PhaseTagComponent.new(
-              phase: :voting,
-              phase_title: "PHASE 04\nVOTE",
-              phase_instruction: "EACH PERSON GETS 3 VOTES. PRIORITIZE WHAT MATTERS MOST.",
-              phase_footer: "DEMOCRATIC FOCUS",
-              rotation: -3
-            ) %>
-
-        <%# Phase 5: Discussion %>
+        <%# Phase 4: Discussion %>
         <%= render PhaseTagComponent.new(
               phase: :discussion,
-              phase_title: "PHASE 05\nACT",
-              phase_instruction: "DISCUSS TOP-VOTED ITEMS. CREATE ACTION ITEMS FOR YOUR NEXT SPRINT.",
+              phase_title: "PHASE 04\nACT",
+              phase_instruction: "DISCUSS THE GROUPED TOPICS. CREATE ACTION ITEMS FOR YOUR NEXT SPRINT.",
               phase_footer: "DRIVE CHANGE",
               rotation: 6
             ) %>
@@ -222,17 +213,10 @@
             Group similar feedback to identify themes and avoid redundant discussions.
           </p>
         </div>
-        <div class="border-l-4 border-flame pl-4 sm:pl-6">
-          <h3 class="font-bold text-base mb-2">04. Vote to Prioritize</h3>
-          <p class="text-zinc-600 leading-relaxed">
-            Everyone gets 3 votes to spend on the items that matter most. Cards and groups sort by vote count
-            in real-time so the team focuses on high-priority topics first.
-          </p>
-        </div>
         <div class="border-l-4 border-emerald-400 pl-4 sm:pl-6">
-          <h3 class="font-bold text-base mb-2">05. Act: Create Sprint Actions</h3>
+          <h3 class="font-bold text-base mb-2">04. Act: Create Sprint Actions</h3>
           <p class="text-zinc-600 leading-relaxed">
-            Work through top-voted feedback together. Create action items with owners and due dates for your next sprint.
+            Work through the grouped feedback together. Create action items with owners and due dates for your next sprint.
             Actions persist after the retro ends—track progress and drive continuous improvement.
           </p>
         </div>
@@ -458,11 +442,11 @@
       <div class="space-y-8">
         <div>
           <h4 class="font-bold mb-2">How does it work?</h4>
-          <p class="text-zinc-600">Create a retro, invite your team via link, and guide everyone through four phases: brainstorming (collect ideas anonymously), grouping (organize similar items), voting (prioritize what matters), and discussion (talk through top items and create action items).</p>
+          <p class="text-zinc-600">Create a retro, invite your team via link, and guide everyone through three phases: brainstorming (collect ideas anonymously), grouping (organize similar items), and discussion (talk through the themes and create action items).</p>
         </div>
         <div>
           <h4 class="font-bold mb-2">Is it real-time?</h4>
-          <p class="text-zinc-600">Yes. All participants see updates instantly. When someone adds a card, votes, or moves to the next phase, everyone sees it immediately. No refreshing needed.</p>
+          <p class="text-zinc-600">Yes. All participants see updates instantly. When someone adds a card, groups items, or moves to the next phase, everyone sees it immediately. No refreshing needed.</p>
         </div>
         <div>
           <h4 class="font-bold mb-2">Self-hosted?</h4>
@@ -508,9 +492,9 @@
         "@type": "FAQPage",
         mainEntity: [
           { "@type": "Question", name: "How does it work?",
-            acceptedAnswer: { "@type": "Answer", text: "Create a retro, invite your team via link, and guide everyone through four phases: brainstorming (collect ideas anonymously), grouping (organize similar items), voting (prioritize what matters), and discussion (talk through top items and create action items)." } },
+            acceptedAnswer: { "@type": "Answer", text: "Create a retro, invite your team via link, and guide everyone through three phases: brainstorming (collect ideas anonymously), grouping (organize similar items), and discussion (talk through the themes and create action items)." } },
           { "@type": "Question", name: "Is it real-time?",
-            acceptedAnswer: { "@type": "Answer", text: "Yes. All participants see updates instantly. When someone adds a card, votes, or moves to the next phase, everyone sees it immediately. No refreshing needed." } },
+            acceptedAnswer: { "@type": "Answer", text: "Yes. All participants see updates instantly. When someone adds a card, groups items, or moves to the next phase, everyone sees it immediately. No refreshing needed." } },
           { "@type": "Question", name: "Self-hosted?",
             acceptedAnswer: { "@type": "Answer", text: "Absolutely. Faster Retro is fully open source. Clone the repo, run it on your own server, and customize it however you want. No license fees, no restrictions on internal use." } },
           { "@type": "Question", name: "What counts toward the free tier?",
