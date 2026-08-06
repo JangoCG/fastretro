@@ -2,3 +2,46 @@
 @import "./custom-tailwind.css";
 
 @plugin "@tailwindcss/typography";
+
+@theme {
+  /* Brand palette, derived from the juicymo.cz design language.
+     Named navy/slate/mute/flame deliberately — lexxy.css already owns
+     a --color-ink-* ramp on :root and reusing "ink" would collide. */
+  --color-navy: #011232;
+  --color-slate: #394763;
+  --color-mute: #7b8397;
+  --color-flame: #ff5d03;
+
+  --color-tint-peach: #ffeedf;
+  --color-tint-peri: #dcddff;
+  --color-tint-butter: #fff2d2;
+  --color-tint-mist: #e7ecf6;
+  --color-tint-sky: #dff7fb;
+
+  --font-display: "Cabin", ui-sans-serif, system-ui, sans-serif;
+  --font-ui: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Cabin", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.85rem;
+  --radius-pill: 2.125rem;
+
+  --shadow-lift: 0 .5rem 5rem rgb(1 18 50 / .15);
+
+  /* Remap Tailwind's own scale so the ~1000 zinc/black utilities already
+     written across the templates render the brand palette with no template
+     edits. Verified: overriding --color-zinc-900 changes .border-zinc-900,
+     .text-zinc-900, and .bg-zinc-900 together. */
+  --color-zinc-950: #000717;
+  --color-zinc-900: #011232;
+  --color-zinc-800: #0a1c3f;
+  --color-zinc-700: #1d2c4d;
+  --color-zinc-600: #394763;
+  --color-zinc-500: #7b8397;
+  --color-zinc-400: #9aa1b1;
+  --color-zinc-300: #c3c9d6;
+  --color-zinc-200: #dde3ee;
+  --color-zinc-100: #e7ecf6;
+  --color-zinc-50: #f4f7fb;
+
+  --color-black: #011232;
+}

@@ -2,7 +2,7 @@
 
 /* CSS Variables needed for cards */
 :root {
-  --card-color: var(--color-ink-medium, #6b7280);
+  --card-color: var(--color-ink-medium, #7b8397);
   --text-xx-large: 1.5rem;
   --block-space: 1rem;
   --block-space-half: 0.5rem;
