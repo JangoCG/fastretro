@@ -3,6 +3,6 @@ class MagicLinkMailer < ApplicationMailer
     @magic_link = magic_link
     @identity = @magic_link.identity
 
-    mail to: @identity.email_address, subject: "Your FastRetro code is #{@magic_link.code}"
+    mail to: @identity.email_address, subject: "Your Faster Retro code is #{@magic_link.code}"
   end
 end

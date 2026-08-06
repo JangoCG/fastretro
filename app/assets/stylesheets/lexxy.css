@@ -2,7 +2,7 @@
 @import url("lexxy-content.css") layer(base);
 @import url("lexxy-editor.css") layer(base);
 
-/* Fast Retro's industrial theme mapped onto Lexxy's public variables. */
+/* Faster Retro's industrial theme mapped onto Lexxy's public variables. */
 :root {
   --color-canvas: #f8f5ec;
   --color-ink: #18181b;
@@ -63,7 +63,7 @@ lexxy-toolbar {
   color: currentColor;
 }
 
-/* Fast Retro exposes image uploads, but not arbitrary files or text highlighting. */
+/* Faster Retro exposes image uploads, but not arbitrary files or text highlighting. */
 lexxy-toolbar button[name="file"],
 lexxy-toolbar lexxy-highlight-dropdown {
   display: none;

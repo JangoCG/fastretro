@@ -6,7 +6,7 @@ class AlternativesControllerTest < ActionDispatch::IntegrationTest
       get alternative_easyretro_path
 
       assert_response :success
-      assert_in_body "FAST RETRO VS"
+      assert_in_body "FASTER RETRO VS"
       assert_in_body "EasyRetro"
     end
   end

@@ -1,7 +1,7 @@
 en:
   # ── Shared / Global ────────────────────────────────────────────
   shared:
-    app_name: "FastRetro"
+    app_name: "Faster Retro"
     retros: "Retros"
     retro: "Retro"
     profile: "Profile"
@@ -284,17 +284,17 @@ en:
       subscription:
         heading: "Subscription"
         used_retros_html: "You've used <u>%{used}</u> free retros out of %{limit}"
-        upgrade_prompt_html: "To keep using Fast Retro past %{limit} retros, it's only <strong>%{price}/month</strong> for <strong>unlimited retros, unlimited users</strong>."
+        upgrade_prompt_html: "To keep using Faster Retro past %{limit} retros, it's only <strong>%{price}/month</strong> for <strong>unlimited retros, unlimited users</strong>."
         upgrade_button: "Upgrade to Unlimited for %{price}/month"
         open_checkout: "Open Stripe Checkout"
         cancel_anytime: "Cancel anytime, no contracts."
         current_plan_free_html: "Right now you're on the <strong>%{plan}</strong> plan which includes %{limit} retros and unlimited users."
-        thank_you: "Thank you for buying Fast Retro!"
+        thank_you: "Thank you for buying Faster Retro!"
         current_plan_paid_html: "You're currently on the <strong>%{plan}</strong> plan with unlimited retros and unlimited users."
         manage_billing: "Manage Billing"
         pricing_unavailable: "Live pricing is currently unavailable. Please try again in a moment."
-        ends_on: "Your Fast Retro subscription ends on"
-        ended_on: "Your Fast Retro subscription ended on"
+        ends_on: "Your Faster Retro subscription ends on"
+        ended_on: "Your Faster Retro subscription ended on"
         next_payment: "Your next payment is <b>%{amount}</b> on"
 
   # ── Join Codes & Invites ──────────────────────────────────────
@@ -396,7 +396,7 @@ en:
       from: "FROM:"
       you: "You"
       to: "TO:"
-      fastretro_team: "FASTRETRO TEAM"
+      fastretro_team: "FASTER RETRO TEAM"
       send_feedback: "Send Feedback"
 
   # ── Errors ─────────────────────────────────────────────────────
@@ -442,7 +442,7 @@ en:
       description: "Share this link to invite team members:"
       copy: "Copy"
     retro_footer:
-      brand: "FASTRETRO // 2026"
+      brand: "FASTER RETRO // 2026"
       blog: "BLOG"
       imprint: "IMPRINT"
       privacy: "PRIVACY"
@@ -470,10 +470,10 @@ en:
   # ── Mailers ────────────────────────────────────────────────────
   mailers:
     magic_link:
-      sign_in_subject: "Fast Retro verification code"
-      sign_in_body: "Please enter this 6-character verification code on the FastRetro sign-in page:"
-      sign_up_subject: "Welcome to Fast Retro!"
-      sign_up_body: "Please enter this 6-character verification code on the FastRetro sign-up page to create your new account:"
+      sign_in_subject: "Faster Retro verification code"
+      sign_in_body: "Please enter this 6-character verification code on the Faster Retro sign-in page:"
+      sign_up_subject: "Welcome to Faster Retro!"
+      sign_up_body: "Please enter this 6-character verification code on the Faster Retro sign-up page to create your new account:"
       code_validity: "This code will work for %{time}."
       need_help: "Need help?"
       send_email: "Send us an email"

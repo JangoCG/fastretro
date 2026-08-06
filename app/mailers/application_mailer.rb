@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV.fetch("MAILER_FROM_ADDRESS", "FastRetro <support@fastretro.app>")
+  default from: ENV.fetch("MAILER_FROM_ADDRESS", "Faster Retro <support@fastretro.app>")
 
   layout "mailer"
   append_view_path Rails.root.join("app/views/mailers")

@@ -15,7 +15,7 @@ Rails.application.configure do
 
     puts ""
     puts "┌─────────────────────────────────────────┐"
-    puts "│         FastRetro Configuration         │"
+    puts "│       Faster Retro Configuration        │"
     puts "├─────────────────────────────────────────┤"
     puts "│  SaaS Mode:         #{FastRetro.saas? ? '✓ ENABLED ' : '✗ disabled'}          │"
     puts "│  Multi-Tenant Mode: #{Account.multi_tenant? ? '✓ ENABLED ' : '✗ disabled'}          │"

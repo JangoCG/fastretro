@@ -36,7 +36,7 @@ class BlogPost
       slug: slug,
       title: frontmatter["title"] || slug.titleize,
       date: parse_date(frontmatter["date"]),
-      author: frontmatter["author"] || "FastRetro Team",
+      author: frontmatter["author"] || "Faster Retro Team",
       description: frontmatter["description"] || "",
       image: frontmatter["image"],
       content: MARKDOWN.render(body).html_safe

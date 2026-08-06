@@ -4,11 +4,11 @@
     <% unless @disable_view_transition %><meta name="view-transition" content="same-origin"><% end %>
     <%# === PRIMARY META TAGS === %>
     <meta charset="UTF-8">
-    <title><%= content_for(:title) || "Fast Retro Blog — Building in Public" %></title>
-    <meta name="title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro Blog — Building in Public" %>">
-    <meta name="description" content="<%= content_for(:meta_description) || "Follow along as we build Fast Retro in public. Tips on retrospectives, agile practices, and behind-the-scenes updates." %>">
-    <meta name="keywords" content="<%= content_for(:meta_keywords) || "retrospective, agile, scrum, sprint retrospective, team retrospective, fast retro blog, building in public" %>">
-    <meta name="author" content="<%= content_for(:meta_author) || "Fast Retro" %>">
+    <title><%= content_for(:title) || "Faster Retro Blog — Building in Public" %></title>
+    <meta name="title" content="<%= content_for(:meta_title) || content_for(:title) || "Faster Retro Blog — Building in Public" %>">
+    <meta name="description" content="<%= content_for(:meta_description) || "Follow along as we build Faster Retro in public. Tips on retrospectives, agile practices, and behind-the-scenes updates." %>">
+    <meta name="keywords" content="<%= content_for(:meta_keywords) || "retrospective, agile, scrum, sprint retrospective, team retrospective, faster retro blog, building in public" %>">
+    <meta name="author" content="<%= content_for(:meta_author) || "Faster Retro" %>">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,8 +16,8 @@
     <%# === MOBILE & APP META === %>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Fast Retro">
-    <meta name="application-name" content="Fast Retro">
+    <meta name="apple-mobile-web-app-title" content="Faster Retro">
+    <meta name="application-name" content="Faster Retro">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#18181b">
 
@@ -27,12 +27,12 @@
     <%# === OPEN GRAPH / FACEBOOK === %>
     <meta property="og:type" content="<%= content_for(:og_type) || "article" %>">
     <meta property="og:url" content="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
-    <meta property="og:title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro Blog" %>">
-    <meta property="og:description" content="<%= content_for(:meta_description) || "Follow along as we build Fast Retro in public." %>">
+    <meta property="og:title" content="<%= content_for(:meta_title) || content_for(:title) || "Faster Retro Blog" %>">
+    <meta property="og:description" content="<%= content_for(:meta_description) || "Follow along as we build Faster Retro in public." %>">
     <meta property="og:image" content="<%= content_for(:og_image) || image_url("retro-image-no-padding.png") %>">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Fast Retro">
+    <meta property="og:site_name" content="Faster Retro">
     <meta property="og:locale" content="en_US">
     <% if content_for?(:published_time) %>
     <meta property="article:published_time" content="<%= content_for(:published_time) %>">
@@ -44,8 +44,8 @@
     <%# === TWITTER CARD === %>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
-    <meta name="twitter:title" content="<%= content_for(:meta_title) || content_for(:title) || "Fast Retro Blog" %>">
-    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Follow along as we build Fast Retro in public." %>">
+    <meta name="twitter:title" content="<%= content_for(:meta_title) || content_for(:title) || "Faster Retro Blog" %>">
+    <meta name="twitter:description" content="<%= content_for(:meta_description) || "Follow along as we build Faster Retro in public." %>">
     <meta name="twitter:image" content="<%= content_for(:og_image) || image_url("retro-image-no-padding.png") %>">
 
     <%# === STRUCTURED DATA (JSON-LD) === %>

@@ -8,7 +8,7 @@ class AlternativesController < ApplicationController
     easyretro: {
       name: "EasyRetro",
       slug: "easyretro",
-      meta_title: "EasyRetro Alternative: Free Open Source Retro | Fast Retro",
+      meta_title: "EasyRetro Alternative: Free Open Source Retro | Faster Retro",
       meta_description: "Switch from EasyRetro to a free, open-source retrospective tool. Self-host, flat per-account pricing, passwordless magic-link login. Start free.",
       meta_keywords: "easyretro alternative, free retrospective tool, open source retro tool, self-hosted retrospective",
       competitor_values: {
@@ -23,7 +23,7 @@ class AlternativesController < ApplicationController
       },
       reasons: [
         "Use one flat account price instead of scaling plan complexity as your retro usage grows.",
-        "Run Fast Retro on your own infrastructure with full code visibility and no platform lock-in.",
+        "Run Faster Retro on your own infrastructure with full code visibility and no platform lock-in.",
         "Keep facilitation focused with an explicit phase flow from brainstorming to action items.",
         "Stay fast for teams with passwordless magic-link sign-in."
       ]
@@ -31,8 +31,8 @@ class AlternativesController < ApplicationController
     parabol: {
       name: "Parabol",
       slug: "parabol",
-      meta_title: "Parabol Alternative: Free Open Source Retro | Fast Retro",
-      meta_description: "Looking for a Parabol alternative? Fast Retro is a free, open-source retrospective tool. Flat account pricing, self-host, magic-link login. No seat fees.",
+      meta_title: "Parabol Alternative: Free Open Source Retro | Faster Retro",
+      meta_description: "Looking for a Parabol alternative? Faster Retro is a free, open-source retrospective tool. Flat account pricing, self-host, magic-link login. No seat fees.",
       meta_keywords: "parabol alternative, free retrospective tool, open source retro tool, self-hosted retrospective",
       competitor_values: {
         pricing_model: "Seat-based plans",
@@ -54,7 +54,7 @@ class AlternativesController < ApplicationController
     metroretro: {
       name: "Metro Retro",
       slug: "metroretro",
-      meta_title: "Metro Retro Alternative: Free & Open Source | Fast Retro",
+      meta_title: "Metro Retro Alternative: Free & Open Source | Faster Retro",
       meta_description: "Switch from Metro Retro to a free, open-source retrospective tool. Self-host for free, flat per-account pricing, magic-link login. Start your first retro free.",
       meta_keywords: "metro retro alternative, metroretro alternative, free retrospective tool, open source retro tool",
       competitor_values: {
@@ -77,8 +77,8 @@ class AlternativesController < ApplicationController
     teamretro: {
       name: "TeamRetro",
       slug: "teamretro",
-      meta_title: "TeamRetro Alternative: Free Open Source Retro | Fast Retro",
-      meta_description: "TeamRetro feels heavy? Fast Retro is a free, open-source retrospective tool. Self-host, flat account pricing, magic-link login. No per-seat fees.",
+      meta_title: "TeamRetro Alternative: Free Open Source Retro | Faster Retro",
+      meta_description: "TeamRetro feels heavy? Faster Retro is a free, open-source retrospective tool. Self-host, flat account pricing, magic-link login. No per-seat fees.",
       meta_keywords: "teamretro alternative, free retrospective tool, open source retro tool, scrum retrospective software",
       competitor_values: {
         pricing_model: "Tiered plans",
@@ -100,8 +100,8 @@ class AlternativesController < ApplicationController
     quickretro: {
       name: "QuickRetro",
       slug: "quickretro",
-      meta_title: "QuickRetro Alternative: Free Open Source Retro | Fast Retro",
-      meta_description: "Looking for a QuickRetro alternative? Fast Retro is a free, open-source sprint retrospective tool. Self-host, flat account pricing, magic-link login.",
+      meta_title: "QuickRetro Alternative: Free Open Source Retro | Faster Retro",
+      meta_description: "Looking for a QuickRetro alternative? Faster Retro is a free, open-source sprint retrospective tool. Self-host, flat account pricing, magic-link login.",
       meta_keywords: "quickretro alternative, quick retro alternative, free retrospective tool, open source retro tool",
       competitor_values: {
         pricing_model: "Freemium with paid tiers",
@@ -123,8 +123,8 @@ class AlternativesController < ApplicationController
     reetro: {
       name: "Reetro",
       slug: "reetro",
-      meta_title: "Reetro Alternative: Free Open Source Retro | Fast Retro",
-      meta_description: "Looking for a Reetro alternative? Fast Retro is a free, open-source retrospective tool. Self-host, flat per-account pricing, magic-link login. Start free.",
+      meta_title: "Reetro Alternative: Free Open Source Retro | Faster Retro",
+      meta_description: "Looking for a Reetro alternative? Faster Retro is a free, open-source retrospective tool. Self-host, flat per-account pricing, magic-link login. Start free.",
       meta_keywords: "reetro alternative, reetro app alternative, free retrospective tool, open source retro tool",
       competitor_values: {
         pricing_model: "Freemium with paid tiers",
@@ -146,8 +146,8 @@ class AlternativesController < ApplicationController
     funretro: {
       name: "FunRetro",
       slug: "funretro",
-      meta_title: "FunRetro Alternative: Free Open Source Retro | Fast Retro",
-      meta_description: "Looking for a FunRetro alternative? Fast Retro is a free, open-source sprint retrospective tool. Self-host, flat per-account pricing, magic-link login.",
+      meta_title: "FunRetro Alternative: Free Open Source Retro | Faster Retro",
+      meta_description: "Looking for a FunRetro alternative? Faster Retro is a free, open-source sprint retrospective tool. Self-host, flat per-account pricing, magic-link login.",
       meta_keywords: "funretro alternative, funretro retrospective tool alternative, free retrospective tool, open source retro tool",
       competitor_values: {
         pricing_model: "Tiered plans",

@@ -21,7 +21,7 @@ class Admin::StatsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :success
-    assert_in_body "Companies Using Fast Retro"
+    assert_in_body "Companies Using Faster Retro"
     assert_match(/Test Account.*one@example\.com.*3/m, response.body)
     assert_match(/Another Account.*other@example\.com.*1/m, response.body)
   end
