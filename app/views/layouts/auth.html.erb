@@ -14,6 +14,8 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <%= tag.link rel: "preload", href: asset_path("cabin-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
+    <%= tag.link rel: "preload", href: asset_path("inter-700-latin.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
