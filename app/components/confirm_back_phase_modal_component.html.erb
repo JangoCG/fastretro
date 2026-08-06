@@ -8,10 +8,10 @@
 
   <%# Modal Dialog %>
   <dialog data-dialog-target="dialog"
-          class="fixed m-auto inset-0 z-50 w-[90vw] sm:w-[480px] max-w-[480px] p-0 bg-[#ffffff] text-zinc-900 shadow-lift border-[3px] border-zinc-900 outline-none backdrop:bg-zinc-900/50 backdrop:backdrop-blur-sm rounded-card overflow-hidden">
+          class="fixed m-auto inset-0 z-50 w-[90vw] sm:w-[480px] max-w-[480px] p-0 bg-[#ffffff] text-zinc-900 shadow-lift border border-zinc-900/10 outline-none backdrop:bg-zinc-900/50 backdrop:backdrop-blur-sm rounded-card overflow-hidden">
 
     <%# Header %>
-    <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b-[3px] border-zinc-900">
+    <div class="flex justify-between items-center px-4 py-3 bg-zinc-900 text-white border-b border-zinc-900/10">
       <span class="font-black text-sm uppercase tracking-widest">"<%= t("components.confirm_back_phase_modal.confirm") %>"</span>
       <button type="button" data-action="click->dialog#close" class="text-white hover:text-zinc-300 transition-colors">
         <%= icon_tag "close", class: "text-xl" %>

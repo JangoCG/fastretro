@@ -3,14 +3,13 @@
   <%# Structural outline with "flange" effect %>
   <div class="absolute -left-1 -top-1 -right-1 -bottom-1 border-[1px] border-zinc-400 rounded-[1.1rem]"></div>
 
-  <div class="relative flex flex-col bg-[#f4f7fb] border-[4px] border-zinc-900 shadow-lift overflow-hidden rounded-card">
+  <div class="relative flex flex-col bg-[#f4f7fb] border border-zinc-900/10 shadow-lift overflow-hidden rounded-card">
 
     <%# Hazard Strip Header %>
 
     <%# Technical Header %>
-    <div class="px-5 py-4 border-b-[3px] border-zinc-900 bg-white relative overflow-hidden">
+    <div class="px-5 py-4 border-b border-zinc-900/10 bg-white relative overflow-hidden">
       <%# Background Grid for Header %>
-      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
 
       <div class="relative z-10">
         <h2 class="font-black text-lg uppercase text-zinc-900 leading-[0.85] filter drop-shadow-sm">
@@ -25,7 +24,6 @@
     <%# Content Area %>
     <div class="p-4 bg-[#ffffff] relative">
       <%# Background Grid %>
-      <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
       <div class="relative z-10">
         <p class="text-xs text-zinc-600 mb-3 uppercase tracking-wide font-bold">
@@ -55,10 +53,5 @@
       </div>
     </div>
 
-    <%# Technical Footer %>
-    <div class="h-5 border-t-[3px] border-zinc-900 bg-zinc-900 flex items-center justify-between px-3">
-      <div></div>
-       <%# Barcode Effect %>
-    </div>
   </div>
 </div>

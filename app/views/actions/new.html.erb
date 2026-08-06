@@ -6,12 +6,11 @@
 <div class="max-w-3xl mx-auto px-4 py-8 font-sans">
   <%= form_with url: retro_action_publish_path(@retro, @action), method: :post, id: "action_form" do |form| %>
     <%# Industrial Container: Clean, heavy border, no rounded corners %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
+    <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
 
       <%# Header Section %>
-      <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
+      <div class="p-6 border-b border-zinc-900/10 bg-white relative">
         <%# Background Grid %>
-        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
 
         <div class="relative z-10 flex items-center justify-between">
           <%# Action Badge (Purple) %>
@@ -27,7 +26,6 @@
       <%# Content Area %>
       <div class="p-6 min-h-[200px] relative bg-[#ffffff]">
         <%# Background Grid %>
-        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
         <div class="relative z-10" data-controller="lexxy-autofocus">
           <%= form.rich_textarea :content, rich_text_editor_options(
@@ -38,7 +36,7 @@
       </div>
 
       <%# Footer Metadata %>
-      <div class="px-6 py-4 border-t-[3px] border-zinc-900 bg-zinc-50 flex items-center justify-between text-xs font-ui uppercase text-zinc-500">
+      <div class="px-6 py-4 border-t border-zinc-900/10 bg-zinc-50 flex items-center justify-between text-xs font-ui uppercase text-zinc-500">
         <div class="flex items-center gap-2">
           <span class="font-bold text-zinc-900"><%= t("shared.author") + ":" %></span>
           <span><%= Current.user&.name || t("shared.unknown") %></span>
