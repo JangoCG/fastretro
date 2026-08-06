@@ -5,7 +5,7 @@
 
 <div class="max-w-3xl mx-auto px-4 py-8 font-sans">
   <%# Industrial Container: Clean, heavy border, no rounded corners %>
-  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative">
+  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
 
     <%# Header Section %>
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
@@ -61,7 +61,7 @@
   <% if @feedback.user == Current.user %>
     <div class="flex justify-center gap-4 mt-8">
       <%= link_to edit_retro_feedback_path(@retro, @feedback),
-          class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all",
+          class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all rounded-pill",
           data: { controller: "hotkey", action: "keydown.e@document->hotkey#click" } do %>
         <%= icon_tag "pencil", class: "text-sm" %>
         Edit
@@ -69,7 +69,7 @@
 
       <%= button_to retro_feedback_path(@retro, @feedback),
           method: :delete,
-          class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-red-600 border-[2px] border-red-600 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all hover:bg-red-50",
+          class: "group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-red-600 border-[2px] border-red-600 font-bold uppercase tracking-widest text-xs hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all hover:bg-red-50 rounded-pill",
           data: {
             controller: "hotkey",
             action: "keydown.d@document->hotkey#click",

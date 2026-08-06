@@ -4,7 +4,7 @@
     <%= button_to remove_vote_path(first_user_vote),
         method: :delete,
         id: "remove-vote-button-#{voteable.class.name.underscore}_#{voteable.id}",
-        class: "flex items-center justify-center w-8 h-8 bg-zinc-200 border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-300 transition-colors shadow-soft hover:shadow-none",
+        class: "flex items-center justify-center w-8 h-8 bg-zinc-200 border-2 border-zinc-900 text-zinc-700 hover:bg-zinc-300 transition-colors shadow-soft hover:shadow-none rounded-[1.1rem]",
         title: "Remove vote" do %>
       <%= icon_tag "minus", class: "text-lg" %>
     <% end %>
@@ -26,7 +26,7 @@
         method: :post,
         params: { voteable_type: voteable_type, voteable_id: voteable_id },
         id: "add-vote-button-#{voteable.class.name.underscore}_#{voteable.id}",
-        class: "flex items-center justify-center w-8 h-8 bg-flame border-2 border-zinc-900 text-white hover:bg-white hover:text-flame transition-colors shadow-soft hover:shadow-none",
+        class: "flex items-center justify-center w-8 h-8 bg-flame border-2 border-zinc-900 text-white hover:bg-white hover:text-flame transition-colors shadow-soft hover:shadow-none rounded-[1.1rem]",
         title: "Add vote" do %>
       <%= icon_tag "add", class: "text-lg" %>
     <% end %>

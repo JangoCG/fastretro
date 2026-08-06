@@ -5,7 +5,7 @@
 
   <%= link_to user_path(user), class: "flex items-center gap-3 sm:gap-4 min-w-0 flex-1 text-zinc-900 hover:text-zinc-600 transition-colors group/link" do %>
     <%# Squared Avatar %>
-    <div class="w-10 h-10 border-[2px] border-zinc-900 bg-zinc-200 flex items-center justify-center shrink-0 shadow-soft group-hover/link:translate-y-0.5 group-hover/link:shadow-none transition-all">
+    <div class="w-10 h-10 border-[2px] border-zinc-900 bg-zinc-200 flex items-center justify-center shrink-0 shadow-soft group-hover/link:translate-y-0.5 group-hover/link:shadow-none transition-all rounded-[1.1rem]">
       <%= icon_tag "person", class: "w-5 h-5 text-zinc-900" %>
     </div>
     <div class="min-w-0 flex flex-col">
@@ -53,7 +53,7 @@
       label: t("account.settings.users.remove_user", name: user.name),
       disabled: !can_remove,
       # Industrial Square Button
-      class: "w-10 h-10 rounded-none border-[2px] flex items-center justify-center transition-all " + (can_remove ? "border-transparent text-red-600 hover:bg-red-50 hover:border-red-600" : "opacity-40 cursor-not-allowed border-transparent text-zinc-400"),
+      class: "w-10 h-10 rounded-[1.1rem] border-[2px] flex items-center justify-center transition-all" + (can_remove ? "border-transparent text-red-600 hover:bg-red-50 hover:border-red-600" : "opacity-40 cursor-not-allowed border-transparent text-zinc-400"),
       data: { turbo_method: :delete, turbo_confirm: can_remove ? t("account.settings.users.remove_confirm", name: user.name) : nil }
     ) %>
   </div>

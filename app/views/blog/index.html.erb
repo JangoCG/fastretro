@@ -39,7 +39,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <% @posts.each do |post| %>
         <%= link_to blog_post_path(post.slug), class: "group block" do %>
-          <article class="bg-white border-2 border-black h-full flex flex-col hover:-translate-y-1 hover:shadow-lift transition-all duration-300">
+          <article class="bg-white border-2 border-black h-full flex flex-col hover:-translate-y-1 hover:shadow-lift transition-all duration-300 rounded-card overflow-hidden">
             <% if post.image %>
               <div class="aspect-[16/10] overflow-hidden border-b-2 border-black relative">
                 <%= image_tag post.image, alt: post.title, class: "w-full h-full object-cover" %>

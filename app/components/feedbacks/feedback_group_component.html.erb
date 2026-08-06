@@ -14,14 +14,14 @@
   <div class="relative">
     <%# Background stacked cards effect %>
     <% if other_feedbacks.any? %>
-      <div class="absolute -bottom-1 left-1 right-1 h-full bg-zinc-200 border-[2px] border-zinc-900 rounded-sm"></div>
+      <div class="absolute -bottom-1 left-1 right-1 h-full bg-zinc-200 border-[2px] border-zinc-900 rounded-[1.1rem]"></div>
       <% if other_feedbacks.size > 1 %>
-        <div class="absolute -bottom-2 left-2 right-2 h-full bg-zinc-300 border-[2px] border-zinc-900 rounded-sm"></div>
+        <div class="absolute -bottom-2 left-2 right-2 h-full bg-zinc-300 border-[2px] border-zinc-900 rounded-[1.1rem]"></div>
       <% end %>
     <% end %>
 
     <%# Primary card %>
-    <div class="relative bg-white border-[2px] border-zinc-900 shadow-soft overflow-hidden">
+    <div class="relative bg-white border-[2px] border-zinc-900 shadow-soft overflow-hidden rounded-[1.1rem]">
       <%# Group badge %>
       <div class="absolute top-2 right-2 z-10 flex items-center gap-1 <%= discussed? ? 'bg-emerald-300' : 'bg-yellow-400' %> px-2 py-0.5 border border-zinc-900">
         <span class="text-[0.6rem] font-black text-zinc-900 uppercase tracking-wider">

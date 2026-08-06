@@ -1,5 +1,5 @@
 class IconButtonComponent < ApplicationComponent
-  BASE_CLASSES = "group relative flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed border-[2px] rounded-0"
+  BASE_CLASSES = "group relative flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed border-[2px] rounded-[1.1rem]"
 
   VARIANTS = {
     primary: "bg-zinc-900 border-zinc-900 text-[#ffffff] hover:bg-white hover:text-zinc-900 shadow-soft hover:shadow-none active:shadow-none",

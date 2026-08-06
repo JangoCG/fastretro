@@ -19,7 +19,7 @@
 
     <%= form_with url: site_feedback_path, method: :post, local: true, class: "font-sans" do |form| %>
       <%# Industrial Container %>
-      <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative">
+      <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
 
         <%# Header Section %>
         <div class="p-6 border-b-[3px] border-zinc-900 bg-flame relative">
@@ -84,7 +84,7 @@
       <%# Submit Button %>
       <div class="flex justify-center mt-8">
         <button type="submit"
-          class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-flame text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all">
+          class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-flame text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all rounded-pill">
           <%= t("site_feedbacks.new.send_feedback") %>
           <%= icon_tag "arrow-right", class: "text-xl" %>
         </button>

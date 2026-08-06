@@ -65,7 +65,7 @@
     </div>
 
     <% if @post.image %>
-      <div class="w-full border-2 border-black p-2 bg-white shadow-lift">
+      <div class="w-full border-2 border-black p-2 bg-white shadow-lift rounded-card overflow-hidden">
         <div class="aspect-[21/9] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
            <%= image_tag @post.image, alt: @post.title, class: "w-full h-full object-cover" %>
            
@@ -88,7 +88,7 @@
               prose-li:text-zinc-700 prose-li:marker:text-zinc-400
               prose-strong:text-black prose-strong:font-bold
               prose-ol:list-decimal prose-ul:list-disc
-              mb-24">
+              mb-24 rounded-[1.1rem]">
     <%= @post.content %>
   </div>
 

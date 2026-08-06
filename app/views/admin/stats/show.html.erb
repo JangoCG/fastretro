@@ -13,7 +13,7 @@
         Admin Stats
       </h1>
       <%= button_to "Trigger Test Exception", admin_test_exception_path, method: :post,
-        class: "flex-shrink-0 font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-red-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer",
+        class: "flex-shrink-0 font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-red-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer rounded-[1.1rem]",
         data: { confirm: "This will raise an exception in the backend. Continue?" } %>
     </div>
     <div class="h-[3px] bg-zinc-900 mt-4"></div>
@@ -22,7 +22,7 @@
   <%# Stats Cards Grid %>
   <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
     <%# Accounts Card %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6 rounded-card overflow-hidden">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "group", class: "text-3xl text-blue-600" %>
         <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Accounts</h2>
@@ -41,7 +41,7 @@
     </div>
 
     <%# Identities Card %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6 rounded-card overflow-hidden">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "person", class: "text-3xl text-emerald-600" %>
         <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Identities</h2>
@@ -60,7 +60,7 @@
     </div>
 
     <%# Retros Card %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6 rounded-card overflow-hidden">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "history", class: "text-3xl text-flame" %>
         <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Retros</h2>
@@ -79,7 +79,7 @@
     </div>
 
     <%# Feedbacks Card %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6 rounded-card overflow-hidden">
       <div class="flex items-center gap-3 mb-2">
         <%= icon_tag "chat", class: "text-3xl text-amber-600" %>
         <h2 class="font-ui text-xs font-bold uppercase tracking-widest text-zinc-500">Feedbacks</h2>
@@ -101,7 +101,7 @@
   <%# Lists Grid %>
   <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
     <%# Recent Signups %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift rounded-card overflow-hidden">
       <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-blue-600">
         <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
           <%= icon_tag "schedule", class: "text-2xl opacity-90" %>
@@ -130,7 +130,7 @@
     </div>
 
     <%# Top Accounts %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift rounded-card overflow-hidden">
       <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-amber-500">
         <h2 class="font-bold text-zinc-900 flex items-center gap-3 uppercase tracking-widest text-sm">
           <%= icon_tag "leaderboard", class: "text-2xl opacity-90" %>
@@ -189,7 +189,7 @@
   </div>
 
   <%# Companies By User Count %>
-  <div class="mt-8 bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift overflow-hidden">
+  <div class="mt-8 bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift overflow-hidden rounded-card">
     <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-emerald-600">
       <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
         <%= icon_tag "domain", class: "text-2xl opacity-90" %>
@@ -229,7 +229,7 @@
   <%# Premium Customers %>
   <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-8">
     <%# Paying Customers %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift rounded-card overflow-hidden">
       <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-flame">
         <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
           <%= icon_tag "payments", class: "text-2xl opacity-90" %>
@@ -263,7 +263,7 @@
     </div>
 
     <%# Comped Accounts %>
-    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift rounded-card overflow-hidden">
       <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-amber-500">
         <h2 class="font-bold text-zinc-900 flex items-center gap-3 uppercase tracking-widest text-sm">
           <%= icon_tag "card_giftcard", class: "text-2xl opacity-90" %>

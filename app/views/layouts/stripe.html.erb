@@ -17,7 +17,7 @@
   <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black">
     <%# === HEADER === %>
     <header class="relative flex justify-center z-50">
-      <div class="relative inline-flex items-center gap-3 px-8 py-5 mt-4 bg-[#ffffff] border-[2px] border-stone-300 shadow-soft overflow-hidden min-w-[280px]">
+      <div class="relative inline-flex items-center gap-3 px-8 py-5 mt-4 bg-[#ffffff] border-[2px] border-stone-300 shadow-soft overflow-hidden min-w-[280px] rounded-[1.1rem]">
         <%# Decorative Hazard Strip %>
         <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
 
@@ -39,7 +39,7 @@
     </div>
 
     <main class="flex-1 flex items-center justify-center p-4 relative z-10">
-      <div class="bg-white border-2 border-zinc-900 shadow-soft p-8 max-w-md w-full">
+      <div class="bg-white border-2 border-zinc-900 shadow-soft p-8 max-w-md w-full rounded-[1.1rem]">
         <%= render "layouts/shared/flash" %>
         <%= yield %>
       </div>

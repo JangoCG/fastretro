@@ -6,7 +6,7 @@
 <div class="max-w-xl mx-auto px-4 py-8 font-sans">
   
   <%# Industrial Container %>
-  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative">
+  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
     
     <%# Header Section %>
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
@@ -18,7 +18,7 @@
           <%= t("users.show.heading") %>
         </h1>
         <% if Current.user == @user %>
-          <%= link_to edit_user_path(@user), class: "group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 bg-zinc-900 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-700 transition-colors shadow-soft hover:shadow-none" do %>
+          <%= link_to edit_user_path(@user), class: "group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2 bg-zinc-900 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:bg-zinc-700 transition-colors shadow-soft hover:shadow-none rounded-pill" do %>
             <%= icon_tag "pencil", class: "w-4 h-4" %>
             <span><%= t("users.show.edit_profile") %></span>
           <% end %>
@@ -33,7 +33,7 @@
        
        <div class="relative z-10 flex flex-col items-center gap-4">
          <%# Industrial Avatar %>
-         <div class="w-24 h-24 border-[3px] border-zinc-900 bg-zinc-900 flex items-center justify-center text-white text-4xl font-display font-black shadow-soft">
+         <div class="w-24 h-24 border-[3px] border-zinc-900 bg-zinc-900 flex items-center justify-center text-white text-4xl font-display font-black shadow-soft rounded-[1.1rem]">
             <%= @user.name.first.upcase %>
          </div>
          
@@ -64,7 +64,7 @@
        <% if Current.user == @user %>
         <div class="w-full h-[2px] bg-zinc-200 my-2"></div>
 
-        <%= link_to my_passkeys_path, class: "w-full flex items-center justify-between p-3 bg-white border-[2px] border-zinc-900 hover:-translate-y-0.5 hover:shadow-soft transition-all" do %>
+        <%= link_to my_passkeys_path, class: "w-full flex items-center justify-between p-3 bg-white border-[2px] border-zinc-900 hover:-translate-y-0.5 hover:shadow-soft transition-all rounded-[1.1rem]" do %>
           <span class="font-bold text-xs text-zinc-900 uppercase tracking-widest"><%= t("users.show.manage_passkeys") %></span>
           <span class="text-zinc-400 font-black">&rarr;</span>
         <% end %>

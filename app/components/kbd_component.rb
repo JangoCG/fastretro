@@ -1,5 +1,5 @@
 class KbdComponent < ApplicationComponent
-  BASE_CLASSES = "font-mono text-[10px] font-bold text-zinc-600 bg-zinc-100 border border-zinc-300 px-1.5 py-0.5 rounded-[1px] uppercase tracking-wide select-none"
+  BASE_CLASSES = "font-mono text-[10px] font-bold text-zinc-600 bg-zinc-100 border border-zinc-300 px-1.5 py-0.5 rounded-[.375rem] uppercase tracking-wide select-none"
 
   SIZES = {
     sm: "text-[10px] px-1.5 py-0.5",

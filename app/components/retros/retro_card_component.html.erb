@@ -1,6 +1,6 @@
 <div
   id="<%= dom_id(@retro) %>"
-  class="group relative border-[2.5px] border-zinc-800 bg-[#ffffff] shadow-soft hover:shadow-soft transition-all duration-200 overflow-hidden rounded-sm"
+  class="group relative border-[2.5px] border-zinc-800 bg-[#ffffff] shadow-soft hover:shadow-soft transition-all duration-200 overflow-hidden rounded-[1.1rem]"
 >
   <%# Stretched link - covers entire card %>
   <%= link_to retro_path(@retro), class: "absolute inset-0 z-10", "aria-label": @retro.name do %><% end %>
@@ -20,13 +20,13 @@
         variant: :ghost,
         size: :sm,
         href: edit_retro_path(@retro),
-        class: "text-zinc-900 hover:bg-zinc-200 rounded-none p-1",
+        class: "text-zinc-900 hover:bg-zinc-200 rounded-[1.1rem] p-1",
         label: t("retros.retro_card.edit_retro")
       ) %>
 
       <%= button_to @retro,
             method: :delete,
-            class: "w-6 h-6 flex items-center justify-center text-zinc-900 hover:bg-red-500 hover:text-white transition-colors border border-transparent hover:border-black rounded-none",
+            class: "w-6 h-6 flex items-center justify-center text-zinc-900 hover:bg-red-500 hover:text-white transition-colors border border-transparent hover:border-black rounded-[1.1rem]",
             data: { turbo_confirm: t("retros.retro_card.delete_confirm", name: @retro.name) } do %>
         <%= icon_tag "close", class: "text-sm font-bold" %>
       <% end %>

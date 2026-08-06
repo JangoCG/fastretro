@@ -5,7 +5,7 @@
 </div>
 
 <div class="max-w-xl mx-auto px-4 py-8 font-sans">
-  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative" style="view-transition-name: <%= dom_id(@join_code) %>">
+  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden" style="view-transition-name: <%= dom_id(@join_code) %>">
     <div class="p-6 border-b-[3px] border-zinc-900 bg-white relative">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       <div class="relative z-10">
@@ -32,7 +32,7 @@
                     required: true,
                     autofocus: true,
                     in: 0..Account::JoinCode::USAGE_LIMIT_MAX,
-                    class: "w-full max-w-[12ch] px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-display font-black text-center rounded-none focus:outline-none focus:bg-yellow-50 transition-colors" %>
+                    class: "w-full max-w-[12ch] px-4 py-3 bg-white border-[2px] border-zinc-900 text-zinc-900 text-3xl font-display font-black text-center rounded-[.875rem] focus:outline-none focus:bg-yellow-50 transition-colors" %>
             </div>
           </div>
 
@@ -49,7 +49,7 @@
           </div>
 
           <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-center">
-            <%= form.button type: :submit, class: "w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all" do %>
+            <%= form.button type: :submit, class: "w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-[#ffffff] border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-xs hover:-translate-y-0.5 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all rounded-pill" do %>
               Save Changes
             <% end %>
 

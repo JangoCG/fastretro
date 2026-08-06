@@ -82,7 +82,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <% @alternative.fetch(:reasons).each_with_index do |reason, index| %>
-        <div class="border-2 border-black bg-white p-6 shadow-soft">
+        <div class="border-2 border-black bg-white p-6 shadow-soft rounded-[1.1rem]">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-zinc-100 border-2 border-black flex items-center justify-center flex-shrink-0">
               <span class="font-black"><%= index + 1 %></span>
@@ -136,7 +136,7 @@
         Live pricing is currently unavailable.
       <% end %>
     </p>
-    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#fff2d2] text-black hover:bg-yellow-300 text-sm font-black uppercase tracking-wider px-10 py-4 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#fff2d2] text-black hover:bg-yellow-300 text-sm font-black uppercase tracking-wider px-10 py-4 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all rounded-pill" do %>
       <span>GET STARTED FREE</span>
       <span class="font-ui">-></span>
     <% end %>

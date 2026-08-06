@@ -5,13 +5,13 @@
      data-action-completion-completed-value="<%= @action.completed %>">
 
   <%# Card Body %>
-  <div class="<%= @action.completed ? 'bg-emerald-50 opacity-75' : 'bg-tint-peach' %> relative border-[2px] border-zinc-900 shadow-soft overflow-hidden flex flex-col min-h-[140px] group-hover:shadow-lift transition-all">
+  <div class="<%= @action.completed ? 'bg-emerald-50 opacity-75' : 'bg-tint-peach' %> relative border-[2px] border-zinc-900 shadow-soft overflow-hidden flex flex-col min-h-[140px] group-hover:shadow-lift transition-all rounded-card">
 
     <%# Completion Checkbox - Top Right %>
     <div class="absolute top-3 right-3 z-10">
       <button type="button"
               data-action="click->action-completion#toggle"
-              class="w-8 h-8 border-2 border-zinc-900 <%= @action.completed ? 'bg-emerald-500' : 'bg-white' %> hover:bg-emerald-200 transition-colors flex items-center justify-center shadow-soft">
+              class="w-8 h-8 border-2 border-zinc-900 <%= @action.completed ? 'bg-emerald-500' : 'bg-white' %> hover:bg-emerald-200 transition-colors flex items-center justify-center shadow-soft rounded-[1.1rem]">
         <% if @action.completed %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />

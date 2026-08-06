@@ -73,7 +73,7 @@
 
     <div class="grid grid-cols-1 gap-6">
       <% shoutouts.each do |shoutout| %>
-        <%= link_to shoutout[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{shoutout[:name]} on X" }, class: "block border-2 border-black bg-white p-5 sm:p-8 shadow-lift hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+        <%= link_to shoutout[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{shoutout[:name]} on X" }, class: "block border-2 border-black bg-white p-5 sm:p-8 shadow-lift hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all rounded-card overflow-hidden" do %>
           <article>
             <div class="flex items-center gap-4 mb-6">
               <div class="inline-flex w-14 h-14 flex-shrink-0">

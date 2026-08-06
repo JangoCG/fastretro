@@ -3,7 +3,7 @@
   <%= render "retros/near_limit_notice" %>
 
   <% if notice.present? %>
-    <div class="border-2 border-black bg-[#fff2d2] p-4 mb-8 font-ui text-xs font-bold uppercase shadow-soft inline-block" id="notice">
+    <div class="border-2 border-black bg-[#fff2d2] p-4 mb-8 font-ui text-xs font-bold uppercase shadow-soft inline-block rounded-[1.1rem]" id="notice">
       <%= notice %>
     </div>
   <% end %>
@@ -20,7 +20,7 @@
         <input
           type="text"
           placeholder="<%= t("shared.search") %>"
-          class="block w-full pl-4 pr-12 py-3 bg-zinc-100 border-2 border-zinc-300 focus:border-black font-ui text-sm uppercase rounded-none focus:outline-none transition-colors"
+          class="block w-full pl-4 pr-12 py-3 bg-zinc-100 border-2 border-zinc-300 focus:border-black font-ui text-sm uppercase rounded-[1.1rem] focus:outline-none transition-colors"
           data-filter-target="input"
           data-controller="hotkey"
           data-action="input->filter#filter keydown.f@window->hotkey#focus"
@@ -32,7 +32,7 @@
 
       <%# Primary Actions %>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 xl:flex xl:items-center">
-        <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-soft hover:shadow-soft hover:-translate-y-1 hover:-translate-x-1", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
+        <%= link_to new_retro_path, id: "new-retro-button", class: "group inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 font-bold uppercase px-5 sm:px-6 text-sm tracking-wider border-2 border-transparent transition-all shadow-soft hover:shadow-soft hover:-translate-y-1 hover:-translate-x-1 rounded-pill", data: { controller: "hotkey", action: "keydown.c@document->hotkey#click" } do %>
           <span><%= t("retros.index.new_retro") %></span>
           <span class="font-ui group-hover:translate-x-1 transition-transform">-></span>
           <span class="hidden sm:inline">
@@ -40,7 +40,7 @@
           </span>
         <% end %>
 
-        <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 px-4 sm:px-5 bg-flame text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-flame transition-colors shadow-soft hover:shadow-none" do %>
+        <%= link_to new_site_feedback_path(script_name: nil), class: "inline-flex h-12 min-w-[14rem] items-center justify-center gap-2 px-4 sm:px-5 bg-flame text-white border-2 border-zinc-900 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-flame transition-colors shadow-soft hover:shadow-none rounded-pill" do %>
           <%= icon_tag "chat", class: "w-4 h-4" %>
           <%= t("retros.index.give_feedback") %>
         <% end %>

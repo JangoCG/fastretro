@@ -15,7 +15,7 @@
   </div>
 
   <%# Account Details Card %>
-  <div class="max-w-2xl bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
+  <div class="max-w-2xl bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift rounded-card overflow-hidden">
     <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-blue-600">
       <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
         <%= icon_tag "group", class: "text-2xl opacity-90" %>
@@ -61,11 +61,11 @@
           <% if @account.comped? %>
             <span class="font-ui text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase">Yes</span>
             <%= button_to "Uncomp account", admin_account_billing_waiver_path(@account.external_account_id), method: :delete,
-              class: "font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-red-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer" %>
+              class: "font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-red-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-red-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer rounded-[1.1rem]" %>
           <% else %>
             <span class="font-ui text-xs px-3 py-1.5 border border-zinc-200 bg-zinc-50 text-zinc-500 font-bold uppercase">No</span>
             <%= button_to "Comp account", admin_account_billing_waiver_path(@account.external_account_id), method: :post,
-              class: "font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-emerald-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-emerald-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer" %>
+              class: "font-ui text-xs font-bold uppercase tracking-widest px-4 py-2 bg-emerald-600 text-white border-[3px] border-zinc-900 shadow-soft hover:bg-emerald-700 hover:shadow-soft active:shadow-none transition-all cursor-pointer rounded-[1.1rem]" %>
           <% end %>
         </div>
       </div>

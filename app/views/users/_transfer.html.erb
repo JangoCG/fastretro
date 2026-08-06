@@ -13,11 +13,11 @@
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <span class="text-zinc-400 font-ui text-xs">Link:</span>
        </div>
-      <input type="text" class="w-full pl-10 pr-3 py-3 text-xs font-ui text-zinc-600 bg-zinc-100 border-[2px] border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:bg-white transition-colors" id="session_transfer_url" value="<%= url %>" aria-labelledby="session_transfer_label" readonly>
+      <input type="text" class="w-full pl-10 pr-3 py-3 text-xs font-ui text-zinc-600 bg-zinc-100 border-[2px] border-zinc-300 rounded-[.875rem] focus:outline-none focus:border-zinc-900 focus:bg-white transition-colors" id="session_transfer_url" value="<%= url %>" aria-labelledby="session_transfer_label" readonly>
     </div>
 
     <%# Squared Copy Button %>
-    <button type="button" class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-soft hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none" data-controller="clipboard" data-clipboard-text-value="<%= url %>" data-action="clipboard#copy">
+    <button type="button" class="group relative flex items-center justify-center w-12 h-11 bg-white border-[2px] border-zinc-900 text-zinc-900 shadow-soft hover:translate-y-0.5 hover:shadow-none transition-all active:translate-y-0 active:shadow-none rounded-[1.1rem]" data-controller="clipboard" data-clipboard-text-value="<%= url %>" data-action="clipboard#copy">
       <i class="icon icon--copy w-5 h-5" data-clipboard-target="icon"></i>
       <i class="icon icon--check w-5 h-5 text-green-600" data-clipboard-target="check" style="display: none;"></i>
       <span class="sr-only">Copy sign-in link</span>

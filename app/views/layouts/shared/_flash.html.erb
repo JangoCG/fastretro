@@ -1,7 +1,7 @@
 <div id="flash">
   <% if flash[:alert].present? %>
     <div class="max-w-md mx-auto px-4 mb-4">
-      <div class="bg-red-50 border-2 border-red-500 p-4 shadow-soft">
+      <div class="bg-red-50 border-2 border-red-500 p-4 shadow-soft rounded-[1.1rem]">
         <div class="flex items-center gap-2 mb-1">
           <span class="w-2 h-2 bg-red-500 rounded-full"></span>
           <span class="font-ui text-xs font-bold uppercase text-red-600"><%= t("shared.error_log") %></span>
@@ -13,7 +13,7 @@
 
   <% if flash[:notice].present? %>
     <div class="max-w-md mx-auto px-4 mb-4">
-      <div class="bg-green-50 border-2 border-green-500 p-4 shadow-soft">
+      <div class="bg-green-50 border-2 border-green-500 p-4 shadow-soft rounded-[1.1rem]">
         <div class="flex items-center gap-2 mb-1">
           <span class="w-2 h-2 bg-green-500 rounded-full"></span>
           <span class="font-ui text-xs font-bold uppercase text-green-600"><%= t("shared.detected") %></span>
