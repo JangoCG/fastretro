@@ -1,7 +1,12 @@
 NOTICES AND INFORMATION
 
+> **Fork notice.** This repository is Faster Retro, an unofficial fork of
+> [JangoCG/fastretro](https://github.com/JangoCG/fastretro). It is not affiliated
+> with or endorsed by the original project. The O'Saasy License is unchanged from
+> upstream.
+
 This software incorporates material from third parties.
-The following components are used within Fast Retro and are presented along their license.
+The following components are used within Faster Retro and are presented along their license.
 
 **component**: https://github.com/basecamp/fizzy
 

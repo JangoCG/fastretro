@@ -1,11 +1,15 @@
 ---
 name: Bug report
-about: Create a report to help us improve Fast Retro
+about: Create a report to help us improve Faster Retro
 title: '[BUG] '
 labels: 'bug'
 assignees: ''
 
 ---
+
+> Issues about the upstream project belong at
+> [JangoCG/fastretro/issues](https://github.com/JangoCG/fastretro/issues). File
+> here only for things specific to this fork.
 
 **Describe the bug**
 A clear and concise description of what the bug is.

@@ -1,11 +1,15 @@
 ---
 name: Feature request
-about: Suggest an idea for Fast Retro
+about: Suggest an idea for Faster Retro
 title: '[FEATURE] '
 labels: 'enhancement'
 assignees: ''
 
 ---
+
+> Issues about the upstream project belong at
+> [JangoCG/fastretro/issues](https://github.com/JangoCG/fastretro/issues). File
+> here only for things specific to this fork.
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]

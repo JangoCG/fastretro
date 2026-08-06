@@ -1,15 +1,18 @@
 ## Deploying with Docker
 
-We provide pre-built Docker images that can be used to run Fast Retro on your own server.
+> Part of Faster Retro, an unofficial fork of
+> [JangoCG/fastretro](https://github.com/JangoCG/fastretro).
 
-If you don't need to change the source code, and just want the out-of-the-box Fast Retro experience, this can be a great way to get started.
+Upstream publishes pre-built Docker images that can be used to run Faster Retro on your own server. This fork does not publish its own images; if you want to run this fork's code specifically, build the image yourself from this repository, or point your own registry at it.
 
-You'll find the latest version of Fast Retro's Docker image at `ghcr.io/jangocg/fastretro`.
+If you don't need to change the source code, and just want the out-of-the-box experience, running the upstream image can be a great way to get started.
+
+You'll find the latest version of the upstream Docker image at `ghcr.io/jangocg/fastretro`.
 To run it you'll need three things: a machine that runs Docker; a mounted volume (so that your database is stored somewhere that is kept around between restarts); and some environment variables for configuration.
 
 ### Mounting a storage volume
 
-The standard Fast Retro setup keeps all of its storage inside the path `/rails/storage`.
+The standard Faster Retro setup keeps all of its storage inside the path `/rails/storage`.
 By default Docker containers don't persist storage between runs, so you'll want to mount a persistent volume into that location.
 
 The simplest way to do this is with the `--volume` flag with `docker run`. For example:
@@ -26,17 +29,17 @@ Check the Docker documentation to find out more about what's available.
 
 ### Configuring with environment variables
 
-To configure your Fast Retro installation, you can use environment variables.
-Fast Retro has several of them.
+To configure your Faster Retro installation, you can use environment variables.
+Faster Retro has several of them.
 Many of these are optional, but at a minimum you'll want to configure your secret key, your SSL domain, and your SMTP email settings.
 
 #### Secret Key Base
 
-Various features inside Fast Retro rely on cryptography to work (such as secure links).
+Various features inside Faster Retro rely on cryptography to work (such as secure links).
 To set this up, you need to provide a secret value that will be used as the basis of those secrets.
 This value can be anything, but it should be unguessable, and specific to your instance.
 
-You can use any long random string for this, or you can have the Fast Retro codebase generate one for you by running:
+You can use any long random string for this, or you can have the Faster Retro codebase generate one for you by running:
 
 ```sh
 bin/rails secret
@@ -50,7 +53,7 @@ docker run --environment SECRET_KEY_BASE=abcdefabcdef ...
 
 #### SSL
 
-If you want the Fast Retro container to handle its own SSL automatically, you just need to specify the domain name that you're running it on.
+If you want the Faster Retro container to handle its own SSL automatically, you just need to specify the domain name that you're running it on.
 You can do that with the `TLS_DOMAIN` environment variable.
 Note that if you're using SSL, you'll want to allow traffic on ports 80 and 443.
 So if you were running on `retro.example.com` you could enable SSL like this:
@@ -59,7 +62,7 @@ So if you were running on `retro.example.com` you could enable SSL like this:
 docker run --publish 80:80 --publish 443:443 --environment TLS_DOMAIN=retro.example.com ...
 ```
 
-If you are terminating SSL in some other proxy in front of Fast Retro, then you don't need to set `TLS_DOMAIN`, and can just publish port 80:
+If you are terminating SSL in some other proxy in front of Faster Retro, then you don't need to set `TLS_DOMAIN`, and can just publish port 80:
 
 ```sh
 docker run --publish 80:80 ...
@@ -73,11 +76,11 @@ docker run --publish 80:80 --environment DISABLE_SSL=true ...
 
 #### SMTP Email
 
-Fast Retro needs to be able to send email for its magic link sign in flow.
+Faster Retro needs to be able to send email for its magic link sign in flow.
 The easiest way to set this up is to use a 3rd-party email provider (such as AWS SES, Postmark, Sendgrid, and so on).
-You can then plug all your SMTP settings from that provider into Fast Retro via the following environment variables:
+You can then plug all your SMTP settings from that provider into Faster Retro via the following environment variables:
 
-- `MAILER_FROM_ADDRESS` - the "from" address that Fast Retro should use to send email
+- `MAILER_FROM_ADDRESS` - the "from" address that Faster Retro should use to send email
 - `SMTP_ADDRESS` - the address of the SMTP server you'll send through
 - `SMTP_PORT` - the port number (defaults to 465 when `SMTP_TLS` is set, 587 otherwise)
 - `SMTP_USERNAME`/`SMTP_PASSWORD` - the credentials for logging in to the SMTP server
@@ -107,20 +110,20 @@ MAILER_FROM_ADDRESS=support@yourdomain.com
 
 #### Multi-tenant mode
 
-By default, when you run the Fast Retro Docker image you'll be limited to creating a single account (although that account can have as many users as you like).
+By default, when you run the Faster Retro Docker image you'll be limited to creating a single account (although that account can have as many users as you like).
 This is for convenience: typically when you self-host you'll be running a single account, so in this mode new account signups are automatically disabled as soon as you've created your first account.
 
 If you do want to allow multiple accounts to be created in your instance, set `MULTI_TENANT=true`.
 
 #### Background jobs
 
-Fast Retro uses Solid Queue for background job processing. By default, jobs run in the same process as the web server. You can control this with:
+Faster Retro uses Solid Queue for background job processing. By default, jobs run in the same process as the web server. You can control this with:
 
 - `SOLID_QUEUE_IN_PUMA` - set to `true` to run background jobs in the app container (recommended for simple deployments)
 
 ## Example
 
-Here's an example of a `docker-compose.yml` that you could use to run Fast Retro via `docker compose up`:
+Here's an example of a `docker-compose.yml` that you could use to run Faster Retro via `docker compose up`:
 
 ```yaml
 services:

@@ -6,3 +6,6 @@ contact_links:
   - name: Fast Retro Documentation
     url: https://github.com/JangoCG/fastretro/wiki
     about: Check our documentation for setup and usage guides
+  - name: Upstream Fast Retro
+    url: https://github.com/JangoCG/fastretro/issues
+    about: For issues with the original project rather than this fork.

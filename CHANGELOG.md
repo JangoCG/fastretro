@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased — Faster Retro fork
+
+- Forked from [JangoCG/fastretro](https://github.com/JangoCG/fastretro).
+- Renamed the user-facing product to Faster Retro. Internal module names,
+  container image references, and file paths are unchanged.
+- Replaced the visual design with a navy/flame palette, pastel section tints,
+  and a self-hosted Cabin/Inter type pairing.
+
 ## [0.1.2.0] - 2026-07-12
 
 ### Added
