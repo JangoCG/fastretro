@@ -22,18 +22,18 @@
     <%# Analytics %>
     <%= analytics_tag %>
   </head>
-  <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black">
+  <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black">
 
     <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
     <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-         style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+         style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
     </div>
 
     <header class="py-6">
       <%# Industrial Header (non-interactive, no menu) %>
       <nav class="relative flex justify-center z-50">
         <%= link_to root_path(script_name: nil), class: "group" do %>
-          <div class="relative inline-flex items-center gap-3 px-8 py-5 bg-[#F8F5EC] border-[2px] border-stone-300 shadow-soft group-hover:shadow-soft transition-all duration-75 overflow-hidden min-w-[280px]">
+          <div class="relative inline-flex items-center gap-3 px-8 py-5 bg-[#ffffff] border-[2px] border-stone-300 shadow-soft group-hover:shadow-soft transition-all duration-75 overflow-hidden min-w-[280px]">
 
             <%# Decorative Hazard Strip %>
             <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
@@ -48,7 +48,7 @@
             <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
               <div class="flex items-center gap-2">
                 <span class="font-black text-xl sm:text-2xl uppercase tracking-tighter text-black leading-none select-none relative px-1">
-                  <span class="absolute inset-0 bg-[#FFFF00] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+                  <span class="absolute inset-0 bg-[#fff2d2] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
                   "FASTER RETRO"
                 </span>
               </div>

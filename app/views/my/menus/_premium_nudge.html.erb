@@ -1,6 +1,6 @@
 <% if FastRetro.saas? && Current.account.plan.free? && Current.user&.admin? %>
   <aside id="premium-upgrade-nudge"
-         class="relative mb-6 overflow-hidden border-[2px] border-zinc-900 bg-[#6b39ff] p-4 text-white shadow-soft"
+         class="relative mb-6 overflow-hidden border-[2px] border-zinc-900 bg-[#ff5d03] p-4 text-white shadow-soft"
          aria-labelledby="premium-upgrade-title">
     <div class="absolute -right-5 -top-7 rotate-12 text-white/10" aria-hidden="true">
       <%= icon_tag "crown", class: "text-[7rem]" %>
@@ -8,7 +8,7 @@
 
     <div class="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div class="max-w-[19rem]">
-        <span class="mb-2 inline-flex items-center gap-1.5 border border-zinc-900 bg-[#ffe600] px-2 py-1 text-[0.6rem] font-black uppercase tracking-widest text-zinc-900">
+        <span class="mb-2 inline-flex items-center gap-1.5 border border-zinc-900 bg-[#fff2d2] px-2 py-1 text-[0.6rem] font-black uppercase tracking-widest text-zinc-900">
           <%= icon_tag "crown", class: "text-xs" %>
           <%= t("menus.premium_nudge.plan") %>
         </span>

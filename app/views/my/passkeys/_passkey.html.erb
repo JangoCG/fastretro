@@ -1,5 +1,5 @@
 <li>
-  <%= link_to edit_my_passkey_path(passkey), class: "flex items-center gap-3 p-3 bg-[#F8F5EC] border-[2px] border-zinc-900 hover:-translate-y-0.5 hover:shadow-soft transition-all" do %>
+  <%= link_to edit_my_passkey_path(passkey), class: "flex items-center gap-3 p-3 bg-[#ffffff] border-[2px] border-zinc-900 hover:-translate-y-0.5 hover:shadow-soft transition-all" do %>
     <% if icon = passkey.authenticator&.icon %>
       <%= image_tag icon[:light], size: 24, class: "shrink-0", aria: { hidden: true } %>
     <% else %>

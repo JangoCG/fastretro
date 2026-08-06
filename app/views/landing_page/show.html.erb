@@ -1,6 +1,6 @@
 <% content_for :full_width, true %>
 <% content_for :skip_javascript, true %>
-<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
+<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black" %>
 <% content_for :title, "Free Retro Tool — Open Source & Self-Hosted | Faster Retro" %>
 <% content_for :meta_title, "Free Retro Tool — Open Source & Self-Hosted | Faster Retro" %>
 <% content_for :meta_description, "Free open-source retrospective tool for agile teams. Anonymous brainstorming, voting, action items. Magic-link login. Self-host or use our cloud." %>
@@ -10,7 +10,7 @@
 
 <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
 <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+     style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
 </div>
 
 <%# === HEADER === %>
@@ -122,7 +122,7 @@
         <div class="marquee-track marquee-right">
           <% 2.times do %>
             <% bottom_row.each do |item| %>
-              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-[#ffe600] px-4 py-3 shadow-soft min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
+              <%= link_to item[:url], target: "_blank", rel: "noopener noreferrer", aria: { label: "Open shoutout from #{item[:author]} on X" }, class: "block border-2 border-black bg-[#fff2d2] px-4 py-3 shadow-soft min-w-[290px] max-w-[420px] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" do %>
                 <div class="flex items-center gap-3">
                   <div class="inline-flex w-8 h-8 flex-shrink-0">
                     <%= image_tag item[:avatar], alt: item[:author], class: "w-full h-full rounded-full border border-black object-cover bg-white", loading: "lazy" %>
@@ -264,7 +264,7 @@
   <section id="why-fastretro" class="max-w-7xl mx-auto px-4 sm:px-6 mb-32">
     <div class="text-center mb-12">
       <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tighter mb-4">
-        WHY <span class="bg-[#ffe600] px-2">FASTER RETRO</span>?
+        WHY <span class="bg-[#fff2d2] px-2">FASTER RETRO</span>?
       </h2>
       <p class="font-mono text-sm text-zinc-600 max-w-2xl mx-auto">
         A free retro tool for Scrum teams who want effective retrospectives without enterprise complexity.
@@ -322,7 +322,7 @@
   <%# === FREE TIER CTA === %>
   <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-24 text-center">
     <h2 class="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight">
-      <span class="bg-[#ffe600] px-2 text-black">RUN <%= number_with_delimiter(@free_limit) %> RETROS</span><br>
+      <span class="bg-[#fff2d2] px-2 text-black">RUN <%= number_with_delimiter(@free_limit) %> RETROS</span><br>
       FOR FREE.
     </h2>
     <p class="mt-6 text-base sm:text-xl md:text-2xl font-mono text-zinc-600 max-w-2xl mx-auto leading-relaxed">
@@ -342,7 +342,7 @@
   <%# === PRICING ("TICKET") === %>
   <section id="pricing" class="mb-32 max-w-7xl mx-auto px-4 sm:px-6">
     <div class="max-w-3xl mx-auto">
-      <div class="relative bg-[#F8F5EC] border-2 border-black p-8 sm:p-12 overflow-hidden group hover:scale-[1.01] transition-transform duration-500">
+      <div class="relative bg-[#ffffff] border-2 border-black p-8 sm:p-12 overflow-hidden group hover:scale-[1.01] transition-transform duration-500">
         <%# Ticket Cutouts %>
         <div class="absolute top-1/2 -left-3 w-6 h-6 bg-zinc-100 rounded-full border-r-2 border-black"></div>
         <div class="absolute top-1/2 -right-3 w-6 h-6 bg-zinc-100 rounded-full border-l-2 border-black"></div>
@@ -533,7 +533,7 @@
       Ready to run<br>
       <span class="text-zinc-400">better retros?</span>
     </h2>
-    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#fff2d2] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
       <span>SIGN UP FREE</span>
       <span class="font-mono">-></span>
     <% end %>

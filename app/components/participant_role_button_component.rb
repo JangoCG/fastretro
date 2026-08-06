@@ -1,5 +1,5 @@
 class ParticipantRoleButtonComponent < ApplicationComponent
-  BASE_CLASSES = "bg-white text-zinc-900 font-bold uppercase tracking-widest border-[1.5px] border-zinc-900 hover:bg-[#ffe600] transition-colors cursor-pointer".freeze
+  BASE_CLASSES = "bg-white text-zinc-900 font-bold uppercase tracking-widest border-[1.5px] border-zinc-900 hover:bg-[#fff2d2] transition-colors cursor-pointer".freeze
   COMPACT_CLASSES = "text-[0.6rem] font-mono px-2 py-1.5".freeze
   CARD_CLASSES = "mt-2 inline-block text-[0.5rem] px-2.5 py-1.5".freeze
 

@@ -6,7 +6,7 @@ class PhaseTagComponent < ApplicationComponent
       footer: "CHECK PROGRESS.",
       bg_color: "bg-violet-50",
       border_color: "border-violet-300",
-      stripe_hex: "#7c3aed",
+      stripe_hex: "#ff5d03",
       accent_color: "text-violet-700"
     },
     brainstorming: {
@@ -33,7 +33,7 @@ class PhaseTagComponent < ApplicationComponent
       footer: "CHOOSE WISELY.",
       bg_color: "bg-violet-50",
       border_color: "border-violet-300",
-      stripe_hex: "#7c3aed",
+      stripe_hex: "#394763",
       accent_color: "text-violet-700"
     },
     discussion: {
@@ -51,7 +51,7 @@ class PhaseTagComponent < ApplicationComponent
       footer: "WELL DONE!",
       bg_color: "bg-zinc-50",
       border_color: "border-zinc-400",
-      stripe_hex: "#18181b",
+      stripe_hex: "#011232",
       accent_color: "text-zinc-700"
     }
   }.freeze
@@ -81,7 +81,7 @@ class PhaseTagComponent < ApplicationComponent
   end
 
   def bg_color
-    config[:bg_color] || "bg-[#F8F5EC]"
+    config[:bg_color] || "bg-[#ffffff]"
   end
 
   def border_color

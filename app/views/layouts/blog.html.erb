@@ -19,7 +19,7 @@
     <meta name="apple-mobile-web-app-title" content="Faster Retro">
     <meta name="application-name" content="Faster Retro">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#18181b">
+    <meta name="theme-color" content="#011232">
 
     <%# === CANONICAL URL === %>
     <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url.split('?').first %>">
@@ -74,7 +74,7 @@
   <body class="<%= content_for(:body_class) || "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden" %> flex flex-col min-h-screen">
     <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
     <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-         style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+         style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
     </div>
 
     <%= render LandingPageHeaderComponent.new %>

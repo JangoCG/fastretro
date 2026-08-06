@@ -67,7 +67,7 @@
           <%= button_to retro_start_path(@retro), method: :post,
               id: "start-retro-button",
               form: { data: { turbo_frame: "_top" } },
-              class: "group w-full bg-[#ffe600] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-lift hover:shadow-lift" do %>
+              class: "group w-full bg-[#fff2d2] text-black hover:bg-white font-bold uppercase px-6 py-5 text-base tracking-wider flex items-center justify-between border-[3px] border-black transition-all shadow-lift hover:shadow-lift" do %>
             <span><%= t("waiting_rooms.show.start_retro") %></span>
             <span class="font-mono group-hover:translate-x-2 transition-transform text-lg">-></span>
           <% end %>
@@ -85,7 +85,7 @@
         <%= render RetroInviteCardComponent.new(retro: @retro) %>
 
         <%# Tips Card %>
-        <div class="mt-6 border-[3px] border-zinc-900 bg-[#f4f1ea] p-5 shadow-soft">
+        <div class="mt-6 border-[3px] border-zinc-900 bg-[#f4f7fb] p-5 shadow-soft">
           <h3 class="font-black text-sm uppercase tracking-tight text-zinc-900 mb-3">
             "<%= t("waiting_rooms.show.how_it_works") %>"
           </h3>

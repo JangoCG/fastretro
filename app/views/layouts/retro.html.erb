@@ -33,11 +33,11 @@
 
 <%#
     BODY STYLING:
-    - bg-zinc-100: A cool grey base that contrasts with the warm #F8F5EC cards.
-    - selection:bg-[#ffe600]: Highlights text in "Highlighter Yellow".
+    - bg-zinc-100: A cool grey base that contrasts with the warm #ffffff cards.
+    - selection:bg-[#fff2d2]: Highlights text in "Highlighter Yellow".
     - overflow-x-hidden: Prevents horizontal scroll from the hanging tag animations.
   %>
-<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black"
+<body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black"
       data-controller="elevator-music"
       data-elevator-music-url-value="<%= retro_music_path(@retro) %>"
       data-elevator-music-playing-value="<%= @retro.music_playing? %>">
@@ -49,7 +49,7 @@
 <%# === BACKGROUND TEXTURE (The Dot Grid) === %>
 <%# This creates a technical 'cutting mat' feel behind your content %>
 <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+     style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
 </div>
 
 <%# === HEADER === %>

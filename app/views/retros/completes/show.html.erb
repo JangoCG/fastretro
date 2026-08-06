@@ -5,7 +5,7 @@
     <%# Summary Stats %>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <%# Participants Card %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift p-6">
+      <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
         <div class="text-center">
           <div class="text-6xl font-black text-zinc-900"><%= @retro.participants.count %></div>
           <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500"><%= t("completes.participants") %></div>
@@ -13,7 +13,7 @@
       </div>
 
       <%# Feedbacks Card %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift p-6">
+      <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
         <% feedback_counts = @retro.feedbacks.published.group(:category).count %>
         <div class="text-center">
           <div class="text-6xl font-black text-zinc-900"><%= @retro.feedbacks.published.count %></div>
@@ -27,7 +27,7 @@
       </div>
 
       <%# Actions Card %>
-      <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift p-6">
+      <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
         <div class="text-center">
           <div class="text-6xl font-black text-violet-600"><%= @retro.actions.published.count %></div>
           <div class="mt-2 text-xs font-bold uppercase tracking-widest text-zinc-500"><%= t("completes.action_items") %></div>
@@ -36,7 +36,7 @@
     </div>
 
     <%# Action Items List %>
-    <div class="bg-[#F8F5EC] border-[3px] border-zinc-900 shadow-lift">
+    <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
       <%# Header %>
       <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-white">
         <div class="flex items-center gap-3">

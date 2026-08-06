@@ -2,7 +2,7 @@ class ButtonComponent < ApplicationComponent
   BASE_CLASSES = "group relative inline-flex items-center justify-center font-bold uppercase tracking-widest transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed border-[2px] rounded-0"
 
   VARIANTS = {
-    primary: "bg-zinc-900 border-zinc-900 text-[#F8F5EC] hover:bg-white hover:text-zinc-900 shadow-soft hover:shadow-none active:shadow-none",
+    primary: "bg-zinc-900 border-zinc-900 text-[#ffffff] hover:bg-white hover:text-zinc-900 shadow-soft hover:shadow-none active:shadow-none",
     secondary: "bg-white border-zinc-900 text-zinc-900 hover:bg-zinc-100 shadow-soft hover:shadow-none active:shadow-none",
     danger: "bg-red-600 border-red-600 text-white hover:bg-white hover:text-red-600 shadow-soft hover:shadow-none active:shadow-none",
     success: "bg-green-600 border-green-600 text-white hover:bg-white hover:text-green-600 shadow-soft hover:shadow-none active:shadow-none",

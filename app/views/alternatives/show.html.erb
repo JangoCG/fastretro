@@ -1,5 +1,5 @@
 <% content_for :full_width, true %>
-<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#ffe600] selection:text-black" %>
+<% content_for :body_class, "bg-zinc-100 text-zinc-900 font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black" %>
 <% content_for :title, @alternative.fetch(:meta_title) %>
 <% content_for :meta_title, @alternative.fetch(:meta_title) %>
 <% content_for :meta_description, @alternative.fetch(:meta_description) %>
@@ -7,7 +7,7 @@
 <% content_for :canonical_url, public_send("alternative_#{@alternative.fetch(:slug)}_url", script_name: nil) %>
 
 <div class="fixed inset-0 z-[-1] pointer-events-none opacity-[0.4]"
-     style="background-image: radial-gradient(#a1a1aa 1px, transparent 1px); background-size: 24px 24px;">
+     style="background-image: radial-gradient(#7b8397 1px, transparent 1px); background-size: 24px 24px;">
 </div>
 
 <%= render LandingPageHeaderComponent.new %>
@@ -55,7 +55,7 @@
         <div class="p-4 sm:p-6 bg-zinc-100 border-r-2 border-black">
           <span class="font-mono text-xs uppercase tracking-wider text-zinc-500">Feature</span>
         </div>
-        <div class="p-4 sm:p-6 bg-[#ffe600] border-r-2 border-black text-center">
+        <div class="p-4 sm:p-6 bg-[#fff2d2] border-r-2 border-black text-center">
           <span class="font-black text-sm sm:text-base uppercase tracking-tight">Faster Retro</span>
         </div>
         <div class="p-4 sm:p-6 bg-zinc-200 text-center">
@@ -101,7 +101,7 @@
   </section>
 
   <section class="max-w-5xl mx-auto px-4 sm:px-6 mb-20">
-    <div class="border-2 border-black bg-[#F8F5EC] p-8 sm:p-12">
+    <div class="border-2 border-black bg-[#ffffff] p-8 sm:p-12">
       <h2 class="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-6">
         FASTER RETRO CORE CAPABILITIES
       </h2>
@@ -140,7 +140,7 @@
         Live pricing is currently unavailable.
       <% end %>
     </p>
-    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#ffe600] text-black hover:bg-yellow-300 text-sm font-black uppercase tracking-wider px-10 py-4 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
+    <%= link_to new_signup_path(script_name: nil), class: "inline-flex items-center justify-center gap-2 bg-[#fff2d2] text-black hover:bg-yellow-300 text-sm font-black uppercase tracking-wider px-10 py-4 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all" do %>
       <span>GET STARTED FREE</span>
       <span class="font-mono">-></span>
     <% end %>
