@@ -22,7 +22,7 @@
       <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative">
 
         <%# Header Section %>
-        <div class="p-6 border-b-[3px] border-zinc-900 bg-gradient-to-r from-violet-500 to-violet-600 relative">
+        <div class="p-6 border-b-[3px] border-zinc-900 bg-flame relative">
           <div class="flex items-center justify-between">
             <span class="inline-flex items-center px-3 py-1 border-[2px] border-white/30 text-xs font-bold uppercase tracking-widest bg-white/20 text-white">
               <span class="mr-2 w-2 h-2 rounded-full bg-white animate-pulse"></span>
@@ -42,14 +42,14 @@
                 <%= t("site_feedbacks.new.your_name") %>
               </label>
               <input type="text" name="name" placeholder="<%= t("site_feedbacks.new.name_placeholder") %>"
-                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500">
+                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-flame focus:border-flame">
             </div>
             <div>
               <label class="block font-mono text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
                 <%= t("site_feedbacks.new.your_email") %> <span class="text-red-500">*</span>
               </label>
               <input type="email" name="email" placeholder="<%= t("site_feedbacks.new.email_placeholder") %>" required
-                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500">
+                class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-flame focus:border-flame">
             </div>
           </div>
         <% end %>
@@ -64,7 +64,7 @@
               <%= t("site_feedbacks.new.your_message") %> <span class="text-red-500">*</span>
             </label>
             <textarea name="message" rows="6" required placeholder="<%= t("site_feedbacks.new.message_placeholder") %>"
-              class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-sans text-base resize-none focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500"></textarea>
+              class="w-full px-4 py-3 border-[2px] border-zinc-900 bg-white font-sans text-base resize-none focus:outline-none focus:ring-2 focus:ring-flame focus:border-flame"></textarea>
           </div>
         </div>
 
@@ -84,7 +84,7 @@
       <%# Submit Button %>
       <div class="flex justify-center mt-8">
         <button type="submit"
-          class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-violet-600 text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all">
+          class="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-flame text-white border-[2px] border-zinc-900 font-bold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-soft active:translate-y-0 active:shadow-none transition-all">
           <%= t("site_feedbacks.new.send_feedback") %>
           <%= icon_tag "arrow-right", class: "text-xl" %>
         </button>

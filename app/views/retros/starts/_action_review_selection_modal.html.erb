@@ -26,7 +26,7 @@
             <%= t("action_reviews.selection_modal.select_retro") %>
           </label>
           <select name="source_retro_id"
-                  class="w-full px-4 py-3 bg-white border-2 border-zinc-900 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-violet-500">
+                  class="w-full px-4 py-3 bg-white border-2 border-zinc-900 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-flame">
             <% past_retros.each do |past_retro| %>
               <option value="<%= past_retro.id %>">
                 <%= past_retro.name %> - <%= past_retro.created_at.strftime("%Y-%m-%d") %> (<%= t("action_reviews.selection_modal.actions_count", count: past_retro.actions.published.count) %>)
@@ -45,7 +45,7 @@
           <% end %>
 
           <%= button_tag type: "submit",
-                         class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-soft hover:shadow-none bg-violet-600 border-violet-700 text-white hover:bg-violet-700" do %>
+                         class: "h-12 px-6 font-bold uppercase tracking-widest text-sm border-[2px] rounded-[1px] transition-all duration-200 shadow-soft hover:shadow-none bg-flame border-flame text-white hover:bg-white hover:text-flame" do %>
             <%= t("action_reviews.selection_modal.review_actions") %>
           <% end %>
         </div>

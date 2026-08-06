@@ -4,10 +4,10 @@ class PhaseTagComponent < ApplicationComponent
       title: "ACTION\nREVIEW",
       instruction: "Review action items from your previous retro.",
       footer: "CHECK PROGRESS.",
-      bg_color: "bg-violet-50",
-      border_color: "border-violet-300",
+      bg_color: "bg-tint-peach",
+      border_color: "border-flame",
       stripe_hex: "#ff5d03",
-      accent_color: "text-violet-700"
+      accent_color: "text-zinc-900"
     },
     brainstorming: {
       title: "BRAIN\nSTORMING",
@@ -31,10 +31,10 @@ class PhaseTagComponent < ApplicationComponent
       title: "VOTING",
       instruction: "Vote on the most important topics.",
       footer: "CHOOSE WISELY.",
-      bg_color: "bg-violet-50",
-      border_color: "border-violet-300",
+      bg_color: "bg-tint-peach",
+      border_color: "border-flame",
       stripe_hex: "#394763",
-      accent_color: "text-violet-700"
+      accent_color: "text-zinc-900"
     },
     discussion: {
       title: "DISCUSSION",

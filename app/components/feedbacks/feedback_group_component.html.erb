@@ -97,7 +97,7 @@
       <% elsif show_vote_count? || can_mark_discussed? %>
         <div class="px-4 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end gap-2">
           <% if show_vote_count? %>
-            <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-violet-100 border-2 border-violet-600 text-violet-700 font-black text-sm">
+            <div class="flex items-center justify-center min-w-[2.5rem] h-8 px-2 bg-tint-peach border-2 border-flame text-zinc-900 font-black text-sm">
               <%= @group.votes.size %>
             </div>
           <% end %>

@@ -62,7 +62,7 @@
     <%# Retros Card %>
     <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift p-6">
       <div class="flex items-center gap-3 mb-2">
-        <%= icon_tag "history", class: "text-3xl text-violet-600" %>
+        <%= icon_tag "history", class: "text-3xl text-flame" %>
         <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-zinc-500">Retros</h2>
       </div>
       <div class="text-5xl font-black text-zinc-900 mb-4"><%= number_with_delimiter(@retros_total) %></div>
@@ -230,7 +230,7 @@
   <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-8">
     <%# Paying Customers %>
     <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift">
-      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-violet-600">
+      <div class="px-6 py-4 border-b-[3px] border-zinc-900 bg-flame">
         <h2 class="font-bold text-white flex items-center gap-3 uppercase tracking-widest text-sm">
           <%= icon_tag "payments", class: "text-2xl opacity-90" %>
           Paying Customers (<%= @paid_accounts.size %>)
@@ -250,7 +250,7 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="font-mono text-xs px-3 py-1.5 border border-violet-200 bg-violet-50 text-violet-700 font-bold uppercase"><%= account.subscription.plan.name %></span>
+                  <span class="font-mono text-xs px-3 py-1.5 border border-flame bg-tint-peach text-zinc-900 font-bold uppercase"><%= account.subscription.plan.name %></span>
                   <span class="font-mono text-xs px-3 py-1.5 border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold uppercase"><%= account.subscription.status %></span>
                 </div>
               </div>
