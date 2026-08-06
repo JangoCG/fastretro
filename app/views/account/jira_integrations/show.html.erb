@@ -38,7 +38,7 @@
             <%= form.text_field :site_url,
               placeholder: "https://your-team.atlassian.net",
               required: true,
-              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
             <% if @jira_integration.errors[:site_url].any? %>
               <p class="text-[0.6rem] font-ui text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:site_url].first %></p>
             <% end %>
@@ -54,7 +54,7 @@
             <%= form.email_field :email,
               placeholder: "you@example.com",
               required: true,
-              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
             <% if @jira_integration.errors[:email].any? %>
               <p class="text-[0.6rem] font-ui text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:email].first %></p>
             <% end %>
@@ -70,7 +70,7 @@
             <%= form.password_field :api_token,
               placeholder: @jira_integration.persisted? ? "••••••••" : "Enter your Jira API token",
               required: !@jira_integration.persisted?,
-              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
+              class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
             <% if @jira_integration.errors[:api_token].any? %>
               <p class="text-[0.6rem] font-ui text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:api_token].first %></p>
             <% end %>
@@ -87,7 +87,7 @@
               <%= form.text_field :project_key,
                 placeholder: "RETRO",
                 required: true,
-                class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
+                class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-300 rounded-[.875rem] text-sm" %>
               <% if @jira_integration.errors[:project_key].any? %>
                 <p class="text-[0.6rem] font-ui text-red-600 uppercase mt-1 tracking-wide font-bold">ERROR: <%= @jira_integration.errors[:project_key].first %></p>
               <% end %>
@@ -103,7 +103,7 @@
               <%= form.select :issue_type,
                 options_for_select([ "Task", "Story", "Bug" ], @jira_integration.issue_type),
                 {},
-                class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-yellow-50 focus:shadow-soft transition-all rounded-[.875rem] text-sm" %>
+                class: "w-full px-4 py-3 border-[2px] border-zinc-900 bg-white text-zinc-900 font-bold focus:outline-none focus:ring-0 focus:border-zinc-900 focus:bg-tint-butter focus:shadow-soft transition-all rounded-[.875rem] text-sm" %>
               <p class="text-[0.6rem] font-ui text-zinc-400 uppercase mt-1 tracking-wide">
                 The Jira issue type created for each action item
               </p>

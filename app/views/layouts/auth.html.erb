@@ -25,30 +25,14 @@
   <body class="bg-zinc-100 text-zinc-900 transition-colors min-h-screen flex flex-col font-sans antialiased overflow-x-hidden selection:bg-[#fff2d2] selection:text-black">
 
     <header class="py-6">
-      <%# Industrial Header (non-interactive, no menu) %>
+      <%# Brand lockup (non-interactive, no menu) %>
       <nav class="relative flex justify-center z-50">
         <%= link_to root_path(script_name: nil), class: "group" do %>
-          <div class="relative inline-flex items-center gap-3 px-8 py-5 bg-[#ffffff] border-[2px] border-stone-300 shadow-soft group-hover:shadow-soft transition-all duration-75 overflow-hidden min-w-[280px] rounded-[1.1rem]">
-
-            <%# Decorative Hazard Strip %>
-            <div class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)] opacity-10"></div>
-
-            <%# Meta Label %>
-            <div class="absolute top-2 left-2 flex flex-col items-start gap-0.5 pointer-events-none">
-              <span class="text-[0.45rem] font-bold text-stone-400 uppercase leading-none tracking-widest">NAV_SYS</span>
-              <span class="text-[0.4rem] font-ui text-stone-300 uppercase leading-none">V 2.0</span>
-            </div>
-
-            <%# Main Label %>
-            <div class="flex flex-col items-start pt-3 pb-1 w-full relative z-10">
-              <div class="flex items-center gap-2">
-                <span class="font-display font-black text-xl sm:text-2xl uppercase text-black leading-none select-none relative px-1">
-                  <span class="absolute inset-0 bg-[#fff2d2] -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
-                  "FASTER RETRO"
-                </span>
-              </div>
-            </div>
-
+          <div class="inline-flex items-center gap-3 px-8 py-5 bg-white border border-zinc-900/10 shadow-soft group-hover:shadow-lift transition-all duration-200 rounded-card">
+            <span class="font-display font-black text-xl sm:text-2xl uppercase text-zinc-900 leading-none select-none relative px-1">
+              <span class="absolute inset-0 bg-tint-butter -rotate-1 skew-x-3 scale-110 -z-10 mix-blend-multiply opacity-80"></span>
+              "FASTER RETRO"
+            </span>
           </div>
         <% end %>
       </nav>

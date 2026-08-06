@@ -3,10 +3,10 @@
 <div class="max-w-md mx-auto px-4 py-8 font-sans <%= 'animate-[shake_400ms_both]' if flash[:alert] || flash[:shake] %>">
   
   <%# Industrial Container %>
-  <div class="bg-[#ffffff] border-[3px] border-zinc-900 shadow-lift relative rounded-card overflow-hidden">
+  <div class="bg-[#ffffff] border border-zinc-900/10 shadow-lift relative rounded-card overflow-hidden">
     
     <%# Header Section %>
-    <div class="p-6 border-b-[3px] border-zinc-900 bg-zinc-900 relative">
+    <div class="p-6 border-b border-zinc-900/10 bg-zinc-900 relative">
       <div class="relative z-10 flex items-center justify-between">
         <h1 class="text-xl font-black text-white uppercase">
            <%= t("sessions.magic_links.verify") %>
@@ -17,8 +17,6 @@
 
     <%# Body %>
     <div class="p-8 relative bg-white flex flex-col items-center gap-6">
-       <%# Background Grid %>
-       <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:10px_10px]"></div>
        
        <div class="relative z-10 text-center w-full">
          <% if flash[:notice] %>
@@ -34,7 +32,7 @@
             </div>
             <%= form.text_field :code,
                 required: true,
-                class: "w-full pl-10 pr-4 py-4 font-ui text-3xl font-display font-black tracking-[0.5em] text-center border-[3px] border-zinc-900 rounded-[.875rem] bg-white text-zinc-900 focus:outline-none focus:bg-yellow-50 focus:shadow-soft transition-all placeholder-zinc-200",
+                class: "w-full pl-10 pr-4 py-4 font-ui text-3xl font-display font-black tracking-[0.5em] text-center border-[3px] border-zinc-900 rounded-[.875rem] bg-white text-zinc-900 focus:outline-none focus:bg-tint-butter focus:shadow-soft transition-all placeholder-zinc-200",
                 autofocus: true,
                 autocorrect: "off",
                 autocapitalize: "off",
@@ -58,7 +56,7 @@
     </div>
     
     <%# Technical Footer %>
-    <div class="h-2 border-t-[3px] border-zinc-900 bg-zinc-900 w-full"></div>
+    <div class="h-2 border-t border-zinc-900/10 bg-zinc-900 w-full"></div>
   </div>
 
   <% if flash[:magic_link_code].present? %>
