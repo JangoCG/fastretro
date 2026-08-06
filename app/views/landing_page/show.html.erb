@@ -42,7 +42,7 @@
           </p>
 
       <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-          <%= link_to new_signup_path(script_name: nil), aria: { label: "Create your free Faster Retro account - no credit card required" }, class: "inline-flex items-center justify-center gap-2 bg-black text-white hover:bg-zinc-800 text-xs font-bold uppercase tracking-wider px-6 py-3 border-2 border-transparent" do %>
+          <%= link_to new_signup_path(script_name: nil), aria: { label: "Create your free Faster Retro account - no credit card required" }, class: "inline-flex items-center justify-center gap-2 bg-flame text-white hover:brightness-95 text-sm font-bold uppercase tracking-wider px-8 py-4 border-2 border-transparent rounded-pill shadow-soft transition-all" do %>
             <span>CREATE FREE ACCOUNT</span>
             <span class="font-ui">-></span>
           <% end %>
@@ -70,7 +70,7 @@
   </section>
 
   <%# === WHAT PEOPLE SAY === %>
-  <section class="mb-28">
+  <section class="bg-tint-mist rounded-card py-16 sm:py-20 px-6 sm:px-10 mb-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-6 sm:mb-8 text-center">
         <h2 class="font-display font-black text-3xl sm:text-4xl">
@@ -256,7 +256,7 @@
   </section>
 
   <%# === WHY FAST RETRO? === %>
-  <section id="why-fastretro" class="max-w-7xl mx-auto px-4 sm:px-6 mb-32">
+  <section id="why-fastretro" class="bg-tint-peach rounded-card py-16 sm:py-20 px-6 sm:px-10 max-w-7xl mx-auto px-4 sm:px-6 mb-32">
     <div class="text-center mb-12">
       <h2 class="text-3xl sm:text-4xl font-display font-black mb-4">
         WHY <span class="bg-[#fff2d2] px-2">FASTER RETRO</span>?
@@ -335,7 +335,7 @@
   </section>
 
   <%# === PRICING ("TICKET") === %>
-  <section id="pricing" class="mb-32 max-w-7xl mx-auto px-4 sm:px-6">
+  <section id="pricing" class="bg-tint-mist rounded-card py-16 sm:py-20 px-6 sm:px-10 mb-32 max-w-7xl mx-auto px-4 sm:px-6">
     <div class="max-w-3xl mx-auto">
       <div class="relative bg-[#ffffff] border-2 border-black p-8 sm:p-12 overflow-hidden group hover:scale-[1.01] transition-transform duration-500">
         <%# Ticket Cutouts %>
@@ -427,7 +427,7 @@
   </section>
 
   <%# === OPEN SOURCE === %>
-  <section id="opensource" class="max-w-3xl mx-auto px-4 sm:px-6 mb-32 text-center text-sm md:text-base">
+  <section id="opensource" class="bg-tint-sky rounded-card py-16 sm:py-20 px-6 sm:px-10 max-w-3xl mx-auto px-4 sm:px-6 mb-32 text-center text-sm md:text-base">
     <div class="border-2 border-black p-8 md:p-12 bg-white relative">
        <!-- Decorative Corners -->
        <div class="absolute top-0 left-0 w-4 h-4 bg-black"></div>
@@ -523,12 +523,12 @@
       ) %>
 
   <%# === FINAL CTA === %>
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 mb-32 text-center">
+  <section class="bg-tint-peri rounded-card py-16 sm:py-20 px-6 sm:px-10 max-w-4xl mx-auto px-4 sm:px-6 mb-32 text-center">
     <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-tight mb-8">
       Ready to run<br>
       <span class="text-zinc-400">better retros?</span>
     </h2>
-    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-[#fff2d2] text-black hover:bg-yellow-300 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-black shadow-soft hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all rounded-pill" do %>
+    <%= link_to new_signup_path(script_name: nil), aria: { label: "Sign up for Faster Retro and start running better retrospectives for free" }, class: "inline-flex items-center justify-center gap-2 bg-flame text-white hover:brightness-95 text-sm sm:text-base font-black uppercase tracking-wider px-8 sm:px-12 py-4 sm:py-5 border-2 border-transparent shadow-soft transition-all rounded-pill" do %>
       <span>SIGN UP FREE</span>
       <span class="font-ui">-></span>
     <% end %>

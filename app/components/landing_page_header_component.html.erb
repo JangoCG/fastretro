@@ -1,12 +1,12 @@
-<header class="fixed top-0 inset-x-0 z-50 bg-zinc-100/80 backdrop-blur-sm border-b border-dashed border-zinc-400">
+<header class="fixed top-0 inset-x-0 z-50 bg-white/85 backdrop-blur-sm border-b border-zinc-900/10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     <%# Branding %>
     <div class="flex items-center gap-2">
       <%= link_to root_path(script_name: nil), class: "group flex items-center gap-2" do %>
-        <div class="w-8 h-8 bg-black text-white flex items-center justify-center font-black text-xs group-hover:rotate-180 transition-transform duration-500">
+        <div class="w-8 h-8 bg-zinc-900 text-white flex items-center justify-center font-black text-xs rounded-[.6rem]">
           FR
         </div>
-        <span class="font-black text-xl uppercase italic">FASTER RETRO</span>
+        <span class="font-display font-black text-xl uppercase">FASTER RETRO</span>
       <% end %>
     </div>
 
@@ -31,7 +31,7 @@
         <span class="hidden sm:inline">Sign in</span>
         <span class="sm:hidden">Login</span>
       <% end %>
-      <%= link_to new_signup_path(script_name: nil), class: "bg-[#fff2d2] text-black font-black text-[10px] sm:text-xs uppercase px-2 sm:px-4 py-1.5 sm:py-2 border-2 border-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-soft sm:shadow-soft rounded-[1.1rem]" do %>
+      <%= link_to new_signup_path(script_name: nil), class: "bg-flame text-white font-black text-[10px] sm:text-xs uppercase px-3 sm:px-5 py-1.5 sm:py-2 border-2 border-transparent rounded-pill hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-soft sm:shadow-soft rounded-[1.1rem]" do %>
         <span class="hidden sm:inline">Start for free</span>
         <span class="sm:hidden">Start</span>
       <% end %>
