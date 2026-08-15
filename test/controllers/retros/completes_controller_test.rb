@@ -16,6 +16,19 @@ class Retros::CompletesControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, retro_jira_export_path(@retro)
   end
 
+  test "the balloon game and its highscore are shown to every participant" do
+    @retro.add_participant(users(:two), role: :participant)
+    retro_participants(:one_admin).update!(balloons_popped: 12)
+    sign_in_as :two
+
+    get retro_complete_path(@retro)
+
+    assert_response :success
+    assert_includes response.body, "Balloon Pop"
+    assert_includes response.body, retro_balloon_pops_path(@retro)
+    assert_includes response.body, users(:one).name
+  end
+
   test "non-admin participant does not see jira export button" do
     @retro.add_participant(users(:two), role: :participant)
     sign_in_as :two

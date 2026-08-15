@@ -187,6 +187,10 @@ class Retro < ApplicationRecord
     end
   end
 
+  def balloon_leaderboard
+    participants.where("balloons_popped > 0").includes(:user).order(balloons_popped: :desc, id: :asc)
+  end
+
   def owner
     participants.admin.order(:created_at).first&.user
   end

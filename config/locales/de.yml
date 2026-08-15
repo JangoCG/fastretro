@@ -228,6 +228,15 @@ de:
     export_xlsx: "Excel exportieren (.xlsx)"
     export_csv: "CSV exportieren"
     export_jira: "Nach Jira exportieren"
+    balloon_game:
+      title: "Ballons zerplatzen"
+      instructions: "Retro geschafft - lass Ballons platzen, wer die meisten schafft, gewinnt"
+      arena_label: "Ballon-Spielfeld"
+      pop_balloon: "Ballon zerplatzen lassen"
+      your_pops: "Deine Treffer"
+      leaderboard: "Highscore"
+      total: "%{count} geplatzt"
+      no_pops: "Noch keine Ballons geplatzt"
 
   # ── Feedbacks ──────────────────────────────────────────────────
   feedbacks:

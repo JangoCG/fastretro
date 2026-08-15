@@ -1,0 +1,23 @@
+<div id="<%= dom_id %>" class="bg-white border-[2px] border-zinc-900 shadow-[3px_3px_0px_0px_rgba(24,24,27,1)]">
+  <div class="px-4 py-3 border-b-[2px] border-zinc-900 flex items-center justify-between gap-2">
+    <h3 class="flex items-center gap-2 font-black text-sm uppercase tracking-widest text-zinc-900">
+      <%= icon_tag "leaderboard", class: "text-base" %>
+      <%= t("completes.balloon_game.leaderboard") %>
+    </h3>
+    <span class="font-mono text-xs text-zinc-500 uppercase"><%= t("completes.balloon_game.total", count: total_pops) %></span>
+  </div>
+
+  <% if any_pops? %>
+    <ol class="divide-y-[2px] divide-zinc-200">
+      <% leaders.each_with_index do |participant, index| %>
+        <li class="flex items-center gap-3 px-4 py-2.5">
+          <span class="w-7 text-center font-black text-sm text-zinc-900"><%= rank_badge(index) %></span>
+          <span class="flex-1 font-bold text-sm text-zinc-900 truncate"><%= participant.name %></span>
+          <span class="font-black text-lg text-violet-600 tabular-nums"><%= participant.balloons_popped %></span>
+        </li>
+      <% end %>
+    </ol>
+  <% else %>
+    <p class="px-4 py-8 text-center text-zinc-400 font-mono text-xs uppercase"><%= t("completes.balloon_game.no_pops") %></p>
+  <% end %>
+</div>
