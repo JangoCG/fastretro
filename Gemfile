@@ -49,7 +49,7 @@ gem "aws-sdk-s3", require: false
 gem "view_component"
 
 # Modern rich text editor built on Lexical
-gem "lexxy", "0.9.23"
+gem "lexxy", "0.9.29"
 
 # Markdown rendering for legal pages
 gem "redcarpet"
