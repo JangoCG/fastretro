@@ -228,6 +228,15 @@ en:
     export_xlsx: "Export Excel (.xlsx)"
     export_csv: "Export CSV"
     export_jira: "Export to Jira"
+    balloon_game:
+      title: "Balloon Pop"
+      instructions: "Retro's done - pop the balloons, most pops wins"
+      arena_label: "Balloon playing field"
+      pop_balloon: "Pop balloon"
+      your_pops: "Your pops"
+      leaderboard: "Highscore"
+      total: "%{count} popped"
+      no_pops: "No balloons popped yet"
 
   # ── Feedbacks ──────────────────────────────────────────────────
   feedbacks:

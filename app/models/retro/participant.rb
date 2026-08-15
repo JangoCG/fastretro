@@ -1,4 +1,6 @@
 class Retro::Participant < ApplicationRecord
+  MAX_BALLOON_POPS_PER_REQUEST = 50
+
   self.table_name = "retro_participants"
 
   belongs_to :retro
@@ -27,7 +29,35 @@ class Retro::Participant < ApplicationRecord
     update!(finished: !finished)
   end
 
+  # Counts balloons popped in the celebration game of the complete phase. Pops arrive
+  # in batches from the browser, so a batch is clamped to what a human hand could
+  # manage in one flush - the controller's rate limit is what bounds a rigged client
+  # over time. Anything that isn't a number counts as no pops at all, since the
+  # count comes straight off a request.
+  #
+  # Incrementing skips callbacks, which keeps a pop from dragging the whole
+  # participant list through a broadcast - only the highscore goes out.
+  def pop_balloons(count)
+    pops = count.to_s.to_i.clamp(0, MAX_BALLOON_POPS_PER_REQUEST)
+
+    if pops.positive?
+      increment!(:balloons_popped, pops)
+      broadcast_balloon_leaderboard
+    end
+  end
+
   private
+
+  def broadcast_balloon_leaderboard
+    leaderboard = BalloonLeaderboardComponent.new(retro:)
+
+    Turbo::StreamsChannel.broadcast_replace_to(
+      retro,
+      target: leaderboard.dom_id,
+      attributes: { method: :morph },
+      html: ApplicationController.render(leaderboard, layout: false)
+    )
+  end
 
   def ensure_retro_keeps_an_admin
     if role_changed?(from: "admin", to: "participant") && retro.participants.admin.where.not(id: id).none?

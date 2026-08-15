@@ -8,6 +8,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       opts.add_argument("--disable-renderer-backgrounding")
       opts.add_argument("--disable-backgrounding-occluded-windows")
       opts.add_argument("--deny-permission-prompts")
+      opts.add_argument("--mute-audio")
       opts.add_argument("--enable-automation")
       opts.add_argument("--headless") if headless
     end

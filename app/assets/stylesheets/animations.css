@@ -94,3 +94,97 @@
 .marquee-right {
   animation: marquee-right 32s linear infinite;
 }
+
+/* Balloon popping game shown when a retro is complete */
+.balloon-arena {
+  position: relative;
+  overflow: hidden;
+  --arena-height: 20rem;
+  height: var(--arena-height);
+  touch-action: manipulation;
+  background-image: radial-gradient(#e4e4e7 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@keyframes balloon-float {
+  from {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+  to {
+    transform: translate3d(var(--balloon-drift), calc((var(--arena-height) + var(--balloon-height)) * -1), 0) rotate(4deg);
+  }
+}
+
+@keyframes balloon-burst {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* The game sets --balloon-left/size/drift/duration/color per balloon; these are the
+   defaults everything else in here builds on. */
+.balloon {
+  --balloon-left: 50%;
+  --balloon-size: 56px;
+  --balloon-drift: 0px;
+  --balloon-duration: 9s;
+  --balloon-color: #f43f5e;
+  --balloon-height: calc(var(--balloon-size) * 1.4);
+
+  position: absolute;
+  bottom: calc(var(--balloon-height) * -1);
+  left: var(--balloon-left);
+  width: var(--balloon-size);
+  height: var(--balloon-height);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  animation: balloon-float var(--balloon-duration) linear forwards;
+  will-change: transform;
+}
+
+.balloon__body {
+  display: block;
+  width: 100%;
+  height: calc(var(--balloon-size) * 1.15);
+  background: var(--balloon-color);
+  border: 2px solid #18181b;
+  border-radius: 50% 50% 48% 48% / 42% 42% 58% 58%;
+  box-shadow: inset -0.4rem -0.5rem 0 rgba(0, 0, 0, 0.12);
+}
+
+.balloon__string {
+  display: block;
+  width: 2px;
+  height: calc(var(--balloon-size) * 0.25);
+  margin: 0 auto;
+  background: #18181b;
+}
+
+.balloon[data-popped] {
+  pointer-events: none;
+}
+
+.balloon[data-popped] .balloon__body {
+  animation: balloon-burst 240ms ease-out forwards;
+}
+
+.balloon[data-popped] .balloon__string {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .balloon {
+    animation-duration: calc(var(--balloon-duration) * 2.5);
+  }
+}

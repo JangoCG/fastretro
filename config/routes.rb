@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         delete :remove_feedback, on: :collection
       end
       resources :votes, only: %i[create destroy]
+      resources :balloon_pops, only: :create
       resources :participants, only: [] do
         resource :role, only: :update, module: :participants
       end

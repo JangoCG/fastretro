@@ -280,6 +280,16 @@ class RetroTest < ActiveSupport::TestCase
     end
   end
 
+  test "balloon leaderboard ranks the busiest poppers first and leaves out the idle ones" do
+    retro = retros(:one)
+    quiet = retro.participants.first
+    quiet.update!(balloons_popped: 0)
+    runner_up = retro.participants.create!(user: users(:two), balloons_popped: 4)
+    winner = retro.participants.create!(user: users(:admin), balloons_popped: 9)
+
+    assert_equal [ winner, runner_up ], retro.balloon_leaderboard.to_a
+  end
+
   private
 
   def enable_saas_mode
