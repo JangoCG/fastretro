@@ -87,8 +87,8 @@
 
     <%# Header - all screen sizes %>
     <div id="header-container" class="mt-0 sm:mt-4 md:mt-0 mb-6 sm:mb-8 font-sans">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 md:items-start">
-        <div class="text-center sm:text-left">
+      <div class="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-start md:gap-6">
+        <div class="text-center sm:text-left md:flex-1 md:min-w-0">
           <% retro_display_name = @retro.name.presence || "Retro" %>
           <h1 class="font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-900 uppercase tracking-tighter leading-none">
             "<%= retro_display_name %>"
@@ -114,15 +114,7 @@
           </p>
         </div>
 
-        <% if content_for?(:header_actions) %>
-          <div class="flex justify-center md:justify-center md:pt-1">
-            <%= yield :header_actions %>
-          </div>
-        <% else %>
-          <div class="hidden md:block"></div>
-        <% end %>
-
-        <div class="w-full md:w-auto flex flex-col items-stretch gap-2 md:items-end md:justify-self-end">
+        <div class="w-full md:w-auto flex flex-col items-stretch gap-2 md:items-end">
 
           <%# Hidden audio element for elevator music %>
           <audio id="elevator-music-audio"
@@ -146,8 +138,11 @@
           </button>
 
           <%# Primary controls stack: full-width mobile actions in meaningful order %>
-          <div class="w-full flex flex-col items-stretch gap-2 md:flex-row md:flex-nowrap md:justify-end">
-            <%# 1) Participant finishes own work %>
+          <div class="w-full flex flex-col items-stretch gap-2 md:flex-row md:flex-wrap md:items-center md:justify-end">
+            <%# 1) Phase specific controls, e.g. votes remaining %>
+            <%= yield :header_actions %>
+
+            <%# 2) Participant finishes own work %>
             <% if @current_participant.present? && !@retro.complete? %>
               <%= button_to retro_finished_path(@retro),
                       method: :patch,
@@ -160,12 +155,12 @@
               <% end %>
             <% end %>
 
-            <%# 2) Admin advances phase %>
+            <%# 3) Admin advances phase %>
             <% if @retro.admin?(Current.user) && !@retro.last_phase? %>
               <%= render ConfirmPhaseModalComponent.new(retro: @retro) %>
             <% end %>
 
-            <%# 3) Admin goes back phase %>
+            <%# 4) Admin goes back phase %>
             <% if @retro.admin?(Current.user) && @retro.can_go_back? %>
               <%= render ConfirmBackPhaseModalComponent.new(retro: @retro) %>
             <% end %>
