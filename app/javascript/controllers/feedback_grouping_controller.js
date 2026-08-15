@@ -37,8 +37,10 @@ export default class extends Controller {
       ghostClass: "feedback-ghost",
       dragClass: "feedback-drag",
       chosenClass: "feedback-chosen",
-      filter: ".no-drag",
-      draggable: "[data-feedback-id]:not([data-feedback-id^='group-'])",
+      // Groups must stay in `draggable` so Sortable reports them as drop
+      // targets in onMove; `filter` is what keeps them from being picked up.
+      filter: ".no-drag, [data-feedback-id^='group-']",
+      draggable: "[data-feedback-id]",
       onStart: this.handleStart.bind(this),
       onMove: this.handleMove.bind(this),
       onEnd: this.handleDrop.bind(this)

@@ -73,6 +73,26 @@ class FeedbackDragAndDropTest < ApplicationSystemTestCase
     assert_not_nil source_feedback.feedback_group_id
   end
 
+  test "admin drops a third feedback onto an existing group" do
+    retro = retros(:one)
+    source_feedback = feedbacks(:one)
+    grouped_feedbacks = 2.times.map do
+      Feedback.create!(retro: retro, user: users(:two), category: source_feedback.category, status: :published)
+    end
+    group = retro.feedback_groups.create!
+    grouped_feedbacks.each { |feedback| feedback.update!(feedback_group: group) }
+    retro.update!(phase: :grouping)
+    sign_in_as users(:one)
+
+    visit retro_grouping_path(retro)
+
+    source = find("#feedback_#{source_feedback.id}")
+    target = find("[data-feedback-id='group-#{group.id}']")
+    source.drag_to(target)
+
+    assert_group_eventually group, source_feedback
+  end
+
   private
     def sign_in_as(user)
       visit session_transfer_url(user.identity.transfer_id, script_name: nil)
@@ -87,5 +107,15 @@ class FeedbackDragAndDropTest < ApplicationSystemTestCase
         sleep 0.1
       end
       assert_equal category, feedback.category
+    end
+
+    # Grouping is sent asynchronously after the drop, so give the request a
+    # moment to land before asserting on the database.
+    def assert_group_eventually(group, feedback)
+      deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + Capybara.default_max_wait_time
+      until feedback.reload.feedback_group_id == group.id || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+        sleep 0.1
+      end
+      assert_equal group.id, feedback.feedback_group_id
     end
 end
