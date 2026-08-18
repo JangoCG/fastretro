@@ -419,7 +419,7 @@ GEM
     sniffer (0.5.0)
       anyway_config (>= 1.0)
       dry-initializer (~> 3)
-    solid_cable (3.0.12)
+    solid_cable (4.0.2)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
