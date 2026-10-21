@@ -20,6 +20,9 @@ For more flexibility to customize your Fast Retro installation and deploy change
 
 Please see our [Development guide](docs/development.md) for how to get Fast Retro set up for local development.
 
+Rails 8.2 is pinned from the Rails development branch. SaaS attachment processing
+uses an isolated Hotcell container; see the [Hotcell guide](docs/hotcell.md).
+
 
 ## Contributing
 

@@ -4,7 +4,7 @@ This file provides guidance to AI coding agents working with this repository.
 
 ## What is Fast Retro?
 
-Fast Retro is a retrospective management tool for agile teams built with Ruby on Rails 8.1. It helps teams run structured retrospective sessions with real-time collaboration, featuring phases for brainstorming, grouping, voting, and discussion.
+Fast Retro is a retrospective management tool for agile teams built with Ruby on Rails 8.2 (the `main` branch, pinned by Gemfile.lock). It helps teams run structured retrospective sessions with real-time collaboration, featuring phases for brainstorming, grouping, voting, and discussion.
 
 ## Development Commands
 

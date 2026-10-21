@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require "digest"
+
+root = ENV["HOTCELL_ROOT"]
+if root.to_s.strip.empty?
+  checkout = File.realpath(File.expand_path("../..", __dir__))
+  root = "/tmp/fastretro-hotcell-#{Process.uid}-#{Digest::SHA256.hexdigest(checkout)[0, 12]}"
+
+  begin
+    Dir.mkdir root, 0o700
+  rescue Errno::EEXIST
+    stat = File.lstat(root)
+    if stat.directory? && stat.uid == Process.uid
+      File.chmod 0o700, root
+    else
+      abort "#{root} must be a directory owned by this user"
+    end
+  end
+end
+
+puts root

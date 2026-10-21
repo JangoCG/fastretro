@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Publishes an already-built cell image. The pin in hotcell/deploy.yml is hotcell/bin/build's job,
+# because the tag is a hash of the image's contents and belongs in the commit that changes them.
+#
+# Pushing is the irreversible half, which is why it is not in hotcell/bin/build. Rebooting the accessory
+# stays explicit and is not done here:
+#
+#   hotcell/bin/reboot [-d <destination>]
+set -euo pipefail
+
+bin_dir="$(cd "$(dirname "$0")" && pwd)"
+cell_dir="$(cd "$bin_dir/.." && pwd)"
+repo_root="$(cd "$cell_dir/.." && pwd)"
+
+source "$bin_dir/image"
+
+for arg in "$@"; do
+  case $arg in
+    --help|-h)
+      cat <<USAGE
+Usage: hotcell/bin/push
+
+Pushes the image hotcell/bin/build made to $HOTCELL_IMAGE_REPOSITORY. Build it first if it is not
+there; build is also what pins hotcell/deploy.yml to the tag.
+USAGE
+      exit 0
+      ;;
+  esac
+done
+
+tag="$(hotcell_image_tag "$repo_root")"
+
+if ! docker image inspect "$tag" > /dev/null 2>&1; then
+  echo "No local image $tag. Build it first: hotcell/bin/build" >&2
+  exit 1
+fi
+
+# Production runs amd64. An arm64 image pushed from a laptop reaches a host that cannot run it, and the
+# accessory crash-loops with nothing in the app to say why.
+architecture="$(docker image inspect --format '{{.Architecture}}' "$tag")"
+if [ "$architecture" != "amd64" ]; then
+  echo "$tag is $architecture and the hosts are amd64." >&2
+  echo "Rebuild it: hotcell/bin/build --platform=linux/amd64" >&2
+  exit 1
+fi
+
+echo "Pushing $tag"
+docker push "$tag"
+
+cat <<NEXT
+
+Published $tag, which hotcell/deploy.yml already pins — hotcell/bin/build wrote it.
+
+The next bin/kamal deploy boots or reboots it automatically. To do that separately:
+
+    hotcell/bin/reboot [-d <destination>]
+NEXT

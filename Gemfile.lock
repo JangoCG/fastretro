@@ -1,68 +1,80 @@
-GEM
-  remote: https://rubygems.org/
+GIT
+  remote: https://github.com/caxlsx/caxlsx.git
+  revision: 4c8eb25615fbac05a07c347cb2733d88641a0cd3
+  branch: master
   specs:
-    action_text-trix (2.1.19)
-      railties
-    actioncable (8.1.4)
-      actionpack (= 8.1.4)
-      activesupport (= 8.1.4)
+    caxlsx (4.5.0)
+      htmlentities (~> 4.3, >= 4.3.4)
+      marcel (>= 1, < 3)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (>= 2.4, < 4)
+
+GIT
+  remote: https://github.com/rails/rails.git
+  revision: cd6fda7b23b7106a350f62522554ffa6bc6cc90a
+  branch: main
+  specs:
+    actioncable (8.2.0.alpha)
+      actionpack (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
       zeitwerk (~> 2.6)
-    actionmailbox (8.1.4)
-      actionpack (= 8.1.4)
-      activejob (= 8.1.4)
-      activerecord (= 8.1.4)
-      activestorage (= 8.1.4)
-      activesupport (= 8.1.4)
+    actionmailbox (8.2.0.alpha)
+      actionpack (= 8.2.0.alpha)
+      activejob (= 8.2.0.alpha)
+      activerecord (= 8.2.0.alpha)
+      activestorage (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       mail (>= 2.8.0)
-    actionmailer (8.1.4)
-      actionpack (= 8.1.4)
-      actionview (= 8.1.4)
-      activejob (= 8.1.4)
-      activesupport (= 8.1.4)
+    actionmailer (8.2.0.alpha)
+      actionpack (= 8.2.0.alpha)
+      actionview (= 8.2.0.alpha)
+      activejob (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       mail (>= 2.8.0)
       rails-dom-testing (~> 2.2)
-    actionpack (8.1.4)
-      actionview (= 8.1.4)
-      activesupport (= 8.1.4)
+    actionpack (8.2.0.alpha)
+      actionview (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       nokogiri (>= 1.8.5)
       rack (>= 2.2.4)
       rack-session (>= 1.0.1)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.2)
-      rails-html-sanitizer (~> 1.6)
+      rails-html-sanitizer (~> 1.7)
       useragent (~> 0.16)
-    actiontext (8.1.4)
-      action_text-trix (~> 2.1.15)
-      actionpack (= 8.1.4)
-      activerecord (= 8.1.4)
-      activestorage (= 8.1.4)
-      activesupport (= 8.1.4)
+    actiontext (8.2.0.alpha)
+      action_text-trix (~> 2.1.16)
+      actionpack (= 8.2.0.alpha)
+      activerecord (= 8.2.0.alpha)
+      activestorage (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       globalid (>= 0.6.0)
       nokogiri (>= 1.8.5)
-    actionview (8.1.4)
-      activesupport (= 8.1.4)
+    actionview (8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       builder (~> 3.1)
       erubi (~> 1.11)
+      herb (>= 0.10)
       rails-dom-testing (~> 2.2)
-      rails-html-sanitizer (~> 1.6)
-    activejob (8.1.4)
-      activesupport (= 8.1.4)
-      globalid (>= 0.3.6)
-    activemodel (8.1.4)
-      activesupport (= 8.1.4)
-    activerecord (8.1.4)
-      activemodel (= 8.1.4)
-      activesupport (= 8.1.4)
+      rails-html-sanitizer (~> 1.7)
+    activejob (8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
+      globalid (>= 1.4.0)
+    activemodel (8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
+    activerecord (8.2.0.alpha)
+      activemodel (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
       timeout (>= 0.4.0)
-    activestorage (8.1.4)
-      actionpack (= 8.1.4)
-      activejob (= 8.1.4)
-      activerecord (= 8.1.4)
-      activesupport (= 8.1.4)
-      marcel (~> 1.0)
-    activesupport (8.1.4)
+    activestorage (8.2.0.alpha)
+      actionpack (= 8.2.0.alpha)
+      activejob (= 8.2.0.alpha)
+      activerecord (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
+      marcel (~> 2.0)
+    activesupport (8.2.0.alpha)
       base64
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.3.1)
@@ -72,9 +84,43 @@ GEM
       json
       logger (>= 1.4.2)
       minitest (>= 5.1)
+      psych (>= 4)
+      ractor-dispatch (>= 0.3.0)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    rails (8.2.0.alpha)
+      actioncable (= 8.2.0.alpha)
+      actionmailbox (= 8.2.0.alpha)
+      actionmailer (= 8.2.0.alpha)
+      actionpack (= 8.2.0.alpha)
+      actiontext (= 8.2.0.alpha)
+      actionview (= 8.2.0.alpha)
+      activejob (= 8.2.0.alpha)
+      activemodel (= 8.2.0.alpha)
+      activerecord (= 8.2.0.alpha)
+      activestorage (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
+      bundler (>= 1.15.0)
+      railties (= 8.2.0.alpha)
+    railties (8.2.0.alpha)
+      actionpack (= 8.2.0.alpha)
+      activesupport (= 8.2.0.alpha)
+      irb (~> 1.13)
+      rackup (>= 1.0.0)
+      rake (>= 12.2)
+      thor (~> 1.0, >= 1.2.2)
+      tsort (>= 0.2)
+      zeitwerk (~> 2.6)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    action_text-trix (2.1.19)
+      railties
+    activestorage-hotcell-client (0.6.0)
+      activestorage (>= 8.2.0.alpha)
+      hotcell-client (= 0.6.0)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     anyway_config (2.9.0)
@@ -122,11 +168,6 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    caxlsx (4.5.0)
-      htmlentities (~> 4.3, >= 4.3.4)
-      marcel (~> 1.0)
-      nokogiri (~> 1.10, >= 1.10.4)
-      rubyzip (>= 2.4, < 4)
     concurrent-ruby (1.3.8)
     connection_pool (3.0.2)
     crass (1.0.7)
@@ -162,6 +203,17 @@ GEM
     globalid (1.4.0)
       activesupport (>= 6.1)
     gvltools (0.5.0)
+    herb (0.11.1-aarch64-linux-gnu)
+    herb (0.11.1-aarch64-linux-musl)
+    herb (0.11.1-arm-linux-gnu)
+    herb (0.11.1-arm-linux-musl)
+    herb (0.11.1-arm64-darwin)
+    herb (0.11.1-x86_64-linux-gnu)
+    herb (0.11.1-x86_64-linux-musl)
+    hotcell-client (0.6.0)
+      activesupport (>= 7.1)
+      hotcell-core (= 0.6.0)
+    hotcell-core (0.6.0)
     hotwire-spark (0.1.13)
       listen
       rails (>= 7.0.0)
@@ -214,7 +266,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.2.1)
+    marcel (2.1.0)
     matrix (0.4.3)
     mini_mime (1.1.5)
     minitest (6.0.6)
@@ -300,6 +352,9 @@ GEM
       activesupport (>= 7.0.0)
       rack
     prosopite (2.2.0)
+    psych (5.5.0)
+      date
+      stringio
     public_suffix (7.0.5)
     puma (8.0.2)
       nio4r (~> 2.0)
@@ -313,20 +368,7 @@ GEM
       rack (>= 1.3)
     rackup (2.3.1)
       rack (>= 3)
-    rails (8.1.4)
-      actioncable (= 8.1.4)
-      actionmailbox (= 8.1.4)
-      actionmailer (= 8.1.4)
-      actionpack (= 8.1.4)
-      actiontext (= 8.1.4)
-      actionview (= 8.1.4)
-      activejob (= 8.1.4)
-      activemodel (= 8.1.4)
-      activerecord (= 8.1.4)
-      activestorage (= 8.1.4)
-      activesupport (= 8.1.4)
-      bundler (>= 1.15.0)
-      railties (= 8.1.4)
+    ractor-dispatch (0.3.0)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
@@ -334,15 +376,6 @@ GEM
     rails-html-sanitizer (1.7.1)
       loofah (~> 2.25, >= 2.25.2)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    railties (8.1.4)
-      actionpack (= 8.1.4)
-      activesupport (= 8.1.4)
-      irb (~> 1.13)
-      rackup (>= 1.0.0)
-      rake (>= 12.2)
-      thor (~> 1.0, >= 1.2.2)
-      tsort (>= 0.2)
-      zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.4.2)
     rake-compiler-dock (1.12.0)
@@ -450,6 +483,7 @@ GEM
       ostruct
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
+    stringio (3.2.0)
     stripe (20.0.0)
       bigdecimal
       logger
@@ -510,6 +544,9 @@ GEM
       yabeda (~> 0.6)
     yabeda-gc (0.4.0)
       yabeda (~> 0.6)
+    yabeda-hotcell (0.6.0)
+      hotcell-client (= 0.6.0)
+      yabeda (>= 0.12)
     yabeda-http_requests (0.3.0)
       anyway_config (>= 1.3, < 3.0)
       sniffer
@@ -541,13 +578,14 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  activestorage-hotcell-client (= 0.6.0)
   aws-sdk-s3
   bcrypt (~> 3.1.22)
   bootsnap
   brakeman
   bundler-audit
   capybara
-  caxlsx
+  caxlsx (~> 4.5)!
   csv
   debug
   dotenv
@@ -566,7 +604,7 @@ DEPENDENCIES
   propshaft
   prosopite
   puma (>= 5.0)
-  rails (~> 8.1.4)
+  rails!
   redcarpet
   rouge
   rubocop-rails-omakase
@@ -591,6 +629,7 @@ DEPENDENCIES
   yabeda-actioncable
   yabeda-activejob
   yabeda-gc
+  yabeda-hotcell (= 0.6.0)
   yabeda-http_requests
   yabeda-prometheus-mmap
   yabeda-puma-plugin

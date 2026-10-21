@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile", __dir__)
+require "bundler/setup"
+require "kamal"
+
+class HotcellReboot < Kamal::Cli::Accessory
+  desc "reboot [NAME]", "Reboot the Hotcell accessory with access to the local registry"
+  default_task :reboot
+  def reboot(name = "hotcell")
+    accessory = KAMAL.accessory(name)
+
+    if port = accessory.image[/\Alocalhost:(\d+)\//, 1]
+      hosts = accessory_hosts(accessory)
+
+      Kamal::Cli::Build::PortForwarding.new(hosts, port.to_i, **KAMAL.config.ssh.options).forward do
+        super
+      end
+    else
+      super
+    end
+  end
+
+  private
+    # Kamal identifies commands by their registered class, so this wrapper needs the accessory name.
+    def command
+      "accessory"
+    end
+end
+
+HotcellReboot.start(ARGV) if $PROGRAM_NAME == __FILE__

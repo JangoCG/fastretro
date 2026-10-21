@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require "bundler"
+require "fileutils"
+require "tmpdir"
+require "timeout"
+
+app_root = File.expand_path("../..", __dir__)
+status = nil
+
+Dir.mktmpdir("hotcell-", "/tmp") do |sockets|
+  cell_dir = File.join(sockets, "active_storage")
+  FileUtils.mkdir_p(cell_dir)
+  cell = nil
+
+  begin
+    Bundler.with_unbundled_env do
+      cell = Process.spawn({
+        "BUNDLE_GEMFILE" => File.join(app_root, "hotcell/Gemfile"),
+        "HOTCELL_CONFIG" => File.join(app_root, "hotcell/config.rb"),
+        "HOTCELL_OPERATIONS" => File.join(app_root, "hotcell/operations"),
+        "HOTCELL_DIR" => cell_dir,
+        "HOTCELL_GROUP" => nil
+      }, "bundle", "exec", "hotcell", "--development", chdir: app_root,
+        out: File.join(cell_dir, "cell.log"), err: [ :child, :out ])
+    end
+
+    Timeout.timeout(20) do
+      until File.socket?(File.join(cell_dir, "work.sock"))
+        raise "Hotcell exited: #{File.read(File.join(cell_dir, "cell.log"))}" if Process.waitpid(cell, Process::WNOHANG)
+        sleep 0.1
+      end
+    end
+
+    status = system({ "HOTCELL_ROOT" => sockets, "HOTCELL_GROUP" => nil, "RAILS_ENV" => "test", "PARALLEL_WORKERS" => "1" },
+      File.join(app_root, "bin/rails"), "test", "hotcell/test/processing_test.rb", chdir: app_root)
+  ensure
+    if cell
+      Process.kill("TERM", cell) rescue Errno::ESRCH
+      Process.wait(cell) rescue Errno::ECHILD
+    end
+  end
+end
+
+exit(status ? 0 : 1)

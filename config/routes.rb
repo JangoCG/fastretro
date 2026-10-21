@@ -109,6 +109,8 @@ Rails.application.routes.draw do
 
   # Health check
   get "up", to: "rails/health#show", as: :rails_health_check
+  get "hotcellz", to: "hot_cell/health#show"
+  get "hotcellz/test", to: "hot_cell/diagnostics#show"
 
   # SEO
   get "sitemap.xml", to: "sitemaps#show", as: :sitemap, defaults: { format: :xml }

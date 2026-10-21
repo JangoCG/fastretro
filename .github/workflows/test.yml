@@ -30,6 +30,18 @@ jobs:
       - name: Run tests
         run: bin/rails db:test:prepare test
 
+      - name: Test Hotcell image processing
+        if: inputs.saas
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libvips-dev mupdf-tools ffmpeg
+          BUNDLE_GEMFILE=hotcell/Gemfile bundle install
+          hotcell/bin/test
+
+      - name: Test Hotcell deployment and rollback
+        if: inputs.saas
+        run: hotcell/test/check-test
+
       - name: Run system tests
         env:
           PARALLEL_WORKERS: 1
