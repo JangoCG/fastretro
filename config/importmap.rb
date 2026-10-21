@@ -10,5 +10,5 @@ pin_all_from "app/javascript/helpers", under: "helpers"
 pin "lexxy", to: "lexxy.js"
 pin "@rails/activestorage", to: "activestorage.esm.js"
 pin "@rails/actiontext", to: "actiontext.esm.js"
-pin "sortablejs"
+pin "sortablejs" # @1.15.7
 pin_all_from "app/javascript/lib", under: "lib"

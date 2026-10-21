@@ -171,7 +171,7 @@ describe("balloon-game controller", () => {
 
   it("plays a pop sound on the first click and reuses the audio context after that", async () => {
     const context = fakeAudioContext()
-    vi.stubGlobal("AudioContext", vi.fn(() => context))
+    vi.stubGlobal("AudioContext", vi.fn(function () { return context }))
     const controller = await startedController()
     const first = await balloon()
     const second = await balloon()
@@ -234,7 +234,7 @@ describe("balloon-game controller", () => {
 
   it("builds a fresh audio context after a disconnect closed the old one", async () => {
     const contexts = [ fakeAudioContext(), fakeAudioContext() ]
-    vi.stubGlobal("AudioContext", vi.fn(() => contexts.shift()))
+    vi.stubGlobal("AudioContext", vi.fn(function () { return contexts.shift() }))
     const controller = await startedController()
     const target = await balloon()
     target.dispatchEvent(popEvent(target))
