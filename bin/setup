@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require "fileutils"
+require "bundler"
 
 APP_ROOT = File.expand_path("..", __dir__)
 
@@ -14,6 +15,14 @@ FileUtils.chdir APP_ROOT do
 
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
+
+  require_relative "../lib/fastretro"
+  if FastRetro.saas?
+    puts "\n== Installing Hotcell dependencies =="
+    Bundler.with_unbundled_env do
+      system!({ "BUNDLE_GEMFILE" => File.join(APP_ROOT, "hotcell/Gemfile") }, "bundle", "install")
+    end
+  end
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

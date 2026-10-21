@@ -32,7 +32,7 @@ class ActionDispatch::IntegrationTest
   include SessionTestHelper
 
   setup do
-    integration_session.default_url_options[:script_name] = "/#{accounts(:one).external_account_id}"
+    integration_session.default_url_options = integration_session.default_url_options.merge(script_name: "/#{accounts(:one).external_account_id}")
   end
 
   private
@@ -62,6 +62,6 @@ end
 
 class ActionDispatch::SystemTestCase
   setup do
-    self.default_url_options[:script_name] = "/#{accounts(:one).external_account_id}"
+    self.default_url_options = default_url_options.merge(script_name: "/#{accounts(:one).external_account_id}")
   end
 end

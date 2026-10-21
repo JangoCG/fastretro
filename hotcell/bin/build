@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require_relative "../image"
+
+exec "docker", "build", "--pull", "--platform", ENV.fetch("HOTCELL_PLATFORM", "linux/amd64"),
+  "--tag", HotcellImage.tag, File.expand_path("..", __dir__)

@@ -38,3 +38,17 @@ if !Rails.env.local? && ENV["SKIP_TELEMETRY"].blank? && ENV["SENTRY_DSN"].presen
     config.rails.register_error_subscriber = true
   end
 end
+
+# Rails 8.2's socket calls these publicly; Sentry still wraps them as private.
+# Match Fizzy's compatibility fix until sentry-rails supports the socket API.
+Rails.application.config.after_initialize do
+  ActiveSupport.on_load(:action_cable_connection) do
+    if defined?(Sentry::Rails::ActionCableExtensions::Connection)
+      Sentry::Rails::ActionCableExtensions::Connection.class_eval do
+        %i[ handle_open handle_close ].each do |method|
+          public method if method_defined?(method) || private_method_defined?(method)
+        end
+      end
+    end
+  end
+end

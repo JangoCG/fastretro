@@ -1,0 +1,34 @@
+# Merge these settings into config/deploy.yml for the SaaS deployment.
+builder:
+  target: saas
+
+servers:
+  web:
+    options:
+      group-add: 10001
+
+env:
+  clear:
+    HOTCELL_ROOT: /run/hotcell
+    HOTCELL_GROUP: 10001
+
+volumes:
+  - hotcell-active-storage:/run/hotcell/active_storage
+
+accessories:
+  hotcell:
+    image: <%= require File.expand_path("hotcell/image", Dir.pwd); HotcellImage.tag %>
+    roles: [ web ]
+    network: none
+    volumes:
+      - hotcell-active-storage:/run/hotcell/cell
+    options:
+      cpus: 2
+      memory: 2g
+      memory-swap: 2g
+      read-only: true
+      cap-drop: ALL
+      security-opt: no-new-privileges:true
+      user: 10001:10001
+      pids-limit: 512
+      tmpfs: /tmp:rw,nosuid,nodev,noexec,size=512m

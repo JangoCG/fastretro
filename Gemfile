@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.4"
+# Rails 8.2 provides the custom Active Storage transformer used by Hotcell.
+gem "rails", github: "rails/rails", branch: "main"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -43,6 +43,10 @@ gem "thruster", require: false
 gem "image_processing", "~> 2.2"
 gem "ruby-vips", require: false
 
+# Isolate SaaS attachment processing in an unprivileged sibling container.
+gem "activestorage-hotcell-client", "0.6.0"
+gem "yabeda-hotcell", "0.6.0", require: false
+
 # Store production Active Storage uploads in S3-compatible object storage
 gem "aws-sdk-s3", require: false
 
@@ -82,8 +86,8 @@ gem "gvltools", require: false
 # CSV export (required explicitly since Ruby 3.4)
 gem "csv"
 
-# Excel export
-gem "caxlsx"
+# Upstream supports the Marcel 2 dependency used by Rails 8.2.
+gem "caxlsx", "~> 4.5", github: "caxlsx/caxlsx", branch: "master"
 
 # HTTP client for external integrations (Jira, etc.)
 gem "faraday", "~> 2.0"
@@ -120,6 +124,6 @@ group :test do
   gem "selenium-webdriver"
   # Mocking and stubbing library
   gem "mocha"
-  # Pin minitest to 6.x for Rails 8.1 compatibility
+  # Keep the test runner on Minitest 6.
   gem "minitest", "~> 6.0"
 end

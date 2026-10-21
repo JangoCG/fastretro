@@ -7,6 +7,8 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 
 require_relative "../lib/action_pack/railtie"
+require_relative "../lib/fastretro"
+require_relative "../lib/fastretro/cell"
 
 module Fastretro
   class Application < Rails::Application
@@ -20,7 +22,9 @@ module Fastretro
     # rails_ext/ is excluded because it contains patches to Rails internals that
     # don't follow autoload naming conventions. These files are manually required
     # via config/initializers/extensions.rb instead.
-    config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda middleware])
+    # FastRetro uses a different spelling from the application's Fastretro namespace.
+    # Its configuration modules are required explicitly above.
+    config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda middleware fastretro])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -33,5 +37,15 @@ module Fastretro
     config.i18n.available_locales = [ :en, :de ]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
+
+    initializer "fastretro.hotcell", before: "active_storage.configs" do |app|
+      FastRetro::Cell.register!
+      HotCell.diagnostics_controller_parent = "AdminController"
+      app.config.active_storage.merge! FastRetro::Cell.active_storage_configuration
+    end
+
+    config.after_initialize do
+      HotCell.describe_cells if FastRetro::Cell.enabled?
+    end
   end
 end
