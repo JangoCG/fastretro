@@ -7,7 +7,7 @@ require "timeout"
 app_root = File.expand_path("../..", __dir__)
 status = nil
 
-Dir.mktmpdir("hotcell-", File.join(app_root, "tmp")) do |sockets|
+Dir.mktmpdir("hotcell-", "/tmp") do |sockets|
   cell_dir = File.join(sockets, "active_storage")
   FileUtils.mkdir_p(cell_dir)
   cell = nil

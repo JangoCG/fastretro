@@ -26,8 +26,11 @@ SAAS=true bin/dev
 ```
 
 `bin/dev` selects `Procfile.saas.dev` in SaaS mode. The cell has its own bundle and
-runs with `--development`, keeping its temporary files separate from other apps.
-Normal self-hosted development still uses `Procfile.dev`.
+runs with `--development`. Its sockets use a short path under `/tmp`, derived from
+the user ID and a hash of the checkout path, so nested worktrees stay within Unix
+socket path limits and separate checkouts do not share a cell. Set `HOTCELL_ROOT`
+to choose another short socket root. Native tests use their own temporary root
+under `/tmp`. Normal self-hosted development still uses `Procfile.dev`.
 
 ## Verification
 
@@ -68,12 +71,22 @@ When ready to release, publish the built image to the deployment's registry, boo
 or reboot the accessory, then deploy the SaaS application target:
 
 ```sh
-docker push "$(ruby hotcell/image.rb)"
-bin/kamal accessory reboot hotcell
+bin/kamal registry setup --skip-remote &&
+docker push "$(ruby hotcell/image.rb)" &&
+hotcell/bin/reboot &&
 bin/kamal deploy
 ```
 
-The registry must be reachable from the publishing machine and production host.
+`hotcell/bin/reboot` forwards a `localhost:<port>` registry over SSH to the selected
+cell hosts for the entire accessory reboot, using Kamal's SSH settings. It accepts
+the same options as Kamal, including `-d staging` and `--hosts=host1,host2`. Pass the
+same destination and host options to each Kamal command when narrowing a release.
+The command also boots the accessory on its first release. A failure stops the
+command chain before the application deploys.
+
+For a remote registry, the publishing machine and production hosts must be able to
+reach it, and any required accessory registry credentials must be configured in
+Kamal. The reboot command then uses the normal pull without a registry tunnel.
 Kamal does not update accessories as part of `deploy`; reboot the accessory whenever
 its image changes. Keep the application and cell on the same Hotcell version and
 retain both images when rolling back. The two lockfiles are checked by a test.

@@ -34,7 +34,7 @@ class HotcellProcessingTest < ActiveSupport::TestCase
   test "an unavailable cell does not fall back to local image processing" do
     blob = create_blob(PNG)
     original_root = HotCell.root
-    HotCell.root = Rails.root.join("tmp/missing-hotcell").to_s
+    HotCell.root = File.join(original_root, "missing")
 
     assert_raises FastRetro::Cell::ProcessingUnavailable do
       blob.variant(resize_to_limit: [ 10, 10 ]).processed

@@ -1,3 +1,3 @@
-web: HOTCELL_ROOT=$PWD/tmp/hotcell bin/rails server
+web: HOTCELL_ROOT="$(ruby hotcell/bin/development-root)" bin/rails server
 css: bin/rails tailwindcss:watch
-cell: env -u RUBYOPT -u RUBYLIB -u BUNDLER_SETUP -u BUNDLER_VERSION -u BUNDLE_BIN_PATH -u BUNDLE_LOCKFILE BUNDLE_GEMFILE=$PWD/hotcell/Gemfile HOTCELL_CONFIG=$PWD/hotcell/config.rb HOTCELL_OPERATIONS=$PWD/hotcell/operations HOTCELL_DIR=$PWD/tmp/hotcell/active_storage bundle exec hotcell --development
+cell: env -u RUBYOPT -u RUBYLIB -u BUNDLER_SETUP -u BUNDLER_VERSION -u BUNDLE_BIN_PATH -u BUNDLE_LOCKFILE BUNDLE_GEMFILE="$PWD/hotcell/Gemfile" HOTCELL_CONFIG="$PWD/hotcell/config.rb" HOTCELL_OPERATIONS="$PWD/hotcell/operations" HOTCELL_DIR="$(ruby hotcell/bin/development-root)/active_storage" bundle exec hotcell --development
