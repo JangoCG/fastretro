@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.3"
+gem "rails", "~> 8.1.4"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -40,7 +40,8 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.2"
+gem "ruby-vips", require: false
 
 # Store production Active Storage uploads in S3-compatible object storage
 gem "aws-sdk-s3", require: false
@@ -49,7 +50,7 @@ gem "aws-sdk-s3", require: false
 gem "view_component"
 
 # Modern rich text editor built on Lexical
-gem "lexxy", "0.9.29"
+gem "lexxy", "~> 1.0"
 
 # Markdown rendering for legal pages
 gem "redcarpet"
@@ -57,7 +58,7 @@ gem "redcarpet"
 # Syntax highlighting for code blocks
 gem "rouge"
 
-gem "stripe", "~> 19.1"
+gem "stripe", "~> 20.0"
 
 # Error tracking
 gem "sentry-ruby"
@@ -74,7 +75,7 @@ gem "yabeda-gc", require: false
 gem "yabeda-http_requests", require: false
 gem "yabeda-prometheus-mmap", require: false
 gem "yabeda-puma-plugin", require: false
-gem "prometheus-client-mmap", "~> 1.5.0", require: false
+gem "prometheus-client-mmap", "~> 1.7", require: false
 gem "webrick", require: false
 gem "gvltools", require: false
 
@@ -119,6 +120,6 @@ group :test do
   gem "selenium-webdriver"
   # Mocking and stubbing library
   gem "mocha"
-  # Pin minitest to 5.x for Rails 8.1 compatibility
+  # Pin minitest to 6.x for Rails 8.1 compatibility
   gem "minitest", "~> 6.0"
 end

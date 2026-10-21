@@ -55,5 +55,8 @@ jobs:
       - name: Install packages
         run: npm ci
 
+      - name: Audit packages
+        run: npm audit
+
       - name: Run JavaScript tests
         run: npm test
