@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
-ENV BUNDLE_PATH=/hotcell/bundle BUNDLE_FROZEN=true
+ENV BUNDLE_PATH=/hotcell/bundle BUNDLE_WITHOUT=development BUNDLE_FROZEN=true
 WORKDIR /hotcell
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && rm -rf "$BUNDLE_PATH"/ruby/*/cache
@@ -14,7 +14,7 @@ RUN bundle install && rm -rf "$BUNDLE_PATH"/ruby/*/cache
 FROM ruby:${RUBY_VERSION}-slim
 RUN apt-get update && \
     apt-get upgrade -y --no-install-recommends && \
-    apt-get install -y --no-install-recommends libvips42 && \
+    apt-get install -y --no-install-recommends libvips42 mupdf-tools ffmpeg && \
     rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 10001 hotcell && \
@@ -24,6 +24,7 @@ RUN groupadd --gid 10001 hotcell && \
 
 ENV HOME=/tmp \
     BUNDLE_PATH=/hotcell/bundle \
+    BUNDLE_WITHOUT=development \
     BUNDLE_FROZEN=true \
     HOTCELL_CONFIG=/hotcell/config.rb \
     HOTCELL_OPERATIONS=/hotcell/operations \

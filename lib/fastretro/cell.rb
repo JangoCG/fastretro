@@ -4,7 +4,7 @@ require "active_storage/hot_cell/client"
 module FastRetro
   module Cell
     NAME = "active_storage"
-    TIMEOUT = 45
+    TIMEOUT = 135
 
     class UnprocessableAttachment < StandardError; end
     class ProcessingUnavailable < StandardError; end
@@ -20,22 +20,33 @@ module FastRetro
         value
       end
 
+      def group
+        ENV["HOTCELL_GROUP"].presence
+      end
+
       def enabled?
         root.present?
       end
 
       def register!
         HotCell.root = root
-        HotCell.group = ENV["HOTCELL_GROUP"].presence
+        HotCell.group = group
         HotCell.register NAME, timeout: TIMEOUT,
           permanent: UnprocessableAttachment, transient: ProcessingUnavailable
+      end
+
+      def cell
+        HotCell.cell NAME
       end
 
       def active_storage_configuration
         if enabled?
           { variant_processor: ActiveStorage::HotCell::Client::Transformers::Image::Vips,
-            analyzers: [ ActiveStorage::HotCell::Client::Analyzers::Image::Vips ],
-            previewers: [] }
+            analyzers: [ ActiveStorage::HotCell::Client::Analyzers::Image::Vips,
+                         ActiveStorage::HotCell::Client::Analyzers::Video::FFprobe,
+                         ActiveStorage::HotCell::Client::Analyzers::Audio::FFprobe ],
+            previewers: [ ActiveStorage::HotCell::Client::Previewers::Pdf::Mutool,
+                          ActiveStorage::HotCell::Client::Previewers::Video::FFmpeg ] }
         else
           {}
         end

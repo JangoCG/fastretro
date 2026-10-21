@@ -1,4 +1,10 @@
-# Merge these settings into config/deploy.yml for the SaaS deployment.
+# Shared SaaS settings. Merge into config/deploy.yml; read the image through HotcellImage.pinned.
+# bin/build updates this literal pin; commit it with the cell's inputs and lockfile.
+hooks_path: hotcell/hooks
+hooks_output:
+  pre-build: verbose
+  pre-deploy: verbose
+
 builder:
   target: saas
 
@@ -6,6 +12,12 @@ servers:
   web:
     options:
       group-add: 10001
+      publish: "127.0.0.1::9394"
+  jobs:
+    cmd: bin/jobs
+    options:
+      group-add: 10001
+      publish: "127.0.0.1::9394"
 
 env:
   clear:
@@ -17,8 +29,8 @@ volumes:
 
 accessories:
   hotcell:
-    image: <%= require File.expand_path("hotcell/image", Dir.pwd); HotcellImage.tag %>
-    roles: [ web ]
+    image: localhost:5555/fastretro-hotcell:0542e5679843
+    roles: [ web, jobs ]
     network: none
     volumes:
       - hotcell-active-storage:/run/hotcell/cell

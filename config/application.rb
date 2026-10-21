@@ -45,7 +45,7 @@ module Fastretro
     end
 
     config.after_initialize do
-      HotCell.describe_cells if FastRetro::Cell.enabled?
+      HotCell.describe_cells
     end
   end
 end

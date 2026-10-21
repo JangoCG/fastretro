@@ -12,6 +12,7 @@ CI.run do
   step "Style: Ruby", "bin/rubocop"
 
   if FastRetro.saas?
+    step "Tests: Hotcell deployment and rollback", "hotcell/test/check-test"
     step "Tests: Hotcell", "hotcell/bin/test"
   end
 
