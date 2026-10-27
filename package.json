@@ -11,7 +11,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "happy-dom": "^21.0.1",
     "sortablejs": "^1.15.7",
-    "vitest": "^5.0.4"
+    "vitest": "^5.0.5"
   },
   "version": "0.1.2.0"
 }
