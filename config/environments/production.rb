@@ -6,9 +6,9 @@ Rails.application.configure do
   # CSP: Allow form submissions to Stripe Checkout and Billing Portal
   config.x.content_security_policy.form_action = "https://checkout.stripe.com https://billing.stripe.com"
 
-  # CSP: Allow analytics scripts (Umami, Cloudflare)
+  # CSP: Allow analytics scripts (Umami, Cloudflare) and browser uploads to S3 storage
   config.x.content_security_policy.script_src = "https://analytics.cengizg.com https://static.cloudflareinsights.com"
-  config.x.content_security_policy.connect_src = "https://analytics.cengizg.com https://cloudflareinsights.com"
+  config.x.content_security_policy.connect_src = "https://analytics.cengizg.com https://cloudflareinsights.com #{ENV["S3_ENDPOINT"]}".strip
 
   # Email provider Settings
   #
