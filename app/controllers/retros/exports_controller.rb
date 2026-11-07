@@ -30,7 +30,7 @@ module Retros
 
       @retro.column_definitions.each do |column|
         @retro.feedbacks.published.in_category(column["id"]).includes(:user, :votes).each do |feedback|
-          data << [ column["name"], strip_html(feedback.content.to_plain_text), feedback.user.name, feedback.votes.size ]
+          data << [ column["name"], feedback.content.to_plain_text.squish, feedback.user.name, feedback.votes.size ]
         end
       end
 
@@ -39,7 +39,7 @@ module Retros
 
     def actions_data
       @retro.actions.published.includes(:user).map do |action|
-        [ strip_html(action.content.to_plain_text), action.user.name ]
+        [ action.content.to_plain_text.squish, action.user.name ]
       end
     end
 
@@ -88,10 +88,6 @@ module Retros
       end
 
       package.to_stream.read
-    end
-
-    def strip_html(text)
-      ActionController::Base.helpers.strip_tags(text).gsub(/\s+/, " ").strip
     end
   end
 end
