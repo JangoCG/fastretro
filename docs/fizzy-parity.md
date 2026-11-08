@@ -1,7 +1,14 @@
 # Shared foundations: Fizzy comparison
 
-Initial batches reference Fizzy commit `aef43ac9c`, read from the local Git repository. Later batches name their reference below. Fast Retro stays on Rails
-8.1.4.1; neither Gemfile nor Gemfile.lock is changed by this alignment.
+Fast Retro runs Rails `8.2.0.alpha` at commit
+`8b06b0eb98315cbbd6d7f526112cd8d909ff787c`, matching both lockfiles in
+Fizzy `4b5c05a84`. The revision is explicit in Gemfile so subsequent bundling
+cannot silently move to another alpha. Like Fizzy, application defaults remain
+at `config.load_defaults 8.1`; Ruby stays at 3.4.11.
+
+Initial batches referenced Fizzy `aef43ac9c`; later changes use `4b5c05a84`.
+The source mapping below describes the final implementation, including the
+replacement of the former Rails 8.1 compatibility code.
 
 ## Security and browser foundations
 
@@ -15,7 +22,7 @@ was read in that checkout; compatibility changes are listed explicitly.
 | `lib/rails_ext/action_text_content_attachment_render_by_path.rb` | [fizzy] same path, unchanged |
 | `config/initializers/vips.rb` | [fizzy] same path; no hotcell branch because Fast Retro processes images in this application |
 | `.github/workflows/test.yml` | [fizzy] same path; install the required `libvips` system package before booting Rails on both SaaS and OSS runners. Fast Retro does not need Fizzy's additional MySQL packages. |
-| `app/controllers/concerns/request_forgery_protection.rb` | [fizzy] same path and Rails header-only verification; Rails 8.1 backport using `verified_request?` instead of the unavailable `using: :header_only` option |
+| `app/controllers/concerns/request_forgery_protection.rb` | [fizzy] same path, unchanged at `4b5c05a84`; native Rails `using: :header_only` and Fizzy's explicit JSON exception replace the former backport |
 | `lib/sentry_sql_redaction.rb` | [fizzy] `saas/lib/fizzy/saas/sentry_sql_redaction.rb`; now includes SQL backstops as well as the local path filter |
 | `lib/credential_path_filter.rb` | [kein Vorbild] compatibility implementation for the unavailable private `rails_structured_logging` dependency; follows Fizzy's route declarations and credential-path test cases |
 | `lib/rails_ext/action_dispatch_filter_path_parameters.rb` | [fizzy] route DSL from `config/routes.rb`; implements filtering rather than copying the OSS no-op fallback, so request paths, route parameters and logged redirects are actually redacted |
@@ -48,7 +55,7 @@ account prefixes and unmatched scanner suffixes. SQL redaction is included in th
 
 | Fast Retro file | Source and adaptation |
 | --- | --- |
-| `lib/rails_ext/active_record_sql_redaction.rb` | [fizzy] same path; Rails 8.1 replaces the unavailable prepended notification subscription with `Fanout::Handle#finish_with_values`, before all finish consumers. SQLite's native error provides the SQL when Rails 8.1 passes `nil` during translation. Other table matching, redaction and error handling follow Fizzy. |
+| `lib/rails_ext/active_record_sql_redaction.rb` | [fizzy] same path, unchanged at `4b5c05a84`; native prepended notification subscriber and error filtering replace the entire Rails 8.1 adapter |
 | `lib/sentry_sql_redaction.rb` | [fizzy] `saas/lib/fizzy/saas/sentry_sql_redaction.rb`; removes the SaaS namespace and uses the existing local path filter. Supersedes `sentry_path_redaction.rb`; existing callers migrate to the full module. |
 | `lib/rails_ext/active_storage_analyze_job_suppress_broadcasts.rb` | [fizzy] same path; substitutes `Feedback` and `Action` for `Board` and `Card`. The existing direct broadcast callbacks now honor Turbo's `suppressed_turbo_broadcasts?` flag. |
 | `config/initializers/active_storage_purge_on_last_attachment.rb` | [fizzy] same path, unchanged. Shared embeds retain their file and avoid redundant purge jobs; the last removal still cleans up. |
@@ -81,8 +88,7 @@ Fast Retro keeps its browser flows and existing JSON update contract.
 
 ## Updated storage and audit behavior
 
-This batch follows the newer Fizzy commit `4b5c05a84`. Rails remains 8.1.4.1;
-there is no runtime Rails upgrade and no OAuth/Connected Apps implementation.
+This batch follows the newer Fizzy commit `4b5c05a84`. Rails now matches its 8.2 alpha revision. No OAuth/Connected Apps implementation is introduced.
 
 | Fast Retro file | Source and adaptation |
 | --- | --- |
@@ -110,22 +116,77 @@ transfers instead of API tokens, retaining bind/cache/bulk/error coverage.
 
 | Fast Retro file | Source and adaptation |
 | --- | --- |
-| `app/controllers/concerns/request_forgery_protection.rb` | [fizzy] same path; Rails 8.1 header-only backport, deliberately omitting Fizzy's blanket JSON API exception. Same-origin browser JSON still works, and HTTPS requests without fetch metadata are rejected regardless of format. |
-| `test/integration/request_forgery_protection_test.rb` | [fizzy] `test/controllers/concerns/request_forgery_protection_test.rb`; retained real request coverage for fetch metadata, origin and HTTP fallback, plus JSON bypass rejection. |
+| `app/controllers/concerns/request_forgery_protection.rb` | [fizzy] same path, unchanged. Header-only verification uses Rails 8.2 directly. Fizzy's JSON exception accepts absent fetch metadata; explicit cross-site or invalid metadata and mismatched origins remain rejected |
+| `test/integration/request_forgery_protection_test.rb` | [fizzy] `test/controllers/concerns/request_forgery_protection_test.rb`; retained real request coverage for fetch metadata, origin and HTTP fallback, including Fizzy's JSON exception and rejection of explicit cross-site metadata. |
 | `test/integration/web_app_authentication_test.rb` | [kein Vorbild] removal regression contract using the project's integration test structure: removed routes return 404, Authorization headers cannot replace cookies, and JSON login requests follow browser redirects without exposing credentials. |
 | `test/controllers/sessions/passkeys_controller_test.rb` | [fizzy] same path; keeps malformed/unsigned-counter/signature checks using browser responses and ensures JSON requests no longer return session credentials. |
 | `test/controllers/retros_controller_test.rb` | Fast Retro's existing controller tests; checks that the original JSON create/update/delete lifecycle still works with session cookies. |
 
-The new removal and JSON-CSRF regression tests were first run against the API
-implementation and failed on the still-exposed endpoints, Bearer challenges,
-credential responses and missing CSRF rejection. Dedicated API tests were
+The API-removal regression tests first failed against the still-exposed endpoints, Bearer challenges and credential responses. The CSRF contract was subsequently aligned to Fizzy when the user authorized the Rails 8.2 upgrade. Dedicated API tests were
 removed because their entire feature is removed; security tests were retained
 at their browser or logging boundary instead of being deleted with the API.
 
-Seventeen temporary mutation probes independently disabled JSON-CSRF, origin,
+Before the Rails upgrade, seventeen temporary mutation probes independently disabled JSON-CSRF, origin,
 HTTPS/protocol, user authorization/scope/parameter, email validation/ownership,
 SQL table redaction and credential-response protections. Every probe failed on
 the intended assertion; all source mutations were restored before final CI.
+
+## Rails 8.2 alignment and remaining limits
+
+The upgrade removes the custom CSRF strategy, SQL notification fanout patch,
+mail-delivery payload adapter and old storage log event conversion. The following
+files are byte-identical to Fizzy `4b5c05a84`:
+
+- `app/controllers/concerns/request_forgery_protection.rb`
+- All 21 Ruby files under `lib/action_pack/`
+- `lib/rails_ext/action_mailer_delivered_event_without_mail.rb`
+- `lib/rails_ext/action_mailer_mail_delivery_job.rb`
+- `lib/rails_ext/action_pack_passkey_infer_name_from_aaguid.rb`
+- `lib/rails_ext/action_text_content_attachment_render_by_path.rb`
+- `lib/rails_ext/active_record_replica_support.rb`
+- `lib/rails_ext/active_record_sql_redaction.rb`
+- `lib/rails_ext/active_storage_analyze_job_skip_detached.rb`
+- `lib/rails_ext/active_storage_log_subscriber_filtered_urls.rb`
+- `lib/rails_ext/active_storage_proxy_disabled.rb`
+- `lib/rails_ext/active_storage_serve_unknown_types_as_binary.rb`
+- `lib/rails_ext/active_storage_transform_jobs_discard_file_not_found.rb`
+
+Additional source mappings:
+
+| Fast Retro file | Source and adaptation |
+| --- | --- |
+| `config/application.rb` | [fizzy] same path; enables `Rails.event.debug_mode` with the same after-initialize block. Keeps Fizzy's 8.1 configuration defaults on the 8.2 runtime. |
+| `config/initializers/sentry.rb` | [fizzy] `saas/lib/fizzy/saas/engine.rb`, Action Cable visibility compatibility block. Inner code is unchanged; `config.after_initialize` becomes `Rails.application.config.after_initialize` outside the SaaS engine. Preserves Sentry instrumentation while making WebSocket connect/disconnect work on Rails 8.2. |
+| `test/test_helper.rb`, `test/test_helpers/session_test_helper.rb` | [fizzy] same paths; assign merged URL options rather than mutating Rails 8.2's frozen defaults, and load routes before constructing an integration session. Fast Retro's account fixtures replace Fizzy's fixtures. |
+| `test/integration/active_storage_authorization_test.rb` | Same immutable URL-options pattern; existing private-storage behavior and deactivated-member denial remain. |
+| `test/jobs/active_storage_jobs_test.rb` | [fizzy] `test/lib/rails_ext/active_storage_transform_jobs_discard_file_not_found_test.rb`; adds the new `CreateVariantsJob` missing-file discard/report contract, with no retries. |
+| `test/lib/rails_ext/active_record_sql_redaction_test.rb`, `test/mailers/magic_link_mailer_test.rb` | [fizzy] SQL/mail redaction tests; observe the actual `Rails.event` payload as well as existing notifications/logs and delivery. |
+| `test/integration/sensitive_logging_test.rb` | [fizzy] SQL/mail subscriber-ordering contracts, exercised with the existing isolated-boot test pattern: consumers registered before Rails boot must receive redacted SQL and mail. No subscriber identity or source assertions. |
+| `test/controllers/retros/exports_controller_test.rb` | [kein Vorbild] Fast Retro-specific workbook compatibility check: reads the actual XLSX ZIP/XML, verifies both worksheets, published Unicode/text content and exclusion of draft content. |
+
+Rails 8.2 requires Marcel 2; released Caxlsx 4.5.0 only accepts Marcel 1.
+The Excel exporter therefore uses the upstream implementation pinned to
+[`ef607a93dcedb37f2704e8e549bc59b62f633ea7`](https://github.com/caxlsx/caxlsx/commit/ef607a93dcedb37f2704e8e549bc59b62f633ea7),
+whose dependency allows Marcel >= 1 and < 3. No Caxlsx fork or local dependency
+patch is introduced. CSV and XLSX behavior remain covered by real downloads.
+
+Exact parity remains impossible for Fizzy's private
+`basecamp/rails-structured-logging` dependency: both available GitHub connections
+return 404, and the user confirmed no authorized source is available. The existing
+`CredentialPathFilter` and route/logging integration remain deliberately, so
+credential paths are still scrubbed in both logs and Sentry. These are local
+implementations, not copies of inaccessible source.
+
+Fast Retro also retains its own domain models, tenant ownership checks, fixtures,
+integer-ID migrations, UI, and the requested API removal. Those differences are
+independent of Rails version. This PR does not claim that the entire app is
+byte-identical to Fizzy.
+
+Five upgrade-specific counterprobes removed SQL/mail subscriber precedence,
+the new variant-job discard handler, Fizzy's JSON exception and the Sentry
+WebSocket compatibility block separately. Every probe reproduced its intended
+failure, including an actual browser connection failure; all source changes
+were restored. The early-consumer test also passes with CI eager loading.
 
 ## Verification
 
@@ -134,3 +195,8 @@ device transfers, permission and tenant boundaries, email confirmations,
 private file downloads, SQL diagnostics, credential paths and Sentry callbacks.
 Production configuration tests boot isolated applications with in-memory
 databases. Sentry callback tests send no events, and test mails stay local.
+
+Final Rails 8.2 validation: full `bin/ci` passes for SaaS and OSS, each with
+574 application tests / 2,951 assertions and 11 system tests / 45 assertions
+(one existing system-test skip per mode). All 22 JavaScript tests, style,
+dependency/importmap/npm audits, Brakeman, Gitleaks and seed checks pass.

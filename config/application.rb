@@ -28,6 +28,12 @@ module Fastretro
     # via config/initializers/extensions.rb instead.
     config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda middleware])
 
+    # Enable debug mode for Rails event logging so we get SQL query logs.
+    # This was made necessary by the change in https://github.com/rails/rails/pull/55900
+    config.after_initialize do
+      Rails.event.debug_mode = true
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

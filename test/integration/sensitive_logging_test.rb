@@ -1,7 +1,49 @@
 require "test_helper"
 require "active_storage/service/s3_service"
+require "open3"
 
 class SensitiveLoggingTest < ActionDispatch::IntegrationTest
+  test "consumers registered before boot never receive SQL or mail credentials" do
+    script = <<~RUBY
+      require "bundler/setup"
+      require "active_support"
+      require "active_support/notifications"
+      require "json"
+
+      captured = { sql: [], mail: [] }
+      ActiveSupport::Notifications.subscribe("sql.active_record") do |event|
+        sql = event.payload[:sql]
+        captured[:sql] << sql.dup if sql.include?("magic_links")
+      end
+      ActiveSupport::Notifications.subscribe("deliver.action_mailer") do |event|
+        captured[:mail] << event.payload[:mail].dup
+      end
+
+      require_relative "config/environment"
+      connection = ActiveRecord::Base.connection
+      connection.create_table(:magic_links) { |table| table.string :code }
+      connection.execute("INSERT INTO magic_links (code) VALUES ('made-up-boot-secret')")
+
+      class BootRedactionMailer < ActionMailer::Base
+        def probe
+          mail(from: "sender@example.com", to: "recipient@example.com",
+            subject: "made-up-boot-secret", body: "made-up-boot-secret")
+        end
+      end
+      BootRedactionMailer.probe.deliver_now
+      puts JSON.generate(captured)
+    RUBY
+    output, status = Open3.capture2e({ "RAILS_ENV" => "test", "SAAS" => "false", "DATABASE_URL" => "sqlite3::memory:",
+      "SKIP_TELEMETRY" => "true", "SENTRY_DSN" => nil, "DISABLE_BOOTSNAP" => "1" },
+      RbConfig.ruby, "-e", script, chdir: Rails.root)
+
+    assert status.success?, output
+    captured = JSON.parse(output.lines.last)
+    assert captured.fetch("sql").any? { |sql| sql.include?("[FILTERED]") }
+    assert_equal [ "[FILTERED]" ], captured.fetch("mail")
+    assert_not_includes captured.inspect, "made-up-boot-secret"
+  end
+
   test "sign in codes are filtered from request logs and record inspection" do
     log = StringIO.new
     original_logger = ActionController::Base.logger

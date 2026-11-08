@@ -11,16 +11,13 @@ class RequestForgeryProtectionTest < ActionDispatch::IntegrationTest
     ActionController::Base.allow_forgery_protection = @original_forgery_protection
   end
 
-  test "JSON requests without fetch metadata cannot bypass CSRF protection" do
+  test "JSON requests with missing fetch metadata use Fizzy's explicit exception" do
     untenanted do
-      assert_no_difference "MagicLink.count" do
-        without_action_dispatch_exception_handling do
-          assert_raises ActionController::InvalidAuthenticityToken do
-            post session_path, params: { email_address: identities(:admin).email_address }, as: :json
-          end
-        end
+      assert_difference "MagicLink.count", 1 do
+        post session_path, params: { email_address: identities(:admin).email_address }, as: :json
       end
-      assert cookies[:pending_authentication_token].blank?
+      assert_redirected_to session_magic_link_path
+      assert cookies[:pending_authentication_token].present?
     end
   end
 
@@ -52,7 +49,7 @@ class RequestForgeryProtectionTest < ActionDispatch::IntegrationTest
     untenanted do
       assert_no_difference "MagicLink.count" do
         without_action_dispatch_exception_handling do
-          assert_raises ActionController::InvalidAuthenticityToken do
+          assert_raises ActionController::InvalidCrossOriginRequest do
             post session_path, params: { email_address: identities(:admin).email_address }, as: :json,
               headers: { "Sec-Fetch-Site" => "same-origin", "Origin" => "https://foreign.example" }
           end
@@ -71,7 +68,7 @@ class RequestForgeryProtectionTest < ActionDispatch::IntegrationTest
 
       ActionDispatch::Http::URL.secure_protocol = true
       without_action_dispatch_exception_handling do
-        assert_raises ActionController::InvalidAuthenticityToken do
+        assert_raises ActionController::InvalidCrossOriginRequest do
           post session_path, params: { email_address: identities(:admin).email_address }
         end
       end
@@ -90,11 +87,11 @@ class RequestForgeryProtectionTest < ActionDispatch::IntegrationTest
 
       without_action_dispatch_exception_handling do
         [ "cross-site", "none", "invalid" ].each do |site|
-          assert_raises ActionController::InvalidAuthenticityToken do
+          assert_raises ActionController::InvalidCrossOriginRequest do
             post session_path, params: { email_address: identities(:admin).email_address }, as: :json, headers: { "Sec-Fetch-Site" => site }
           end
         end
-        assert_raises ActionController::InvalidAuthenticityToken do
+        assert_raises ActionController::InvalidCrossOriginRequest do
           post session_path, params: { email_address: identities(:admin).email_address }
         end
       end

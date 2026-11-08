@@ -6,9 +6,7 @@ require "active_storage/log_subscriber"
 # pair, as Action Dispatch filters a redirect's location for the "Redirected to" line.
 module ActiveStorageLogSubscriberFilteredUrls
   def service_url(event)
-    filtered_event = event.dup
-    filtered_event.payload = event.payload.merge(url: filtered_url(event.payload[:url]))
-    super filtered_event
+    super event.merge(payload: event[:payload].merge(url: filtered_url(event[:payload][:url])))
   end
 
   private

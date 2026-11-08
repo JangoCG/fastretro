@@ -5,7 +5,7 @@
 #
 # Discard the job, reporting so a bug that deletes files still referenced would stay visible.
 ActiveSupport.on_load :active_storage_blob do
-  [ ActiveStorage::TransformJob ].each do |job|
+  [ ActiveStorage::TransformJob, ActiveStorage::CreateVariantsJob ].each do |job|
     job.discard_on ActiveStorage::FileNotFoundError, report: true
   end
 end

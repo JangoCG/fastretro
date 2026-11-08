@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.4"
+# Match Fizzy's locked Rails 8.2 alpha revision.
+gem "rails", github: "rails/rails", ref: "8b06b0eb98315cbbd6d7f526112cd8d909ff787c"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -83,7 +83,8 @@ gem "gvltools", require: false
 gem "csv"
 
 # Excel export
-gem "caxlsx"
+# Upstream Marcel 2 support required by Rails 8.2; not yet released on RubyGems.
+gem "caxlsx", github: "caxlsx/caxlsx", ref: "ef607a93dcedb37f2704e8e549bc59b62f633ea7"
 
 # HTTP client for external integrations (Jira, etc.)
 gem "faraday", "~> 2.0"
@@ -120,6 +121,6 @@ group :test do
   gem "selenium-webdriver"
   # Mocking and stubbing library
   gem "mocha"
-  # Pin minitest to 6.x for Rails 8.1 compatibility
+  # Keep the existing Minitest 6 test suite.
   gem "minitest", "~> 6.0"
 end

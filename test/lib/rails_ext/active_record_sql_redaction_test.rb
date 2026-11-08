@@ -1,6 +1,21 @@
 require "test_helper"
 
 class ActiveRecordSqlRedactionTest < ActiveSupport::TestCase
+  test "structured Rails SQL events contain no credential literals or binds" do
+    events = []
+    subscriber = Class.new { define_method(:emit) { |event| events << event } }.new
+    Rails.event.subscribe(subscriber) { |event| event[:name] == "active_record.sql" }
+
+    MagicLink.where("code = 'ZQ7XW3'").load
+
+    payload = events.map { |event| event[:payload] }.find { |event| event[:sql].include?("magic_links") }
+    assert payload
+    assert_includes payload[:sql], "[FILTERED]"
+    assert_not_includes payload.inspect, "ZQ7XW3"
+  ensure
+    Rails.event.unsubscribe(subscriber) if subscriber
+  end
+
   test "SQL consumers see no credential binds while database values remain usable" do
     log, seen = capture do
       link = identities(:admin).magic_links.create!(code: "ZQ7XW3")

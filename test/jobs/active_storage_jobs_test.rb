@@ -94,4 +94,15 @@ class ActiveStorageJobsTest < ActiveJob::TestCase
       ActiveStorage::TransformJob.perform_now(@blob, resize_to_limit: [ 100, 100 ])
     end
   end
+
+  test "creating variants discards and reports missing storage files without retrying" do
+    ActiveStorage::CreateVariantsJob.any_instance.stubs(:perform).raises(ActiveStorage::FileNotFoundError)
+    Rails.error.expects(:report).with { |error, **| error.is_a?(ActiveStorage::FileNotFoundError) }
+
+    assert_no_enqueued_jobs do
+      assert_nothing_raised do
+        ActiveStorage::CreateVariantsJob.perform_now @blob, variants: [ { resize_to_limit: [ 100, 100 ] } ], process: :immediately
+      end
+    end
+  end
 end

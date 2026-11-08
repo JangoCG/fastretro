@@ -49,7 +49,7 @@ class ActiveStorageAuthorizationTest < ActionDispatch::IntegrationTest
 
   test "members of another account cannot download or process private images" do
     sign_in_as users(:other_account_owner)
-    integration_session.default_url_options[:script_name] = accounts(:two).slug
+    integration_session.default_url_options = integration_session.default_url_options.merge(script_name: accounts(:two).slug)
 
     assert_no_difference "ActiveStorage::VariantRecord.count" do
       download_paths.each do |path|

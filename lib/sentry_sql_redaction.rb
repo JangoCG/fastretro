@@ -1,5 +1,5 @@
 # Sentry's breadcrumbs and spans read SQL from the sql.active_record notification, whose payload the
-# finish hook in lib/rails_ext/active_record_sql_redaction.rb has already redacted. The
+# prepended subscriber in lib/rails_ext/active_record_sql_redaction.rb has already redacted. The
 # breadcrumb and span filters here are a backstop for SQL that reaches Sentry some other way: a
 # consumer that reads it outside the notification payload, or a Rails or Sentry upgrade that changes
 # which subscriber runs first. before_send covers exception messages, which the notification never
