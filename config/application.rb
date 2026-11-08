@@ -13,6 +13,12 @@ module Fastretro
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 
+    # Active Record copies these filters when it loads, before our framework extensions.
+    config.filter_parameters += [
+      *%i[ passw email secret token _key crypt salt certificate otp ssn cvv cvc code signature ],
+      /(?:\A|\.)url\z/
+    ]
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require_relative "../../lib/fastretro"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -40,20 +41,29 @@ Rails.application.configure do
   # Turn on fragment caching in view templates.
   config.action_controller.perform_caching = true
 
-  # Cache assets for far-future expiry since they are all digest stamped.
-  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    "Cache-Control" => "public, max-age=#{5.minutes.to_i}"
+  }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
   # Store uploaded files in S3-compatible object storage.
-  config.active_storage.service = :s3
+  config.active_storage.service = :s3 if FastRetro.saas?
+  if config.active_storage.service.blank?
+    config.active_storage.service = ENV.fetch("ACTIVE_STORAGE_SERVICE", "local").to_sym
+  end
 
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy unless specifically told otherwise.
-  config.assume_ssl = ENV["DISABLE_SSL"] != "true"
+  # Set DISABLE_SSL=true to disable all SSL options, rather than specify each individually
+  ssl_enabled = "true" unless ENV["DISABLE_SSL"] == "true"
 
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies unless specifically told otherwise.
-  config.force_ssl = ENV["DISABLE_SSL"] != "true"
+  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
+  # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
+  config.assume_ssl = ENV.fetch("ASSUME_SSL", ssl_enabled) == "true"
+
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  config.force_ssl = ENV.fetch("FORCE_SSL", ssl_enabled) == "true"
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
@@ -82,12 +92,21 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = {
-    host: ENV.fetch("APP_HOST", "fastretro.app"),
-    protocol: "https"
-  }
+  config.action_mailer.default_url_options = { host: ENV.fetch("APP_HOST", "fastretro.app"), protocol: "https" }
 
+  if base_url = ENV["BASE_URL"].presence
+    uri = URI.parse(base_url)
+    url_options = { host: uri.host, protocol: uri.scheme }
+    url_options[:port] = uri.port if uri.port != uri.default_port
+
+    routes.default_url_options = url_options
+    config.action_mailer.default_url_options = url_options
+  end
+
+  if FastRetro.saas?
+    config.x.content_security_policy.trusted_types_sample_rate = 0.01
+  end
+  config.x.content_security_policy.trusted_types_report_uri = "/trusted_types_reports"
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -105,11 +124,8 @@ Rails.application.configure do
   config.active_record.encryption.key_derivation_salt = ENV["ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
+  config.hosts = [ config.action_mailer.default_url_options.fetch(:host) ]
+
   # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end

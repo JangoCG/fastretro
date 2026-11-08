@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :ensure_permission_to_change_user, only: :update
   before_action :ensure_permission_to_administer_user, only: :destroy
 
   def show
@@ -29,7 +30,11 @@ class UsersController < ApplicationController
 
   private
     def set_user
-      @user = Current.account.users.find(params[:id])
+      @user = Current.account.users.active.find(params[:id])
+    end
+
+    def ensure_permission_to_change_user
+      head :forbidden unless Current.user.can_change?(@user)
     end
 
     def ensure_permission_to_administer_user
@@ -37,6 +42,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name)
+      params.expect(user: [ :name ])
     end
 end

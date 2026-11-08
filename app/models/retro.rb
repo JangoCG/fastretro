@@ -62,6 +62,10 @@ class Retro < ApplicationRecord
     ) { count }
   end
 
+  def accessible_to?(user)
+    user.present? && user.active? && user.account_id == account_id
+  end
+
   def start!(skip_action_review: false)
     if skip_action_review || !account.has_completed_retros_with_actions?
       update!(phase: :brainstorming)

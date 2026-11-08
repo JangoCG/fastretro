@@ -408,14 +408,6 @@ de:
       fastretro_team: "FASTRETRO TEAM"
       send_feedback: "Feedback senden"
 
-  # ── Errors ─────────────────────────────────────────────────────
-  errors:
-    not_found:
-      title: "404"
-      heading: "Seite nicht gefunden"
-      description: "Die gesuchte Seite existiert nicht. Möglicherweise hast du die Adresse falsch eingegeben oder die Seite wurde verschoben."
-      back_home: "Zurück zur Startseite"
-
   # ── Components ─────────────────────────────────────────────────
   components:
     confirm_phase_modal:

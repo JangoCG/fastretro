@@ -15,7 +15,7 @@ module Authentication::ViaMagicLink
     def redirect_to_fake_session_magic_link(email_address, **options)
       fake_magic_link = MagicLink.new(
         identity: Identity.new(email_address: email_address),
-        code: SecureRandom.alphanumeric(6).upcase,
+        code: MagicLink::Code.generate(6),
         expires_at: MagicLink::EXPIRATION_TIME.from_now
       )
 
@@ -26,12 +26,13 @@ module Authentication::ViaMagicLink
       serve_development_magic_link(magic_link)
       set_pending_authentication_token(magic_link)
       session[:return_to_after_authenticating] = return_to if return_to
+
       redirect_to main_app.session_magic_link_url(script_name: nil)
     end
 
     def serve_development_magic_link(magic_link)
-      if show_magic_link_code?
-        flash[:magic_link_code] = magic_link&.code
+      if Rails.env.development? && magic_link.present?
+        flash[:magic_link_code] = magic_link.code
       end
     end
 
@@ -58,9 +59,5 @@ module Authentication::ViaMagicLink
 
     def clear_pending_authentication_token
       cookies.delete(:pending_authentication_token)
-    end
-
-    def show_magic_link_code?
-      Rails.env.development? || ENV["SHOW_MAGIC_LINK_CODE"].present?
     end
 end

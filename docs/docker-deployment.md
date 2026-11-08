@@ -48,6 +48,24 @@ Once you have one, set it in the `SECRET_KEY_BASE` environment variable:
 docker run --environment SECRET_KEY_BASE=abcdefabcdef ...
 ```
 
+#### Public URL and file storage
+
+Set `BASE_URL` to the public URL of your instance, for example
+`https://retro.example.com`. It configures links in email, URL generation, and the
+allowed request host. Nonstandard ports are supported. `APP_HOST` remains the
+fallback when `BASE_URL` is unset.
+
+Self-hosted uploads use local disk in `/rails/storage` by default. To use the S3
+configuration in `config/storage.yml`, set `ACTIVE_STORAGE_SERVICE=s3` and supply
+`S3_ACCESS_KEY`, `S3_SECRET_KEY`, `S3_REGION`, `S3_BUCKET`, and optionally
+`S3_ENDPOINT`. SaaS deployments (`SAAS=true`) retain S3 as their storage service.
+
+Trusted Types diagnostics are report-only. Set `CSP_TRUSTED_TYPES_SAMPLE_RATE`
+to a number from `0` to `1` to select the share of HTML page loads that report;
+self-hosting defaults to `0`, SaaS to `0.01`. Reports go to the local
+`/trusted_types_reports` collector, which drops the sampled user content before
+logging the sink, script position, and page route.
+
 #### SSL
 
 If you want the Fast Retro container to handle its own SSL automatically, you just need to specify the domain name that you're running it on.
@@ -70,6 +88,12 @@ If you aren't using SSL at all (for example, if you want to run it locally on yo
 ```sh
 docker run --publish 80:80 --environment DISABLE_SSL=true ...
 ```
+
+`ASSUME_SSL` and `FORCE_SSL` can also be set independently to `true` or `false`.
+Both default to enabled unless `DISABLE_SSL=true`; either individual setting
+overrides that shared default. `ASSUME_SSL` tells Rails that the reverse proxy
+terminates TLS, while `FORCE_SSL` controls HTTPS redirects and secure-cookie/HSTS
+behavior.
 
 #### SMTP Email
 

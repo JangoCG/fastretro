@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_15_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_121000) do
   create_table "account_billing_waivers", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -80,7 +80,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_120000) do
     t.string "holder_type", null: false
     t.string "name"
     t.binary "public_key", null: false
-    t.integer "sign_count", default: 0, null: false
+    t.bigint "sign_count", default: 0, null: false
     t.text "transports"
     t.datetime "updated_at", null: false
     t.index ["credential_id"], name: "index_action_pack_passkeys_on_credential_id", unique: true
@@ -128,6 +128,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_120000) do
     t.string "key", null: false
     t.text "metadata"
     t.string "service_name", null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_active_storage_blobs_on_account_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -166,6 +168,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_120000) do
     t.boolean "staff", default: false, null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_identities_on_email_address", unique: true
+  end
+
+  create_table "identity_transfers", force: :cascade do |t|
+    t.integer "identity_id", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_identity_transfers_on_identity_id"
+    t.index ["token"], name: "index_identity_transfers_on_token", unique: true
   end
 
   create_table "magic_links", force: :cascade do |t|
@@ -249,6 +260,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_120000) do
   add_foreign_key "actions", "retros"
   add_foreign_key "actions", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_blobs", "accounts", on_delete: :nullify
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "feedback_groups", "retros"
   add_foreign_key "feedbacks", "feedback_groups"

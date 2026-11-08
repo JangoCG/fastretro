@@ -1,6 +1,8 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
+  include ActionCable::TestHelper
+
   test "new" do
     untenanted do
       get new_session_path
@@ -52,7 +54,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
           post session_path, params: { email_address: "not-a-valid-email" }
         end
 
-        assert_response :unprocessable_entity
+        assert_redirected_to new_session_path
       end
     end
   end
@@ -88,9 +90,14 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "destroy" do
     sign_in_as :admin
+    other_membership = accounts(:two).users.create!(name: "Other membership", identity: identities(:admin))
 
     untenanted do
-      delete session_path
+      assert_broadcast_on "action_cable/#{users(:admin).to_gid_param}", type: "disconnect", reconnect: true do
+        assert_broadcast_on "action_cable/#{other_membership.to_gid_param}", type: "disconnect", reconnect: true do
+          delete session_path
+        end
+      end
 
       assert_redirected_to root_path
       assert_not cookies[:session_token].present?

@@ -9,7 +9,7 @@ class Users::RolesController < ApplicationController
 
   private
     def set_user
-      @user = Current.account.users.find(params[:user_id])
+      @user = Current.account.users.active.find(params[:user_id])
     end
 
     def ensure_permission_to_administer_user

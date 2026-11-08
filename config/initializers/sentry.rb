@@ -1,3 +1,5 @@
+require "sentry_sql_redaction"
+
 # frozen_string_literal: true
 
 # Sentry error tracking configuration.
@@ -24,6 +26,7 @@ if !Rails.env.local? && ENV["SKIP_TELEMETRY"].blank? && ENV["SENTRY_DSN"].presen
 
     # Privacy: Do NOT send personally identifiable information
     config.send_default_pii = false
+    SentrySqlRedaction.install(config)
 
     # Release tracking: tag errors with deployment version
     config.release = ENV["KAMAL_VERSION"]
