@@ -14,6 +14,7 @@ was read in that checkout; compatibility changes are listed explicitly.
 | `app/controllers/trusted_types_reports_controller.rb` | [fizzy] same path, unchanged |
 | `lib/rails_ext/action_text_content_attachment_render_by_path.rb` | [fizzy] same path, unchanged |
 | `config/initializers/vips.rb` | [fizzy] same path; no hotcell branch because Fast Retro processes images in this application |
+| `.github/workflows/test.yml` | [fizzy] same path; install the required `libvips` system package before booting Rails on both SaaS and OSS runners. Fast Retro does not need Fizzy's additional MySQL packages. |
 | `app/controllers/concerns/request_forgery_protection.rb` | [fizzy] same path and Rails header-only verification; Rails 8.1 backport using `verified_request?` instead of the unavailable `using: :header_only` option |
 | `lib/sentry_sql_redaction.rb` | [fizzy] `saas/lib/fizzy/saas/sentry_sql_redaction.rb`; now includes SQL backstops as well as the local path filter |
 | `lib/credential_path_filter.rb` | [kein Vorbild] compatibility implementation for the unavailable private `rails_structured_logging` dependency; follows Fizzy's route declarations and credential-path test cases |
