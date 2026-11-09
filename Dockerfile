@@ -16,7 +16,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 sqlite3 && \
     ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
@@ -32,7 +32,7 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev libvips pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
@@ -57,7 +57,10 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 # Final stage for app image
-FROM base
+FROM base AS runtime
+
+# A fresh socket volume inherits ownership from its mount point.
+RUN mkdir -p /run/hotcell/active_storage && chown -R 10001:10001 /run/hotcell
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
@@ -74,3 +77,15 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
+
+# SaaS uses Hotcell for every conversion and carries no media libraries at runtime.
+FROM runtime AS saas
+ENV SAAS="true"
+
+# Keep the default self-hosted image usable without a sidecar.
+FROM runtime AS standalone
+USER root
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y libvips && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+USER 1000:1000

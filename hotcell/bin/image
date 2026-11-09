@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Shared by build, push and check; the Ruby helper also supplies the private Kamal config's pin.
+HOTCELL_IMAGE_REPOSITORY="${HOTCELL_IMAGE_REPOSITORY:-localhost:5555/fastretro-hotcell}"
+
+hotcell_image_tag() {
+  HOTCELL_IMAGE_REPOSITORY="$HOTCELL_IMAGE_REPOSITORY" ruby "$1/hotcell/image.rb"
+}

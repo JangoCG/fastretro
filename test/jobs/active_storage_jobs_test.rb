@@ -95,6 +95,16 @@ class ActiveStorageJobsTest < ActiveJob::TestCase
     end
   end
 
+  test "transform jobs discard and report permanent Hotcell failures without retrying" do
+    ActiveStorage::Variation.any_instance.stubs(:transform).raises(FastRetro::Cell::UnprocessableAttachment.new("killed: fsize"))
+    Rails.error.expects(:report).with { |error, **| error.is_a?(FastRetro::Cell::UnprocessableAttachment) }.twice
+
+    assert_no_enqueued_jobs do
+      ActiveStorage::TransformJob.perform_now(@blob, resize_to_limit: [ 10, 10 ])
+      ActiveStorage::CreateVariantsJob.perform_now(@blob, variants: [ { resize_to_limit: [ 20, 20 ] } ], process: :immediately)
+    end
+  end
+
   test "creating variants discards and reports missing storage files without retrying" do
     ActiveStorage::CreateVariantsJob.any_instance.stubs(:perform).raises(ActiveStorage::FileNotFoundError)
     Rails.error.expects(:report).with { |error, **| error.is_a?(ActiveStorage::FileNotFoundError) }

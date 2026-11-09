@@ -13,4 +13,8 @@ export PORT="${PORT:-3000}"
 export RUBY_DEBUG_OPEN="true"
 export RUBY_DEBUG_LAZY="true"
 
-exec foreman start -f Procfile.dev "$@"
+if ruby -r ./lib/fastretro -e 'exit(FastRetro.saas? ? 0 : 1)'; then
+  exec foreman start -f Procfile.saas.dev "$@"
+else
+  exec foreman start -f Procfile.dev "$@"
+fi

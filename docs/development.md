@@ -65,6 +65,12 @@ The CI pipeline runs: rubocop, bundler-audit, importmap audit, brakeman, gitleak
 
 Fast Retro uses SQLite by default.
 
+### SaaS attachment processing
+
+SaaS development starts a native Hotcell process alongside Rails. Install libvips
+with `brew install vips` on macOS, then run `SAAS=true bin/setup --skip-server` and
+`SAAS=true bin/dev`. See the [Hotcell guide](hotcell.md) for testing and deployment.
+
 ### Outbound Emails
 
 You can view email previews at http://localhost:3000/rails/mailers.

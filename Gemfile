@@ -43,6 +43,10 @@ gem "thruster", require: false
 gem "image_processing", "~> 2.2"
 gem "ruby-vips", require: false
 
+# Isolate SaaS attachment processing in an unprivileged sibling container.
+gem "activestorage-hotcell-client", "0.6.0"
+gem "yabeda-hotcell", "0.6.0", require: false
+
 # Store production Active Storage uploads in S3-compatible object storage
 gem "aws-sdk-s3", require: false
 

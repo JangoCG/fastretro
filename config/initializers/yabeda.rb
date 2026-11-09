@@ -8,6 +8,7 @@ require "yabeda/rails"
 require "yabeda/actioncable"
 require "yabeda/activejob"
 require "yabeda/gc"
+require "yabeda/hot_cell"
 require "yabeda/prometheus/mmap"
 require "prometheus/client/support/puma"
 
@@ -21,6 +22,7 @@ Yabeda::Rails.config.ignore_actions = %w[
 
 Yabeda::Rails.install!
 Yabeda::ActiveJob.install!
+Yabeda::HotCell.install!
 
 Yabeda::ActionCable.configure do |config|
   config.channel_class_name = "ActionCable::Channel::Base"

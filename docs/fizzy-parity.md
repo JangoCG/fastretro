@@ -20,7 +20,7 @@ was read in that checkout; compatibility changes are listed explicitly.
 | `app/models/trusted_types_violation.rb` | [fizzy] same path, unchanged |
 | `app/controllers/trusted_types_reports_controller.rb` | [fizzy] same path, unchanged |
 | `lib/rails_ext/action_text_content_attachment_render_by_path.rb` | [fizzy] same path, unchanged |
-| `config/initializers/vips.rb` | [fizzy] same path; no hotcell branch because Fast Retro processes images in this application |
+| `config/initializers/vips.rb` | [fizzy] same path, with the Hotcell branch and adapted `FastRetro::Cell` namespace; SaaS processing runs in the cell |
 | `.github/workflows/test.yml` | [fizzy] same path; install the required `libvips` system package before booting Rails on both SaaS and OSS runners. Fast Retro does not need Fizzy's additional MySQL packages. |
 | `app/controllers/concerns/request_forgery_protection.rb` | [fizzy] same path, unchanged at `4b5c05a84`; native Rails `using: :header_only` and Fizzy's explicit JSON exception replace the former backport |
 | `lib/sentry_sql_redaction.rb` | [fizzy] `saas/lib/fizzy/saas/sentry_sql_redaction.rb`; now includes SQL backstops as well as the local path filter |
@@ -200,3 +200,17 @@ Final Rails 8.2 validation: full `bin/ci` passes for SaaS and OSS, each with
 574 application tests / 2,951 assertions and 11 system tests / 45 assertions
 (one existing system-test skip per mode). All 22 JavaScript tests, style,
 dependency/importmap/npm audits, Brakeman, Gitleaks and seed checks pass.
+
+## Hotcell alignment (PR #172)
+
+The Hotcell integration has been rebased onto the shared Rails revision above.
+`lib/fastretro/unprocessable_attachments.rb` copies
+[fizzy] `saas/lib/fizzy/saas/unprocessable_attachments.rb` after namespace adaptation,
+including Rails 8.2’s `.processed` call using `blob.local_io`.
+The Vips initializer now skips native library configuration when Hotcell carries
+the conversions. Existing account ownership, authentication and proxy-route
+protections remain in front of representation processing.
+
+[Hotcell source mapping and deployment differences](hotcell.md#fizzy-source-mapping)
+documents the runtime, container and hook references. Fast Retro retains Ruby
+3.4.11, its local registry and bounded tmpfs; builds target its ARM64 server.
