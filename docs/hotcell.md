@@ -1,6 +1,7 @@
 # Attachment processing with Hotcell
 
-Fast Retro uses Rails 8.2 from `rails/rails` main, pinned to a commit in `Gemfile.lock`,
+Fast Retro uses Rails 8.2 alpha at Fizzy’s pinned revision
+`8b06b0eb98315cbbd6d7f526112cd8d909ff787c`,
 and Hotcell 0.6.0, matching Fizzy's Hotcell release. Rails configuration defaults stay
 at 8.1, as in Fizzy. The Excel exporter also uses a locked upstream commit because
 the released caxlsx 4.5.0 requires Marcel 1 and Rails 8.2 requires Marcel 2.
@@ -44,7 +45,8 @@ bin/ci
 
 The Hotcell test starts a real native cell and checks metadata extraction, image
 conversion, permanent rejection of invalid images, and failure without local fallback
-when the socket is unavailable. It needs libvips. CI runs it on Linux as well.
+when the socket is unavailable. It also runs the private download authorization and
+immediate-variant tests with Hotcell enabled, including account isolation and blocked proxy routes. It needs libvips. CI runs it on Linux as well.
 `hotcell/test/check-test` exercises the deployment hooks and rollback pins against
 isolated Docker, SSH and Kamal stubs; it never contacts deployment hosts.
 
@@ -68,11 +70,12 @@ deployments; the self-hosted deployment template keeps local image processing.
 Both `web` and `jobs` roles share group 10001 and the socket volume. The jobs role
 runs `bin/jobs`; remove `SOLID_QUEUE_IN_PUMA` so web containers do not start another
 job supervisor. Both roles publish metrics on an automatically assigned loopback
-port. The images create the socket mount points with group 10001, so either
+port targeting 9306, retaining Fast Retro’s existing Prometheus configuration
+(Fizzy uses 9394). Both exporter implementations listen on that same port. The images create the socket mount points with group 10001, so either
 container can mount a fresh socket volume first.
 
-Build the cell locally. The default platform matches production's `linux/amd64`;
-set `HOTCELL_PLATFORM=linux/arm64` for an ARM host. The image tag is a hash of its
+Build the cell locally. The default platform matches production's `linux/arm64`. The production server uses ARM64;
+keep the build and publication architecture checks aligned with it. The image tag is a hash of its
 Dockerfile, lockfile, configuration and operations, so changes produce a new tag.
 `HOTCELL_IMAGE_REPOSITORY` defaults to `localhost:5555/fastretro-hotcell`.
 
@@ -83,8 +86,8 @@ git diff -- hotcell/Gemfile.lock hotcell/deploy.yml
 
 The build first synchronizes the cell's Hotcell version with the application
 lockfile, then builds and writes the immutable image pin. Commit the lockfiles,
-cell inputs and pin together. `hotcell/bin/push` publishes an already built amd64
-image; it rejects an arm64 image rather than publishing one production cannot run.
+cell inputs and pin together. `hotcell/bin/push` publishes an already built ARM64
+image; it rejects an AMD64 image rather than publishing one production cannot run.
 
 Deploy with the usual command:
 
@@ -158,9 +161,12 @@ by the variant jobs; transient failures remain retryable.
 
 ## Fizzy source mapping
 
-The implementation follows the local Fizzy checkout's Hotcell setup. Paths and the
+The implementation follows the local Fizzy checkout at `4b5c05a84` (2026-11-07). Paths and the
 SaaS namespace are adapted to Fast Retro; registry forwarding and tmpfs remain
-Fast Retro's existing implementation.
+Fast Retro's existing implementation. Ruby stays at 3.4.11 and the image architecture
+is ARM64 to match the production server. Metrics retain port 9306. The runtime modules match Fizzy after
+namespace adaptation; `Cell.root` additionally permits standalone production
+without Hotcell, since Fast Retro packages SaaS and self-hosting in one application.
 
 | Fizzy reference | Fast Retro implementation |
 | --- | --- |
@@ -172,3 +178,18 @@ Fast Retro's existing implementation.
 | `[fizzy] saas/lib/fizzy/saas/unprocessable_attachments.rb`, `engine.rb` | `lib/fastretro/unprocessable_attachments.rb`, `config/initializers/hotcell.rb` |
 | `[fizzy] saas/test/hotcell-check-test` | `hotcell/test/check-test`, CI invocation in `config/ci.rb` and `.github/workflows/test.yml` |
 | `[fizzy] saas/test/lib/{hotcell_accessory_test,hotcell_image_test}.rb` | corresponding files under `test/lib/` |
+
+The updated tests follow [fizzy] `saas/test/integration/unprocessable_representation_test.rb`,
+`saas/test/models/unprocessable_attachment_test.rb`, `saas/test/lib/cell_test.rb` and
+`saas/test/integration/hotcellz_test.rb`. They cover the corresponding controller,
+upload lifecycle, configuration and diagnostic contracts in `test/integration/`,
+`test/models/`, `test/lib/fastretro/` and `test/controllers/`. The existing
+`test/integration/active_storage_authorization_test.rb` also runs with a real cell.
+
+[kein Vorbild] Fizzy has no localhost registry forwarding helper or architecture
+check for an ARM64 deployment. `hotcell/bin/reboot` delegates forwarding to Kamal’s
+existing `Build::PortForwarding`; `test/lib/hotcell_reboot_test.rb` and
+`test/lib/hotcell_push_test.rb` cover these infrastructure adaptations.
+`hotcell/bin/development-root` supplies private short socket paths on macOS;
+`hotcell/bin/test` and `hotcell/test/processing_test.rb` exercise the real client/server
+transport, supplementing the Fizzy-derived tests.

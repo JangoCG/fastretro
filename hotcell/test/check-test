@@ -48,7 +48,7 @@ case "$name" in
         [ -z "${STUB_REGISTRY_ERROR:-}" ] || { echo "registry connection failed" >&2; exit 1; }
         image="${!#}"
         [ -e "$STUB_SANDBOX/state/registry/${image##*:}" ] || { echo "manifest unknown" >&2; exit 1; } ;;
-      *) echo amd64 ;;
+      *) echo arm64 ;;
     esac ;;
   ssh)
     [ -z "${STUB_SSH_ERROR:-}" ] || { echo "ssh connection failed" >&2; exit 1; }
@@ -169,7 +169,7 @@ expect_output "STOP. No hotcell accessory is running on h1"
 run_scenario "--publish builds and pushes a missing image, and never sshes" "hotcell/bin/check staging --publish" \
 "$CONFIG
 $MANIFEST
-build --platform=linux/amd64
+build --platform=linux/arm64
 push
 $MANIFEST
 exit: 0"
@@ -184,7 +184,7 @@ exit: 0" REGISTRY=aaa
 run_scenario "--publish refuses a build that moved the pin" "hotcell/bin/check staging --publish" \
 "$CONFIG
 $MANIFEST
-build --platform=linux/amd64
+build --platform=linux/arm64
 exit: 2" STUB_BUILD_MOVES_PIN=1
 expect_output "moved the hotcell pin"
 
@@ -223,7 +223,7 @@ expect_output "STOP. The hotcell accessory is running an image other than"
 run_scenario "--apply does both" "hotcell/bin/check staging --apply" \
 "$CONFIG
 $MANIFEST
-build --platform=linux/amd64
+build --platform=linux/arm64
 push
 $MANIFEST
 $SSH_H1

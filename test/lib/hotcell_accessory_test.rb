@@ -94,6 +94,18 @@ class HotcellAccessoryTest < ActiveSupport::TestCase
     assert_equal "/run/hotcell", deploy_configuration.dig("env", "clear", "HOTCELL_ROOT")
   end
 
+  test "web and jobs publish the metrics port that their exporters listen on" do
+    configuration = configuration(nil)
+
+    configuration.roles.each do |role|
+      env = role.env(role.hosts.first).clear
+      port = env.fetch("PROMETHEUS_EXPORTER_PORT").to_s
+
+      assert_equal "http://0.0.0.0:#{port}/metrics", env.fetch("PROMETHEUS_EXPORTER_URL")
+      assert_includes role.option_args.join(" "), "127.0.0.1::#{port}"
+    end
+  end
+
   test "the app image creates the mount point owned by the cell's user" do
     assert_match %r{mkdir -p /run/hotcell/#{FastRetro::Cell::NAME}.*chown -R 10001:10001 /run/hotcell}m,
       Rails.root.join("Dockerfile").read

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include Authorization
   include BlockSearchEngineIndexing
   include CurrentRequest, CurrentTimezone
+  include RequestForgeryProtection
   include TurboFlash, ViewTransitions
 
   before_action :set_log_context

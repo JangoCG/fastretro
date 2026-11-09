@@ -18,13 +18,13 @@ repo_root="$(cd "$cell_dir/.." && pwd)"
 
 source "$bin_dir/image"
 
-platform="${HOTCELL_PLATFORM:-linux/amd64}"
+platform="${HOTCELL_PLATFORM:-linux/arm64}"
 for arg in "$@"; do
   case $arg in
     --platform=*) platform="${arg#*=}" ;;
     --help|-h)
       cat <<USAGE
-Usage: hotcell/bin/build [--platform=linux/amd64]
+Usage: hotcell/bin/build [--platform=linux/arm64]
 
 Locks hotcell/Gemfile.lock to the hotcell version in Gemfile.lock, builds the cell image, tags
 it with a hash of what went into it, and pins hotcell/deploy.yml to that tag. Pushing is a separate

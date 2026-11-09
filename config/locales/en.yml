@@ -408,14 +408,6 @@ en:
       fastretro_team: "FASTRETRO TEAM"
       send_feedback: "Send Feedback"
 
-  # ── Errors ─────────────────────────────────────────────────────
-  errors:
-    not_found:
-      title: "404"
-      heading: "Page not found"
-      description: "The page you were looking for doesn't exist. You may have mistyped the address or the page may have moved."
-      back_home: "Back to home"
-
   # ── Components ─────────────────────────────────────────────────
   components:
     confirm_phase_modal:

@@ -65,14 +65,14 @@ destination_args=()
 cd "$repo_root"
 
 # The tag hashes the cell's contents, so the build command is what produces the pinned tag, and the hosts
-# are amd64: an arm64 image reaches a host that cannot run it, so name the platform off amd64.
+# are arm64: an arm64 image reaches a host that cannot run it, so name the platform off arm64.
 build_command() {
   local arch
   arch="$(docker version --format '{{.Server.Arch}}' 2>/dev/null || true)"
-  if [ "$arch" = "amd64" ]; then
+  if [ "$arch" = "arm64" ]; then
     echo "hotcell/bin/build"
   else
-    echo "hotcell/bin/build --platform=linux/amd64"
+    echo "hotcell/bin/build --platform=linux/arm64"
   fi
 }
 
@@ -213,7 +213,7 @@ MSG
     fi
     echo
     echo "The pinned cell image is not in the registry. Building and pushing it."
-    hotcell/bin/build --platform=linux/amd64 || exit 1
+    hotcell/bin/build --platform=linux/arm64 || exit 1
     # The tag hashes the cell's contents, so a build that moved the pin means this commit pinned an image
     # it does not build. Publishing that would leave the commit pointing at nothing.
     if [ "$(tree_pin)" != "$pinned" ]; then

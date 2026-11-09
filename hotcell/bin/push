@@ -35,12 +35,12 @@ if ! docker image inspect "$tag" > /dev/null 2>&1; then
   exit 1
 fi
 
-# Production runs amd64. An arm64 image pushed from a laptop reaches a host that cannot run it, and the
+# Production runs arm64. An arm64 image pushed from a laptop reaches a host that cannot run it, and the
 # accessory crash-loops with nothing in the app to say why.
 architecture="$(docker image inspect --format '{{.Architecture}}' "$tag")"
-if [ "$architecture" != "amd64" ]; then
-  echo "$tag is $architecture and the hosts are amd64." >&2
-  echo "Rebuild it: hotcell/bin/build --platform=linux/amd64" >&2
+if [ "$architecture" != "arm64" ]; then
+  echo "$tag is $architecture and the hosts are arm64." >&2
+  echo "Rebuild it: hotcell/bin/build --platform=linux/arm64" >&2
   exit 1
 fi
 

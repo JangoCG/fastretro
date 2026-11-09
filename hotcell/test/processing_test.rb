@@ -53,10 +53,13 @@ end
 
 class HotcellRepresentationTest < ActionDispatch::IntegrationTest
   test "requesting an unreadable image returns 422" do
+    retros(:one).update!(phase: :grouping)
     blob = ActiveStorage::Blob.create_and_upload! io: StringIO.new("not an image"), filename: "invalid.png",
       content_type: "image/png", identify: false
+    feedbacks(:one).update!(content: ActionText::Attachment.from_attachable(blob).to_html)
+    sign_in_as :one
 
-    get rails_storage_proxy_path(blob.variant(resize_to_limit: [ 10, 10 ]))
+    get rails_representation_path(blob.representation(resize_to_limit: [ 10, 10 ]))
 
     assert_response :unprocessable_entity
   ensure

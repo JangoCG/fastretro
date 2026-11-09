@@ -9,6 +9,7 @@ class Feedback < ApplicationRecord
   after_commit :broadcast_targeted_columns
 
   has_rich_text :content
+  delegate :account, to: :retro
 
   validates :category, presence: true
   validate :category_exists_in_retro
@@ -16,6 +17,10 @@ class Feedback < ApplicationRecord
   scope :in_category, ->(cat) { where(category: cat) }
   scope :went_well, -> { in_category("went_well") }
   scope :could_be_better, -> { in_category("could_be_better") }
+
+  def accessible_to?(user)
+    retro.accessible_to?(user) && (user_id == user.id || (published? && !retro.brainstorming?))
+  end
 
   def went_well?
     category == "went_well"
@@ -35,6 +40,7 @@ class Feedback < ApplicationRecord
   end
 
   def broadcast_targeted_columns
+    return if suppressed_turbo_broadcasts?
     return if Current.skip_targeted_broadcasts
     return unless broadcast_columns?
 

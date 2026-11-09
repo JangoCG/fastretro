@@ -21,6 +21,14 @@ class FastRetro::CellTest < ActiveSupport::TestCase
     assert_nil FastRetro::Cell.root
   end
 
+  test "SaaS production accepts its configured cell root" do
+    FastRetro.stubs(:saas?).returns(true)
+    Rails.stubs(:env).returns(ActiveSupport::EnvironmentInquirer.new("production"))
+    ENV.stubs(:[]).with("HOTCELL_ROOT").returns("/run/hotcell")
+
+    assert_equal "/run/hotcell", FastRetro::Cell.root
+  end
+
   test "self hosted production can process images without a cell" do
     FastRetro.stubs(:saas?).returns(false)
     Rails.stubs(:env).returns(ActiveSupport::EnvironmentInquirer.new("production"))

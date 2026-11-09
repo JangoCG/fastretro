@@ -32,7 +32,7 @@ Dir.mktmpdir("hotcell-", "/tmp") do |sockets|
     end
 
     status = system({ "HOTCELL_ROOT" => sockets, "HOTCELL_GROUP" => nil, "RAILS_ENV" => "test", "PARALLEL_WORKERS" => "1" },
-      File.join(app_root, "bin/rails"), "test", "hotcell/test/processing_test.rb", chdir: app_root)
+      File.join(app_root, "bin/rails"), "test", "hotcell/test/processing_test.rb", "test/integration/active_storage_authorization_test.rb", "test/integration/unprocessable_representation_test.rb", "test/models/unprocessable_attachment_test.rb", chdir: app_root)
   ensure
     if cell
       Process.kill("TERM", cell) rescue Errno::ESRCH

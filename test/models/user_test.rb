@@ -1,6 +1,8 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  include ActionCable::TestHelper
+
   test "active scope returns active users" do
     user = users(:one)
     assert user.active?
@@ -14,7 +16,9 @@ class UserTest < ActiveSupport::TestCase
 
   test "deactivate sets active to false and removes identity" do
     user = users(:one)
-    user.deactivate
+    assert_broadcast_on "action_cable/#{user.to_gid_param}", type: "disconnect", reconnect: false do
+      user.deactivate
+    end
     assert_not user.active?
     assert_nil user.identity
   end

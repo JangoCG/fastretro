@@ -21,6 +21,24 @@ class AccountTenantedTest < ActiveJob::TestCase
     CapturingJob.performed_count = 0
   end
 
+  test "jobs are enqueued only after the surrounding transaction commits" do
+    assert_enqueued_jobs 1, only: CapturingJob do
+      Account.transaction(requires_new: true) do
+        CapturingJob.perform_later
+        assert_no_enqueued_jobs only: CapturingJob
+      end
+    end
+  end
+
+  test "rolling back the transaction does not enqueue its jobs" do
+    assert_no_enqueued_jobs only: CapturingJob do
+      Account.transaction(requires_new: true) do
+        CapturingJob.perform_later
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
   test "restores Current.account inside perform when enqueued with one" do
     account = accounts(:one)
 

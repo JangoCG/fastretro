@@ -6,23 +6,26 @@ hooks_output:
   pre-deploy: verbose
 
 builder:
+  arch: arm64
   target: saas
 
 servers:
   web:
     options:
       group-add: 10001
-      publish: "127.0.0.1::9394"
+      publish: "127.0.0.1::9306"
   jobs:
     cmd: bin/jobs
     options:
       group-add: 10001
-      publish: "127.0.0.1::9394"
+      publish: "127.0.0.1::9306"
 
 env:
   clear:
     HOTCELL_ROOT: /run/hotcell
     HOTCELL_GROUP: 10001
+    PROMETHEUS_EXPORTER_URL: http://0.0.0.0:9306/metrics
+    PROMETHEUS_EXPORTER_PORT: 9306
 
 volumes:
   - hotcell-active-storage:/run/hotcell/active_storage

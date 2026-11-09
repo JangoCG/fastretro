@@ -1,22 +1,78 @@
-# frozen_string_literal: true
-
 # Be sure to restart your server when you modify this file.
 
 # Define an application-wide Content Security Policy.
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 #
 # Directives are configurable via environment variables with fallback to config.x
-# settings. This allows different deployments to extend the base policy
+# settings. This allows fizzy-saas (or other deployments) to extend the base policy
 # without duplicating it.
 #
 # ENV vars (space-separated sources):
 #   CSP_DEFAULT_SRC, CSP_SCRIPT_SRC, CSP_STYLE_SRC, CSP_CONNECT_SRC, CSP_FRAME_SRC,
 #   CSP_IMG_SRC, CSP_FONT_SRC, CSP_MEDIA_SRC, CSP_WORKER_SRC, CSP_FRAME_ANCESTORS,
-#   CSP_FORM_ACTION, CSP_REPORT_URI, CSP_REPORT_ONLY, DISABLE_CSP
+#   CSP_FORM_ACTION, CSP_REPORT_URI, CSP_REPORT_ONLY, DISABLE_CSP,
+#   CSP_TRUSTED_TYPES_SAMPLE_RATE
 #
 # config.x.content_security_policy.* (string, space-separated string, or array):
 #   script_src, style_src, connect_src, frame_src, img_src, font_src, media_src,
 #   worker_src, frame_ancestors, form_action, report_uri, report_only
+#
+# config.x.content_security_policy.trusted_types_sample_rate (0 to 1): the share
+# of HTML responses that carry the Trusted Types report-only policy below.
+# Unset or 0 leaves it off.
+#
+# config.x.content_security_policy.trusted_types_report_uri: where its reports
+# go. Without one, violations stay in the browser (the test environment).
+# Point it only at TrustedTypesReportsController, never at a third party: every
+# report carries the first 40 characters written to the sink, which can be a
+# user's own content, and only that controller drops them.
+
+# Trusted Types report-only policy.
+#
+# Marks every raw-string write to a DOM sink (innerHTML, outerHTML,
+# insertAdjacentHTML, DOMParser#parseFromString, document.write, ...) as a
+# violation without blocking it, so we can inventory the sinks fizzy and its
+# libraries write to before designing enforcement. Chromium, Safari and Firefox
+# all support Trusted Types.
+#
+# It rides a separate Content-Security-Policy-Report-Only header, so the policy
+# below is untouched whether it enforces or reports. Report-only can only
+# report, never block.
+#
+# Only `require-trusted-types-for 'script'` is emitted. A `trusted-types`
+# allowlist restricts which policy names may be created, which would only add
+# policy-creation noise (lexxy creates its own DOMPurify policy) to a pilot that
+# registers no policy of its own.
+class TrustedTypesReportOnly
+  DIRECTIVE = "require-trusted-types-for 'script'"
+  HEADER = ActionDispatch::Constants::CONTENT_SECURITY_POLICY_REPORT_ONLY.downcase # Rack 3 header names are lowercase
+
+  def initialize(app, report_uri: nil, sample_rate: 1.0)
+    @app = app
+    @policy = report_uri ? "#{DIRECTIVE}; report-uri #{report_uri}" : DIRECTIVE
+    @sample_rate = sample_rate
+  end
+
+  def call(env)
+    status, headers, body = @app.call(env)
+
+    # Only documents run script, so only they can write to a sink. When the app
+    # policy is itself report-only, both go out as separate header fields (a
+    # Rack 3 array), each reporting independently.
+    if headers[Rack::CONTENT_TYPE].to_s.start_with?("text/html") && sampled?
+      headers[HEADER] = headers[HEADER] ? [ *headers[HEADER], @policy ] : @policy
+    end
+
+    [ status, headers, body ]
+  end
+
+  private
+    # A document keeps the policy it loaded with across Turbo Drive visits, so
+    # this samples page loads, and each sampled one reports for its lifetime.
+    def sampled?
+      Random.rand < @sample_rate
+    end
+end
 
 Rails.application.configure do
   # Helper to get additional CSP sources from ENV or config.x.
@@ -48,7 +104,7 @@ Rails.application.configure do
 
   # Generate nonces for importmap and inline scripts
   config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
-  config.content_security_policy_nonce_directives = %w[script-src]
+  config.content_security_policy_nonce_directives = %w[ script-src ]
 
   config.content_security_policy do |policy|
     policy.default_src :self, *sources.(:default_src)
@@ -77,4 +133,53 @@ Rails.application.configure do
 
   # Report violations without enforcing the policy.
   config.content_security_policy_report_only = report_only
+
+  # Inserted outside the Rails CSP middleware so it runs after that header is
+  # written, stacking beside an app policy that is itself report-only.
+  trusted_types_sample_rate = Float(ENV.fetch("CSP_TRUSTED_TYPES_SAMPLE_RATE") { config.x.content_security_policy.trusted_types_sample_rate || 0 })
+
+  unless trusted_types_sample_rate.between?(0, 1)
+    raise ArgumentError, "Trusted Types sample rate must be between 0 and 1, not #{trusted_types_sample_rate}"
+  end
+
+  if trusted_types_sample_rate > 0
+    config.middleware.insert_before ActionDispatch::ContentSecurityPolicy::Middleware, TrustedTypesReportOnly,
+      report_uri: config.x.content_security_policy.trusted_types_report_uri, sample_rate: trusted_types_sample_rate
+  end
+
+  # Locked-down policy for the static pages served from public/ (error pages).
+  # They carry no script or inline styles at all, so everything falls back to
+  # default-src 'none'.
+  static_policy = "default-src 'none'; img-src 'self'; style-src 'self'; " \
+    "base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+
+  # Report violations from the static pages to the same collector as the
+  # app policy, so a report-only rollout sees them too.
+  static_policy += "; report-uri #{report_uri}" if report_uri
+
+  # Honor report-only mode for the static policy too, so the report_only
+  # switch disables enforcement everywhere at once.
+  static_policy_header = report_only ? ActionDispatch::Constants::CONTENT_SECURITY_POLICY_REPORT_ONLY \
+                                     : ActionDispatch::Constants::CONTENT_SECURITY_POLICY
+
+  # Files served straight from public/ return before the CSP middleware runs,
+  # so they get the static policy stamped by the file server.
+  config.public_file_server.headers = (config.public_file_server.headers || {})\
+    .merge(static_policy_header => static_policy)
+
+  # The same public/ pages served through the error path (a real 404/500
+  # renders public/404.html via the exceptions app, bypassing the static
+  # file server) get it too. JSON error responses pass through untouched.
+  # A deployment that configures its own exceptions_app keeps full control
+  # of its responses, headers included.
+  if config.exceptions_app.nil?
+    public_exceptions = ActionDispatch::PublicExceptions.new(Rails.public_path)
+    config.exceptions_app = ->(env) do
+      public_exceptions.call(env).tap do |_status, headers, _body|
+        if headers[Rack::CONTENT_TYPE].to_s.start_with?("text/html")
+          headers[static_policy_header] = static_policy
+        end
+      end
+    end
+  end
 end unless ENV["DISABLE_CSP"]
