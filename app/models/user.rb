@@ -8,7 +8,14 @@ class User < ApplicationRecord
   scope :alphabetically, -> { order(:name) }
 
   def deactivate
-    update!(active: false, identity: nil)
+    transaction do
+      update! active: false, identity: nil
+      close_remote_connections
+    end
+  end
+
+  def close_remote_connections(reconnect: false)
+    ActionCable.server.remote_connections.where(current_user: self).disconnect(reconnect:)
   end
 
   def setup?

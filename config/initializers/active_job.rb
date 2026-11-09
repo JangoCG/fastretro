@@ -1,9 +1,15 @@
-Rails.application.config.to_prepare do
-  ActionMailer::MailDeliveryJob.prepend AccountTenanted
-  ActionMailer::MailDeliveryJob.discard_on ActiveJob::DeserializationError
+# frozen_string_literal: true
 
-  [ Turbo::Streams::ActionBroadcastJob, Turbo::Streams::BroadcastJob, Turbo::Streams::BroadcastStreamJob ].each do |job|
-    job.prepend AccountTenanted
-    job.discard_on ActiveJob::DeserializationError
-  end
+ActiveSupport.on_load(:active_job) do
+  self.enqueue_after_transaction_commit = true
+end
+
+ActiveSupport.on_load(:action_mailer) do
+  ActionMailer::MailDeliveryJob.prepend AccountTenanted
+end
+
+Rails.application.config.after_initialize do
+  Turbo::Streams::ActionBroadcastJob.prepend AccountTenanted
+  Turbo::Streams::BroadcastJob.prepend AccountTenanted
+  Turbo::Streams::BroadcastStreamJob.prepend AccountTenanted
 end

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   root "landing_page#show"
 
+  resources :trusted_types_reports, only: :create, constraints: ->(request) { request.media_type == "application/csp-report" }
+
   resources :users, only: %i[ show edit update destroy ] do
     scope module: :users do
       resource :role, only: :update
-      resources :email_addresses, param: :token, only: %i[ new create ] do
-        resource :confirmation, only: %i[ show create ], module: :email_addresses
+      filter_path_parameters :token, :email_address_token do
+        resources :email_addresses, param: :token, only: %i[ new create ] do
+          resource :confirmation, only: %i[ show create ], module: :email_addresses
+        end
       end
     end
   end
@@ -57,13 +61,15 @@ Rails.application.routes.draw do
     resource :jira_integration, only: %i[ show create update destroy ]
   end
 
-  # Join codes for multi-account
-  get "join/:code", to: "join_codes#new", as: :join
-  post "join/:code", to: "join_codes#create"
+  filter_path_parameters :code do
+    # Join codes for multi-account
+    get "join/:code", to: "join_codes#new", as: :join
+    post "join/:code", to: "join_codes#create"
 
-  # Retro invite links (combines join code + retro access)
-  get "invite/:code/retro/:retro_id", to: "retros/invites#show", as: :retro_invite
-  post "invite/:code/retro/:retro_id", to: "retros/invites#create"
+    # Retro invite links (combines join code + retro access)
+    get "invite/:code/retro/:retro_id", to: "retros/invites#show", as: :retro_invite
+    post "invite/:code/retro/:retro_id", to: "retros/invites#create"
+  end
 
   # User verifications
   namespace :users do
@@ -73,7 +79,9 @@ Rails.application.routes.draw do
   # Session management with magic links and passkeys
   resource :session do
     scope module: :sessions do
-      resources :transfers
+      filter_path_parameters :id do
+        resources :transfers
+      end
       resource :magic_link do
         post :resend, on: :member
       end
@@ -149,9 +157,4 @@ Rails.application.routes.draw do
 
   # Authenticate and validate blobs before Active Storage issues a direct-upload URL.
   post "rails/active_storage/direct_uploads", to: "rich_text_uploads#create"
-
-  # Catch-all route for unmatched paths (must be last)
-  constraints ->(request) { !request.path_info.start_with?("/rails/") } do
-    match "*unmatched", to: "errors#not_found", via: :all
-  end
 end

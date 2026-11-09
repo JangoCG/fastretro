@@ -26,6 +26,26 @@ class RetrosControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "existing JSON retro creation update and deletion work with a browser session" do
+    assert_difference "Retro.count", 1 do
+      post retros_path, params: { retro: { name: "Browser JSON retro" } }, as: :json
+    end
+    assert_response :created
+    retro = Retro.find(response.parsed_body.fetch("id"))
+    assert_equal @account, retro.account
+    assert retro.admin?(@identity.users.find_by!(account: @account))
+
+    patch retro_path(retro), params: { retro: { name: "Updated JSON retro" } }, as: :json
+    assert_response :success
+    assert_equal "Updated JSON retro", response.parsed_body.fetch("name")
+    assert_equal "Updated JSON retro", retro.reload.name
+
+    assert_difference "Retro.count", -1 do
+      delete retro_path(retro), as: :json
+    end
+    assert_response :no_content
+  end
+
   test "should create retro with default layout when mode is not provided" do
     post "#{account_path_prefix(@account)}/retros", params: { retro: { name: "Default Layout Retro" } }
 

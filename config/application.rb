@@ -13,6 +13,12 @@ module Fastretro
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 
+    # Active Record copies these filters when it loads, before our framework extensions.
+    config.filter_parameters += [
+      *%i[ passw email secret token _key crypt salt certificate otp ssn cvv cvc code signature ],
+      /(?:\A|\.)url\z/
+    ]
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
@@ -21,6 +27,12 @@ module Fastretro
     # don't follow autoload naming conventions. These files are manually required
     # via config/initializers/extensions.rb instead.
     config.autoload_lib(ignore: %w[assets tasks rails_ext yabeda middleware])
+
+    # Enable debug mode for Rails event logging so we get SQL query logs.
+    # This was made necessary by the change in https://github.com/rails/rails/pull/55900
+    config.after_initialize do
+      Rails.event.debug_mode = true
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #

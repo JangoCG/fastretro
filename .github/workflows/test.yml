@@ -20,6 +20,10 @@ jobs:
       ${{ inputs.saas && 'SAAS' || 'SAAS_DISABLED' }}: ${{ inputs.saas && '1' || '' }}
 
     steps:
+      - name: Install system packages
+        timeout-minutes: 10
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libvips
+
       - uses: actions/checkout@v7
 
       - uses: ruby/setup-ruby@v1

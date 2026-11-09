@@ -7,9 +7,14 @@ class Action < ApplicationRecord
   after_commit :broadcast_targeted_actions
 
   has_rich_text :content
+  delegate :account, to: :retro
 
   scope :incomplete, -> { where(completed: false) }
   scope :completed_actions, -> { where(completed: true) }
+
+  def accessible_to?(user)
+    retro.accessible_to?(user) && (published? || user_id == user.id)
+  end
 
   def toggle_completion!
     update!(completed: !completed)
@@ -18,6 +23,7 @@ class Action < ApplicationRecord
   private
 
   def broadcast_targeted_actions
+    return if suppressed_turbo_broadcasts?
     return unless broadcast_actions?
     return unless retro.present?
 
