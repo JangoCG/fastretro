@@ -482,7 +482,7 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.2.0)
-    stripe (20.0.0)
+    stripe (20.1.0)
       bigdecimal
       logger
     strscan (3.1.8)
@@ -615,7 +615,7 @@ DEPENDENCIES
   solid_queue
   sqlite3 (>= 2.1)
   stimulus-rails
-  stripe (~> 20.0)
+  stripe (~> 20.1)
   tailwindcss-rails
   thruster
   turbo-rails
