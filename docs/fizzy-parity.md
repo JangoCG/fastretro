@@ -4,7 +4,7 @@ Fast Retro runs Rails `8.2.0.alpha` at commit
 `8b06b0eb98315cbbd6d7f526112cd8d909ff787c`, matching both lockfiles in
 Fizzy `4b5c05a84`. The revision is explicit in Gemfile so subsequent bundling
 cannot silently move to another alpha. Like Fizzy, application defaults remain
-at `config.load_defaults 8.1`; Ruby stays at 3.4.11.
+at `config.load_defaults 8.1`; Ruby stays at 4.0.10.
 
 Initial batches referenced Fizzy `aef43ac9c`; later changes use `4b5c05a84`.
 The source mapping below describes the final implementation, including the
